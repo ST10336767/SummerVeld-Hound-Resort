@@ -176,7 +176,7 @@ class RegisterFragment : Fragment() {
 
 //                    findNavController().navigate(R.id.action_registerFragment_to_navigation_home)
                 }
-                is AppResult.Error<*> -> {
+                is AppResult.Error -> {
                     Log.d(TAG, "Registration Failed: ${result.exception.message}")
                 }
             }

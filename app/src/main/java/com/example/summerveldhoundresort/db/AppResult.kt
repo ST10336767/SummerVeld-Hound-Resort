@@ -5,5 +5,5 @@ package com.example.summerveldhoundresort.db
 //Good for genericism
 sealed class AppResult<out T> {
     data class Success<T>(val data: T): AppResult<T>()
-    data class Error<T>(val exception: Exception): AppResult<Nothing>()
+    data class Error(val exception: Exception): AppResult<Nothing>()
 }

@@ -60,7 +60,7 @@ class LoginFragment : Fragment() {
                         startActivity(intent)
                         requireActivity().finish()
                     }
-                    is AppResult.Error<*> -> {
+                    is AppResult.Error -> {
                         Log.d(TAG, "Login Failed: ${result.exception.message}")
                     }
                 }
