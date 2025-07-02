@@ -12,7 +12,12 @@
           "package_name": "com.example.summerveld_hound_resort"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "782347961405-3shvlcrleof4t3hc43ul380h5iqrfs7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCAi80W2b85DBWh3B9WDQ2A6inpLMWnv_8"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782347961405-3shvlcrleof4t3hc43ul380h5iqrfs7i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     },
@@ -31,7 +41,20 @@
           "package_name": "com.example.summerveldhoundresort"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "782347961405-k5q76kqa25a1gejgjo81501nrrujv5v8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.summerveldhoundresort",
+            "certificate_hash": "32be9c29a95b5f6b39ad6d44d2df1518f8eb9985"
+          }
+        },
+        {
+          "client_id": "782347961405-3shvlcrleof4t3hc43ul380h5iqrfs7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCAi80W2b85DBWh3B9WDQ2A6inpLMWnv_8"
@@ -39,7 +62,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782347961405-3shvlcrleof4t3hc43ul380h5iqrfs7i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
