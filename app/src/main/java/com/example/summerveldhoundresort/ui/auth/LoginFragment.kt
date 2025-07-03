@@ -120,6 +120,10 @@ class LoginFragment : Fragment() {
         binding.tvSignUp.setOnClickListener{
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
+
+        binding.buttonForgotPassword.setOnClickListener{
+            findNavController().navigate(R.id.action_loginFragment_to_forgotPassawordFragment)
+        }
     }
 
     override fun onStart() {
@@ -239,18 +243,4 @@ class LoginFragment : Fragment() {
         _binding = null
     }
 
-    // Optional: Add a signOut method if you need it elsewhere (e.g., a logout button)
-    fun signOutFromGoogleAndFirebase() {
-        firebaseAuth.signOut()
-        googleSignInClient.signOut().addOnCompleteListener(requireActivity()) { task ->
-            if (task.isSuccessful) {
-                Log.d(TAG, "Google Sign-out successful.")
-                Toast.makeText(requireContext(), "Signed out successfully.", Toast.LENGTH_SHORT).show()
-                updateUI(null) // Reset UI
-            } else {
-                Log.w(TAG, "Google Sign-out failed.", task.exception)
-                Toast.makeText(requireContext(), "Sign out failed.", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
 }

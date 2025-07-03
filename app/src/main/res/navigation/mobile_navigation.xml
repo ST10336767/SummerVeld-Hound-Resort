@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_loginFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPassawordFragment"
+            app:destination="@id/forgotPassawordFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -46,4 +49,9 @@
             android:id="@+id/action_registerFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
+    <fragment
+        android:id="@+id/forgotPassawordFragment"
+        android:name="com.example.summerveldhoundresort.ui.auth.ForgotPassawordFragment"
+        android:label="fragment_forgot_passaword"
+        tools:layout="@layout/fragment_forgot_passaword" />
 </navigation>
