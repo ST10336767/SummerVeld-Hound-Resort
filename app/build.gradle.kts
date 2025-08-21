@@ -67,4 +67,8 @@ dependencies {
 //    implementation("com.google.firebase:firebase-auth-ktx") // ✅ Required for Firebase.auth
     // Firebase Auth KTX
     implementation("com.google.firebase:firebase-auth-ktx")
+
+    // Google Sign-In and Firebase Authentication dependencies
+    implementation("com.google.android.gms:play-services-auth:21.2.0") //
+    implementation("com.google.firebase:firebase-auth:23.0.0") //
 }
