@@ -46,6 +46,15 @@ class LoginFragment : Fragment() {
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var firebaseAuth: FirebaseAuth
 
+    private val signInLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            handleSignInResult(task)
+        }
+    }
+
     // NEW: Request code for Google Sign-In
     companion object {
         private const val RC_GOOGLE_SIGN_IN = 9001 // Renamed to avoid confusion with ContentValues.TAG
@@ -59,85 +68,158 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root // Return the root directly here
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val fbUserImpl = firebaseUsersImpl()
-        val factory = AuthViewModelFactory{AuthViewModel(fbUserImpl)}
+        val factory = AuthViewModelFactory { AuthViewModel(fbUserImpl) }
         authViewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
 
         // Initialize Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance()
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id)) // Your server's client ID
+            .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-        val googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
+        // --- Email/password login ---
+        binding.buttonLogin.setOnClickListener {
+            val emailAddress = binding.edtEmailAddress.text.toString().trim()
+            val password = binding.textInputPassword.editText?.text.toString().trim()
 
-
-        // Set click listener for the traditional email/password Login button
-        binding.buttonLogin.setOnClickListener{
-            val emailAddress = binding.edtEmailAddress.text.toString().trim() // Trim whitespace
-            val password = binding.textInputPassword.editText?.text.toString().trim() // Trim whitespace
-
-            // Basic validation (you can add more robust validation)
             if (emailAddress.isEmpty() || password.isEmpty()) {
                 Toast.makeText(requireContext(), "Email and password cannot be empty.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             lifecycleScope.launch {
-                val result = authViewModel.login(
-                    userLoginField = emailAddress,
-                    password = password
-                )
-                Log.d(TAG, "Login details: $emailAddress, password: $password ")
-                when(result){
+                val result = authViewModel.login(emailAddress, password)
+                when (result) {
                     is AppResult.Success -> {
-                        Log.d(TAG, "SUCCESS result: $result")
-                        Toast.makeText(
-                            requireContext(),
-                            "Login Successful",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        // Navigate to MainActivity after successful login
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                        startActivity(intent)
-                        requireActivity().finish() // Finish the activity hosting this fragment
+                        Toast.makeText(requireContext(), "Login Successful", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(requireContext(), MainActivity::class.java))
+                        requireActivity().finish()
                     }
-
-                    is AppResult.Error<*> -> {
-                        Log.e(TAG, "Login Failed: ${result.exception?.message}") // Use e for errors
-                        Toast.makeText(requireContext(), "Login Failed: ${result.exception?.message}", Toast.LENGTH_LONG).show()
+                    is AppResult.Error -> {
+                        Toast.makeText(requireContext(), "Login Failed: ${result.exception.message}", Toast.LENGTH_LONG).show()
+                    }
+                    else -> {
+                        Toast.makeText(requireContext(), "An unexpected error occurred.", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         }
 
-
-        val signInLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-                    handleSignInResult(task)
-                }
-            }
-        // Set click listener for the Google Sign-In button
+        // --- Google login ---
         binding.googleSignInButton.setOnClickListener {
             val signInIntent = googleSignInClient.signInIntent
-            signInLauncher.launch(signInIntent)
+            signInLauncher.launch(signInIntent) // ✅ just use launcher, don’t register here
         }
 
-        // Set click listener for Sign Up text
-        binding.tvSignUp.setOnClickListener{
+        // Navigation
+        binding.tvSignUp.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
-
-        binding.buttonForgotPassword.setOnClickListener{
+        binding.buttonForgotPassword.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_forgotPassawordFragment)
         }
     }
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        val fbUserImpl = firebaseUsersImpl()
+//        val factory = AuthViewModelFactory { AuthViewModel(fbUserImpl) }
+//        authViewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
+//
+//        // Initialize Firebase Auth
+//        firebaseAuth = FirebaseAuth.getInstance()
+//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//            .requestIdToken(getString(R.string.default_web_client_id)) // Your server's client ID
+//            .requestEmail()
+//            .build()
+//        val googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+//
+//
+//        // Set click listener for the traditional email/password Login button
+//        binding.buttonLogin.setOnClickListener {
+//            val emailAddress = binding.edtEmailAddress.text.toString().trim() // Trim whitespace
+//            val password =
+//                binding.textInputPassword.editText?.text.toString().trim() // Trim whitespace
+//
+//            // Basic validation (you can add more robust validation)
+//            if (emailAddress.isEmpty() || password.isEmpty()) {
+//                Toast.makeText(
+//                    requireContext(),
+//                    "Email and password cannot be empty.",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//                return@setOnClickListener
+//            }
+//
+//            lifecycleScope.launch {
+//                val result = authViewModel.login(
+//                    userLoginField = emailAddress,
+//                    password = password
+//                )
+//                Log.d(TAG, "Login details: $emailAddress, password: $password ")
+//                when (result) {
+//                    is AppResult.Success -> {
+//                        Log.d(TAG, "SUCCESS result: $result")
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "Login Successful",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                        // Navigate to MainActivity after successful login
+//                        val intent = Intent(requireContext(), MainActivity::class.java)
+//                        startActivity(intent)
+//                        requireActivity().finish() // Finish the activity hosting this fragment
+//                    }
+//
+//                    is AppResult.Error -> {
+//                        Log.e(TAG, "Login Failed: ${result.exception?.message}")
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "Login Failed: ${result.exception?.message}",
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//                    }
+//                    else -> {
+//                        // Handle any other unexpected AppResult states
+//                        Log.w(TAG, "Unhandled login result state: $result")
+//                        Toast.makeText(requireContext(), "An unexpected error occurred.", Toast.LENGTH_LONG).show()
+//                    }
+//
+//                }
+//            }
+//
+//
+//            val signInLauncher =
+//                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+//                    if (result.resultCode == Activity.RESULT_OK) {
+//                        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+//                        handleSignInResult(task)
+//                    }
+//                }
+//
+//            // Set click listener for the Google Sign-In button
+//            binding.googleSignInButton.setOnClickListener {
+//                val signInIntent = googleSignInClient.signInIntent
+//                signInLauncher.launch(signInIntent)
+//            }
+//        }
+//
+//
+//        // Set click listener for Sign Up text
+//        binding.tvSignUp.setOnClickListener{
+//            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+//        }
+//
+//        binding.buttonForgotPassword.setOnClickListener{
+//            findNavController().navigate(R.id.action_loginFragment_to_forgotPassawordFragment)
+//        }
+//    }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {

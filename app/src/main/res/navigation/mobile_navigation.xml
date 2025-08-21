@@ -79,5 +79,10 @@
             android:id="@+id/action_profileViewFragment_to_editProfileFragment2"
             app:destination="@id/editProfileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.summerveldhoundresort.ui.profile.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
 
 </navigation>
