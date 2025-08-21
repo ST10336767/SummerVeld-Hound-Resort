@@ -50,8 +50,34 @@
             app:destination="@id/navigation_home" />
     </fragment>
     <fragment
+
         android:id="@+id/forgotPassawordFragment"
         android:name="com.example.summerveldhoundresort.ui.auth.ForgotPassawordFragment"
         android:label="fragment_forgot_passaword"
         tools:layout="@layout/fragment_forgot_passaword" />
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.summerveldhoundresort.ui.profile.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.summerveldhoundresort.ui.profile.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/profileViewFragment"
+        android:name="com.example.summerveldhoundresort.ui.profile.ProfileViewFragment"
+        android:label="fragment_profile_view"
+        tools:layout="@layout/fragment_profile_view" >
+        <action
+            android:id="@+id/action_profileViewFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_profileViewFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileViewFragment_to_editProfileFragment2"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+
 </navigation>

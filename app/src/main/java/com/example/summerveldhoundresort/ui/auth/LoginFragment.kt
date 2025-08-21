@@ -1,5 +1,6 @@
 package com.example.summerveldhoundresort.ui.auth
 
+import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -21,13 +23,18 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.auth
 import kotlinx.coroutines.launch
 
 
+@Suppress("DEPRECATION")
 class LoginFragment : Fragment() {
 
     private lateinit var authViewModel: AuthViewModel
@@ -62,16 +69,13 @@ class LoginFragment : Fragment() {
 
         // Initialize Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance()
-
-        // Configure Google Sign In options
-        // Use requestIdToken with R.string.default_web_client_id from google-services.json
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id)) // This is crucial for Firebase Auth
-            .requestEmail() // Request user's email address
+            .requestIdToken(getString(R.string.default_web_client_id)) // Your server's client ID
+            .requestEmail()
             .build()
+        val googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
-        // Build a GoogleSignInClient with the options specified by gso.
-        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+
 
         // Set click listener for the traditional email/password Login button
         binding.buttonLogin.setOnClickListener{
@@ -103,17 +107,26 @@ class LoginFragment : Fragment() {
                         startActivity(intent)
                         requireActivity().finish() // Finish the activity hosting this fragment
                     }
+
                     is AppResult.Error<*> -> {
                         Log.e(TAG, "Login Failed: ${result.exception?.message}") // Use e for errors
                         Toast.makeText(requireContext(), "Login Failed: ${result.exception?.message}", Toast.LENGTH_LONG).show()
-                    }
                 }
             }
         }
 
+
+        val signInLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                    handleSignInResult(task)
+                }
+            }
         // Set click listener for the Google Sign-In button
         binding.googleSignInButton.setOnClickListener {
-            signInWithGoogle()
+            val signInIntent = googleSignInClient.signInIntent
+            signInLauncher.launch(signInIntent)
         }
 
         // Set click listener for Sign Up text
@@ -126,12 +139,34 @@ class LoginFragment : Fragment() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) from a previous session and update UI.
-        val currentUser = firebaseAuth.currentUser
-        updateUI(currentUser)
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+            val account = completedTask.getResult(ApiException::class.java)
+            firebaseAuthWithGoogle(account.idToken!!)
+        } catch (e: ApiException) {
+            // Handle sign-in failure
+            Toast.makeText(requireContext(), "Google Sign-In failed.", Toast.LENGTH_SHORT).show()
+        }
     }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        Firebase.auth.signInWithCredential(credential)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    // Firebase sign-in successful.
+                    Toast.makeText(requireContext(), "Sign in successful", Toast.LENGTH_SHORT).show()
+                    // Now, trigger the biometric authentication flow.
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
+                } else {
+                    // Sign in failed.
+                    Toast.makeText(requireContext(), "Firebase authentication failed.", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
 
     // Function to start the Google Sign-In flow
     private fun signInWithGoogle() {
@@ -141,106 +176,10 @@ class LoginFragment : Fragment() {
     }
 
     // Handles the result from the Google Sign-In activity
-    @Deprecated("Deprecated in Java") // This annotation indicates it's deprecated in Java, but still widely used for ActivityResult
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_GOOGLE_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                // Google Sign In was successful, get the account and authenticate with Firebase
-                val account = task.getResult(ApiException::class.java)!!
-                Log.d(TAG, "Google sign in successful: id=${account.id}")
-                firebaseAuthWithGoogle(account.idToken!!)
-            } catch (e: ApiException) {
-                // Google Sign In failed, update UI and show a message
-                Log.w(TAG, "Google sign in failed", e)
-                Toast.makeText(requireContext(), "Google Sign In Failed: ${e.statusCode} - ${e.message}", Toast.LENGTH_LONG).show()
-                updateUI(null)
-            }
-        }
-    }
-
-    // Authenticates with Firebase using the Google ID token
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        Log.d(TAG, "firebaseAuthWithGoogle: idToken=$idToken")
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        firebaseAuth.signInWithCredential(credential)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "Firebase signInWithCredential success")
-                    val user = firebaseAuth.currentUser
-                    updateUI(user)
-
-                    Toast.makeText(requireContext(), "Google Login Successful!", Toast.LENGTH_SHORT).show()
-                    // Navigate to MainActivity after successful login
-                    val intent = Intent(requireContext(), MainActivity::class.java)
-                    startActivity(intent)
-                    requireActivity().finish() // Finish the activity hosting this fragment
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "Firebase signInWithCredential failed", task.exception)
-                    Toast.makeText(requireContext(), "Authentication Failed via Google: ${task.exception?.message}", Toast.LENGTH_LONG).show()
-                    updateUI(null)
-                }
-            }
-    }
-
-    // Updates the UI based on the authentication state
-    private fun updateUI(user: FirebaseUser?) {
-        if (user != null) {
-            // User is signed in. You might want to update a status TextView.
-            binding.statusTextView.text = "Signed in as: ${user.displayName ?: user.email}"
-            binding.googleSignInButton.visibility = View.GONE // Hide the button if already signed in
-            binding.buttonLogin.visibility = View.GONE // Hide traditional login if signed in via Google
-            binding.edtEmailAddress.visibility = View.GONE
-            binding.textInputPassword.visibility = View.GONE
-            binding.tvLogin.visibility = View.GONE
-            binding.tvOrSeparator.visibility = View.GONE
-            binding.dividerLeft.visibility = View.GONE
-            binding.dividerRight.visibility = View.GONE
-            binding.tvNoAccount.visibility = View.GONE
-            binding.tvSignUp.visibility = View.GONE
-            binding.buttonForgotPassword.visibility = View.GONE
-            binding.divider.visibility = View.GONE
-            binding.divider2.visibility = View.GONE
-
-            // You can also add navigation here if the user is auto-logged in on start
-            if (findNavController().currentDestination?.id == R.id.loginFragment) {
-                // Check if it's not already on MainActivity
-                // This prevents navigating back to login fragment after main activity is loaded
-                if (!requireActivity().isFinishing) {
-                    val intent = Intent(requireContext(), MainActivity::class.java)
-                    startActivity(intent)
-                    requireActivity().finish()
-                }
-            }
-
-
-        } else {
-            // User is signed out or not signed in. Show login options.
-            binding.statusTextView.text = "Not signed in via Google"
-            binding.googleSignInButton.visibility = View.VISIBLE
-            binding.buttonLogin.visibility = View.VISIBLE
-            binding.edtEmailAddress.visibility = View.VISIBLE
-            binding.textInputPassword.visibility = View.VISIBLE
-            binding.tvLogin.visibility = View.VISIBLE
-            binding.tvOrSeparator.visibility = View.VISIBLE
-            binding.dividerLeft.visibility = View.VISIBLE
-            binding.dividerRight.visibility = View.VISIBLE
-            binding.tvNoAccount.visibility = View.VISIBLE
-            binding.tvSignUp.visibility = View.VISIBLE
-            binding.buttonForgotPassword.visibility = View.VISIBLE
-            binding.divider.visibility = View.VISIBLE
-            binding.divider2.visibility = View.VISIBLE
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }
