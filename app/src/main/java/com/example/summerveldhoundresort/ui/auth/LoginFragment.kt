@@ -133,6 +133,10 @@ class LoginFragment : Fragment() {
         binding.tvSignUp.setOnClickListener{
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
+
+        binding.buttonForgotPassword.setOnClickListener{
+            findNavController().navigate(R.id.action_loginFragment_to_forgotPassawordFragment)
+        }
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
