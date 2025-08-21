@@ -32,7 +32,7 @@ class firebaseUsersImpl : UsersRepo {
             Elvis Operator, if result.user is not null, return it, if it is, return what
             is after the operator ?:
             */
-            val user = result.user ?: return AppResult.Error<Unit>(Exception("User registration failed"))
+            val user = result.user ?: return AppResult.Error(Exception("User registration failed"))
 
             val userProfile = User(
                 userID = user.uid,
@@ -52,28 +52,28 @@ class firebaseUsersImpl : UsersRepo {
              AppResult.Success(Unit)
         } catch (e: Exception) {
           Log.e(TAG, "Registration failed", e)
-             AppResult.Error<Unit>(e)
+             AppResult.Error(e)
         }
     }
 
     override suspend fun login(identifier: String, password: String): AppResult<User> {
         return try{
             val result = auth.signInWithEmailAndPassword(identifier, password).await()
-            val fbUser = result.user ?: return AppResult.Error<User>(Exception("User not found."))
+            val fbUser = result.user ?: return AppResult.Error(Exception("User not found."))
 
             Log.d(TAG, "signInWithEmail:success")
 
             //gets user doc from firestore then converts to user entity
             val documentSnapShot = firestore.collection("users").document(fbUser.uid).get().await()
-            val user = documentSnapShot.toObject(User::class.java) ?: return AppResult.Error<User>(Exception("Failed to parse user profile"))
+            val user = documentSnapShot.toObject(User::class.java) ?: return AppResult.Error(Exception("Failed to parse user profile"))
             AppResult.Success(user)
         }catch (e:Exception){
             Log.e(TAG, "Login failed", e)
-            AppResult.Error<User>(e)
+            AppResult.Error(e)
         }
     }
 
-    override suspend fun logout() {
+    override  fun logout() {
        FirebaseAuth.getInstance().signOut()
     }
 
@@ -83,11 +83,11 @@ class firebaseUsersImpl : UsersRepo {
             try {
                 //gets user doc from firestore then converts to user entity
                 val documentSnapShot = firestore.collection("users").document(currentUser.uid).get().await()
-                val user = documentSnapShot.toObject(User::class.java) ?: return AppResult.Error<User>(Exception("Failed to parse user profile"))
+                val user = documentSnapShot.toObject(User::class.java) ?: return AppResult.Error(Exception("Failed to parse user profile"))
                return AppResult.Success(user)
             }catch (e: Exception){
                 Log.e(TAG, "get current user method failed", e)
-              return  AppResult.Error<User>(e)
+              return  AppResult.Error(e)
             }
         }
        return  AppResult.Success(null)

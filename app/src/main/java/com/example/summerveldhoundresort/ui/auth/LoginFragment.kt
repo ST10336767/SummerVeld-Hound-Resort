@@ -107,10 +107,10 @@ class LoginFragment : Fragment() {
                         startActivity(intent)
                         requireActivity().finish() // Finish the activity hosting this fragment
                     }
+
                     is AppResult.Error<*> -> {
                         Log.e(TAG, "Login Failed: ${result.exception?.message}") // Use e for errors
                         Toast.makeText(requireContext(), "Login Failed: ${result.exception?.message}", Toast.LENGTH_LONG).show()
-                    }
                 }
             }
         }

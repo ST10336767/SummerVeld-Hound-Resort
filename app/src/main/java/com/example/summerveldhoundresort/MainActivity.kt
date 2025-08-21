@@ -32,4 +32,12 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+
+    //Added - Enables back button functionality on toolbar
+    //Author: Zorbey Torunoğlu
+    // Website: https://medium.com/@zorbeytorunoglu/fragment-navigation-on-android-c45488184399
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
 }
