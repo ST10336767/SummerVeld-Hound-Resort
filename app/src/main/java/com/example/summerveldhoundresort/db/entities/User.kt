@@ -9,4 +9,5 @@ data class User(
     var email : String = "",
     var phoneNumber : String = "",
     val creationDate : String = "",
+    var role: String = "user"
 )
