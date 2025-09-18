@@ -61,7 +61,7 @@ class EventsFragment : Fragment() {
     }
 
     private fun pushList() {
-        adapter.submitList(events.toList()) // pass a copy for DiffUtil
+        adapter.submitList(events.toList())
         emptyView.visibility = if (events.isEmpty()) View.VISIBLE else View.GONE
     }
 

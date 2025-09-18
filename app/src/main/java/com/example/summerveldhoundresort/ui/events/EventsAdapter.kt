@@ -11,8 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.summerveldhoundresort.R
-
-// You can keep this model here or move it to its own file.
+//Data class Should be moved else where (Put here for testing)
 data class Event(
     val id: String,
     val title: String,
