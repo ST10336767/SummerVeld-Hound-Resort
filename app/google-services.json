@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "782347961405",
+    "project_id": "summerveld-hound-resort",
+    "storage_bucket": "summerveld-hound-resort.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782347961405:android:f0d115f36f574442c71654",
+        "android_client_info": {
+          "package_name": "com.example.summerveld_hound_resort"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782347961405-3shvlcrleof4t3hc43ul380h5iqrfs7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAi80W2b85DBWh3B9WDQ2A6inpLMWnv_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782347961405-3shvlcrleof4t3hc43ul380h5iqrfs7i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782347961405:android:aa08b3d33da0e18dc71654",
+        "android_client_info": {
+          "package_name": "com.example.summerveldhoundresort"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782347961405-k5q76kqa25a1gejgjo81501nrrujv5v8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.summerveldhoundresort",
+            "certificate_hash": "32be9c29a95b5f6b39ad6d44d2df1518f8eb9985"
+          }
+        },
+        {
+          "client_id": "782347961405-3shvlcrleof4t3hc43ul380h5iqrfs7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAi80W2b85DBWh3B9WDQ2A6inpLMWnv_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782347961405-3shvlcrleof4t3hc43ul380h5iqrfs7i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
