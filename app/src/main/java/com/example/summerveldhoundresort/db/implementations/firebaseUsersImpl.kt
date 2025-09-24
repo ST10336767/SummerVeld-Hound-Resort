@@ -39,7 +39,8 @@ class firebaseUsersImpl : UsersRepo {
                 username = name,
                 email = email,
                 phoneNumber = phoneNumber,
-                creationDate = creationDate
+                creationDate = creationDate,
+                role = "user"
             )
             //Adding the extra user information to a user profile under their ID
           //sets display name to name user entered
@@ -65,7 +66,8 @@ class firebaseUsersImpl : UsersRepo {
 
             //gets user doc from firestore then converts to user entity
             val documentSnapShot = firestore.collection("users").document(fbUser.uid).get().await()
-            val user = documentSnapShot.toObject(User::class.java) ?: return AppResult.Error(Exception("Failed to parse user profile"))
+            val user = documentSnapShot.toObject(User::class.java)
+                ?: return AppResult.Error(Exception("Failed to parse user profile"))
             AppResult.Success(user)
         }catch (e:Exception){
             Log.e(TAG, "Login failed", e)

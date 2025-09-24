@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.summerveldhoundresort.AdminActivity
 import com.example.summerveldhoundresort.MainActivity
 import com.example.summerveldhoundresort.R
 import com.example.summerveldhoundresort.databinding.FragmentLoginBinding
@@ -100,16 +101,22 @@ class LoginFragment : Fragment() {
                 Log.d(TAG, "Login details: $emailAddress, password: $password ")
                 when (result) {
                     is AppResult.Success -> {
-                        Log.d(TAG, "SUCCESS result: $result")
-                        Toast.makeText(
-                            requireContext(),
-                            "Login Successful",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        // Navigate to MainActivity after successful login
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                        startActivity(intent)
-                        requireActivity().finish() // Finish the activity hosting this fragment
+                        val user = result.data
+                        Toast.makeText(requireContext(), "Login Successful", Toast.LENGTH_SHORT).show()
+
+                        if (user.role == "admin") {
+                            // Navigate to AdminActivity or AdminFragment
+                            val intent = Intent(requireContext(), AdminActivity::class.java)
+                            startActivity(intent)
+                        } else{
+                            // Normal user
+                            val intent = Intent(requireContext(), MainActivity::class.java)
+                            startActivity(intent)
+                        }
+
+                        requireActivity().finish()
+
+                      
                     }
 
                     is AppResult.Error -> {
