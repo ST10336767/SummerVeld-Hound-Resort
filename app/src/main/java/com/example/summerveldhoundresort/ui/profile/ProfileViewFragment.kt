@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.summerveldhoundresort.R
@@ -14,6 +15,7 @@ import com.example.summerveldhoundresort.databinding.FragmentRegisterBinding
 import com.example.summerveldhoundresort.db.implementations.firebaseUsersImpl
 import com.example.summerveldhoundresort.ui.auth.AuthViewModel
 import com.example.summerveldhoundresort.ui.auth.AuthViewModelFactory
+import com.google.firebase.auth.FirebaseAuth
 
 class ProfileViewFragment : Fragment() {
     private lateinit var profileViewModel: ProfileViewModel
@@ -45,8 +47,24 @@ class ProfileViewFragment : Fragment() {
         binding.mbDataPrivacy.setOnClickListener{
 //            findNavController().navigate(R.id.action_ProfileFragment_to_EditProfileFragment)
         }
-        binding.mbChangePassword.setOnClickListener{
-            findNavController().navigate(R.id.action_profileViewFragment_to_changePasswordFragment)
+        binding.mbChangePassword.setOnClickListener {
+            val auth = FirebaseAuth.getInstance()
+            val userEmail = auth.currentUser?.email
+
+            if (userEmail != null) {
+                auth.sendPasswordResetEmail(userEmail)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(requireContext(), "Password reset email sent!", Toast.LENGTH_SHORT).show()
+                            // Navigate to change password fragment
+                            findNavController().navigate(R.id.action_profileViewFragment_to_changePasswordFragment)
+                        } else {
+                            Toast.makeText(requireContext(), "Failed to send reset email.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            } else {
+                Toast.makeText(requireContext(), "No email associated with this account", Toast.LENGTH_SHORT).show()
+            }
         }
         binding.mbSettings.setOnClickListener{
 //            findNavController().navigate(R.id.action_ProfileFragment_to_EditProfileFragment)
