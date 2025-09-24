@@ -88,5 +88,14 @@
             android:id="@+id/action_changePasswordFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <activity
+        android:id="@+id/manageEventsActivity"
+        android:name="com.example.summerveldhoundresort.ManageEventsActivity"
+        android:label="ManageEventsActivity" />
+    <activity
+        android:id="@+id/adminActivity"
+        android:name="com.example.summerveldhoundresort.AdminActivity"
+        android:label="activity_admin"
+        tools:layout="@layout/activity_admin" />
 
 </navigation>
