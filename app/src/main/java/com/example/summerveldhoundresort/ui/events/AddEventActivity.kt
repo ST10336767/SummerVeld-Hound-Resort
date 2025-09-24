@@ -78,6 +78,11 @@ class AddEventActivity : AppCompatActivity() {
             timePicker.show()
         }
 
+        val backBtn: Button = findViewById(R.id.btnBack)
+        backBtn.setOnClickListener {
+            finish() // simply finishes this activity and goes back
+        }
+
         // Save Event
         saveEventBtn.setOnClickListener {
             val eventName = eventNameInput.text.toString().trim()
@@ -86,7 +91,7 @@ class AddEventActivity : AppCompatActivity() {
             val eventLocation = eventLocationInput.text.toString().trim()
             val eventTime = eventTimeInput.text.toString().trim()
 
-            if (eventName.isNotEmpty() && eventDate.isNotEmpty()) {
+            if (eventName.isNotEmpty() && eventDate.isNotEmpty() && eventTime.isNotEmpty() && eventLocation.isNotEmpty() && eventDesc.isNotEmpty() && user != null) {
                 val event = hashMapOf(
                     "name" to eventName,
                     "description" to eventDesc,
