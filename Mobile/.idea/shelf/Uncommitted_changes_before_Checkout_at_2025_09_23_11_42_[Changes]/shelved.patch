@@ -1,0 +1,59 @@
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"CHOOSE_PER_TEST\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"#GRADLE_LOCAL_JAVA_HOME\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 8054880291aa76463a0cf044f3d9ef3a9e7eca2c)
++++ b/.idea/gradle.xml	(date 1756378026826)
+@@ -13,6 +13,7 @@
+             <option value="$PROJECT_DIR$/app" />
+           </set>
+         </option>
++        <option name="resolveExternalAnnotations" value="false" />
+       </GradleProjectSettings>
+     </option>
+   </component>
+Index: gradle/libs.versions.toml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[versions]\r\nagp = \"8.8.2\"\r\nkotlin = \"2.1.0\"\r\ncoreKtx = \"1.16.0\"\r\njunit = \"4.13.2\"\r\njunitVersion = \"1.2.1\"\r\nespressoCore = \"3.6.1\"\r\nappcompat = \"1.7.1\"\r\nmaterial = \"1.12.0\"\r\nconstraintlayout = \"2.2.1\"\r\nlifecycleLivedataKtx = \"2.9.0\"\r\nlifecycleViewmodelKtx = \"2.9.0\"\r\nnavigationFragmentKtx = \"2.9.0\"\r\nnavigationUiKtx = \"2.9.0\"\r\nfirebaseAuthKtx = \"23.2.1\"\r\nlegacySupportV4 = \"1.0.0\"\r\nfragmentKtx = \"1.8.7\"\r\nactivity = \"1.10.1\"\r\n\r\n[libraries]\r\nandroidx-core-ktx = { group = \"androidx.core\", name = \"core-ktx\", version.ref = \"coreKtx\" }\r\njunit = { group = \"junit\", name = \"junit\", version.ref = \"junit\" }\r\nandroidx-junit = { group = \"androidx.test.ext\", name = \"junit\", version.ref = \"junitVersion\" }\r\nandroidx-espresso-core = { group = \"androidx.test.espresso\", name = \"espresso-core\", version.ref = \"espressoCore\" }\r\nandroidx-appcompat = { group = \"androidx.appcompat\", name = \"appcompat\", version.ref = \"appcompat\" }\r\nmaterial = { group = \"com.google.android.material\", name = \"material\", version.ref = \"material\" }\r\nandroidx-constraintlayout = { group = \"androidx.constraintlayout\", name = \"constraintlayout\", version.ref = \"constraintlayout\" }\r\nandroidx-lifecycle-livedata-ktx = { group = \"androidx.lifecycle\", name = \"lifecycle-livedata-ktx\", version.ref = \"lifecycleLivedataKtx\" }\r\nandroidx-lifecycle-viewmodel-ktx = { group = \"androidx.lifecycle\", name = \"lifecycle-viewmodel-ktx\", version.ref = \"lifecycleViewmodelKtx\" }\r\nandroidx-navigation-fragment-ktx = { group = \"androidx.navigation\", name = \"navigation-fragment-ktx\", version.ref = \"navigationFragmentKtx\" }\r\nandroidx-navigation-ui-ktx = { group = \"androidx.navigation\", name = \"navigation-ui-ktx\", version.ref = \"navigationUiKtx\" }\r\nfirebase-auth-ktx = { group = \"com.google.firebase\", name = \"firebase-auth-ktx\", version.ref = \"firebaseAuthKtx\" }\r\nandroidx-legacy-support-v4 = { group = \"androidx.legacy\", name = \"legacy-support-v4\", version.ref = \"legacySupportV4\" }\r\nandroidx-fragment-ktx = { group = \"androidx.fragment\", name = \"fragment-ktx\", version.ref = \"fragmentKtx\" }\r\nandroidx-activity = { group = \"androidx.activity\", name = \"activity\", version.ref = \"activity\" }\r\n\r\n[plugins]\r\nandroid-application = { id = \"com.android.application\", version.ref = \"agp\" }\r\nkotlin-android = { id = \"org.jetbrains.kotlin.android\", version.ref = \"kotlin\" }\r\n\r\n
+===================================================================
+diff --git a/gradle/libs.versions.toml b/gradle/libs.versions.toml
+--- a/gradle/libs.versions.toml	(revision 8054880291aa76463a0cf044f3d9ef3a9e7eca2c)
++++ b/gradle/libs.versions.toml	(date 1758620286618)
+@@ -16,6 +16,8 @@
+ legacySupportV4 = "1.0.0"
+ fragmentKtx = "1.8.7"
+ activity = "1.10.1"
++navigationFragmentKtxVersion = "2.9.4"
++navigationUiKtxVersion = "2.9.4"
+ 
+ [libraries]
+ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+@@ -33,6 +35,8 @@
+ androidx-legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupportV4" }
+ androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
+ androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
++navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtxVersion" }
++navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtxVersion" }
+ 
+ [plugins]
+ android-application = { id = "com.android.application", version.ref = "agp" }
+Index: app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    alias(libs.plugins.android.application)\r\n    alias(libs.plugins.kotlin.android)\r\n\r\n    // Add the Google services Gradle plugin\r\n    id(\"com.google.gms.google-services\")\r\n}\r\n\r\nandroid {\r\n    namespace = \"com.example.summerveldhoundresort\"\r\n    compileSdk = 35\r\n\r\n    defaultConfig {\r\n        applicationId = \"com.example.summerveldhoundresort\"\r\n        minSdk = 24\r\n        targetSdk = 35\r\n        versionCode = 1\r\n        versionName = \"1.0\"\r\n\r\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            isMinifyEnabled = false\r\n            proguardFiles(\r\n                getDefaultProguardFile(\"proguard-android-optimize.txt\"),\r\n                \"proguard-rules.pro\"\r\n            )\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility = JavaVersion.VERSION_11\r\n        targetCompatibility = JavaVersion.VERSION_11\r\n    }\r\n    kotlinOptions {\r\n        jvmTarget = \"11\"\r\n    }\r\n    buildFeatures {\r\n        viewBinding = true\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation(libs.androidx.core.ktx)\r\n    implementation(libs.androidx.appcompat)\r\n    implementation(libs.material)\r\n    implementation(libs.androidx.constraintlayout)\r\n    implementation(libs.androidx.lifecycle.livedata.ktx)\r\n    implementation(libs.androidx.lifecycle.viewmodel.ktx)\r\n    implementation(libs.androidx.navigation.fragment.ktx)\r\n    implementation(libs.androidx.navigation.ui.ktx)\r\n    implementation(libs.firebase.auth.ktx)\r\n    implementation(libs.androidx.legacy.support.v4)\r\n    implementation(libs.androidx.fragment.ktx)\r\n    implementation(libs.androidx.activity)\r\n    testImplementation(libs.junit)\r\n    androidTestImplementation(libs.androidx.junit)\r\n    androidTestImplementation(libs.androidx.espresso.core)\r\n\r\n    //Added For Firebase\r\n    implementation(platform(\"com.google.firebase:firebase-bom:33.16.0\"))\r\n    implementation(\"com.google.firebase:firebase-analytics\")\r\n    implementation(\"com.google.firebase:firebase-firestore\")\r\n\r\n//    implementation(\"com.google.firebase:firebase-auth-ktx\") // ✅ Required for Firebase.auth\r\n    // Firebase Auth KTX\r\n    implementation(\"com.google.firebase:firebase-auth-ktx\")\r\n\r\n    // Google Sign-In and Firebase Authentication dependencies\r\n    implementation(\"com.google.android.gms:play-services-auth:21.2.0\") //\r\n    implementation(\"com.google.firebase:firebase-auth:23.0.0\") //\r\n}
+===================================================================
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+--- a/app/build.gradle.kts	(revision 8054880291aa76463a0cf044f3d9ef3a9e7eca2c)
++++ b/app/build.gradle.kts	(date 1758620286659)
+@@ -55,6 +55,8 @@
+     implementation(libs.androidx.legacy.support.v4)
+     implementation(libs.androidx.fragment.ktx)
+     implementation(libs.androidx.activity)
++    implementation(libs.navigation.fragment.ktx)
++    implementation(libs.navigation.ui.ktx)
+     testImplementation(libs.junit)
+     androidTestImplementation(libs.androidx.junit)
+     androidTestImplementation(libs.androidx.espresso.core)
