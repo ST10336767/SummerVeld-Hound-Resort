@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.summerveldhoundresort.databinding.FragmentCreateDogBinding
 import com.example.summerveldhoundresort.db.AppResult
 import com.example.summerveldhoundresort.db.entities.Dog
@@ -19,6 +20,7 @@ import com.example.summerveldhoundresort.ui.images.ImageViewModel
 import com.example.summerveldhoundresort.utils.ImagePickerUtils
 import com.google.firebase.firestore.FirebaseFirestore
 import com.bumptech.glide.Glide
+import com.example.summerveldhoundresort.R
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -76,6 +78,7 @@ class CreateDog : Fragment() {
 
         binding.buttonAddDog.setOnClickListener {
             saveDogData()
+            findNavController().navigate(R.id.action_createDog_to_navigation_home)
         }
     }
 
@@ -127,6 +130,7 @@ class CreateDog : Fragment() {
         
         binding.buttonAddDog.isEnabled = false
         uploadPetProfileImage(dogName, dogDOB, dogBreed, dogColour, dogGender, dogDescription)
+
     }
 
     private fun setupImageUploadObserver() {

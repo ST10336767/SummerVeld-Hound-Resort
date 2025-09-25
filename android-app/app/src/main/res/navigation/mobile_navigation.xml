@@ -93,7 +93,11 @@
         android:id="@+id/createDog"
         android:name="com.example.summerveldhoundresort.ui.admin.CreateDog"
         android:label="fragment_create_dog"
-        tools:layout="@layout/fragment_create_dog" />
+        tools:layout="@layout/fragment_create_dog" >
+        <action
+            android:id="@+id/action_createDog_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
     <activity
         android:id="@+id/manageEventsActivity"
         android:name="com.example.summerveldhoundresort.ManageEventsActivity"

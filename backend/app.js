@@ -6,7 +6,7 @@ const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
-const connectDB = require('./config/database');
+// const connectDB = require('./config/database'); // MongoDB - not used
 const { initializeFirebase } = require('./config/firebase');
 const errorHandler = require('./middleware/errorHandler');
 
@@ -19,11 +19,11 @@ const imageRoutes = require('./routes/images');
 
 const app = express();
 
-// Connect to database
-//connectDB();
-
-// Initialize Firebase Admin SDK
-initializeFirebase();
+// Initialize Firebase Admin SDK (Firebase is our database)
+const firebaseApp = initializeFirebase();
+if (!firebaseApp) {
+  console.warn('⚠️  Firebase not initialized. Some features may not work properly.');
+}
 
 // Rate limiting
 const limiter = rateLimit({
@@ -36,10 +36,29 @@ const limiter = rateLimit({
 app.use(helmet()); // Security headers
 app.use(compression()); // Compress responses
 app.use(limiter); // Rate limiting
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+// CORS configuration for production and development
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      process.env.FRONTEND_URL,
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'https://your-app-name.onrender.com' // Replace with your actual Render frontend URL
+    ].filter(Boolean);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
-}));
+};
+
+app.use(cors(corsOptions));
 app.use(morgan('combined')); // Logging
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
