@@ -1,30 +1,30 @@
-# Gradle
-.gradle/
-build/
-*/build/
-
-# IntelliJ IDEA
-.idea/
 *.iml
-*.iws
-*.ipr
-
-# Android Studio
-*.hprof
-.cxx/
-.externalNativeBuild/
-
-# Local configuration
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
 local.properties
 
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# Root level directories (should be ignored)
+../.gradle/
+../.idea/
+../local.properties
+
+# Android build files
+Mobile/app/build/
+Mobile/build/
+Mobile/.gradle/
+Mobile/app/.cxx/
+Mobile/app/.externalNativeBuild/
 
 # Node.js
 node_modules/
@@ -56,6 +56,7 @@ coverage/
 .nyc_output
 
 # Dependency directories
+node_modules/
 jspm_packages/
 
 # Optional npm cache directory
@@ -69,6 +70,9 @@ jspm_packages/
 
 # Yarn Integrity file
 .yarn-integrity
+
+# dotenv environment variables file
+.env
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
