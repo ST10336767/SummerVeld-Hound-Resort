@@ -12,13 +12,12 @@ import java.util.concurrent.TimeUnit
 object NetworkConfig {
     
     // Base URL for your RESTful API
-    // Update this to match your actual API server URL
-    private const val BASE_URL = "http://10.0.2.2:5000/api/" // For Android emulator
-    // For physical device, use your computer's IP address:
-    // private const val BASE_URL = "http://192.168.1.100:5000/api/"
+    // Updated to use Render deployment
+    private const val BASE_URL = "https://summerveld-api.onrender.com/api/"
     
-    // For production, use your deployed API URL:
-    // private const val BASE_URL = "https://your-api-domain.com/api/"
+    // Alternative URLs for development (uncomment if needed):
+    // private const val BASE_URL = "http://10.0.2.2:5000/api/" // For Android emulator
+    // private const val BASE_URL = "http://192.168.1.100:5000/api/" // For physical device
     
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
@@ -39,4 +38,7 @@ object NetworkConfig {
     
     val imageApiService: com.example.summerveldhoundresort.network.api.ImageApiService = 
         retrofit.create(com.example.summerveldhoundresort.network.api.ImageApiService::class.java)
+    
+    val authApiService: com.example.summerveldhoundresort.network.api.AuthApiService = 
+        retrofit.create(com.example.summerveldhoundresort.network.api.AuthApiService::class.java)
 }

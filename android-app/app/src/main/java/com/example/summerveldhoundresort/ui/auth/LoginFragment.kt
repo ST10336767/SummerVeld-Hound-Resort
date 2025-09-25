@@ -26,6 +26,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.tasks.Task
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -142,8 +144,12 @@ class LoginFragment : Fragment() {
             }
         // Set click listener for the Google Sign-In button
         binding.googleSignInButton.setOnClickListener {
-            val signInIntent = googleSignInClient.signInIntent
-            signInLauncher.launch(signInIntent)
+            if (isGooglePlayServicesAvailable()) {
+                val signInIntent = googleSignInClient.signInIntent
+                signInLauncher.launch(signInIntent)
+            } else {
+                Toast.makeText(requireContext(), "Google Play Services is not available", Toast.LENGTH_SHORT).show()
+            }
         }
 
         // Set click listener for Sign Up text
@@ -192,8 +198,19 @@ class LoginFragment : Fragment() {
         startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN)
     }
 
-    // Handles the result from the Google Sign-In activity
-
+    // Check if Google Play Services is available
+    private fun isGooglePlayServicesAvailable(): Boolean {
+        val googleApiAvailability = GoogleApiAvailability.getInstance()
+        val resultCode = googleApiAvailability.isGooglePlayServicesAvailable(requireContext())
+        
+        return when (resultCode) {
+            ConnectionResult.SUCCESS -> true
+            else -> {
+                Log.w(TAG, "Google Play Services not available: $resultCode")
+                false
+            }
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
