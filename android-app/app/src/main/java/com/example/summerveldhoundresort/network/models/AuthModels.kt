@@ -50,6 +50,7 @@ object AuthModels {
 
     data class UserResponse(
         @SerializedName("success") val success: Boolean,
+        @SerializedName("message") val message: String? = null,
         @SerializedName("data") val data: UserProfileData
     )
 

@@ -116,7 +116,7 @@ class AuthRepository {
                     AppResult.Error(Exception("User profile data is null"))
                 }
             } else {
-                val errorMessage = response.body()?.message ?: "Failed to get user profile"
+                val errorMessage = response.body()?.message ?: "Failed to get user profile - HTTP ${response.code()}"
                 Log.e(TAG, "Get current user failed: $errorMessage")
                 AppResult.Error(Exception(errorMessage))
             }
