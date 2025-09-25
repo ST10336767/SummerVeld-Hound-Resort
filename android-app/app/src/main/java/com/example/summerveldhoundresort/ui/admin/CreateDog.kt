@@ -19,6 +19,7 @@ import com.example.summerveldhoundresort.db.entities.Dog
 import com.example.summerveldhoundresort.ui.images.ImageViewModel
 import com.example.summerveldhoundresort.utils.ImagePickerUtils
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.auth.FirebaseAuth
 import com.bumptech.glide.Glide
 import com.example.summerveldhoundresort.R
 import java.text.SimpleDateFormat
@@ -32,6 +33,7 @@ class CreateDog : Fragment() {
     private val binding get() = _binding!!
 
     private val firestoreDb = FirebaseFirestore.getInstance()
+    private val firebaseAuth = FirebaseAuth.getInstance()
     private val imageViewModel: ImageViewModel by viewModels()
     private var selectedImageUri: Uri? = null
     private var dogId: String? = null
@@ -135,8 +137,12 @@ class CreateDog : Fragment() {
 
     private fun setupImageUploadObserver() {
         imageViewModel.petProfileUploadResult.observe(viewLifecycleOwner, Observer { result ->
+            android.util.Log.d("CreateDog", "Image upload observer triggered: $result")
             when (result) {
                 is AppResult.Success -> {
+                    android.util.Log.d("CreateDog", "Image upload successful, saving dog data to Firestore")
+                    Toast.makeText(requireContext(), "Image uploaded! Saving dog data...", Toast.LENGTH_SHORT).show()
+                    
                     // Image uploaded successfully, now save dog data to Firestore
                     saveDogToFirestore(
                         dogName = arguments?.getString("dogName") ?: "",
@@ -150,9 +156,12 @@ class CreateDog : Fragment() {
                 }
                 is AppResult.Error -> {
                     binding.buttonAddDog.isEnabled = true
+                    android.util.Log.e("CreateDog", "Image upload failed: ${result.exception.message}")
                     Toast.makeText(requireContext(), "Image upload failed: ${result.exception.message}", Toast.LENGTH_LONG).show()
                 }
-                else -> {}
+                else -> {
+                    android.util.Log.d("CreateDog", "Image upload result: $result")
+                }
             }
         })
     }
@@ -184,7 +193,13 @@ class CreateDog : Fragment() {
         dogName: String, dogDOB: Date, dogBreed: String, dogColour: String,
         dogGender: String, dogDescription: String
     ) {
+        android.util.Log.d("CreateDog", "Starting image upload process")
+        android.util.Log.d("CreateDog", "Dog ID for upload: $dogId")
+        android.util.Log.d("CreateDog", "Selected image URI: $selectedImageUri")
+        
         selectedImageUri?.let { uri ->
+            android.util.Log.d("CreateDog", "Storing dog data in arguments for observer")
+            
             // Store dog data temporarily to use in observer
             arguments = Bundle().apply {
                 putString("dogName", dogName)
@@ -195,7 +210,12 @@ class CreateDog : Fragment() {
                 putString("dogDescription", dogDescription)
             }
             
+            android.util.Log.d("CreateDog", "Calling imageViewModel.uploadPetProfileImage")
             imageViewModel.uploadPetProfileImage(uri, dogId ?: "")
+        } ?: run {
+            android.util.Log.e("CreateDog", "Selected image URI is null!")
+            Toast.makeText(requireContext(), "No image selected!", Toast.LENGTH_SHORT).show()
+            binding.buttonAddDog.isEnabled = true
         }
     }
 
@@ -203,6 +223,18 @@ class CreateDog : Fragment() {
         dogName: String, dogDOB: Date, dogBreed: String,
         dogColour: String, dogGender: String, dogDescription: String, imageData: com.example.summerveldhoundresort.network.models.ImageData
     ) {
+        android.util.Log.d("CreateDog", "Starting to save dog to Firestore")
+        android.util.Log.d("CreateDog", "Dog ID: $dogId")
+        android.util.Log.d("CreateDog", "Image URL: ${imageData.publicUrl}")
+        
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser == null) {
+            android.util.Log.e("CreateDog", "No authenticated user found!")
+            Toast.makeText(requireContext(), "Please log in first", Toast.LENGTH_SHORT).show()
+            binding.buttonAddDog.isEnabled = true
+            return
+        }
+
         val dog = Dog(
             dogID = dogId ?: "",
             dogName = dogName,
@@ -212,17 +244,24 @@ class CreateDog : Fragment() {
             gender = dogGender,
             description = dogDescription,
             imageUri = imageData.publicUrl,
+            ownerId = currentUser.uid,
+            createdAt = Date(),
+            updatedAt = Date()
         )
+
+        android.util.Log.d("CreateDog", "Dog object created: $dog")
 
         firestoreDb.collection("dogs")
             .document(dogId ?: "")
             .set(dog)
             .addOnSuccessListener {
+                android.util.Log.d("CreateDog", "Dog saved successfully to Firestore")
                 binding.buttonAddDog.isEnabled = true
                 Toast.makeText(requireContext(), "Dog added successfully!", Toast.LENGTH_SHORT).show()
                 resetFields()
             }
             .addOnFailureListener { e ->
+                android.util.Log.e("CreateDog", "Failed to save dog to Firestore: ${e.message}")
                 binding.buttonAddDog.isEnabled = true
                 Toast.makeText(requireContext(), "Failed to add dog: ${e.message}", Toast.LENGTH_LONG).show()
             }

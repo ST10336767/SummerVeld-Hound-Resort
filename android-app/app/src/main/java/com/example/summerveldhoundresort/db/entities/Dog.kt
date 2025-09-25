@@ -6,24 +6,33 @@ data class Dog(
     // Unique identifier for the dog (could be generated or retrieved from a database)
     var dogID: String = "",
 
-// Name of the dog
+    // Name of the dog
     var dogName: String = "",
 
-// Date of birth of the dog (initialized as an empty Date)
+    // Date of birth of the dog (initialized as an empty Date)
     var dogDOB: Date = Date(),
 
-// Breed of the dog (e.g., Labrador, German Shepherd)
+    // Breed of the dog (e.g., Labrador, German Shepherd)
     var breed: String = "",
 
-// Color of the dog’s coat (e.g., Brown, Black, White)
+    // Color of the dog's coat (e.g., Brown, Black, White)
     var colour: String = "",
 
-// Gender of the dog (e.g., Male, Female)
+    // Gender of the dog (e.g., Male, Female)
     var gender: String = "",
 
-// Additional information or notes about the dog
+    // Additional information or notes about the dog
     var description: String = "",
 
-// URI for the dog's image, possibly stored as an encrypted string (bitcrypt)
+    // URI for the dog's image, possibly stored as an encrypted string (bitcrypt)
     var imageUri: String = "",
+
+    // Owner ID to link the dog to a user
+    var ownerId: String = "",
+
+    // Creation timestamp
+    var createdAt: Date = Date(),
+
+    // Last update timestamp
+    var updatedAt: Date = Date()
 )
