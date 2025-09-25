@@ -19,7 +19,6 @@ import com.example.summerveldhoundresort.db.entities.Dog
 import com.example.summerveldhoundresort.ui.images.ImageViewModel
 import com.example.summerveldhoundresort.utils.ImagePickerUtils
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.auth.FirebaseAuth
 import com.bumptech.glide.Glide
 import com.example.summerveldhoundresort.R
 import java.text.SimpleDateFormat
@@ -33,7 +32,6 @@ class CreateDog : Fragment() {
     private val binding get() = _binding!!
 
     private val firestoreDb = FirebaseFirestore.getInstance()
-    private val firebaseAuth = FirebaseAuth.getInstance()
     private val imageViewModel: ImageViewModel by viewModels()
     private var selectedImageUri: Uri? = null
     private var dogId: String? = null
@@ -227,14 +225,6 @@ class CreateDog : Fragment() {
         android.util.Log.d("CreateDog", "Dog ID: $dogId")
         android.util.Log.d("CreateDog", "Image URL: ${imageData.publicUrl}")
         
-        val currentUser = firebaseAuth.currentUser
-        if (currentUser == null) {
-            android.util.Log.e("CreateDog", "No authenticated user found!")
-            Toast.makeText(requireContext(), "Please log in first", Toast.LENGTH_SHORT).show()
-            binding.buttonAddDog.isEnabled = true
-            return
-        }
-
         val dog = Dog(
             dogID = dogId ?: "",
             dogName = dogName,
@@ -244,7 +234,6 @@ class CreateDog : Fragment() {
             gender = dogGender,
             description = dogDescription,
             imageUri = imageData.publicUrl,
-            ownerId = currentUser.uid,
             createdAt = Date(),
             updatedAt = Date()
         )

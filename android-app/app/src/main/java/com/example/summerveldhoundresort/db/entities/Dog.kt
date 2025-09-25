@@ -27,9 +27,6 @@ data class Dog(
     // URI for the dog's image, possibly stored as an encrypted string (bitcrypt)
     var imageUri: String = "",
 
-    // Owner ID to link the dog to a user
-    var ownerId: String = "",
-
     // Creation timestamp
     var createdAt: Date = Date(),
 
