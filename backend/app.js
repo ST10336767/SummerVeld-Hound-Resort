@@ -6,7 +6,7 @@ const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
-// const connectDB = require('./config/database'); // MongoDB - not used
+// const connectDB = require('./config/database'); // MongoDB not needed - using Firebase
 const { initializeFirebase } = require('./config/firebase');
 const errorHandler = require('./middleware/errorHandler');
 
@@ -36,18 +36,25 @@ const limiter = rateLimit({
 app.use(helmet()); // Security headers
 app.use(compression()); // Compress responses
 app.use(limiter); // Rate limiting
-// CORS configuration for production and development
+// CORS configuration for mobile app and development
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
+    // Allow requests with no origin (like mobile apps, Postman, or curl requests)
     if (!origin) return callback(null, true);
     
     const allowedOrigins = [
       process.env.FRONTEND_URL,
       'http://localhost:3000',
       'http://localhost:3001',
-      'https://your-app-name.onrender.com' // Replace with your actual Render frontend URL
+      'http://10.0.2.2:3000', // Android emulator localhost
+      'http://10.0.2.2:3001', // Android emulator localhost alternative
+      'https://summerveld-api.onrender.com' // Your API URL
     ].filter(Boolean);
+    
+    // Allow all origins for development (you can restrict this in production)
+    if (process.env.NODE_ENV === 'development') {
+      return callback(null, true);
+    }
     
     if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
@@ -55,7 +62,9 @@ const corsOptions = {
       callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 };
 
 app.use(cors(corsOptions));
