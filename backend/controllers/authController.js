@@ -18,16 +18,7 @@ const register = async (req, res) => {
 
     const { firstName, lastName, email, password, phone } = req.body;
 
-    // Check if user exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({
-        success: false,
-        message: 'User already exists with this email'
-      });
-    }
-
-    // Create user
+    // Create user (User.create handles duplicate check)
     const user = await User.create({
       firstName,
       lastName,
@@ -41,8 +32,9 @@ const register = async (req, res) => {
     const refreshToken = generateRefreshToken({ id: user._id });
 
     // Save refresh token
-    user.refreshTokens.push({ token: refreshToken });
-    await user.save();
+    await User.findByIdAndUpdate(user._id, {
+      $push: { refreshTokens: { token: refreshToken } }
+    });
 
     res.status(201).json({
       success: true,
@@ -63,7 +55,7 @@ const register = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Server error during registration',
+      message: error.message || 'Server error during registration',
       error: error.message
     });
   }
@@ -86,7 +78,7 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     // Check for user
-    const user = await User.findOne({ email }).select('+password');
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({
         success: false,
@@ -103,7 +95,8 @@ const login = async (req, res) => {
     }
 
     // Check password
-    const isMatch = await user.matchPassword(password);
+    const userInstance = new User(user);
+    const isMatch = await userInstance.matchPassword(password);
     if (!isMatch) {
       return res.status(401).json({
         success: false,
@@ -112,16 +105,18 @@ const login = async (req, res) => {
     }
 
     // Update last login
-    user.lastLogin = new Date();
-    await user.save();
+    await User.findByIdAndUpdate(user._id, {
+      lastLogin: new Date()
+    });
 
     // Generate tokens
     const token = generateToken({ id: user._id });
     const refreshToken = generateRefreshToken({ id: user._id });
 
     // Save refresh token
-    user.refreshTokens.push({ token: refreshToken });
-    await user.save();
+    await User.findByIdAndUpdate(user._id, {
+      $push: { refreshTokens: { token: refreshToken } }
+    });
 
     res.json({
       success: true,
@@ -134,7 +129,7 @@ const login = async (req, res) => {
           email: user.email,
           phone: user.phone,
           role: user.role,
-          lastLogin: user.lastLogin
+          lastLogin: new Date()
         },
         token,
         refreshToken
@@ -143,7 +138,7 @@ const login = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Server error during login',
+      message: error.message || 'Server error during login',
       error: error.message
     });
   }
@@ -190,10 +185,9 @@ const logout = async (req, res) => {
     const { refreshToken } = req.body;
     
     if (refreshToken) {
-      await User.findByIdAndUpdate(
-        req.user.id,
-        { $pull: { refreshTokens: { token: refreshToken } } }
-      );
+      await User.findByIdAndUpdate(req.user.id, {
+        $pull: { refreshTokens: { token: refreshToken } }
+      });
     }
 
     res.json({
