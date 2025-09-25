@@ -78,7 +78,7 @@ class CreateDog : Fragment() {
 
         binding.buttonAddDog.setOnClickListener {
             saveDogData()
-            findNavController().navigate(R.id.action_createDog_to_navigation_home)
+
         }
     }
 
