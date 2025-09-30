@@ -269,14 +269,11 @@ const displayImage = (filePath) => {
 #### Save Image Reference to Database
 ```javascript
 // After successful upload
-const booking = await Booking.findByIdAndUpdate(
-  bookingId,
-  { 
-    'pet.profileImage': result.data.filePath,
-    'pet.profileImageUrl': result.data.publicUrl
-  },
-  { new: true }
-);
+// Update your data model with the image information
+const result = {
+  filePath: result.data.filePath,
+  publicUrl: result.data.publicUrl
+};
 ```
 
 ## Performance Considerations

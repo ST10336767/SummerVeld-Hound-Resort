@@ -5,8 +5,7 @@ A comprehensive Node.js Express API backend service for the SummerVeld Hound Res
 ## Features
 
 - 🔐 **Authentication & Authorization** - JWT-based auth with role-based access control
-- 🐕 **Pet Management** - Complete pet profile and booking management
-- 📅 **Booking System** - Full booking lifecycle management
+- 🐕 **Pet Management** - Complete pet profile management
 - 🛠️ **Service Management** - Pet care services (boarding, grooming, training, etc.)
 - 👥 **User Management** - User profiles with different roles (user, staff, admin)
 - 🔒 **Security** - Helmet, CORS, rate limiting, input validation
@@ -94,13 +93,6 @@ JWT_REFRESH_EXPIRE=30d
 - `PUT /api/users/:id` - Update user
 - `DELETE /api/users/:id` - Delete user (admin only)
 
-### Bookings
-- `GET /api/bookings` - Get all bookings
-- `GET /api/bookings/:id` - Get booking by ID
-- `POST /api/bookings` - Create new booking
-- `PUT /api/bookings/:id` - Update booking
-- `DELETE /api/bookings/:id` - Delete booking
-
 ### Services
 - `GET /api/services` - Get all available services
 - `GET /api/services/:id` - Get service by ID
@@ -124,19 +116,16 @@ backend/
 │   └── supabase.js      # Supabase configuration
 ├── controllers/          # Route controllers
 │   ├── authController.js
-│   ├── bookingController.js
 │   └── imageController.js
 ├── middleware/           # Custom middleware
 │   ├── auth.js          # Authentication middleware
 │   ├── errorHandler.js  # Error handling middleware
 │   └── upload.js        # File upload middleware
 ├── models/              # Database models
-│   ├── User.js
-│   └── Booking.js
+│   └── User.js
 ├── routes/              # API routes
 │   ├── auth.js
 │   ├── users.js
-│   ├── bookings.js
 │   ├── images.js
 │   └── services.js
 ├── services/            # Business logic services
@@ -151,8 +140,8 @@ backend/
 
 ## User Roles
 
-- **User**: Can manage their own bookings and profile
-- **Staff**: Can manage bookings and view user information
+- **User**: Can manage their own profile
+- **Staff**: Can view user information
 - **Admin**: Full access to all features and user management
 
 ## API Response Format

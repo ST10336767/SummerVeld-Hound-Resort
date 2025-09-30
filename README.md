@@ -41,7 +41,7 @@ SummerVeld-Hound-Resort/
 - Firebase integration
 - Image storage and processing
 - User authentication
-- Booking management
+- Service management
 - Database operations
 
 ## Getting Started
