@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingHorizontal="24dp">
+
+    <!-- Top Paw Prints -->
+    <ImageView
+        android:id="@+id/pawTop"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="Top paw prints"
+        android:scaleType="fitCenter"
+        android:src="@drawable/paw"
+        android:rotation="-15"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="-25dp"
+        android:layout_marginEnd="-35dp" />
+
+
+    <!-- Bottom Paw Prints -->
+    <ImageView
+        android:id="@+id/pawBottom"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="Bottom paw prints"
+        android:scaleType="fitCenter"
+        android:src="@drawable/paw"
+        android:rotation="-15"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="-45dp"
+        android:layout_marginStart="-35dp" />
+
+    <!-- Form container -->
+    <LinearLayout
+        android:id="@+id/formContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign up"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/purple"
+            android:layout_marginBottom="50dp"/>
+
+        <!-- Full Name -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="15dp">
+
+            <EditText
+                android:id="@+id/etFullName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Full Name or Username"
+                android:background="@android:color/transparent"
+                android:paddingStart="15dp"
+                android:paddingEnd="40dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/purple" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/user" />
+        </RelativeLayout>
+
+        <!-- Email -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="15dp">
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:background="@android:color/transparent"
+                android:paddingStart="15dp"
+                android:paddingEnd="40dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/purple" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/email" />
+        </RelativeLayout>
+
+        <!-- Password -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="15dp">
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:background="@android:color/transparent"
+                android:paddingStart="15dp"
+                android:paddingEnd="40dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/purple" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/password"
+                android:clickable="true"
+                android:focusable="true" />
+        </RelativeLayout>
+
+        <!-- Confirm Password -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="15dp">
+
+            <EditText
+                android:id="@+id/etConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:background="@android:color/transparent"
+                android:paddingStart="15dp"
+                android:paddingEnd="40dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/purple" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/password"
+                android:clickable="true"
+                android:focusable="true" />
+        </RelativeLayout>
+
+        <!-- Create Account Button -->
+        <Button
+            android:id="@+id/btnCreateAccount"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Create Account"
+            android:textColor="@color/white"
+
+            android:backgroundTint="@color/dark_purple"
+            android:textSize="16sp"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="10dp"/>
+
+        <!-- Already have an account -->
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? Log in"
+            android:textSize="14sp"
+            android:textColor="@color/purple"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
