@@ -36,10 +36,11 @@ class AdminEventAdapter(private val events: List<Event>,
         holder.timeTextView.text = event.time
         holder.locationTextView.text = event.location
         holder.descriptionTextView.text = event.description
-        holder.editButton.setOnClickListener {
-            onEventClick(event)
-        }
+
+        // 👇 Hide edit button for normal user
+        holder.editButton.visibility = View.GONE
     }
+
 
     override fun getItemCount() = events.size
 }

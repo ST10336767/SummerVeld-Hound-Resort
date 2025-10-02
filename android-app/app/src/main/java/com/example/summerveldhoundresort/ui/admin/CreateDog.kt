@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -18,6 +19,7 @@ import com.example.summerveldhoundresort.db.entities.Dog
 import com.example.summerveldhoundresort.ui.images.ImageViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.bumptech.glide.Glide
+import com.example.summerveldhoundresort.R
 import com.example.summerveldhoundresort.utils.ImagePickerUtils
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -26,6 +28,7 @@ import java.util.Locale
 import java.util.UUID
 
 class CreateDog : Fragment() {
+
     private var _binding: FragmentCreateDogBinding? = null
     private val binding get() = _binding!!
 
@@ -33,6 +36,7 @@ class CreateDog : Fragment() {
     private val imageViewModel: ImageViewModel by viewModels()
     private var selectedImageUri: Uri? = null
     private var dogId: String? = null
+
 
     // Date formatter
     private val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
@@ -46,13 +50,24 @@ class CreateDog : Fragment() {
         }
     }
 
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View {
         _binding = FragmentCreateDogBinding.inflate(inflater, container, false)
         return binding.root
+
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null  // cleanup
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -255,4 +270,5 @@ class CreateDog : Fragment() {
             }
         )
     }
+
 }
