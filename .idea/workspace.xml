@@ -5,58 +5,37 @@
       <config />
     </shared>
     <layouts>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_arrow_drop_down.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/activity_add_event.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/rounded_edittext_background.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/activity_admin.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/rounded_spinner_background.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/activity_auth.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_create_dog.xml">
-        <config>
-          <state>Portrait</state>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/activity_edit_event.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_edit_profile.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/activity_manage_events.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_create_dog.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_login.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_register.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/navigation/auth_nav_graph.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/navigation/mobile_navigation.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/item_event_card.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
@@ -67,7 +46,24 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9564e76-b5a1-4209-b231-2f915e8ab9fd" name="Changes" comment="" />
+    <list default="true" id="c9564e76-b5a1-4209-b231-2f915e8ab9fd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/AdminActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/AdminActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/ManageEventsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/ManageEventsActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/db/entities/Event.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/db/entities/Event.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/ui/admin/CreateDog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/ui/admin/CreateDog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/ui/events/AddEventActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/ui/events/AddEventActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/ui/events/AdminEventAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/ui/events/AdminEventAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/utils/ImagePickerUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/res/layout/activity_manage_events.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/res/layout/activity_manage_events.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/res/layout/item_event_card.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/res/layout/item_event_card.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/res/values/strings.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,9 +72,12 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\keato\.android\avd\Medium_Phone_API_35.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\USER\.android\avd\Medium_Phone.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/android-app">
       <ProjectState />
     </projectState>
   </component>
@@ -124,9 +123,11 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Data Class" />
-        <option value="Kotlin Class" />
         <option value="resourceFile" />
         <option value="valueResourceFile" />
+        <option value="Kotlin Class" />
+        <option value="layoutResourceFile" />
+        <option value="Kotlin Object" />
       </list>
     </option>
   </component>
@@ -147,7 +148,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/ST10336767/SummerVeld-Hound-Resort.git&quot;,
-    &quot;accountId&quot;: &quot;e5869982-81d6-43c1-974b-ea26c9a6594d&quot;
+    &quot;accountId&quot;: &quot;140c1f98-80c0-44b6-bee0-a34d7fc8f92e&quot;
   }
 }</component>
   <component name="KotlinScriptingSettings">
@@ -176,15 +177,103 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "com.google.services.firebase.aqiPopupShown": "true",
+    "git-widget-placeholder": "Mikyle-EditEvent",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Varsity College/2025/WILL/SummerVeld-Hound-Resort",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.17",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "AndroidSdkUpdater"
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="android.template.932092265">
+      <recent name="com.example.summerveldhoundresort" />
+    </key>
+    <key name="android.template.1198737938">
+      <recent name="com.example.summerveldhoundresort.utils" />
+    </key>
+    <key name="android.template.-931380111">
+      <recent name="com.example.summerveldhoundresort.utils" />
+      <recent name="com.example.summerveldhoundresort" />
+    </key>
+    <key name="android.template.953068565">
+      <recent name="com.example.summerveldhoundresort" />
+      <recent name="com.example.summerveldhoundresort.utils" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Android App.app">
+    <configuration name="Unnamed" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false" nameIsGenerated="true">
+      <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="ALLOW_ASSUME_VERIFIED" value="false" />
+      <option name="CLEAR_APP_STORAGE" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="RESTORE_ENABLED" value="false" />
+      <option name="RESTORE_FILE" value="" />
+      <option name="RESTORE_FRESH_INSTALL_ONLY" value="false" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Hybrid>
+      <Java>
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Java>
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="SummerveldHoundResort.app" />
       <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
@@ -257,6 +346,10 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Android App.app" />
+      <item itemvalue="Android App.Unnamed" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="StandaloneScriptsStorage">
@@ -268,7 +361,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="fa584b48-1b86-4a31-874d-810fc24fb616" name="Changes" comment="" />
+      <changelist id="c9564e76-b5a1-4209-b231-2f915e8ab9fd" name="Changes" comment="" />
       <created>1755756580584</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -303,12 +396,12 @@
       <map>
         <entry key="com.example.summerveldhoundresort">
           <value>
-            <CheckInfo lastCheckTimestamp="1758625748774" />
+            <CheckInfo lastCheckTimestamp="1759393258322" />
           </value>
         </entry>
         <entry key="com.example.summerveldhoundresort.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1758625748774" />
+            <CheckInfo lastCheckTimestamp="1759393258295" />
           </value>
         </entry>
       </map>

@@ -3,6 +3,7 @@ package com.example.summerveldhoundresort
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.summerveldhoundresort.databinding.ActivityAdminBinding
@@ -13,6 +14,7 @@ class AdminActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

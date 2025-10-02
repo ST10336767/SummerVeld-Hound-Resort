@@ -16,9 +16,9 @@ import com.example.summerveldhoundresort.databinding.FragmentCreateDogBinding
 import com.example.summerveldhoundresort.db.AppResult
 import com.example.summerveldhoundresort.db.entities.Dog
 import com.example.summerveldhoundresort.ui.images.ImageViewModel
-import com.example.summerveldhoundresort.utils.ImagePickerUtils
 import com.google.firebase.firestore.FirebaseFirestore
 import com.bumptech.glide.Glide
+import com.example.summerveldhoundresort.utils.ImagePickerUtils
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
