@@ -10,4 +10,6 @@
     <color name="muted">#777777</color>
     <color name="brand_magenta">#C2185B</color>
     <color name="brand_maroon">#800020</color>
+    <color name="purple">#C05A8D</color>        <!-- text -->
+    <color name="dark_purple">#640047</color>   <!-- components -->
 </resources>
