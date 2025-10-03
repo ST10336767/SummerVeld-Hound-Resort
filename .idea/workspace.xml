@@ -5,58 +5,22 @@
       <config />
     </shared>
     <layouts>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_arrow_drop_down.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_change_password.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/rounded_edittext_background.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_create_dog.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/rounded_spinner_background.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_edit_profile.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_create_dog.xml">
-        <config>
-          <state>Portrait</state>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_edit_profile.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_login.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_register.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/navigation/auth_nav_graph.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/navigation/mobile_navigation.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_forgot_passaword.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
@@ -68,9 +32,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9564e76-b5a1-4209-b231-2f915e8ab9fd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android-app/app/src/main/res/drawable/paw_reversed.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_change_password.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_change_password.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +44,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\keato\.android\avd\Medium_Phone_API_35.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\GNG\.android\avd\Medium_Phone.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -180,7 +144,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "com.google.services.firebase.aqiPopupShown": "true",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "Hameed-ChangePasswordUI",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Varsity College/2025/WILL/SummerVeld-Hound-Resort",
     "project.structure.last.edited": "Modules",
@@ -308,12 +272,12 @@
       <map>
         <entry key="com.example.summerveldhoundresort">
           <value>
-            <CheckInfo lastCheckTimestamp="1758625748774" />
+            <CheckInfo lastCheckTimestamp="1759526931849" />
           </value>
         </entry>
         <entry key="com.example.summerveldhoundresort.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1758625748774" />
+            <CheckInfo lastCheckTimestamp="1759526931839" />
           </value>
         </entry>
       </map>
