@@ -1,16 +1,19 @@
 package com.example.summerveldhoundresort.ui.events
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.summerveldhoundresort.R
+import com.example.summerveldhoundresort.db.entities.Comment
 import com.example.summerveldhoundresort.db.entities.Event
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.*
 
 class UserEventAdapter(private val events: List<Event>) :
     RecyclerView.Adapter<UserEventAdapter.EventViewHolder>() {
@@ -23,6 +26,11 @@ class UserEventAdapter(private val events: List<Event>) :
         val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
         val rsvpButton: Button = itemView.findViewById(R.id.buttonRsvp)
         val memberCountText: TextView = itemView.findViewById(R.id.textViewMemberCount)
+
+        // Comments
+        val commentInput: EditText? = itemView.findViewById(R.id.editTextComment)
+        val sendCommentButton: Button? = itemView.findViewById(R.id.buttonSendComment)
+        val commentsRecycler: RecyclerView? = itemView.findViewById(R.id.recyclerComments)
     }
 
     private val firestore = FirebaseFirestore.getInstance()
@@ -44,45 +52,110 @@ class UserEventAdapter(private val events: List<Event>) :
         holder.locationTextView.text = event.location
         holder.descriptionTextView.text = event.description
 
-        // Sanitize event name for Firestore document ID
-        val eventDocId = event.name.replace("/", "_")
+        // Check if event passed
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val today = Calendar.getInstance().time
+        val eventDate = try {
+            sdf.parse(event.date)
+        } catch (e: Exception) {
+            null
+        }
 
-        // Live member count listener
-        firestore.collection("events")
-            .document(eventDocId)
-            .collection("rsvps")
-            .addSnapshotListener { snapshot, error ->
+        val isExpired = eventDate != null && eventDate.before(today)
+        holder.rsvpButton.isEnabled = !isExpired
+        holder.rsvpButton.text = when {
+            isExpired -> "Event Passed"
+            else -> "RSVP"
+        }
+
+        if (event.id.isNotEmpty()) {
+            val rsvpCollection = firestore.collection("events")
+                .document(event.id)
+                .collection("rsvps")
+
+            // Listen for RSVP count and update button text
+            rsvpCollection.addSnapshotListener { snapshot, error ->
                 if (error != null) {
-                    Toast.makeText(holder.itemView.context, "Failed to load RSVPs.", Toast.LENGTH_SHORT).show()
+                    Log.e("UserEventAdapter", "Failed to load RSVPs: ${error.message}")
+                    holder.memberCountText.text = "0 members going"
                     return@addSnapshotListener
                 }
                 val count = snapshot?.size() ?: 0
                 holder.memberCountText.text = "$count members going"
+
+                val userGoing = snapshot?.documents?.any { it.id == currentUser?.uid } ?: false
+                if (!isExpired) {
+                    holder.rsvpButton.text = if (userGoing) "Un-RSVP" else "RSVP"
+                }
             }
 
-        // RSVP toggle button
-        holder.rsvpButton.setOnClickListener {
-            currentUser?.let { user ->
-                val rsvpRef = firestore.collection("events")
-                    .document(eventDocId)
-                    .collection("rsvps")
-                    .document(user.uid)
+            // RSVP button click
+            holder.rsvpButton.setOnClickListener {
+                if (currentUser == null) {
+                    Toast.makeText(holder.itemView.context, "Sign in to RSVP", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
 
+                val rsvpRef = rsvpCollection.document(currentUser.uid)
                 rsvpRef.get().addOnSuccessListener { doc ->
                     if (doc.exists()) {
                         rsvpRef.delete()
                     } else {
                         rsvpRef.set(mapOf(
-                            "userId" to user.uid,
+                            "userId" to currentUser.uid,
                             "timestamp" to System.currentTimeMillis()
                         ))
                     }
                 }.addOnFailureListener {
                     Toast.makeText(holder.itemView.context, "RSVP failed: ${it.message}", Toast.LENGTH_SHORT).show()
                 }
-            } ?: run {
-                Toast.makeText(holder.itemView.context, "Please sign in to RSVP.", Toast.LENGTH_SHORT).show()
             }
+
+            // Comments setup
+            val commentsCollection = firestore.collection("events")
+                .document(event.id)
+                .collection("comments")
+
+            val commentsList = mutableListOf<Comment>()
+            val commentAdapter = CommentAdapter(commentsList)
+            holder.commentsRecycler?.adapter = commentAdapter
+            holder.commentsRecycler?.layoutManager = LinearLayoutManager(holder.itemView.context)
+            holder.commentsRecycler?.setHasFixedSize(true)
+
+            // Listen to comments
+            commentsCollection.orderBy("timestamp").addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    Log.e("UserEventAdapter", "Failed to load comments: ${error.message}")
+                    return@addSnapshotListener
+                }
+                commentsList.clear()
+                snapshot?.documents?.mapNotNull { it.toObject(Comment::class.java) }?.let { commentsList.addAll(it) }
+                commentAdapter.notifyDataSetChanged()
+            }
+
+            // Send comment
+            holder.sendCommentButton?.setOnClickListener {
+                val text = holder.commentInput?.text.toString().trim()
+                if (text.isNotEmpty() && currentUser != null) {
+                    val comment = Comment(
+                        userId = currentUser.uid,
+                        username = currentUser.displayName ?: "User",
+                        text = text,
+                        timestamp = System.currentTimeMillis()
+                    )
+                    commentsCollection.add(comment)
+                        .addOnSuccessListener {
+                            holder.commentInput?.text?.clear()
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(holder.itemView.context, "Failed to send comment: ${it.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }
+
+        } else {
+            holder.memberCountText.text = "0 members going"
+            holder.rsvpButton.isEnabled = false
         }
     }
 
