@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">782347961405-3shvlcrleof4t3hc43ul380h5iqrfs7i.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">782347961405</string>
+    <string name="google_api_key" translatable="false">AIzaSyCAi80W2b85DBWh3B9WDQ2A6inpLMWnv_8</string>
+    <string name="google_app_id" translatable="false">1:782347961405:android:aa08b3d33da0e18dc71654</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCAi80W2b85DBWh3B9WDQ2A6inpLMWnv_8</string>
+    <string name="google_storage_bucket" translatable="false">summerveld-hound-resort.firebasestorage.app</string>
+    <string name="project_id" translatable="false">summerveld-hound-resort</string>
+</resources>

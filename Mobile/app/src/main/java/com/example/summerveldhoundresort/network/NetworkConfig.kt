@@ -26,9 +26,9 @@ object NetworkConfig {
     
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
-        .connectTimeout(30, TimeUnit.SECONDS)
-        .readTimeout(30, TimeUnit.SECONDS)
-        .writeTimeout(30, TimeUnit.SECONDS)
+        .connectTimeout(60, TimeUnit.SECONDS)
+        .readTimeout(300, TimeUnit.SECONDS)  // 5 minutes for read operations (image uploads)
+        .writeTimeout(300, TimeUnit.SECONDS) // 5 minutes for write operations (image uploads)
         .build()
     
     private val retrofit = Retrofit.Builder()
