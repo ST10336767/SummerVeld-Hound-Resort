@@ -203,17 +203,24 @@ const deleteImage = async (req, res) => {
 // @route   POST /api/images/pet-profile
 // @access  Private
 const uploadPetProfileImage = async (req, res) => {
+  const startTime = Date.now();
+  console.log('📸 Starting pet profile image upload...');
+  
   try {
     const { petId } = req.body;
     const file = req.file;
 
     if (!file) {
+      console.log('❌ No file uploaded');
       return sendError(res, 'No file uploaded', 400);
     }
 
     if (!petId) {
+      console.log('❌ Pet ID is required');
       return sendError(res, 'Pet ID is required', 400);
     }
+
+    console.log(`📊 Upload details - Pet ID: ${petId}, File size: ${file.size} bytes, Original name: ${file.originalname}`);
 
     // Store directly in dog_images bucket without subfolders
     const options = {
@@ -227,6 +234,9 @@ const uploadPetProfileImage = async (req, res) => {
     const fileExtension = path.extname(file.originalname);
     const fileName = `pet_${petId}_${Date.now()}${fileExtension}`;
 
+    console.log(`🔄 Processing image: ${fileName}`);
+    const processingStartTime = Date.now();
+
     const result = await imageService.uploadImage(
       file.buffer,
       fileName,
@@ -234,14 +244,38 @@ const uploadPetProfileImage = async (req, res) => {
       options
     );
 
+    const processingTime = Date.now() - processingStartTime;
+    console.log(`⏱️  Image processing took: ${processingTime}ms`);
+
     if (!result.success) {
+      console.error('❌ Image upload failed:', result.error);
       return sendError(res, result.error, 400);
     }
 
+    const totalTime = Date.now() - startTime;
+    console.log(`✅ Pet profile image uploaded successfully in ${totalTime}ms: ${result.data.publicUrl}`);
+    
     sendSuccess(res, 'Pet profile image uploaded successfully', result.data, 201);
   } catch (error) {
-    console.error('Upload pet profile image error:', error);
-    sendError(res, 'Failed to upload pet profile image', 500, error.message);
+    const totalTime = Date.now() - startTime;
+    console.error(`❌ Upload pet profile image error after ${totalTime}ms:`, error);
+    
+    // Provide more specific error messages
+    let errorMessage = 'Failed to upload pet profile image';
+    let statusCode = 500;
+    
+    if (error.message.includes('timeout')) {
+      errorMessage = 'Image upload timed out. Please try again with a smaller image.';
+      statusCode = 408;
+    } else if (error.message.includes('size')) {
+      errorMessage = 'Image file is too large. Please use an image smaller than 5MB.';
+      statusCode = 413;
+    } else if (error.message.includes('format')) {
+      errorMessage = 'Invalid image format. Please use JPEG, PNG, WebP, or GIF.';
+      statusCode = 400;
+    }
+    
+    sendError(res, errorMessage, statusCode, error.message);
   }
 };
 

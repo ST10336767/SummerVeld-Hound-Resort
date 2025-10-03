@@ -155,7 +155,24 @@ class CreateDog : Fragment() {
                 is AppResult.Error -> {
                     binding.buttonAddDog.isEnabled = true
                     android.util.Log.e("CreateDog", "Image upload failed: ${result.exception.message}")
-                    Toast.makeText(requireContext(), "Image upload failed: ${result.exception.message}", Toast.LENGTH_LONG).show()
+                    
+                    // Provide user-friendly error messages
+                    val errorMessage = when {
+                        result.exception.message?.contains("timeout", ignoreCase = true) == true -> {
+                            "Image upload timed out. Please check your internet connection and try again with a smaller image."
+                        }
+                        result.exception.message?.contains("network", ignoreCase = true) == true -> {
+                            "Network error. Please check your internet connection and try again."
+                        }
+                        result.exception.message?.contains("size", ignoreCase = true) == true -> {
+                            "Image file is too large. Please select a smaller image."
+                        }
+                        else -> {
+                            "Image upload failed. Please try again. Error: ${result.exception.message}"
+                        }
+                    }
+                    
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
                 }
                 else -> {
                     android.util.Log.d("CreateDog", "Image upload result: $result")
@@ -207,6 +224,9 @@ class CreateDog : Fragment() {
                 putString("dogGender", dogGender)
                 putString("dogDescription", dogDescription)
             }
+            
+            // Show progress message to user
+            Toast.makeText(requireContext(), "Uploading image... This may take a moment for large images.", Toast.LENGTH_LONG).show()
             
             android.util.Log.d("CreateDog", "Calling imageViewModel.uploadPetProfileImage")
             imageViewModel.uploadPetProfileImage(uri, dogId ?: "")
