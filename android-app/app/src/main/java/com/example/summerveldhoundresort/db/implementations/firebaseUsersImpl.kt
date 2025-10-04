@@ -85,8 +85,35 @@ class firebaseUsersImpl : UsersRepo {
             try {
                 //gets user doc from firestore then converts to user entity
                 val documentSnapShot = firestore.collection("users").document(currentUser.uid).get().await()
-                val user = documentSnapShot.toObject(User::class.java) ?: return AppResult.Error(Exception("Failed to parse user profile"))
-               return AppResult.Success(user)
+                
+                if (documentSnapShot.exists()) {
+                    val user = documentSnapShot.toObject(User::class.java)
+                        ?: return AppResult.Error(Exception("Failed to parse user profile"))
+                    return AppResult.Success(user)
+                } else {
+                    // If user profile doesn't exist, check if it's a Google user and create profile
+                    val signInMethod = currentUser.getIdToken(false).await()?.signInProvider
+                    if (signInMethod == "google.com") {
+                        Log.d(TAG, "Creating missing Google user profile for user: ${currentUser.uid}")
+                        
+                        // Create user profile for Google Sign-In
+                        val currentDate = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(java.util.Date())
+                        val userProfile = User(
+                            userID = currentUser.uid,
+                            username = currentUser.displayName ?: currentUser.email?.substringBefore("@") ?: "User",
+                            email = currentUser.email ?: "",
+                            phoneNumber = "",
+                            creationDate = currentDate,
+                            role = "user"
+                        )
+                        
+                        // Save to Firestore
+                        firestore.collection("users").document(currentUser.uid).set(userProfile).await()
+                        return AppResult.Success(userProfile)
+                    } else {
+                        return AppResult.Error(Exception("User profile not found and is not a Google user"))
+                    }
+                }
             }catch (e: Exception){
                 Log.e(TAG, "get current user method failed", e)
               return  AppResult.Error(e)

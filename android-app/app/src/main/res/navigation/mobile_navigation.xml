@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_createDog3"
             app:destination="@id/createDog" />
+        <action
+            android:id="@+id/action_navigation_home_to_eventsFragment"
+            app:destination="@id/eventsFragment" />
     </fragment>
 
     <fragment
@@ -107,5 +110,9 @@
         android:name="com.example.summerveldhoundresort.AdminActivity"
         android:label="activity_admin"
         tools:layout="@layout/activity_admin" />
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.example.summerveldhoundresort.ui.events.EventsFragment"
+        android:label="EventsFragment" />
 
 </navigation>
