@@ -14,21 +14,24 @@
         android:textSize="18sp"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Small window for events -->
-    <androidx.cardview.widget.CardView
+        <!-- Upcoming events (3 only) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewEvents"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp">
+        android:layout_height="385dp"
+        android:nestedScrollingEnabled="false"
+        android:overScrollMode="never" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewEvents"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"/>
+        <!-- Button to view all events -->
+        <Button
+            android:id="@+id/btnViewAllEvents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View All Events"
+            android:layout_marginTop="12dp"/>
 
-    </androidx.cardview.widget.CardView>
+
+
 
     <Button
         android:id="@+id/button"
