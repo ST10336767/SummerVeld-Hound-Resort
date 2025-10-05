@@ -31,9 +31,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9564e76-b5a1-4209-b231-2f915e8ab9fd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/android-app/app/src/main/res/drawable/paw_reversed.png" afterDir="false" />
+    <list default="true" id="c9564e76-b5a1-4209-b231-2f915e8ab9fd" name="Changes" comment="Completed Change Password UI">
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-app/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_change_password.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_change_password.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,6 +48,9 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\GNG\.android\avd\Medium_Phone.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/android-app">
       <ProjectState />
     </projectState>
   </component>
@@ -115,9 +119,10 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/ST10336767/SummerVeld-Hound-Resort.git&quot;,
-    &quot;accountId&quot;: &quot;e5869982-81d6-43c1-974b-ea26c9a6594d&quot;
+    &quot;accountId&quot;: &quot;53f6dac5-305e-4741-b357-a0af0361ee1b&quot;
   }
 }</component>
+  <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$/android-app" gradleHome="C:\Users\GNG\.gradle\wrapper\dists\gradle-8.10.2-bin\a04bxjujx95o3nb99gddekhwo\gradle-8.10.2" javaHome="D:\AndroidStudio\jbr" gradleVersion="8.10.2" />
   <component name="KotlinScriptingSettings">
     <scriptDefinition className="org.jetbrains.kotlin.scripting.resolve.KotlinScriptDefinitionFromAnnotatedTemplate" definitionName="KotlinBuildScript">
       <order>2147483647</order>
@@ -131,28 +136,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "Android App.app.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "com.google.services.firebase.aqiPopupShown": "true",
-    "git-widget-placeholder": "Hameed-ChangePasswordUI",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Varsity College/2025/WILL/SummerVeld-Hound-Resort",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.17",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "AndroidSdkUpdater"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Hameed-ChangePasswordUI&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Varsity College/2025/WILL/SummerVeld-Hound-Resort&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="SummerveldHoundResort.app" />
@@ -259,25 +264,34 @@
       <option name="project" value="LOCAL" />
       <updated>1756377811620</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Completed Change Password UI">
+      <option name="closed" value="true" />
+      <created>1759528054498</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1759528054498</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated google login to simplify the code" />
     <MESSAGE value="Fixed login page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed login page" />
+    <MESSAGE value="Completed Change Password UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed Change Password UI" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
         <entry key="com.example.summerveldhoundresort">
           <value>
-            <CheckInfo lastCheckTimestamp="1759526931849" />
+            <CheckInfo lastCheckTimestamp="1759676355096" />
           </value>
         </entry>
         <entry key="com.example.summerveldhoundresort.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1759526931839" />
+            <CheckInfo lastCheckTimestamp="1759676355058" />
           </value>
         </entry>
       </map>
