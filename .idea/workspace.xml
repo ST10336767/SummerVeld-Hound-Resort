@@ -31,11 +31,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9564e76-b5a1-4209-b231-2f915e8ab9fd" name="Changes" comment="Completed Change Password UI">
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+    <list default="true" id="c9564e76-b5a1-4209-b231-2f915e8ab9fd" name="Changes" comment="alterations made">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android-app/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_change_password.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_change_password.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,14 +269,23 @@
       <option name="project" value="LOCAL" />
       <updated>1759528054498</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="alterations made">
+      <option name="closed" value="true" />
+      <created>1759677816892</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1759677816892</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated google login to simplify the code" />
     <MESSAGE value="Fixed login page" />
     <MESSAGE value="Completed Change Password UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completed Change Password UI" />
+    <MESSAGE value="alterations made" />
+    <option name="LAST_COMMIT_MESSAGE" value="alterations made" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
