@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_navigation_home_to_eventsFragment"
             app:destination="@id/eventsFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_savedDogsFragment"
+            app:destination="@id/savedDogsFragment" />
     </fragment>
 
     <fragment
@@ -114,5 +117,18 @@
         android:id="@+id/eventsFragment"
         android:name="com.example.summerveldhoundresort.ui.events.EventsFragment"
         android:label="EventsFragment" />
+    <fragment
+        android:id="@+id/savedDogsFragment"
+        android:name="com.example.summerveldhoundresort.ui.saved.SavedDogsFragment"
+        android:label="SavedDogsFragment" >
+        <action
+            android:id="@+id/action_savedDogsFragment_to_dogDetailFragment"
+            app:destination="@id/dogDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dogDetailFragment"
+        android:name="com.example.summerveldhoundresort.ui.saved.DogDetailFragment"
+        android:label="Dog Details"
+        tools:layout="@layout/fragment_dog_detail" />
 
 </navigation>

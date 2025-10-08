@@ -45,6 +45,11 @@ class HomeFragment : Fragment() {
         binding.btnViewAllEvents.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_eventsFragment)
         }
+
+        binding.button2.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_savedDogsFragment)
+        }
+
     }
 
     private fun loadUpcomingEvents() {
