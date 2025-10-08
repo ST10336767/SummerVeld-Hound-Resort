@@ -1,7 +1,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
     android:layout_margin="6dp">
 
     <!-- Kennel background -->
@@ -9,45 +10,42 @@
         android:id="@+id/imageKennel"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/dog_kennel"
         android:scaleType="fitXY"
-        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/dog_kennel"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Dog photo -->
+    <!-- Dog photo - circular and positioned to block entrance -->
     <ImageView
         android:id="@+id/imageDog"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/circle_background"
         android:clipToOutline="true"
         android:contentDescription="Dog Photo"
-        app:layout_constraintTop_toTopOf="parent"
+        android:padding="4dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Dog name aligned with bar on PNG -->
+    <!-- Dog name positioned above the dog image -->
     <TextView
         android:id="@+id/textDogName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginBottom="4dp"
         android:gravity="center"
+        android:paddingHorizontal="8dp"
         android:text="Dog Name"
         android:textColor="@android:color/black"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:translationY="27dp"
+        app:layout_constraintBottom_toTopOf="@id/imageDog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" /> <!-- tweak this value to align exactly -->
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
