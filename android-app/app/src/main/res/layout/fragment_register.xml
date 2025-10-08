@@ -114,23 +114,35 @@
                 android:src="@drawable/email"/>
         </RelativeLayout>
 
+        <!-- Phone Number -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/edittext_background">
 
-        <EditText
-            android:id="@+id/edtPhone"
-            android:layout_width="279dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="84dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rounded_button"
-            android:drawableEnd="@drawable/baseline_phone_24"
-            android:ems="10"
-            android:hint="Phone Number"
-            android:inputType="phone"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtEmailAddress" />
+            <EditText
+                android:id="@+id/edtPhone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:hint="Phone Number"
+                android:inputType="phone"
+                android:textSize="16sp"
+                android:paddingStart="10dp"
+                android:paddingEnd="40dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/purple" />
 
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="1dp"
+                android:src="@drawable/baseline_phone_24"
+                app:tint="@color/dark_purple" />
+        </RelativeLayout>
 
         <!-- Password -->
         <com.google.android.material.textfield.TextInputLayout
