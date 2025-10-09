@@ -1,254 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:padding="24dp"
-    tools:context=".ui.admin.CreateDog">
-
-    <TextView
-        android:id="@+id/textView_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Adding Dog"
-        android:textColor="#E91E63"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        android:layout_marginTop="16dp" />
-
-
-
-    <TextView
-        android:id="@+id/textView_picture_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Picture of Dog:"
-        android:textColor="#333333"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView_title"
-        android:layout_marginTop="40dp" />
-
-    <FrameLayout
-        android:id="@+id/frameLayout_picture_placeholder"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:background="#E0E0E0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textView_picture_label">
-
-        <ImageView
-            android:id="@+id/imageView_dog_picture"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/textView_placeholder_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="Tap to add picture"
-            android:textColor="#616161"
-            android:textSize="14sp" />
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/textView_name_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#333333"
-        android:textSize="18sp"
-        android:text="Name:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frameLayout_picture_placeholder"
-        android:layout_marginTop="32dp" />
-
-    <EditText
-        android:id="@+id/editText_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:background="@drawable/rounded_edittext_background"
-        android:textColor="#333333"
-        android:textColorHint="#9E9E9E"
-        android:hint="Doge"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textView_name_label"
-        app:layout_constraintBaseline_toBaselineOf="@id/textView_name_label"
-        android:layout_marginStart="24dp" />
-
-    <TextView
-        android:id="@+id/textView_dob_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#333333"
-        android:textSize="18sp"
-        android:text="DOB:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView_name_label"
-        android:layout_marginTop="24dp" />
-
-    <EditText
-        android:id="@+id/editText_dob"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:background="@drawable/rounded_edittext_background"
-        android:textColor="#333333"
-        android:textColorHint="#9E9E9E"
-        android:hint="Select Date"
-        android:textSize="16sp"
-        android:focusable="false"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textView_dob_label"
-        app:layout_constraintBaseline_toBaselineOf="@id/textView_dob_label"
-        android:layout_marginStart="24dp" />
-
-    <TextView
-        android:id="@+id/textView_breed_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#333333"
-        android:textSize="18sp"
-        android:text="Breed:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView_dob_label"
-        android:layout_marginTop="24dp" />
-
-    <EditText
-        android:id="@+id/editText_breed"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:background="@drawable/rounded_edittext_background"
-        android:textColor="#333333"
-        android:textColorHint="#9E9E9E"
-        android:hint="German Shepard"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textView_breed_label"
-        app:layout_constraintBaseline_toBaselineOf="@id/textView_breed_label"
-        android:layout_marginStart="24dp" />
-
-    <TextView
-        android:id="@+id/textView_colour_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#333333"
-        android:textSize="18sp"
-        android:text="Colour:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView_breed_label"
-        android:layout_marginTop="24dp" />
-
-    <EditText
-        android:id="@+id/editText_colour"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:background="@drawable/rounded_edittext_background"
-        android:textColor="#333333"
-        android:textColorHint="#9E9E9E"
-        android:hint="Black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textView_colour_label"
-        app:layout_constraintBaseline_toBaselineOf="@id/textView_colour_label"
-        android:layout_marginStart="24dp" />
-
-    <TextView
-        android:id="@+id/textView_gender_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#333333"
-        android:textSize="18sp"
-        android:text="Gender:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView_colour_label"
-        android:layout_marginTop="24dp" />
-
-    <Spinner
-        android:id="@+id/spinner_gender"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:background="@drawable/rounded_spinner_background"
-        android:entries="@array/gender_options"
-        android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textView_gender_label"
-        app:layout_constraintBaseline_toBaselineOf="@id/textView_gender_label"
-        android:layout_marginStart="24dp" />
-
-    <TextView
-        android:id="@+id/textView_description_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#333333"
-        android:textSize="18sp"
-        android:text="Description:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView_gender_label"
-        android:layout_marginTop="24dp" />
-
-    <EditText
-        android:id="@+id/editText_description"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:background="@drawable/rounded_edittext_background"
-        android:textColor="#333333"
-        android:textColorHint="#9E9E9E"
-        android:gravity="top"
-        android:inputType="textMultiLine"
-        android:hint="Tell us more about your dog..."
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textView_description_label"
-        app:layout_constraintTop_toTopOf="@id/textView_description_label"
-        android:layout_marginStart="24dp" />
-
-    <Button
-        android:id="@+id/button_add_dog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="60dp"
-        android:paddingStart="48dp"
-        android:paddingEnd="48dp"
-        android:text="ADD DOG"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:backgroundTint="#4CAF50"
-        app:cornerRadius="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+<?xml version="1.0" encoding="utf-8"?><ScrollView xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:app="http://schemas.android.com/apk/res-auto"    xmlns:tools="http://schemas.android.com/tools"    android:layout_width="match_parent"    android:layout_height="match_parent"    android:background="@color/white"    tools:context=".ui.admin.CreateDog">    <androidx.constraintlayout.widget.ConstraintLayout        android:layout_width="match_parent"        android:layout_height="wrap_content"        android:paddingBottom="-10dp">        <!-- Paw Prints -->        <ImageView            android:id="@+id/imgPawsTop"            android:layout_width="150dp"            android:layout_height="150dp"            android:src="@drawable/paw"            android:layout_marginTop="-15dp"            android:layout_marginEnd="-15dp"            app:layout_constraintTop_toTopOf="parent"            app:layout_constraintEnd_toEndOf="parent" />        <ImageView            android:id="@+id/imgPawsBottom"            android:layout_width="150dp"            android:layout_height="150dp"            android:src="@drawable/paw"            android:layout_marginStart="-30dp"            app:layout_constraintTop_toBottomOf="@+id/editText_description"            app:layout_constraintBottom_toBottomOf="parent"            app:layout_constraintStart_toStartOf="parent"/>        <!-- Title -->        <TextView            android:id="@+id/textView_title"            android:layout_width="wrap_content"            android:layout_height="wrap_content"            android:text="Add a Dog"            android:textColor="@color/purple"            android:textSize="26sp"            android:textStyle="bold"            app:layout_constraintTop_toBottomOf="@+id/imgPawsTop"            app:layout_constraintStart_toStartOf="parent"            app:layout_constraintEnd_toEndOf="parent"            android:layout_marginTop="-65dp" />        <!-- Picture -->        <TextView            android:id="@+id/textView_picture_label"            android:layout_width="wrap_content"            android:layout_height="wrap_content"            android:text="Picture of the Dog:"            android:textSize="18sp"            android:textColor="@color/black"            app:layout_constraintTop_toBottomOf="@id/textView_title"            app:layout_constraintStart_toStartOf="parent"            android:layout_marginStart="32dp"            android:layout_marginTop="30dp" />        <FrameLayout            android:id="@+id/frameLayout_picture_placeholder"            android:layout_width="160dp"            android:layout_height="160dp"            android:background="@drawable/rounded_edittext_background"            app:layout_constraintTop_toBottomOf="@id/textView_picture_label"            app:layout_constraintStart_toStartOf="parent"            app:layout_constraintEnd_toEndOf="parent"            android:layout_marginTop="8dp">            <ImageView                android:id="@+id/imageView_dog_picture"                android:layout_width="match_parent"                android:layout_height="match_parent"                android:scaleType="centerCrop"                android:visibility="gone" />            <TextView                android:id="@+id/textView_placeholder_text"                android:layout_width="wrap_content"                android:layout_height="wrap_content"                android:layout_gravity="center"                android:text="Tap to add picture"                android:textColor="@color/black"                android:textSize="14sp" />        </FrameLayout>        <!-- Name -->        <TextView            android:id="@+id/label_name"            android:layout_width="wrap_content"            android:layout_height="wrap_content"            android:text="Name:"            android:textSize="18sp"            android:textColor="@color/black"            app:layout_constraintTop_toBottomOf="@id/frameLayout_picture_placeholder"            app:layout_constraintStart_toStartOf="parent"            android:layout_marginStart="32dp"            android:layout_marginTop="16dp" />        <EditText            android:id="@+id/editText_name"            android:layout_width="0dp"            android:layout_height="48dp"            android:background="@drawable/edittext_background"            android:paddingHorizontal="12dp"            android:textColor="@color/black"            android:textSize="16sp"            android:hint="Enter dogs name"            android:textColorHint="@color/black"            app:layout_constraintTop_toBottomOf="@id/label_name"            app:layout_constraintStart_toStartOf="parent"            app:layout_constraintEnd_toEndOf="parent"            android:layout_marginHorizontal="32dp" />        <!-- DOB -->        <TextView            android:id="@+id/label_dob"            android:layout_width="wrap_content"            android:layout_height="wrap_content"            android:text="Date of Birth:"            android:textSize="18sp"            android:textColor="@color/black"            app:layout_constraintTop_toBottomOf="@id/editText_name"            app:layout_constraintStart_toStartOf="parent"            android:layout_marginStart="32dp"            android:layout_marginTop="12dp" />        <EditText            android:id="@+id/editText_dob"            android:layout_width="0dp"            android:layout_height="48dp"            android:background="@drawable/edittext_background"            android:paddingHorizontal="12dp"            android:textColor="@color/black"            android:textSize="16sp"            android:hint="Select date of birth"            android:textColorHint="@color/black"            app:layout_constraintTop_toBottomOf="@id/label_dob"            app:layout_constraintStart_toStartOf="parent"            app:layout_constraintEnd_toEndOf="parent"            android:layout_marginHorizontal="32dp" />        <!-- Breed -->        <TextView            android:id="@+id/label_breed"            android:layout_width="wrap_content"            android:layout_height="wrap_content"            android:text="Breed:"            android:textSize="18sp"            android:textColor="@color/black"            app:layout_constraintTop_toBottomOf="@id/editText_dob"            app:layout_constraintStart_toStartOf="parent"            android:layout_marginStart="32dp"            android:layout_marginTop="12dp" />        <EditText            android:id="@+id/editText_breed"            android:layout_width="0dp"            android:layout_height="48dp"            android:background="@drawable/edittext_background"            android:paddingHorizontal="12dp"            android:textColor="@color/black"            android:textSize="16sp"            android:hint="Enter breed"            android:textColorHint="@color/black"            app:layout_constraintTop_toBottomOf="@id/label_breed"            app:layout_constraintStart_toStartOf="parent"            app:layout_constraintEnd_toEndOf="parent"            android:layout_marginHorizontal="32dp" />        <!-- Colour -->        <TextView            android:id="@+id/label_colour"            android:layout_width="wrap_content"            android:layout_height="wrap_content"            android:text="Colour:"            android:textSize="18sp"            android:textColor="@color/black"            app:layout_constraintTop_toBottomOf="@id/editText_breed"            app:layout_constraintStart_toStartOf="parent"            android:layout_marginStart="32dp"            android:layout_marginTop="12dp" />        <EditText            android:id="@+id/editText_colour"            android:layout_width="0dp"            android:layout_height="48dp"            android:background="@drawable/edittext_background"            android:paddingHorizontal="12dp"            android:textColor="@color/black"            android:textSize="16sp"            android:hint="Enter colour"            android:textColorHint="@color/black"            app:layout_constraintTop_toBottomOf="@id/label_colour"            app:layout_constraintStart_toStartOf="parent"            app:layout_constraintEnd_toEndOf="parent"            android:layout_marginHorizontal="32dp" />        <!-- Gender -->        <TextView            android:id="@+id/label_gender"            android:layout_width="wrap_content"            android:layout_height="wrap_content"            android:text="Gender:"            android:textSize="18sp"            android:textColor="@color/black"            app:layout_constraintTop_toBottomOf="@id/editText_colour"            app:layout_constraintStart_toStartOf="parent"            android:layout_marginStart="32dp"            android:layout_marginTop="12dp" />        <Spinner            android:id="@+id/spinner_gender"            android:layout_width="0dp"            android:layout_height="48dp"            android:background="@drawable/rounded_spinner_background"            android:entries="@array/gender_options"            android:spinnerMode="dropdown"            app:layout_constraintTop_toBottomOf="@id/label_gender"            app:layout_constraintStart_toStartOf="parent"            app:layout_constraintEnd_toEndOf="parent"            android:layout_marginHorizontal="32dp"            />        <!-- Description -->        <TextView            android:id="@+id/label_description"            android:layout_width="wrap_content"            android:layout_height="wrap_content"            android:text="Description:"            android:textSize="18sp"            android:textColor="@color/black"            app:layout_constraintTop_toBottomOf="@id/spinner_gender"            app:layout_constraintStart_toStartOf="parent"            android:layout_marginStart="32dp"            android:layout_marginTop="12dp" />        <EditText            android:id="@+id/editText_description"            android:layout_width="0dp"            android:layout_height="100dp"            android:gravity="top"            android:inputType="textMultiLine"            android:background="@drawable/edittext_background"            android:padding="12dp"            android:textColor="@color/black"            android:textSize="16sp"            android:hint="Tell us more about the dog..."            android:textColorHint="@color/black"            app:layout_constraintTop_toBottomOf="@id/label_description"            app:layout_constraintStart_toStartOf="parent"            app:layout_constraintEnd_toEndOf="parent"            android:layout_marginHorizontal="32dp" />        <!-- Button -->        <Button            android:id="@+id/button_add_dog"            android:layout_width="wrap_content"            android:layout_height="wrap_content"            android:text="Add Dog"            android:textColor="@color/white"            android:textStyle="bold"            android:textSize="18sp"            android:backgroundTint="@color/dark_purple"            app:layout_constraintTop_toBottomOf="@id/editText_description"            app:layout_constraintStart_toStartOf="parent"            app:layout_constraintEnd_toEndOf="parent"            android:layout_marginTop="24dp"            android:layout_marginBottom="100dp" />    </androidx.constraintlayout.widget.ConstraintLayout></ScrollView>
