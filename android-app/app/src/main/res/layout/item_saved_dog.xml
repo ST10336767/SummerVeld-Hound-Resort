@@ -1,51 +1,48 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
-    android:layout_margin="6dp">
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp">
 
-    <!-- Kennel background -->
-    <ImageView
-        android:id="@+id/imageKennel"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/dog_kennel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Dog photo - circular and positioned to block entrance -->
-    <ImageView
-        android:id="@+id/imageDog"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/circle_background"
-        android:clipToOutline="true"
-        android:contentDescription="Dog Photo"
-        android:padding="4dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <!-- Dog name positioned above the dog image -->
-    <TextView
-        android:id="@+id/textDogName"
-        android:layout_width="0dp"
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:gravity="center"
-        android:paddingHorizontal="8dp"
-        android:text="Dog Name"
-        android:textColor="@android:color/black"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/imageDog"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:padding="0dp">
+
+        <!-- Kennel Image -->
+        <ImageView
+            android:id="@+id/imageKennel"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/dog_kennel" />
+
+        <!-- Dog Name -->
+        <TextView
+            android:id="@+id/textDogName"
+            android:layout_width="110dp"
+            android:layout_height="32dp"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="92dp"
+            android:gravity="center"
+            android:text="Dog Name"
+            android:textColor="@android:color/black"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <!-- Dog Image-->
+        <ImageView
+            android:id="@+id/imageDog"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="45dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop" />
+    </FrameLayout>
+</androidx.cardview.widget.CardView>
