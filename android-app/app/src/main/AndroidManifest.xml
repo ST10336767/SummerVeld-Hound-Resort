@@ -31,7 +31,7 @@
         <!-- New Activities from EditEvent branch -->
         <activity
             android:name=".DogActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".EditEventActivity"
             android:exported="true" />
@@ -40,6 +40,12 @@
             android:exported="true" />
         <activity
             android:name=".ManageEventsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ManageDogsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".EditDogActivity"
             android:exported="true" />
         <activity
             android:name=".AdminActivity"

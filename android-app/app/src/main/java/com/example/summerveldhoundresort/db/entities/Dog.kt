@@ -32,4 +32,4 @@ data class Dog(
 
     // Last update timestamp
     var updatedAt: Date = Date()
-)
+)  : java.io.Serializable
