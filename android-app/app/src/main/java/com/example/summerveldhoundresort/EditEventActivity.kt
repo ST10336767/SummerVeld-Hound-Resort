@@ -31,7 +31,6 @@ class EditEventActivity : AppCompatActivity() {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_edit_event)
 
-        // Bind views
         eventNameInput = findViewById(R.id.eventNameInput)
         eventDescInput = findViewById(R.id.eventDescInput)
         eventDateInput = findViewById(R.id.eventDateInput)
@@ -56,9 +55,7 @@ class EditEventActivity : AppCompatActivity() {
         eventDateInput.setOnClickListener {
             val cal = Calendar.getInstance()
             val datePicker = DatePickerDialog(this,
-                { _, y, m, d ->
-                    eventDateInput.setText("%04d-%02d-%02d".format(y, m + 1, d))
-                },
+                { _, y, m, d -> eventDateInput.setText("%04d-%02d-%02d".format(y, m + 1, d)) },
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH)
@@ -71,9 +68,7 @@ class EditEventActivity : AppCompatActivity() {
         eventTimeInput.setOnClickListener {
             val cal = Calendar.getInstance()
             val timePicker = TimePickerDialog(this,
-                { _, h, min ->
-                    eventTimeInput.setText("%02d:%02d".format(h, min))
-                },
+                { _, h, min -> eventTimeInput.setText("%02d:%02d".format(h, min)) },
                 cal.get(Calendar.HOUR_OF_DAY),
                 cal.get(Calendar.MINUTE),
                 true
@@ -81,19 +76,31 @@ class EditEventActivity : AppCompatActivity() {
             timePicker.show()
         }
 
-        // Save changes
+        // Save changes with validation
         saveBtn.setOnClickListener {
+            val name = eventNameInput.text.toString().trim()
+            val desc = eventDescInput.text.toString().trim()
+            val date = eventDateInput.text.toString().trim()
+            val time = eventTimeInput.text.toString().trim()
+            val location = eventLocationInput.text.toString().trim()
+
+            if (name.isEmpty() || desc.isEmpty() || date.isEmpty() || time.isEmpty() || location.isEmpty()) {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val updates = mapOf(
-                "name" to eventNameInput.text.toString(),
-                "description" to eventDescInput.text.toString(),
-                "date" to eventDateInput.text.toString(),
-                "time" to eventTimeInput.text.toString(),
-                "location" to eventLocationInput.text.toString()
+                "name" to name,
+                "description" to desc,
+                "date" to date,
+                "time" to time,
+                "location" to location
             )
+
             db.collection("events").document(eventId!!)
                 .update(updates)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Event updated", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Event updated successfully", Toast.LENGTH_SHORT).show()
                     finish()
                 }
                 .addOnFailureListener { e ->
@@ -114,10 +121,7 @@ class EditEventActivity : AppCompatActivity() {
                 }
         }
 
-        // Back button
-        backBtn.setOnClickListener {
-            finish()
-        }
+        backBtn.setOnClickListener { finish() }
     }
 
     private fun loadEventDetails(eventId: String) {
