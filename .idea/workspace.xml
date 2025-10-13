@@ -5,12 +5,37 @@
       <config />
     </shared>
     <layouts>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_login.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_events.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/mipmap-anydpi-v26/paw_reversed.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_home.xml">
+        <config>
+          <theme>@style/Theme.SummerveldHoundResort</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/item_comment.xml">
+        <config>
+          <theme>@style/Theme.SummerveldHoundResort</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/item_event_card.xml">
+        <config>
+          <theme>@style/Theme.SummerveldHoundResort</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/item_event_card_user.xml">
+        <config>
+          <theme>@style/Theme.SummerveldHoundResort</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/navigation/auth_nav_graph.xml">
+        <config>
+          <theme>@style/Theme.SummerveldHoundResort</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/navigation/mobile_navigation.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
@@ -21,14 +46,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9564e76-b5a1-4209-b231-2f915e8ab9fd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/android-app/app/src/main/paw_reversed-playstore.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android-app/app/src/main/res/drawable/paw_reverse.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/res/values/colors.xml" afterDir="false" />
-    </list>
+    <list default="true" id="c9564e76-b5a1-4209-b231-2f915e8ab9fd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,17 +82,18 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Data Class" />
-        <option value="Kotlin Class" />
         <option value="resourceFile" />
         <option value="valueResourceFile" />
+        <option value="Kotlin Class" />
+        <option value="layoutResourceFile" />
+        <option value="Kotlin Data Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="Ahrin-RegisterScreen-and-NavBars" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -88,7 +107,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/ST10336767/SummerVeld-Hound-Resort.git&quot;,
-    &quot;accountId&quot;: &quot;53f6dac5-305e-4741-b357-a0af0361ee1b&quot;
+    &quot;accountId&quot;: &quot;140c1f98-80c0-44b6-bee0-a34d7fc8f92e&quot;
   }
 }</component>
   <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$/android-app" gradleHome="C:\Users\GNG\.gradle\wrapper\dists\gradle-8.10.2-bin\a04bxjujx95o3nb99gddekhwo\gradle-8.10.2" javaHome="D:\AndroidStudio\jbr" gradleVersion="8.10.2" />
@@ -121,9 +140,9 @@
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Hameed-Login&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/GitHub/SummerVeld-Hound-Resort&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Varsity College/2025/WILL/SummerVeld-Hound-Resort&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -236,25 +255,34 @@
       <option name="project" value="LOCAL" />
       <updated>1756377811620</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Completed Login UI">
+      <option name="closed" value="true" />
+      <created>1759525335123</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1759525335123</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated google login to simplify the code" />
     <MESSAGE value="Fixed login page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed login page" />
+    <MESSAGE value="Completed Login UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed Login UI" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
         <entry key="com.example.summerveldhoundresort">
           <value>
-            <CheckInfo lastCheckTimestamp="1759514986614" />
+            <CheckInfo lastCheckTimestamp="1759522540920" />
           </value>
         </entry>
         <entry key="com.example.summerveldhoundresort.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1759514986603" />
+            <CheckInfo lastCheckTimestamp="1759522540921" />
           </value>
         </entry>
       </map>

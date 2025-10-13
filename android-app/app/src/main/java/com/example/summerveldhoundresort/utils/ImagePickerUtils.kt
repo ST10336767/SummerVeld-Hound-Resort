@@ -10,7 +10,7 @@ import com.github.dhaval2404.imagepicker.ImagePicker
  * Utility class for handling image picker operations
  */
 object ImagePickerUtils {
-    
+
     /**
      * Launch image picker for single image selection
      */
@@ -21,7 +21,7 @@ object ImagePickerUtils {
             .maxResultSize(1080, 1080) // Final image resolution will be less than 1080 x 1080
             .start()
     }
-    
+
     /**
      * Launch image picker for camera capture
      */
@@ -33,7 +33,7 @@ object ImagePickerUtils {
             .maxResultSize(1080, 1080) // Final image resolution will be less than 1080 x 1080
             .start()
     }
-    
+
     /**
      * Launch image picker with gallery only
      */
@@ -45,7 +45,7 @@ object ImagePickerUtils {
             .maxResultSize(1080, 1080) // Final image resolution will be less than 1080 x 1080
             .start()
     }
-    
+
     /**
      * Launch image picker for profile images (square crop)
      */
@@ -56,7 +56,7 @@ object ImagePickerUtils {
             .maxResultSize(400, 400) // Profile image size
             .start()
     }
-    
+
     /**
      * Handle the result from ImagePicker in onActivityResult
      */

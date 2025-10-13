@@ -29,12 +29,18 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.tasks.Task
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.CoroutineScope
 
 
 @Suppress("DEPRECATION")
@@ -177,17 +183,70 @@ class LoginFragment : Fragment() {
         Firebase.auth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    // Firebase sign-in successful.
                     Toast.makeText(requireContext(), "Sign in successful", Toast.LENGTH_SHORT).show()
-                    // Now, trigger the biometric authentication flow.
+                    
+                    // Navigate to MainActivity immediately
                     val intent = Intent(requireContext(), MainActivity::class.java)
                     startActivity(intent)
                     requireActivity().finish()
+                    
+                    // Handle user profile creation asynchronously without blocking
+                    val user = Firebase.auth.currentUser
+                    if (user != null) {
+                        createGoogleUserProfileSafely(user)
+                    }
                 } else {
                     // Sign in failed.
                     Toast.makeText(requireContext(), "Firebase authentication failed.", Toast.LENGTH_SHORT).show()
+                    Log.e(TAG, "Firebase authentication failed - ${task.exception?.message}", task.exception)
                 }
             }
+    }
+    
+    private fun createGoogleUserProfileSafely(user: FirebaseUser) {
+        // Create a supervisor job to avoid cancelling
+        val supervisorJob = SupervisorJob()
+        val scope = CoroutineScope(Dispatchers.IO + supervisorJob)
+        
+        scope.launch {
+            try {
+                createOrUpdateUserProfile(user)
+                Log.d(TAG, "Google user profile created successfully")
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to create Google user profile: ${e.message}")
+                // Profile creation will be retried when user accesses profile
+            }
+        }
+    }
+    
+    private suspend fun createOrUpdateUserProfile(user: FirebaseUser) {
+        try {
+            val firestore = Firebase.firestore
+            
+            // Check if user document already exists
+            val userDocSnapshot = firestore.collection("users").document(user.uid).get().await()
+            
+            if (!userDocSnapshot.exists()) {
+                // Create new user profile for Google Sign-In
+                val currentDate = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(java.util.Date())
+                val userProfile = com.example.summerveldhoundresort.db.entities.User(
+                    userID = user.uid,
+                    username = user.displayName ?: user.email?.substringBefore("@") ?: "User",
+                    email = user.email ?: "",
+                    phoneNumber = "", // Google Sign-In doesn't provide phone number
+                    creationDate = currentDate,
+                    role = "user"
+                )
+                
+                // Save to Firestore
+                firestore.collection("users").document(user.uid).set(userProfile).await()
+                Log.d(TAG, "Google user profile created in Firestore")
+            } else {
+                Log.d(TAG, "Google user profile already exists in Firestore")
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to create Google user profile", e)
+        }
     }
 
 
