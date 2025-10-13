@@ -35,10 +35,10 @@ class AdminActivity : AppCompatActivity() {
         }
 
         binding.MngDogsBtn.setOnClickListener {
-            val intent = Intent(this, DogActivity::class.java)
+            val intent = Intent(this, ManageDogsActivity::class.java)
             startActivity(intent)
-            finish() // optional, if you don’t want to come back
         }
+
 
 
 

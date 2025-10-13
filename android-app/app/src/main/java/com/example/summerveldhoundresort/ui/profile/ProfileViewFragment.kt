@@ -44,8 +44,8 @@ class ProfileViewFragment : Fragment() {
         binding.mbEditProfile.setOnClickListener{
             findNavController().navigate(R.id.action_profileViewFragment_to_editProfileFragment)
         }
-        binding.mbDataPrivacy.setOnClickListener{
-//            findNavController().navigate(R.id.action_ProfileFragment_to_EditProfileFragment)
+        binding.mbDataPrivacy.setOnClickListener {
+            findNavController().navigate(R.id.action_global_privacyFragment)
         }
         binding.mbChangePassword.setOnClickListener {
             val auth = FirebaseAuth.getInstance()
