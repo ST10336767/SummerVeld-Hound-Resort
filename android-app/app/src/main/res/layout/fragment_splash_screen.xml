@@ -12,26 +12,15 @@
         android:id="@+id/imageViewLogo"
         android:layout_width="412dp"
         android:layout_height="343dp"
+        android:layout_marginTop="256dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@id/imageViewDog"
         app:layout_constraintDimensionRatio="580:420"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/splash_logo" />
 
     <!-- Dog image at bottom -->
-    <ImageView
-        android:id="@+id/imageViewDog"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:srcCompat="@drawable/dog"
-        app:layout_constraintTop_toBottomOf="@id/imageViewLogo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="432:400"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
