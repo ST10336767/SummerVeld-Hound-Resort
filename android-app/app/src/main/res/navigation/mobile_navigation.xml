@@ -131,4 +131,25 @@
         android:label="Dog Details"
         tools:layout="@layout/fragment_dog_detail" />
 
+    <!-- About Us destination -->
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.example.summerveldhoundresort.ui.about.AboutUsFragment"
+        android:label="About Us" />
+
+    <!-- Privacy destination -->
+    <fragment
+        android:id="@+id/privacyFragment"
+        android:name="com.example.summerveldhoundresort.ui.privacy.PrivacyFragment"
+        android:label="Data and Privacy" />
+
+    <!-- Global actions so any screen can open these -->
+    <action
+        android:id="@+id/action_global_aboutUsFragment"
+        app:destination="@id/aboutUsFragment" />
+    <action
+        android:id="@+id/action_global_privacyFragment"
+        app:destination="@id/privacyFragment" />
+
+
 </navigation>

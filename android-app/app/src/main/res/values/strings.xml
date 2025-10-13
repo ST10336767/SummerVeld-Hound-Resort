@@ -49,4 +49,81 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+
+    <!-- About page titles -->
+    <string name="about_us_title">About Us</string>
+    <string name="about_who_title">Who We Are &amp; What We Do</string>
+    <string name="about_what_title">How We Operate</string>
+    <string name="about_goal_title">How Our Journey Started</string>
+    <string name="about_where_title">How We Stand Out</string>
+    <string name="cd_paw_decor">decorative paw</string>
+
+    <!-- About page bodies -->
+    <string name="about_who_body">
+        Summerveld Hound Resort Rescue Sanctuary (NPO 225-939 &amp; PBO 930069359) is a family operated animal rescue that is situated in the heart of Assagay, KZN.\n\n
+        We are BBBEE certified &amp; 75% women owned.\n\n
+        Our NPO does not receive government or municipal funding, we rely solely on donations from the public.\n\n
+        Our aim is to rescue and rehabilitate neglected, abused and unwanted animals.\n\n
+        We also aim to educate society about animal welfare and the importance of sterilization.
+    </string>
+
+    <string name="about_operate_body">
+        Our rescues are our family, and we couldn’t imagine life without them. That’s why we are their forever home, providing them with a safe haven and a better quality of life in a loving, home-like environment.\n\n
+        We did attempt to rehome some of our rescues in the past, conducting thorough home checks and approvals. However, during surprise visits, we were devastated to find them living in unacceptable conditions.\n\n
+        Through this experience, we realized that many people were simply looking for a playmate for their pet, a guard dog, or were unwilling to accept our rescues because they weren’t a specific breed.
+    </string>
+
+    <string name="about_journey_body">
+        It all started on the 21st of July 2016 at our regular visit to the vet for dog food when we laid our eyes on the most precious little being. The Westville Veterinary Hospital had taken care of this little puppy a week before we adopted her. On this day our lives changed. Our eyes opened up to the grotesque reality and we became aware of how innocent animals were victims of torture, abuse, neglect and mistreatment.\n\n
+        Our conscious was awakened and we realised that we had been living in a cocoon.\n\n
+        The second major turning point in our lives happened one night in Umhlatuzana while we were driving home. We spotted a tiny black kitten near the edge of the road and immediately turned back to rescue her. She was terrified and tried to fight us off, but we refused to leave her behind to fend for herself.\n\n
+        That night, we kept a close watch over her as she cried endlessly. The next morning, we took her to the vet, hoping to get her the care she needed. After waiting anxiously, the nurse informed us that the kitten had snuffles, which they claimed was incurable. Instead of treating her, they refused to return her to us. Moments later, we were devastated to learn that they had put her down, without our consent. The nurse justified their actions by saying she would have infected other animals at the clinic.\n\n
+        The pain of losing our baby, Angel, stayed with us for a long time. But from that heartbreak grew an even stronger determination to help as many unwanted, unloved, and abused animals as possible. We knew then that making a difference in their lives was our true purpose.\n\n
+        That’s when our mission to save innocent lives began.
+    </string>
+
+    <string name="about_standout_body">
+        Our furbabies mean the world to us, and the thought of them being mistreated due to their breed is truly heartbreaking. Many of our rescues have grown up alongside their siblings and even their mothers, forming strong family bonds. Separating them would be unthinkable and cruel.\n\n
+        As passionate advocates against animal cruelty, we follow a vegan lifestyle, believing that all beings are equal and deserve the right to life.\n\n
+        We are a family of four with an unwavering love and compassion for animals in need, which inspired us to establish this NPO. Our rescues are carefully grouped based on their temperaments. During the day, they enjoy time together in spacious enclosures, and at night, they are free to roam the property.\n\n
+        We strongly believe in socialization, as isolation can lead to anxiety, aggression, depression, and kennel stress. We are firmly against chaining dogs, as it is cruel and inhumane. Instead, our rescues live in structured packs of 2-8 dogs, fostering a natural and enriching environment.
+    </string>
+
+    <!-- Privacy fragment -->
+    <string name="privacy_title">Data and Privacy</string>
+
+    <string name="privacy_intro">
+        Welcome to the Summerveld Hound Resort App. Your privacy matters to us. This policy outlines how we collect, use, and protect your information when you use our app and services.
+    </string>
+
+    <string name="privacy_s1_title">1. Information We Collect</string>
+    <string name="privacy_s1_body">
+        We may collect basic personal information that you choose to provide, like your name and email address, for example when you contact us or make a donation. We may also collect general device and app usage information to improve performance.
+    </string>
+
+    <string name="privacy_s2_title">2. How We Use Your Information</string>
+    <string name="privacy_s2_body">
+        We use your information to operate and improve the app, process donations, respond to enquiries, share updates about rescue work, and keep our platform safe and reliable.
+    </string>
+
+    <string name="privacy_s3_title">3. Data Security</string>
+    <string name="privacy_s3_body">
+        We store information securely and limit access to authorized team members only. Although no method is perfectly secure, we apply reasonable safeguards to protect your data.
+    </string>
+
+    <string name="privacy_s4_title">4. Third-Party Sharing</string>
+    <string name="privacy_s4_body">
+        We do not sell or rent your personal information. We may share limited data with trusted service providers who help us run the app, like payment processing or analytics, and only for the purpose of providing those services.
+    </string>
+
+    <string name="privacy_s5_title">5. Your Rights and Choices</string>
+    <string name="privacy_s5_body">
+        You can request to view, update, or delete your information. If you want to stop receiving communications, you can opt out in settings or by contacting us.
+    </string>
+
+    <string name="privacy_s6_title">6. Changes to This Policy</string>
+    <string name="privacy_s6_body">
+        We may update this policy from time to time. Significant changes will be highlighted in the app or on our website. Questions or concerns? Email us at info@summerveldhoundresort.org.za.
+    </string>
+
 </resources>
