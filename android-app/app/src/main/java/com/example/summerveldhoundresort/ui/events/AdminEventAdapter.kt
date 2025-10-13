@@ -37,8 +37,10 @@ class AdminEventAdapter(private val events: List<Event>,
         holder.locationTextView.text = event.location
         holder.descriptionTextView.text = event.description
 
-        // 👇 Hide edit button for normal user
-        holder.editButton.visibility = View.GONE
+        holder.editButton.visibility = View.VISIBLE
+        holder.editButton.setOnClickListener {
+            onEventClick(event)
+        }
     }
 
 
