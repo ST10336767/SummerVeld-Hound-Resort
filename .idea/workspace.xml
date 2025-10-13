@@ -5,77 +5,37 @@
       <config />
     </shared>
     <layouts>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/drawable/baseline_credit_card_24.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_events.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/drawable/ic_dashboard_black_24dp.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_home.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/drawable/ic_launcher_background.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/item_comment.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/drawable/ic_launcher_foreground.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/item_event_card.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/activity_add_event.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/item_event_card_user.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/activity_admin.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/navigation/auth_nav_graph.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/activity_auth.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/activity_main.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/activity_manage_events.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_change_password.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_create_dog.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_edit_profile.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_forgot_passaword.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_login.xml">
-        <config>
-          <theme>@style/Theme.SummerveldHoundResort</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_profile_view.xml">
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/navigation/mobile_navigation.xml">
         <config>
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
@@ -111,10 +71,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9564e76-b5a1-4209-b231-2f915e8ab9fd" name="Changes" comment="splash screen implemented and working&#10;logo changed to summerveld logo">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_splash_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_splash_screen.xml" afterDir="false" />
-    </list>
+    <list default="true" id="c9564e76-b5a1-4209-b231-2f915e8ab9fd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -140,30 +97,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="SummerveldHoundResort" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="SummerveldHoundResort" type="f1a62948:ProjectNode" />
-                <item name="app" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="SummerveldHoundResort" type="f1a62948:ProjectNode" />
-                <item name="app" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="SummerveldHoundResort" type="f1a62948:ProjectNode" />
-                <item name="app" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="other" type="c8890929:TasksNode$1" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -173,19 +107,18 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Data Class" />
-        <option value="Kotlin Class" />
         <option value="resourceFile" />
         <option value="valueResourceFile" />
-        <option value="Class" />
+        <option value="Kotlin Class" />
         <option value="layoutResourceFile" />
+        <option value="Kotlin Data Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Hameed-EditProfileUI" />
+        <entry key="$PROJECT_DIR$" value="Ahrin-RegisterScreen-and-NavBars" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -199,7 +132,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/ST10336767/SummerVeld-Hound-Resort.git&quot;,
-    &quot;accountId&quot;: &quot;53f6dac5-305e-4741-b357-a0af0361ee1b&quot;
+    &quot;accountId&quot;: &quot;140c1f98-80c0-44b6-bee0-a34d7fc8f92e&quot;
   }
 }</component>
   <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$/android-app" gradleHome="C:\Users\GNG\.gradle\wrapper\dists\gradle-8.10.2-bin\a04bxjujx95o3nb99gddekhwo\gradle-8.10.2" javaHome="D:\AndroidStudio\jbr" gradleVersion="8.10.2" />
@@ -207,6 +140,9 @@
     <scriptDefinition className="org.jetbrains.kotlin.scripting.resolve.KotlinScriptDefinitionFromAnnotatedTemplate" definitionName="KotlinBuildScript">
       <order>2147483647</order>
     </scriptDefinition>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -221,9 +157,7 @@
     &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
     &quot;Android App.app.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;ResourceManagerPrefKey.ResourceType&quot;: &quot;DRAWABLE&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
@@ -231,7 +165,7 @@
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Hameed-Logo+SplashScreen&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Varsity College/2025/WILL/SummerVeld-Hound-Resort&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
@@ -240,11 +174,6 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;
   }
 }</component>
-  <component name="RecentsManager">
-    <key name="android.template.-655565971">
-      <recent name="com.example.summerveldhoundresort" />
-    </key>
-  </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="SummerveldHoundResort.app" />
@@ -351,78 +280,34 @@
       <option name="project" value="LOCAL" />
       <updated>1756377811620</updated>
     </task>
-    <task id="LOCAL-00003" summary="Completed Change Password UI">
+    <task id="LOCAL-00003" summary="Completed Login UI">
       <option name="closed" value="true" />
-      <created>1759528054498</created>
+      <created>1759525335123</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1759528054498</updated>
+      <updated>1759525335123</updated>
     </task>
-    <task id="LOCAL-00004" summary="alterations made">
-      <option name="closed" value="true" />
-      <created>1759677816892</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1759677816892</updated>
-    </task>
-    <task id="LOCAL-00005" summary="alterations made">
-      <option name="closed" value="true" />
-      <created>1759682001382</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1759682001382</updated>
-    </task>
-    <task id="LOCAL-00006" summary="finished UI for Profile">
-      <option name="closed" value="true" />
-      <created>1760098390397</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1760098390397</updated>
-    </task>
-    <task id="LOCAL-00007" summary="finished UI for Edit Profile">
-      <option name="closed" value="true" />
-      <created>1760098823723</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1760098823723</updated>
-    </task>
-    <task id="LOCAL-00008" summary="splash screen implemented and working&#10;logo changed to summerveld logo">
-      <option name="closed" value="true" />
-      <created>1760125379707</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1760125379707</updated>
-    </task>
-    <option name="localTasksCounter" value="9" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated google login to simplify the code" />
     <MESSAGE value="Fixed login page" />
-    <MESSAGE value="Completed Change Password UI" />
-    <MESSAGE value="alterations made" />
-    <MESSAGE value="finished UI for Profile" />
-    <MESSAGE value="finished UI for Edit Profile" />
-    <MESSAGE value="splash screen implemented and working&#10;logo changed to summerveld logo" />
-    <option name="LAST_COMMIT_MESSAGE" value="splash screen implemented and working&#10;logo changed to summerveld logo" />
+    <MESSAGE value="Completed Login UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed Login UI" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
         <entry key="com.example.summerveldhoundresort">
           <value>
-            <CheckInfo lastCheckTimestamp="1760356830793" />
+            <CheckInfo lastCheckTimestamp="1759522540920" />
           </value>
         </entry>
         <entry key="com.example.summerveldhoundresort.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1760356830781" />
+            <CheckInfo lastCheckTimestamp="1759522540921" />
           </value>
         </entry>
       </map>

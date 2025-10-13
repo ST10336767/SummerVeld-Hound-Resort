@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/imageDog"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/dog_placeholder" />
+
+    <TextView
+        android:id="@+id/textDogName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dog Name"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingTop="6dp"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/buttonEditDog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Dog"
+        android:layout_marginTop="6dp" />
+</LinearLayout>
