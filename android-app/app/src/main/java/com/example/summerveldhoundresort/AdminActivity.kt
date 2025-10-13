@@ -3,9 +3,13 @@ package com.example.summerveldhoundresort
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.summerveldhoundresort.databinding.ActivityAdminBinding
+import com.example.summerveldhoundresort.ui.admin.CreateDog
 import com.google.firebase.auth.FirebaseAuth
 
 class AdminActivity : AppCompatActivity() {
@@ -13,6 +17,7 @@ class AdminActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -28,5 +33,15 @@ class AdminActivity : AppCompatActivity() {
         binding.MngEventsBtn.setOnClickListener {
             startActivity(Intent(this, ManageEventsActivity::class.java))
         }
+
+        binding.MngDogsBtn.setOnClickListener {
+            val intent = Intent(this, DogActivity::class.java)
+            startActivity(intent)
+            finish() // optional, if you don’t want to come back
+        }
+
+
+
+
     }
 }
