@@ -130,6 +130,10 @@
         android:name="com.example.summerveldhoundresort.ui.saved.DogDetailFragment"
         android:label="Dog Details"
         tools:layout="@layout/fragment_dog_detail" />
+    <fragment
+        android:id="@+id/editDogFragment"
+        android:name="com.example.summerveldhoundresort.ui.saved.EditDogFragment"
+        android:label="EditDogFragment" />
 
     <!-- About Us destination -->
     <fragment
