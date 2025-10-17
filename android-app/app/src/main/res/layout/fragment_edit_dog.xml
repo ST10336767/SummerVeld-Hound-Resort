@@ -97,8 +97,9 @@
                 android:id="@+id/buttonCancelEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cancel"
-                android:backgroundTint="@android:color/darker_gray"/>
+                android:text="← Back"
+                android:backgroundTint="@color/dark_purple"
+                android:textColor="@android:color/white"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

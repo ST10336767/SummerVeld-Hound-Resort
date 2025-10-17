@@ -63,6 +63,11 @@ class EditProfileFragment : Fragment() {
             Toast.makeText(requireContext(), "Profile info updated successfully", Toast.LENGTH_SHORT).show()
         }
 
+        // Set up back button click listener
+        binding.buttonBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         return binding.root
     }
 

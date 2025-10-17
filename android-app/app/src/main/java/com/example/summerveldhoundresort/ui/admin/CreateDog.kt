@@ -94,6 +94,11 @@ class CreateDog : Fragment() {
             saveDogData()
 
         }
+
+        // Set up back button click listener
+        binding.buttonBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun showDatePickerDialog() {
@@ -128,14 +133,14 @@ class CreateDog : Fragment() {
         if (dogName.isEmpty() || dogBreed.isEmpty() || dogDobString.isEmpty() ||
             dogColour.isEmpty() || dogGender.isEmpty() || dogDescription.isEmpty() || selectedImageUri == null
         ) {
-            Toast.makeText(requireContext(), "Please fill in all fields and select a picture.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Please fill all fields and select a picture.", Toast.LENGTH_SHORT).show()
             return
         }
 
         val dogDOB: Date = try {
             dateFormat.parse(dogDobString) ?: Date()
         } catch (e: Exception) {
-            Toast.makeText(requireContext(), "Invalid DOB format. Please use the date picker.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Invalid date format. Use the date picker.", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -240,7 +245,7 @@ class CreateDog : Fragment() {
             }
             
             // Show progress message to user
-            Toast.makeText(requireContext(), "Uploading image... This may take a moment for large images.", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "Uploading image... Please wait.", Toast.LENGTH_SHORT).show()
             
             android.util.Log.d("CreateDog", "Calling imageViewModel.uploadPetProfileImage")
             imageViewModel.uploadPetProfileImage(uri, dogId ?: "")

@@ -38,6 +38,15 @@ class SavedDogsFragment : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        
+        // Set up back button click listener
+        view.findViewById<View>(R.id.buttonBack)?.setOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
+
     private fun loadSavedDogs() {
         android.util.Log.d("SavedDogsFragment", "Loading dogs from Firestore...")
         firestore.collection("dogs")

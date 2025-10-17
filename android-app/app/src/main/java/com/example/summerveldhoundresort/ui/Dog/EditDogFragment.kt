@@ -94,9 +94,9 @@ class EditDogFragment : Fragment() {
             deleteDog()
         }
 
-// Cancel
+// Cancel/Back
         binding.buttonCancelEdit.setOnClickListener {
-            requireActivity().finish()
+            findNavController().navigateUp()
         }
 }
 
