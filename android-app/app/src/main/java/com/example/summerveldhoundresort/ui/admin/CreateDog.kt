@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import com.example.summerveldhoundresort.databinding.FragmentCreateDogBinding
 import com.example.summerveldhoundresort.db.AppResult
 import com.example.summerveldhoundresort.db.entities.Dog
@@ -97,7 +96,20 @@ class CreateDog : Fragment() {
 
         // Set up back button click listener
         binding.buttonBack.setOnClickListener {
-            findNavController().navigateUp()
+            try {
+                // Since this fragment is used in an Activity, finish the activity
+                if (isAdded && !requireActivity().isFinishing) {
+                    requireActivity().finish()
+                }
+            } catch (e: Exception) {
+                // If there's an error, try alternative navigation
+                try {
+                    requireActivity().onBackPressed()
+                } catch (e2: Exception) {
+                    // Last resort - just log the error
+                    android.util.Log.e("CreateDog", "Error handling back button", e2)
+                }
+            }
         }
     }
 
