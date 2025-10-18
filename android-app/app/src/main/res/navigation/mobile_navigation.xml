@@ -147,6 +147,12 @@
         android:name="com.example.summerveldhoundresort.ui.privacy.PrivacyFragment"
         android:label="Data and Privacy" />
 
+    <!-- Settings destination -->
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.summerveldhoundresort.ui.settings.SettingsFragment"
+        android:label="Settings" />
+
     <!-- Global actions so any screen can open these -->
     <action
         android:id="@+id/action_global_aboutUsFragment"
@@ -154,6 +160,9 @@
     <action
         android:id="@+id/action_global_privacyFragment"
         app:destination="@id/privacyFragment" />
+    <action
+        android:id="@+id/action_global_settingsFragment"
+        app:destination="@id/settingsFragment" />
 
 
 </navigation>

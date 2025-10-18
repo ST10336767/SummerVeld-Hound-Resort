@@ -67,7 +67,7 @@ class ProfileViewFragment : Fragment() {
             }
         }
         binding.mbSettings.setOnClickListener{
-//            findNavController().navigate(R.id.action_ProfileFragment_to_EditProfileFragment)
+            findNavController().navigate(R.id.action_global_settingsFragment)
         }
         binding.mbLogout.setOnClickListener{
             profileViewModel.logout()

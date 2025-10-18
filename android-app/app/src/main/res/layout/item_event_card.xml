@@ -21,7 +21,7 @@
             android:text="Event Name"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#000000" />
+            android:textColor="@color/black" />
 
         <!-- Event Description -->
         <TextView
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:text="Short description"
             android:textSize="14sp"
-            android:textColor="#555555"
+            android:textColor="@color/black"
             android:layout_marginTop="4dp" />
 
         <!-- Event Date and Time -->
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="Date"
                 android:textSize="14sp"
-                android:textColor="#777777" />
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/timeTextView"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="Time"
                 android:textSize="14sp"
-                android:textColor="#777777" />
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <!-- Event Location -->
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:text="Location"
             android:textSize="14sp"
-            android:textColor="#777777"
+            android:textColor="@color/black"
             android:layout_marginTop="4dp" />
 
         <Button

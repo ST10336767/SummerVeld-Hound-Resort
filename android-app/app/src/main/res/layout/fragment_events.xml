@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:padding="16dp">
 
     <!-- Back Button -->
@@ -23,6 +24,7 @@
         android:layout_height="wrap_content"
         android:text="All Events"
         android:textSize="20sp"
+        android:textColor="@color/black"
         android:paddingBottom="12dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
