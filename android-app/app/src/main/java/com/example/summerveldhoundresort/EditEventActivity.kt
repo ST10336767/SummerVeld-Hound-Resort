@@ -103,7 +103,7 @@ class EditEventActivity : AppCompatActivity() {
                     finish()
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(this, "Update failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Update failed. Try again.", Toast.LENGTH_SHORT).show()
                 }
         }
 
@@ -116,7 +116,7 @@ class EditEventActivity : AppCompatActivity() {
                     finish()
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(this, "Delete failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Delete failed. Try again.", Toast.LENGTH_SHORT).show()
                 }
         }
 

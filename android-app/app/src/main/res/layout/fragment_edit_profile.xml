@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.EditProfileFragment">
 
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/dark_purple"
+        android:text="← Back"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:padding="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="181dp"
