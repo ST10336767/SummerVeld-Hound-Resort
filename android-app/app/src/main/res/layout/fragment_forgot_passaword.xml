@@ -11,35 +11,94 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="88dp"
         android:text="Forgot Password"
-        android:textSize="24sp" android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/purple"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="32dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="136dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginTop="64dp"
+        android:background="@drawable/rounded_button"
         android:ems="10"
-        android:inputType="textEmailAddress"
         android:hint="Please enter your email address"
+        android:inputType="textEmailAddress"
         android:padding="12dp"
-        android:background="@drawable/rounded_button" app:layout_constraintEnd_toEndOf="parent"
+        android:textColorHint="@color/purple"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/forgotPassswordButton"
-        android:layout_width="0dp" android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginTop="60dp"
-        android:text="Reset Password" android:backgroundTint="@color/black" app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/dark_purple"
+        android:text="Reset Password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+
+    <Button
+        android:id="@+id/buttonBackToLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/dark_purple"
+        android:text="Back to Login"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forgotPassswordButton" />
+
+    <TextView
+        android:id="@+id/tvFPInfo"
+        android:layout_width="380dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="184dp"
+        android:gravity="center"
+        android:text="A password reset will be sent to your email. Please click on it and follow the instructions on resetting your password."
+        android:textColor="@color/purple"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="206dp"
+        android:src="@drawable/paw_trail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forgotPassswordButton" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="177dp"
+        android:layout_height="155dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginBottom="43dp"
+        android:src="@drawable/paw_reversed"
+        app:layout_constraintBottom_toTopOf="@+id/tvFPInfo"
+        app:layout_constraintStart_toEndOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/privacyScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@android:color/white"
+    tools:context=".ui.privacy.PrivacyFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="90dp">
+
+        <!-- Back Button -->
+        <Button
+            android:id="@+id/buttonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/dark_purple"
+            android:text="← Back"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:padding="12dp" />
+
+        <!-- Title area (paw + title stacked) -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/pawTrailPrivacy"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="top|start"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/paw_trail"
+                android:alpha="0.25"
+                android:contentDescription="@string/cd_paw_decor" />
+
+            <TextView
+                android:id="@+id/tvPrivacyTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_title"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/brand_magenta"
+                android:gravity="center"
+                android:layout_marginTop="40dp"
+                android:paddingBottom="8dp" />
+        </FrameLayout>
+
+        <!-- small divider under the header -->
+        <View
+            android:layout_width="64dp"
+            android:layout_height="1dp"
+            android:background="@color/brand_maroon"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Intro -->
+        <TextView
+            android:id="@+id/tvPrivacyIntro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_intro"
+            android:textSize="14sp"
+            android:textColor="@color/muted"
+            android:lineSpacingExtra="2dp"
+            android:gravity="center"
+            android:paddingBottom="8dp" />
+
+        <!-- Section 1 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_s1_title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/brand_magenta"
+            android:gravity="center"
+            android:paddingTop="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_s1_body"
+            android:textSize="14sp"
+            android:textColor="@color/muted"
+            android:lineSpacingExtra="2dp"
+            android:gravity="center"
+            android:paddingTop="8dp" />
+
+        <View
+            android:layout_width="64dp"
+            android:layout_height="1dp"
+            android:background="@color/brand_maroon"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp" />
+
+        <!-- Section 2 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_s2_title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/brand_magenta"
+            android:gravity="center"
+            android:paddingTop="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_s2_body"
+            android:textSize="14sp"
+            android:textColor="@color/muted"
+            android:lineSpacingExtra="2dp"
+            android:gravity="center"
+            android:paddingTop="8dp" />
+
+        <View
+            android:layout_width="64dp"
+            android:layout_height="1dp"
+            android:background="@color/brand_maroon"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp" />
+
+        <!-- Section 3 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_s3_title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/brand_magenta"
+            android:gravity="center"
+            android:paddingTop="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_s3_body"
+            android:textSize="14sp"
+            android:textColor="@color/muted"
+            android:lineSpacingExtra="2dp"
+            android:gravity="center"
+            android:paddingTop="8dp" />
+
+        <View
+            android:layout_width="64dp"
+            android:layout_height="1dp"
+            android:background="@color/brand_maroon"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp" />
+
+        <!-- Section 4 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_s4_title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/brand_magenta"
+            android:gravity="center"
+            android:paddingTop="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_s4_body"
+            android:textSize="14sp"
+            android:textColor="@color/muted"
+            android:lineSpacingExtra="2dp"
+            android:gravity="center"
+            android:paddingTop="8dp" />
+
+        <View
+            android:layout_width="64dp"
+            android:layout_height="1dp"
+            android:background="@color/brand_maroon"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp" />
+
+        <!-- Section 5 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_s5_title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/brand_magenta"
+            android:gravity="center"
+            android:paddingTop="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_s5_body"
+            android:textSize="14sp"
+            android:textColor="@color/muted"
+            android:lineSpacingExtra="2dp"
+            android:gravity="center"
+            android:paddingTop="8dp" />
+
+        <View
+            android:layout_width="64dp"
+            android:layout_height="1dp"
+            android:background="@color/brand_maroon"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp" />
+
+        <!-- Section 6 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_s6_title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/brand_magenta"
+            android:gravity="center"
+            android:paddingTop="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_s6_body"
+            android:textSize="14sp"
+            android:textColor="@color/muted"
+            android:lineSpacingExtra="2dp"
+            android:gravity="center"
+            android:paddingTop="8dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+    </LinearLayout>
+</ScrollView>

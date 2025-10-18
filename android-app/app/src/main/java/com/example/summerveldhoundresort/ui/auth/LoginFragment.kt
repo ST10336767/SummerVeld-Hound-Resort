@@ -131,7 +131,7 @@ class LoginFragment : Fragment() {
                         Log.e(TAG, "Login Failed: ${result.exception?.message}") // Use e for errors
                         Toast.makeText(
                             requireContext(),
-                            "Login Failed: ${result.exception?.message}",
+                            "Login failed. Please try again.",
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -198,6 +198,7 @@ class LoginFragment : Fragment() {
                 } else {
                     // Sign in failed.
                     Toast.makeText(requireContext(), "Firebase authentication failed.", Toast.LENGTH_SHORT).show()
+                    Log.e(TAG, "Firebase authentication failed - ${task.exception?.message}", task.exception)
                 }
             }
     }

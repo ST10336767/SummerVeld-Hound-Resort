@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:gravity="center_horizontal">
+
+            <!-- Dog Image Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dog Photo"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark_purple"
+                android:layout_marginBottom="8dp" />
+
+            <FrameLayout
+                android:id="@+id/frameLayoutImageContainer"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/image_border"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:id="@+id/imageDogEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/dog_placeholder"
+                    android:contentDescription="Dog image preview" />
+
+                <TextView
+                    android:id="@+id/textViewImageHint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Tap to change photo"
+                    android:textColor="@color/purple"
+                    android:textSize="12sp"
+                    android:background="@android:color/white"
+                    android:padding="8dp"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <!-- Dog Name Field -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dog Name *"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark_purple"
+                android:layout_marginBottom="4dp"
+                android:layout_gravity="start" />
+
+            <EditText
+                android:id="@+id/editDogName"
+                android:hint="Enter dog's name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"/>
+
+            <!-- Breed Field -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Breed *"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark_purple"
+                android:layout_marginBottom="4dp"
+                android:layout_gravity="start" />
+
+            <EditText
+                android:id="@+id/editBreed"
+                android:hint="Enter dog's breed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"/>
+
+            <!-- Colour Field -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Colour *"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark_purple"
+                android:layout_marginBottom="4dp"
+                android:layout_gravity="start" />
+
+            <EditText
+                android:id="@+id/editColour"
+                android:hint="Enter dog's colour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"/>
+
+            <!-- Gender Field -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender *"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark_purple"
+                android:layout_marginBottom="4dp"
+                android:layout_gravity="start" />
+
+            <Spinner
+                android:id="@+id/spinnerGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"/>
+
+            <!-- Date of Birth Field -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date of Birth *"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark_purple"
+                android:layout_marginBottom="4dp"
+                android:layout_gravity="start" />
+
+            <EditText
+                android:id="@+id/editDob"
+                android:hint="Tap to select date (e.g. 15 Mar 2020)"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:clickable="true"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"/>
+
+            <!-- Description Field -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description *"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark_purple"
+                android:layout_marginBottom="4dp"
+                android:layout_gravity="start" />
+
+            <EditText
+                android:id="@+id/editDescription"
+                android:hint="Enter dog's description, personality, special needs, etc."
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"/>
+
+            <Button
+                android:id="@+id/buttonSaveDog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save Changes"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/buttonDeleteDog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delete Dog"
+                android:backgroundTint="@android:color/holo_red_light"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/buttonCancelEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="← Back"
+                android:backgroundTint="@color/dark_purple"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

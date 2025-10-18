@@ -40,20 +40,38 @@
           <theme>@style/Theme.SummerveldHoundResort</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_register.xml">
+        <config>
+          <theme>@style/Theme.SummerveldHoundResort</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_splash_screen.xml">
+        <config>
+          <theme>@style/Theme.SummerveldHoundResort</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/layout/item_event_card.xml">
+        <config>
+          <theme>@style/Theme.SummerveldHoundResort</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml">
+        <config>
+          <theme>@style/Theme.SummerveldHoundResort</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/android-app/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml">
+        <config>
+          <theme>@style/Theme.SummerveldHoundResort</theme>
+        </config>
+      </layout>
     </layouts>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9564e76-b5a1-4209-b231-2f915e8ab9fd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/ui/events/UserEventAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/ui/events/UserEventAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/ui/home/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/java/com/example/summerveldhoundresort/ui/home/HomeFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/res/layout/item_event_card_user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/res/layout/item_event_card_user.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android-app/app/src/main/res/navigation/mobile_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android-app/app/src/main/res/navigation/mobile_navigation.xml" afterDir="false" />
-    </list>
+    <list default="true" id="c9564e76-b5a1-4209-b231-2f915e8ab9fd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,7 +80,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\USER\.android\avd\Medium_Phone_2.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\GNG\.android\avd\Medium_Phone.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -79,30 +97,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="SummerveldHoundResort" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="SummerveldHoundResort" type="f1a62948:ProjectNode" />
-                <item name="app" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="SummerveldHoundResort" type="f1a62948:ProjectNode" />
-                <item name="app" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="SummerveldHoundResort" type="f1a62948:ProjectNode" />
-                <item name="app" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="other" type="c8890929:TasksNode$1" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -123,7 +118,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="Ahrin-RegisterScreen-and-NavBars" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -140,10 +135,14 @@
     &quot;accountId&quot;: &quot;140c1f98-80c0-44b6-bee0-a34d7fc8f92e&quot;
   }
 }</component>
+  <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$/android-app" gradleHome="C:\Users\GNG\.gradle\wrapper\dists\gradle-8.10.2-bin\a04bxjujx95o3nb99gddekhwo\gradle-8.10.2" javaHome="D:\AndroidStudio\jbr" gradleVersion="8.10.2" />
   <component name="KotlinScriptingSettings">
     <scriptDefinition className="org.jetbrains.kotlin.scripting.resolve.KotlinScriptDefinitionFromAnnotatedTemplate" definitionName="KotlinBuildScript">
       <order>2147483647</order>
     </scriptDefinition>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -281,13 +280,22 @@
       <option name="project" value="LOCAL" />
       <updated>1756377811620</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Completed Login UI">
+      <option name="closed" value="true" />
+      <created>1759525335123</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1759525335123</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated google login to simplify the code" />
     <MESSAGE value="Fixed login page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed login page" />
+    <MESSAGE value="Completed Login UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed Login UI" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
