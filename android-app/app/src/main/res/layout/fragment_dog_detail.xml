@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="?android:attr/colorBackground"
     android:paddingBottom="80dp"
     android:clipToPadding="false">
 
@@ -38,7 +38,7 @@
             android:text="Dog Name"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:layout_marginBottom="16dp" />
 
         <!-- Breed Section -->
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:text="Breed"
                 android:textSize="14sp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textStyle="bold" />
 
             <TextView
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:text="Unknown"
                 android:textSize="18sp"
-                android:textColor="@android:color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 android:layout_marginTop="4dp" />
         </LinearLayout>
 
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:text="Date of Birth"
                 android:textSize="14sp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textStyle="bold" />
 
             <TextView
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:text="Unknown"
                 android:textSize="18sp"
-                android:textColor="@android:color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 android:layout_marginTop="4dp" />
         </LinearLayout>
 
@@ -111,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:text="Color"
                     android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:textStyle="bold" />
 
                 <TextView
@@ -120,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:text="Unknown"
                     android:textSize="18sp"
-                    android:textColor="@android:color/black"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:layout_marginTop="4dp" />
             </LinearLayout>
 
@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:text="Gender"
                     android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:textStyle="bold" />
 
                 <TextView
@@ -146,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:text="Unknown"
                     android:textSize="18sp"
-                    android:textColor="@android:color/black"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:layout_marginTop="4dp" />
             </LinearLayout>
         </LinearLayout>
@@ -163,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:text="About"
                 android:textSize="14sp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textStyle="bold" />
 
             <TextView
@@ -172,7 +172,7 @@
                 android:layout_height="wrap_content"
                 android:text="No description available."
                 android:textSize="16sp"
-                android:textColor="@android:color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 android:layout_marginTop="4dp"
                 android:lineSpacingExtra="4dp" />
         </LinearLayout>

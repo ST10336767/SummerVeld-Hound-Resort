@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@android:color/white"
+    android:background="?android:attr/colorBackground"
     tools:context=".ui.about.AboutUsFragment">
 
     <LinearLayout
@@ -55,7 +55,7 @@
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-medium"
-                android:textColor="@color/brand_magenta"
+                android:textColor="?android:attr/textColorPrimary"
                 android:gravity="center"
                 android:layout_marginTop="42dp"
                 android:paddingBottom="16dp" />
@@ -80,7 +80,7 @@
             android:text="@string/about_who_body"
             android:textSize="14sp"
             android:lineSpacingExtra="2dp"
-            android:textColor="@color/muted"
+            android:textColor="?android:attr/textColorSecondary"
             android:gravity="center"
             android:paddingTop="8dp" />
 
@@ -110,7 +110,7 @@
             android:text="@string/about_operate_body"
             android:textSize="14sp"
             android:lineSpacingExtra="2dp"
-            android:textColor="@color/muted"
+            android:textColor="?android:attr/textColorSecondary"
             android:gravity="center"
             android:paddingTop="8dp" />
 
@@ -140,7 +140,7 @@
             android:text="@string/about_journey_body"
             android:textSize="14sp"
             android:lineSpacingExtra="2dp"
-            android:textColor="@color/muted"
+            android:textColor="?android:attr/textColorSecondary"
             android:gravity="center"
             android:paddingTop="8dp" />
 
