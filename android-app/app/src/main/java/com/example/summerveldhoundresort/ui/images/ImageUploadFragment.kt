@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.summerveldhoundresort.R
 import com.example.summerveldhoundresort.databinding.FragmentImageUploadBinding
@@ -56,6 +57,11 @@ class ImageUploadFragment : Fragment() {
         
         binding.btnClearImage.setOnClickListener {
             clearSelectedImage()
+        }
+        
+        // Set up back button click listener
+        binding.buttonBack.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
     

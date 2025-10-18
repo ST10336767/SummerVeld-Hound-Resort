@@ -109,7 +109,7 @@ class AddEventActivity : AppCompatActivity() {
                         finish()
                     }
                     .addOnFailureListener { e ->
-                        Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Error saving event. Try again.", Toast.LENGTH_LONG).show()
                         Log.e("AddEventActivity", "Firestore write failed", e)
                     }
             } else {

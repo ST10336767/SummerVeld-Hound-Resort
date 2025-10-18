@@ -1,18 +1,23 @@
 package com.example.summerveldhoundresort.ui.saved
 
 import android.app.DatePickerDialog
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.summerveldhoundresort.R
 import com.example.summerveldhoundresort.databinding.FragmentEditDogBinding
+import com.example.summerveldhoundresort.db.AppResult
 import com.example.summerveldhoundresort.db.entities.Dog
+import com.example.summerveldhoundresort.ui.images.ImageViewModel
+import com.example.summerveldhoundresort.utils.ImagePickerUtils
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,6 +29,18 @@ class EditDogFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
     private var dog: Dog? = null
+    private val imageViewModel: ImageViewModel by viewModels()
+    private var selectedImageUri: Uri? = null
+    private var isImageChanged = false
+
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        uri?.let {
+            selectedImageUri = it
+            isImageChanged = true
+            Glide.with(this).load(it).into(binding.imageDogEdit)
+            binding.textViewImageHint.visibility = View.GONE
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +53,8 @@ class EditDogFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupImageUploadObserver()
+        
         dog = arguments?.getSerializable("dog") as? Dog
 
         dog?.let { d ->
@@ -53,7 +72,15 @@ class EditDogFragment : Fragment() {
                     .placeholder(R.drawable.dog_placeholder)
                     .centerCrop()
                     .into(binding.imageDogEdit)
+                binding.textViewImageHint.visibility = View.GONE
+            } else {
+                binding.textViewImageHint.visibility = View.VISIBLE
             }
+        }
+
+        // Set up image click listener
+        binding.frameLayoutImageContainer.setOnClickListener {
+            showImagePickerOptions()
         }
 
         // Gender Spinner setup
@@ -94,22 +121,64 @@ class EditDogFragment : Fragment() {
             deleteDog()
         }
 
-// Cancel
+// Cancel/Back
         binding.buttonCancelEdit.setOnClickListener {
-            requireActivity().finish()
+            try {
+                // Since this fragment is used in an Activity, finish the activity
+                if (isAdded && !requireActivity().isFinishing) {
+                    requireActivity().finish()
+                }
+            } catch (e: Exception) {
+                // If there's an error, try alternative navigation
+                try {
+                    requireActivity().onBackPressed()
+                } catch (e2: Exception) {
+                    // Last resort - just log the error
+                    android.util.Log.e("EditDogFragment", "Error handling back button", e2)
+                }
+            }
         }
-}
+    }
 
-        private fun saveDogChanges() {
+    private fun saveDogChanges() {
         val id = dog?.dogID ?: return
+        
+        // Validate required fields
+        val dogName = binding.editDogName.text.toString().trim()
+        val breed = binding.editBreed.text.toString().trim()
+        val colour = binding.editColour.text.toString().trim()
+        val description = binding.editDescription.text.toString().trim()
+        
+        if (dogName.isEmpty() || breed.isEmpty() || colour.isEmpty() || description.isEmpty()) {
+            Toast.makeText(requireContext(), "Please fill in all required fields", Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        if (isImageChanged && selectedImageUri != null) {
+            // Upload new image first
+            uploadNewImage(id, dogName, breed, colour, description)
+        } else {
+            // Update without changing image
+            updateDogData(id, dogName, breed, colour, description, dog?.imageUri ?: "")
+        }
+    }
+    
+    private fun uploadNewImage(id: String, dogName: String, breed: String, colour: String, description: String) {
+        selectedImageUri?.let { uri ->
+            Toast.makeText(requireContext(), "Uploading new image...", Toast.LENGTH_SHORT).show()
+            imageViewModel.uploadPetProfileImage(uri, id)
+        }
+    }
+    
+    private fun updateDogData(id: String, dogName: String, breed: String, colour: String, description: String, imageUri: String) {
         val updatedData = mapOf(
-            "dogName" to binding.editDogName.text.toString().trim(),
-            "breed" to binding.editBreed.text.toString().trim(),
-            "colour" to binding.editColour.text.toString().trim(),
+            "dogName" to dogName,
+            "breed" to breed,
+            "colour" to colour,
             "gender" to binding.spinnerGender.selectedItem.toString(),
-            "description" to binding.editDescription.text.toString().trim(),
+            "description" to description,
             "dogDOB" to (dog?.dogDOB ?: Date()),
-            "imageUri" to dog?.imageUri,
+            "imageUri" to imageUri,
             "updatedAt" to Date()
         )
 
@@ -117,23 +186,101 @@ class EditDogFragment : Fragment() {
             .update(updatedData)
             .addOnSuccessListener {
                 Toast.makeText(requireContext(), "Dog updated successfully!", Toast.LENGTH_SHORT).show()
-                findNavController().navigateUp()
+                try {
+                    // Since this fragment is used in an Activity, finish the activity
+                    if (isAdded && !requireActivity().isFinishing) {
+                        requireActivity().finish()
+                    }
+                } catch (e: Exception) {
+                    android.util.Log.e("EditDogFragment", "Error finishing activity after update", e)
+                }
             }
             .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Error updating dog: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Error updating dog. Try again.", Toast.LENGTH_LONG).show()
             }
+    }
+    
+    private fun setupImageUploadObserver() {
+        imageViewModel.uploadResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is AppResult.Success -> {
+                    val imageData = result.data
+                    val imageUrl = imageData.publicUrl
+                    // Update the dog data with the new image URL
+                    dog?.let { d ->
+                        updateDogData(
+                            d.dogID ?: "",
+                            binding.editDogName.text.toString().trim(),
+                            binding.editBreed.text.toString().trim(),
+                            binding.editColour.text.toString().trim(),
+                            binding.editDescription.text.toString().trim(),
+                            imageUrl
+                        )
+                    }
+                }
+                is AppResult.Error -> {
+                    Toast.makeText(requireContext(), "Image upload failed. Try again.", Toast.LENGTH_LONG).show()
+                }
+                else -> {
+                    // Handle other states if needed
+                }
+            }
+        }
+    }
+    
+    private fun showImagePickerOptions() {
+        val options = arrayOf("Camera", "Gallery", "Cancel")
+        
+        androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setTitle("Change Dog Photo")
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> openCamera()
+                    1 -> openGallery()
+                    2 -> {} // Cancel
+                }
+            }
+            .show()
+    }
+    
+    private fun openCamera() {
+        ImagePickerUtils.launchCamera(this)
+    }
+    
+    private fun openGallery() {
+        ImagePickerUtils.launchGallery(this)
     }
 
     private fun deleteDog() {
         val id = dog?.dogID ?: return
+        
+        // Show confirmation dialog
+        androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setTitle("Delete Dog")
+            .setMessage("Are you sure you want to delete ${dog?.dogName}? This action cannot be undone.")
+            .setPositiveButton("Delete") { _, _ ->
+                performDelete(id)
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+    
+    private fun performDelete(id: String) {
         db.collection("dogs").document(id)
             .delete()
             .addOnSuccessListener {
                 Toast.makeText(requireContext(), "Dog deleted successfully!", Toast.LENGTH_SHORT).show()
-                requireActivity().finish()
+                try {
+                    // Since this fragment is used in an Activity, finish the activity
+                    if (isAdded && !requireActivity().isFinishing) {
+                        requireActivity().finish()
+                    }
+                } catch (e: Exception) {
+                    android.util.Log.e("EditDogFragment", "Error finishing activity after delete", e)
+                }
             }
             .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Error deleting dog: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Error deleting dog. Try again.", Toast.LENGTH_LONG).show()
             }
     }
 

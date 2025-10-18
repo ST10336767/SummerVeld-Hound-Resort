@@ -36,7 +36,7 @@ class ManageEventsActivity : AppCompatActivity() {
             startActivity(Intent(this, AddEventActivity::class.java))
         }
 
-        // 🔙 Back button to go home/admin dashboard
+        // Back button to go home/admin dashboard
         binding.btnBack.setOnClickListener {
             finish() // closes this activity and returns to previous
         }
