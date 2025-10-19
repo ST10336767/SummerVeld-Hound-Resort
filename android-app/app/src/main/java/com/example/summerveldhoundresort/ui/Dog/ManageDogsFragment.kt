@@ -14,6 +14,7 @@ import com.example.summerveldhoundresort.R
 import com.example.summerveldhoundresort.db.entities.Dog
 import com.example.summerveldhoundresort.ui.admin.CreateDogActivity
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 
 class ManageDogsFragment : Fragment() {
 
@@ -22,6 +23,7 @@ class ManageDogsFragment : Fragment() {
     private lateinit var backButton: Button
     private val firestore = FirebaseFirestore.getInstance()
     private val dogList = mutableListOf<Dog>()
+    private var realTimeListener: ListenerRegistration? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,8 +65,6 @@ class ManageDogsFragment : Fragment() {
             }
         }
 
-
-
         adapter = ManageDogsAdapter(dogList) { dog ->
             try {
                 if (isAdded && !requireActivity().isFinishing) {
@@ -78,7 +78,9 @@ class ManageDogsFragment : Fragment() {
         }
         recyclerView.adapter = adapter
 
+        // Load dogs and set up real-time listener
         loadDogs()
+        setupRealTimeListener()
         return view
     }
 
@@ -105,5 +107,42 @@ class ManageDogsFragment : Fragment() {
             .addOnFailureListener { e ->
                 android.util.Log.e("ManageDogsFragment", "Error loading dogs", e)
             }
+    }
+
+    private fun setupRealTimeListener() {
+        // Set up real-time listener for dogs collection
+        realTimeListener = firestore.collection("dogs")
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    android.util.Log.e("ManageDogsFragment", "Real-time listener error", error)
+                    return@addSnapshotListener
+                }
+
+                snapshot?.let { docs ->
+                    try {
+                        dogList.clear()
+                        for (doc in docs.documents) {
+                            val dog = doc.toObject(Dog::class.java)
+                            if (dog != null) {
+                                dog.dogID = doc.id
+                                dogList.add(dog)
+                            }
+                        }
+                        if (::adapter.isInitialized) {
+                            adapter.notifyDataSetChanged()
+                        }
+                        android.util.Log.d("ManageDogsFragment", "Real-time update: ${dogList.size} dogs loaded")
+                    } catch (e: Exception) {
+                        android.util.Log.e("ManageDogsFragment", "Error processing real-time dogs data", e)
+                    }
+                }
+            }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Clean up the real-time listener
+        realTimeListener?.remove()
+        realTimeListener = null
     }
 }
