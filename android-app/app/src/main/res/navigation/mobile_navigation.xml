@@ -154,6 +154,9 @@
     <action
         android:id="@+id/action_global_privacyFragment"
         app:destination="@id/privacyFragment" />
+    <action
+        android:id="@+id/action_global_changePasswordFragment"
+        app:destination="@id/changePasswordFragment" />
 
 
 </navigation>

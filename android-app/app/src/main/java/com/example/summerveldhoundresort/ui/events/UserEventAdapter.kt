@@ -68,6 +68,8 @@ class UserEventAdapter(private val events: List<Event>) :
             else -> "RSVP"
         }
 
+        Log.d("UserEventAdapter", "Event ID: '${event.id}', Event name: '${event.name}'")
+        
         if (event.id.isNotEmpty()) {
             val rsvpCollection = firestore.collection("events")
                 .document(event.id)
@@ -121,36 +123,68 @@ class UserEventAdapter(private val events: List<Event>) :
             holder.commentsRecycler?.adapter = commentAdapter
             holder.commentsRecycler?.layoutManager = LinearLayoutManager(holder.itemView.context)
             holder.commentsRecycler?.setHasFixedSize(true)
+            
+            Log.d("UserEventAdapter", "Comment input exists: ${holder.commentInput != null}")
+            Log.d("UserEventAdapter", "Send button exists: ${holder.sendCommentButton != null}")
+            Log.d("UserEventAdapter", "Comments recycler exists: ${holder.commentsRecycler != null}")
 
             // Listen to comments
+            Log.d("UserEventAdapter", "Setting up comment listener for event: ${event.id}")
             commentsCollection.orderBy("timestamp").addSnapshotListener { snapshot, error ->
                 if (error != null) {
-                    Log.e("UserEventAdapter", "Failed to load comments: ${error.message}")
+                    Log.e("UserEventAdapter", "Failed to load comments for event ${event.id}: ${error.message}")
                     return@addSnapshotListener
                 }
+                
                 commentsList.clear()
-                snapshot?.documents?.mapNotNull { it.toObject(Comment::class.java) }?.let { commentsList.addAll(it) }
+                val comments = snapshot?.documents?.mapNotNull { doc ->
+                    val comment = doc.toObject(Comment::class.java)
+                    Log.d("UserEventAdapter", "Loaded comment: ${comment?.text} by ${comment?.username}")
+                    comment
+                } ?: emptyList()
+                
+                commentsList.addAll(comments)
+                Log.d("UserEventAdapter", "Total comments loaded: ${commentsList.size}")
                 commentAdapter.notifyDataSetChanged()
             }
 
             // Send comment
             holder.sendCommentButton?.setOnClickListener {
-                val text = holder.commentInput?.text.toString().trim()
-                if (text.isNotEmpty() && currentUser != null) {
-                    val comment = Comment(
-                        userId = currentUser.uid,
-                        username = currentUser.displayName ?: "User",
-                        text = text,
-                        timestamp = System.currentTimeMillis()
-                    )
-                    commentsCollection.add(comment)
-                        .addOnSuccessListener {
-                            holder.commentInput?.text?.clear()
-                        }
-                        .addOnFailureListener {
-                            Toast.makeText(holder.itemView.context, "Failed to send comment: ${it.message}", Toast.LENGTH_SHORT).show()
-                        }
+                Log.d("UserEventAdapter", "Send comment button clicked")
+                
+                // Check if user is logged in
+                if (currentUser == null) {
+                    Toast.makeText(holder.itemView.context, "Please sign in to comment", Toast.LENGTH_SHORT).show()
+                    Log.e("UserEventAdapter", "User not logged in")
+                    return@setOnClickListener
                 }
+                
+                val text = holder.commentInput?.text.toString().trim()
+                Log.d("UserEventAdapter", "Comment text: '$text'")
+                
+                if (text.isEmpty()) {
+                    Toast.makeText(holder.itemView.context, "Please enter a comment", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                
+                val comment = Comment(
+                    userId = currentUser.uid,
+                    username = currentUser.displayName ?: "User",
+                    text = text,
+                    timestamp = System.currentTimeMillis()
+                )
+                
+                Log.d("UserEventAdapter", "Adding comment to collection: ${commentsCollection.path}")
+                commentsCollection.add(comment)
+                    .addOnSuccessListener { docRef ->
+                        Log.d("UserEventAdapter", "Comment added successfully with ID: ${docRef.id}")
+                        holder.commentInput?.text?.clear()
+                        Toast.makeText(holder.itemView.context, "Comment posted!", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Log.e("UserEventAdapter", "Failed to add comment", e)
+                        Toast.makeText(holder.itemView.context, "Failed to send comment: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
             }
 
         } else {

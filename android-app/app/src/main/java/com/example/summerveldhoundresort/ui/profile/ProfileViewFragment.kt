@@ -56,8 +56,8 @@ class ProfileViewFragment : Fragment() {
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(requireContext(), "Password reset email sent!", Toast.LENGTH_SHORT).show()
-                            // Navigate to change password fragment
-                            findNavController().navigate(R.id.action_profileViewFragment_to_changePasswordFragment)
+                            // Navigate to change password fragment using global action
+                            findNavController().navigate(R.id.action_global_changePasswordFragment)
                         } else {
                             Toast.makeText(requireContext(), "Failed to send reset email.", Toast.LENGTH_SHORT).show()
                         }

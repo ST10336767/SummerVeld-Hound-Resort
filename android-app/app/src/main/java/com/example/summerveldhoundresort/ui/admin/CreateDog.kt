@@ -298,7 +298,15 @@ class CreateDog : Fragment() {
                 android.util.Log.d("CreateDog", "Dog saved successfully to Firestore")
                 binding.buttonAddDog.isEnabled = true
                 Toast.makeText(requireContext(), "Dog added successfully!", Toast.LENGTH_SHORT).show()
-                resetFields()
+                
+                // Navigate back to manage dogs page
+                try {
+                    if (isAdded && !requireActivity().isFinishing) {
+                        requireActivity().finish()
+                    }
+                } catch (e: Exception) {
+                    android.util.Log.e("CreateDog", "Error finishing activity after dog creation", e)
+                }
             }
             .addOnFailureListener { e ->
                 android.util.Log.e("CreateDog", "Failed to save dog to Firestore: ${e.message}")
