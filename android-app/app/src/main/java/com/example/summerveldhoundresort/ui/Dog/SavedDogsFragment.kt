@@ -12,6 +12,7 @@ import com.example.summerveldhoundresort.R
 import com.example.summerveldhoundresort.db.entities.Dog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 
 class SavedDogsFragment : Fragment() {
 
@@ -20,6 +21,7 @@ class SavedDogsFragment : Fragment() {
     private val auth = FirebaseAuth.getInstance()
     private val dogList = mutableListOf<Dog>()
     private lateinit var adapter: SavedDogAdapter
+    private var realTimeListener: ListenerRegistration? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +37,7 @@ class SavedDogsFragment : Fragment() {
         }
         recyclerView.adapter = adapter
         loadSavedDogs()
+        setupRealTimeListener()
         return view
     }
 
@@ -73,10 +76,45 @@ class SavedDogsFragment : Fragment() {
             }
     }
 
+    private fun setupRealTimeListener() {
+        // Set up real-time listener for dogs collection
+        realTimeListener = firestore.collection("dogs")
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    android.util.Log.e("SavedDogsFragment", "Real-time listener error", error)
+                    return@addSnapshotListener
+                }
+
+                snapshot?.let { docs ->
+                    try {
+                        dogList.clear()
+                        for (doc in docs.documents) {
+                            val dog = doc.toObject(Dog::class.java)
+                            if (dog != null) {
+                                dog.dogID = doc.id
+                                dogList.add(dog)
+                            }
+                        }
+                        adapter.notifyDataSetChanged()
+                        android.util.Log.d("SavedDogsFragment", "Real-time update: ${dogList.size} dogs loaded")
+                    } catch (e: Exception) {
+                        android.util.Log.e("SavedDogsFragment", "Error processing real-time dogs data", e)
+                    }
+                }
+            }
+    }
+
     private fun onDogClicked(dog: Dog) {
         // Navigate to dog detail fragment with dog data
         val bundle = DogDetailFragment.createBundle(dog)
         findNavController().navigate(R.id.action_savedDogsFragment_to_dogDetailFragment, bundle)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Clean up the real-time listener
+        realTimeListener?.remove()
+        realTimeListener = null
     }
 
 }

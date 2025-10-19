@@ -1,6 +1,8 @@
 package com.example.summerveldhoundresort.ui.saved
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -18,6 +19,7 @@ import com.example.summerveldhoundresort.db.AppResult
 import com.example.summerveldhoundresort.db.entities.Dog
 import com.example.summerveldhoundresort.ui.images.ImageViewModel
 import com.example.summerveldhoundresort.utils.ImagePickerUtils
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
@@ -33,14 +35,7 @@ class EditDogFragment : Fragment() {
     private var selectedImageUri: Uri? = null
     private var isImageChanged = false
 
-    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        uri?.let {
-            selectedImageUri = it
-            isImageChanged = true
-            Glide.with(this).load(it).into(binding.imageDogEdit)
-            binding.textViewPlaceholderText.visibility = View.GONE
-        }
-    }
+    // Remove the old getContent launcher - we'll use ImagePicker directly
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -156,14 +151,14 @@ class EditDogFragment : Fragment() {
         
         if (isImageChanged && selectedImageUri != null) {
             // Upload new image first
-            uploadNewImage(id, dogName, breed, colour, description)
+            uploadNewImage(id)
         } else {
             // Update without changing image
             updateDogData(id, dogName, breed, colour, description, dog?.imageUri ?: "")
         }
     }
     
-    private fun uploadNewImage(id: String, dogName: String, breed: String, colour: String, description: String) {
+    private fun uploadNewImage(id: String) {
         selectedImageUri?.let { uri ->
             Toast.makeText(requireContext(), "Uploading new image...", Toast.LENGTH_SHORT).show()
             imageViewModel.uploadPetProfileImage(uri, id)
@@ -195,13 +190,14 @@ class EditDogFragment : Fragment() {
                     android.util.Log.e("EditDogFragment", "Error finishing activity after update", e)
                 }
             }
-            .addOnFailureListener { e ->
+            .addOnFailureListener { _ ->
                 Toast.makeText(requireContext(), "Error updating dog. Try again.", Toast.LENGTH_LONG).show()
             }
     }
     
     private fun setupImageUploadObserver() {
-        imageViewModel.uploadResult.observe(viewLifecycleOwner) { result ->
+        // Observe the correct LiveData for pet profile uploads
+        imageViewModel.petProfileUploadResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is AppResult.Success -> {
                     val imageData = result.data
@@ -251,6 +247,30 @@ class EditDogFragment : Fragment() {
         ImagePickerUtils.launchGallery(this)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        
+        ImagePickerUtils.handleImagePickerResult(
+            requestCode = requestCode,
+            resultCode = resultCode,
+            data = data,
+            onImageSelected = { uri ->
+                selectedImageUri = uri
+                isImageChanged = true
+                Glide.with(this)
+                    .load(uri)
+                    .placeholder(R.drawable.dog_placeholder)
+                    .centerCrop()
+                    .into(binding.imageDogEdit)
+                binding.textViewPlaceholderText.visibility = View.GONE
+                Toast.makeText(requireContext(), "Image selected successfully", Toast.LENGTH_SHORT).show()
+            },
+            onError = { error ->
+                Toast.makeText(requireContext(), "Error selecting image: $error", Toast.LENGTH_SHORT).show()
+            }
+        )
+    }
+
     private fun deleteDog() {
         val id = dog?.dogID ?: return
         
@@ -279,7 +299,7 @@ class EditDogFragment : Fragment() {
                     android.util.Log.e("EditDogFragment", "Error finishing activity after delete", e)
                 }
             }
-            .addOnFailureListener { e ->
+            .addOnFailureListener { _ ->
                 Toast.makeText(requireContext(), "Error deleting dog. Try again.", Toast.LENGTH_LONG).show()
             }
     }
