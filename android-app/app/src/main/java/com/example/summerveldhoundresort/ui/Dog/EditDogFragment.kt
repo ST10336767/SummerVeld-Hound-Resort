@@ -38,7 +38,7 @@ class EditDogFragment : Fragment() {
             selectedImageUri = it
             isImageChanged = true
             Glide.with(this).load(it).into(binding.imageDogEdit)
-            binding.textViewImageHint.visibility = View.GONE
+            binding.textViewPlaceholderText.visibility = View.GONE
         }
     }
 
@@ -72,14 +72,14 @@ class EditDogFragment : Fragment() {
                     .placeholder(R.drawable.dog_placeholder)
                     .centerCrop()
                     .into(binding.imageDogEdit)
-                binding.textViewImageHint.visibility = View.GONE
+                binding.textViewPlaceholderText.visibility = View.GONE
             } else {
-                binding.textViewImageHint.visibility = View.VISIBLE
+                binding.textViewPlaceholderText.visibility = View.VISIBLE
             }
         }
 
         // Set up image click listener
-        binding.frameLayoutImageContainer.setOnClickListener {
+        binding.frameLayoutPicturePlaceholder.setOnClickListener {
             showImagePickerOptions()
         }
 
