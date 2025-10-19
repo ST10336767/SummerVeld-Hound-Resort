@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.summerveldhoundresort.databinding.FragmentEventsBinding
 import com.example.summerveldhoundresort.db.entities.Event
@@ -33,6 +34,11 @@ class EventsFragment : Fragment() {
         binding.recyclerViewAllEvents.layoutManager = LinearLayoutManager(requireContext())
         adapter = UserEventAdapter(events)
         binding.recyclerViewAllEvents.adapter = adapter
+
+        // Set up back button click listener
+        binding.buttonBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
         loadAllEvents()
     }

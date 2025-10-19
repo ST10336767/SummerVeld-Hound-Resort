@@ -131,7 +131,7 @@ class LoginFragment : Fragment() {
                         Log.e(TAG, "Login Failed: ${result.exception?.message}") // Use e for errors
                         Toast.makeText(
                             requireContext(),
-                            "Login Failed: ${result.exception?.message}",
+                            "Login failed. Please try again.",
                             Toast.LENGTH_LONG
                         ).show()
                     }

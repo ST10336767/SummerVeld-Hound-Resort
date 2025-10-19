@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import com.example.summerveldhoundresort.databinding.FragmentCreateDogBinding
 import com.example.summerveldhoundresort.db.AppResult
 import com.example.summerveldhoundresort.db.entities.Dog
@@ -94,6 +93,24 @@ class CreateDog : Fragment() {
             saveDogData()
 
         }
+
+        // Set up back button click listener
+        binding.buttonBack.setOnClickListener {
+            try {
+                // Since this fragment is used in an Activity, finish the activity
+                if (isAdded && !requireActivity().isFinishing) {
+                    requireActivity().finish()
+                }
+            } catch (e: Exception) {
+                // If there's an error, try alternative navigation
+                try {
+                    requireActivity().onBackPressed()
+                } catch (e2: Exception) {
+                    // Last resort - just log the error
+                    android.util.Log.e("CreateDog", "Error handling back button", e2)
+                }
+            }
+        }
     }
 
     private fun showDatePickerDialog() {
@@ -128,14 +145,14 @@ class CreateDog : Fragment() {
         if (dogName.isEmpty() || dogBreed.isEmpty() || dogDobString.isEmpty() ||
             dogColour.isEmpty() || dogGender.isEmpty() || dogDescription.isEmpty() || selectedImageUri == null
         ) {
-            Toast.makeText(requireContext(), "Please fill in all fields and select a picture.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Please fill all fields and select a picture.", Toast.LENGTH_SHORT).show()
             return
         }
 
         val dogDOB: Date = try {
             dateFormat.parse(dogDobString) ?: Date()
         } catch (e: Exception) {
-            Toast.makeText(requireContext(), "Invalid DOB format. Please use the date picker.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Invalid date format. Use the date picker.", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -240,7 +257,7 @@ class CreateDog : Fragment() {
             }
             
             // Show progress message to user
-            Toast.makeText(requireContext(), "Uploading image... This may take a moment for large images.", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "Uploading image... Please wait.", Toast.LENGTH_SHORT).show()
             
             android.util.Log.d("CreateDog", "Calling imageViewModel.uploadPetProfileImage")
             imageViewModel.uploadPetProfileImage(uri, dogId ?: "")
@@ -281,7 +298,15 @@ class CreateDog : Fragment() {
                 android.util.Log.d("CreateDog", "Dog saved successfully to Firestore")
                 binding.buttonAddDog.isEnabled = true
                 Toast.makeText(requireContext(), "Dog added successfully!", Toast.LENGTH_SHORT).show()
-                resetFields()
+                
+                // Navigate back to manage dogs page
+                try {
+                    if (isAdded && !requireActivity().isFinishing) {
+                        requireActivity().finish()
+                    }
+                } catch (e: Exception) {
+                    android.util.Log.e("CreateDog", "Error finishing activity after dog creation", e)
+                }
             }
             .addOnFailureListener { e ->
                 android.util.Log.e("CreateDog", "Failed to save dog to Firestore: ${e.message}")

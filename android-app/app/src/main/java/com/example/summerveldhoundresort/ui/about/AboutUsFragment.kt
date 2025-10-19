@@ -12,5 +12,10 @@ class AboutUsFragment : Fragment(R.layout.fragment_about_us) {
         view.findViewById<View>(R.id.linkPrivacy)?.setOnClickListener {
             findNavController().navigate(R.id.privacyFragment)
         }
+        
+        // Set up back button click listener
+        view.findViewById<View>(R.id.buttonBack)?.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 }
