@@ -30,7 +30,7 @@
                 android:layout_marginTop="-40dp"
                 android:layout_marginEnd="-135dp"
                 android:rotation="-15"
-                android:src="@drawable/paw"
+                android:src="@drawable/paw_reversed_svg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 

@@ -239,7 +239,7 @@
         android:layout_height="174dp"
         android:layout_marginStart="26dp"
         android:layout_marginBottom="152dp"
-        android:src="@drawable/paw_reversed"
+        android:src="@drawable/paw_reversed_svg"
         app:layout_constraintBottom_toTopOf="@+id/mbEditProfile"
         app:layout_constraintStart_toEndOf="@+id/imageView" />
 
@@ -249,7 +249,7 @@
         android:layout_height="152dp"
         android:layout_marginTop="11dp"
         android:layout_marginEnd="291dp"
-        android:src="@drawable/paw_trail"
+        android:src="@drawable/pawprint_svg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mbLogout" />
 
