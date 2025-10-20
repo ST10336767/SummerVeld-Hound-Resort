@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.summerveldhoundresort.R
@@ -15,6 +16,7 @@ import com.example.summerveldhoundresort.databinding.FragmentRegisterBinding
 import com.example.summerveldhoundresort.db.implementations.firebaseUsersImpl
 import com.example.summerveldhoundresort.ui.auth.AuthViewModel
 import com.example.summerveldhoundresort.ui.auth.AuthViewModelFactory
+import com.example.summerveldhoundresort.utils.ThemeManager
 import com.google.firebase.auth.FirebaseAuth
 
 class ProfileViewFragment : Fragment() {
@@ -25,6 +27,13 @@ class ProfileViewFragment : Fragment() {
     private var _binding: FragmentProfileViewBinding? = null
     private val binding get() = _binding!!
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Apply saved theme on fragment creation
+        val savedTheme = ThemeManager.getThemeMode(requireContext())
+        ThemeManager.applyTheme(savedTheme)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,7 +82,67 @@ class ProfileViewFragment : Fragment() {
             profileViewModel.logout()
         }
 
+        binding.mbChangeTheme.setOnClickListener {
+            showThemeDialog()
+        }
+
         return binding.root
+    }
+
+    private fun showThemeDialog() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_dark_mode_settings, null)
+
+        val lightOption = dialogView.findViewById<View>(R.id.lightThemeOption)
+        val darkOption = dialogView.findViewById<View>(R.id.darkThemeOption)
+        val systemOption = dialogView.findViewById<View>(R.id.systemThemeOption)
+
+        val ivLightSelected = dialogView.findViewById<View>(R.id.ivLightSelected)
+        val ivDarkSelected = dialogView.findViewById<View>(R.id.ivDarkSelected)
+        val ivSystemSelected = dialogView.findViewById<View>(R.id.ivSystemSelected)
+
+        // Show current selection
+        val currentTheme = ThemeManager.getThemeMode(requireContext())
+        when (currentTheme) {
+            ThemeManager.THEME_LIGHT -> ivLightSelected.visibility = View.VISIBLE
+            ThemeManager.THEME_DARK -> ivDarkSelected.visibility = View.VISIBLE
+            ThemeManager.THEME_SYSTEM -> ivSystemSelected.visibility = View.VISIBLE
+        }
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .setTitle("Theme Settings")
+            .setPositiveButton("Apply") { _, _ -> }
+            .setNegativeButton("Cancel", null)
+            .create()
+
+        lightOption.setOnClickListener {
+            ThemeManager.setThemeMode(requireContext(), ThemeManager.THEME_LIGHT)
+            ivLightSelected.visibility = View.VISIBLE
+            ivDarkSelected.visibility = View.GONE
+            ivSystemSelected.visibility = View.GONE
+            Toast.makeText(requireContext(), "Light theme applied", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+
+        darkOption.setOnClickListener {
+            ThemeManager.setThemeMode(requireContext(), ThemeManager.THEME_DARK)
+            ivLightSelected.visibility = View.GONE
+            ivDarkSelected.visibility = View.VISIBLE
+            ivSystemSelected.visibility = View.GONE
+            Toast.makeText(requireContext(), "Dark theme applied", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+
+        systemOption.setOnClickListener {
+            ThemeManager.setThemeMode(requireContext(), ThemeManager.THEME_SYSTEM)
+            ivLightSelected.visibility = View.GONE
+            ivDarkSelected.visibility = View.GONE
+            ivSystemSelected.visibility = View.VISIBLE
+            Toast.makeText(requireContext(), "System theme applied", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     //Part of viewbinding
