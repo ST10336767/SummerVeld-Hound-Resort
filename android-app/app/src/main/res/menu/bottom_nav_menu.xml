@@ -8,12 +8,12 @@
 
     <item
         android:id="@+id/savedDogsFragment"
-        android:icon="@drawable/outline_sound_detection_dog_barking_24"
+        android:icon="@drawable/dog_sit_svg"
         android:title="@string/title_dashboard" />
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/donate_heart_svg"
         android:title="@string/title_donate" />
 
     <item
