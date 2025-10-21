@@ -69,6 +69,9 @@ class ProfileViewFragment : Fragment() {
         binding.mbSettings.setOnClickListener{
 //            findNavController().navigate(R.id.action_ProfileFragment_to_EditProfileFragment)
         }
+        binding.mbAccountDeletion.setOnClickListener {
+            findNavController().navigate(R.id.action_profileViewFragment_to_accountDeletionFragment)
+        }
         binding.mbLogout.setOnClickListener{
             profileViewModel.logout()
         }
