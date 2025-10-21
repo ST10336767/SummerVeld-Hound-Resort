@@ -140,9 +140,5 @@
 
     <!-- Data Management -->
     <string name="data_management_title">Data Management</string>
-    <string name="data_export_title">Export My Data</string>
-    <string name="data_export_description">Download a copy of your personal data</string>
-    <string name="data_deletion_title">Delete Specific Data</string>
-    <string name="data_deletion_description">Delete specific types of data without deleting your account</string>
 
 </resources>

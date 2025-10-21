@@ -85,6 +85,9 @@
         <action
             android:id="@+id/action_profileViewFragment_to_editProfileFragment2"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileViewFragment_to_accountDeletionFragment"
+            app:destination="@id/accountDeletionFragment" />
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
@@ -146,6 +149,17 @@
         android:id="@+id/privacyFragment"
         android:name="com.example.summerveldhoundresort.ui.privacy.PrivacyFragment"
         android:label="Data and Privacy" />
+
+    <!-- Account Deletion destination -->
+    <fragment
+        android:id="@+id/accountDeletionFragment"
+        android:name="com.example.summerveldhoundresort.ui.profile.AccountDeletionFragment"
+        android:label="Data Management"
+        tools:layout="@layout/fragment_account_deletion" >
+        <action
+            android:id="@+id/action_accountDeletionFragment_to_authActivity"
+            app:destination="@id/loginFragment" />
+    </fragment>
 
     <!-- Global actions so any screen can open these -->
     <action

@@ -125,7 +125,7 @@
         android:gravity="start|center_vertical"
         android:text="@string/data_management_title"
         android:textColor="#D32F2F"
-        app:icon="@drawable/baseline_delete_forever_24"
+        app:icon="@drawable/baseline_security_24"
         app:iconGravity="start"
         app:iconPadding="20dp"
         app:iconSize="25dp"

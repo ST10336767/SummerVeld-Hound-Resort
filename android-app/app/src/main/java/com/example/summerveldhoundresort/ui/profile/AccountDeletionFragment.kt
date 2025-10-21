@@ -48,16 +48,6 @@ class AccountDeletionFragment : Fragment() {
             showDeleteConfirmationDialog()
         }
 
-        // Export data button
-        binding.buttonExportData.setOnClickListener {
-            exportUserData()
-        }
-
-        // Partial deletion button
-        binding.buttonPartialDeletion.setOnClickListener {
-            showPartialDeletionDialog()
-        }
-
         // Contact support button
         binding.buttonContactSupport.setOnClickListener {
             contactSupport()
@@ -114,15 +104,28 @@ class AccountDeletionFragment : Fragment() {
         // Delete user document
         db.collection("users").document(userId).delete()
             .addOnSuccessListener {
-                // Delete user's pets
-                db.collection("dogs").whereEqualTo("userId", userId).get()
-                    .addOnSuccessListener { petsSnapshot ->
-                        val batch = db.batch()
-                        petsSnapshot.documents.forEach { doc ->
-                            batch.delete(doc.reference)
-                        }
-                        batch.commit()
-                            .addOnSuccessListener { callback(true) }
+                // Delete user's comments
+                db.collection("comments").whereEqualTo("userId", userId).get()
+                    .addOnSuccessListener { commentsSnapshot ->
+                        // Delete user's RSVPs
+                        db.collection("rsvps").whereEqualTo("userId", userId).get()
+                            .addOnSuccessListener { rsvpsSnapshot ->
+                                val batch = db.batch()
+                                
+                                // Delete comments
+                                commentsSnapshot.documents.forEach { doc ->
+                                    batch.delete(doc.reference)
+                                }
+                                
+                                // Delete RSVPs
+                                rsvpsSnapshot.documents.forEach { doc ->
+                                    batch.delete(doc.reference)
+                                }
+                                
+                                batch.commit()
+                                    .addOnSuccessListener { callback(true) }
+                                    .addOnFailureListener { callback(false) }
+                            }
                             .addOnFailureListener { callback(false) }
                     }
                     .addOnFailureListener { callback(false) }
@@ -130,115 +133,6 @@ class AccountDeletionFragment : Fragment() {
             .addOnFailureListener { callback(false) }
     }
 
-    private fun exportUserData() {
-        val user = auth.currentUser
-        if (user == null) {
-            Toast.makeText(requireContext(), "No user logged in", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        // Collect user data
-        db.collection("users").document(user.uid).get()
-            .addOnSuccessListener { userDoc ->
-                db.collection("dogs").whereEqualTo("userId", user.uid).get()
-                    .addOnSuccessListener { petsSnapshot ->
-                        // Create export data
-                        val exportData = buildString {
-                            appendLine("User Data Export - ${java.util.Date()}")
-                            appendLine("Email: ${user.email}")
-                            appendLine("User ID: ${user.uid}")
-                            appendLine()
-                            
-                            if (userDoc.exists()) {
-                                appendLine("Profile Information:")
-                                userDoc.data?.forEach { (key, value) ->
-                                    appendLine("$key: $value")
-                                }
-                                appendLine()
-                            }
-                            
-                            if (!petsSnapshot.isEmpty) {
-                                appendLine("Pet Information:")
-                                petsSnapshot.documents.forEach { petDoc ->
-                                    appendLine("Pet: ${petDoc.id}")
-                                    petDoc.data?.forEach { (key, value) ->
-                                        appendLine("  $key: $value")
-                                    }
-                                    appendLine()
-                                }
-                            }
-                        }
-                        
-                        // Create email intent with export data
-                        val emailIntent = Intent(Intent.ACTION_SEND).apply {
-                            type = "text/plain"
-                            putExtra(Intent.EXTRA_EMAIL, arrayOf("keatonjones02@gmail.com"))
-                            putExtra(Intent.EXTRA_SUBJECT, "Data Export Request - SummerVeld Hound Resort App")
-                            putExtra(Intent.EXTRA_TEXT, exportData)
-                        }
-                        
-                        if (emailIntent.resolveActivity(requireContext().packageManager) != null) {
-                            startActivity(emailIntent)
-                        } else {
-                            Toast.makeText(requireContext(), "No email app available", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-            }
-            .addOnFailureListener {
-                Toast.makeText(requireContext(), "Failed to export data", Toast.LENGTH_SHORT).show()
-            }
-    }
-
-    private fun showPartialDeletionDialog() {
-        val options = arrayOf(
-            "Delete Pet Profiles",
-            "Delete Photos",
-            "Delete Event History",
-            "Opt Out of Notifications"
-        )
-        
-        AlertDialog.Builder(requireContext())
-            .setTitle("Partial Data Deletion")
-            .setItems(options) { _, which ->
-                when (which) {
-                    0 -> deletePetProfiles()
-                    1 -> deletePhotos()
-                    2 -> deleteEventHistory()
-                    3 -> optOutOfNotifications()
-                }
-            }
-            .show()
-    }
-
-    private fun deletePetProfiles() {
-        val user = auth.currentUser
-        if (user == null) return
-        
-        db.collection("dogs").whereEqualTo("userId", user.uid).get()
-            .addOnSuccessListener { snapshot ->
-                val batch = db.batch()
-                snapshot.documents.forEach { doc ->
-                    batch.delete(doc.reference)
-                }
-                batch.commit()
-                    .addOnSuccessListener {
-                        Toast.makeText(requireContext(), "Pet profiles deleted", Toast.LENGTH_SHORT).show()
-                    }
-            }
-    }
-
-    private fun deletePhotos() {
-        // This would require Firebase Storage implementation
-        Toast.makeText(requireContext(), "Photo deletion feature coming soon", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun deleteEventHistory() {
-        Toast.makeText(requireContext(), "Event history deletion feature coming soon", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun optOutOfNotifications() {
-        Toast.makeText(requireContext(), "Notification preferences updated", Toast.LENGTH_SHORT).show()
-    }
 
     private fun contactSupport() {
         val user = auth.currentUser
