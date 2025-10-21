@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:text="Permanently delete your account and all associated data including:\n• Profile information\n• Event comments\n• RSVP responses\n\nThis action cannot be undone."
             android:textSize="14sp"
-            android:textColor="@color/muted"
+            android:textColor="@color/purple"
             android:layout_marginBottom="15dp"
             android:lineSpacingExtra="2dp" />
 
@@ -126,7 +126,7 @@
                     android:id="@+id/buttonContactSupport"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/purple"
+                    android:backgroundTint="@color/dark_purple"
                     android:text="Contact Support"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
@@ -138,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:text="Need help with data management or have questions?"
                     android:textSize="12sp"
-                    android:textColor="@color/muted" />
+                    android:textColor="@color/purple" />
 
             </LinearLayout>
 
@@ -150,7 +150,7 @@
             android:layout_height="wrap_content"
             android:text="For more information about our data practices, please review our Privacy Policy."
             android:textSize="12sp"
-            android:textColor="@color/muted"
+            android:textColor="@color/purple"
             android:gravity="center"
             android:layout_marginTop="10dp"
             android:lineSpacingExtra="2dp" />
