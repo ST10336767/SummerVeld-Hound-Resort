@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_navigation_home_to_savedDogsFragment"
             app:destination="@id/savedDogsFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_donateInfoFragment2"
+            app:destination="@id/donateInfoFragment2" />
     </fragment>
 
     <fragment
@@ -174,6 +177,10 @@
     <action
         android:id="@+id/action_global_changePasswordFragment"
         app:destination="@id/changePasswordFragment" />
+    <fragment
+        android:id="@+id/donateInfoFragment2"
+        android:name="com.example.summerveldhoundresort.DonateInfoFragment"
+        android:label="DonateInfoFragment" />
 
 
 </navigation>
