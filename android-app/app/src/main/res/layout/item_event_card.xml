@@ -35,9 +35,8 @@
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:text="Edit"
-            android:textStyle="bold"
             android:textAllCaps="false"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             android:background="@drawable/bg_pill_white_stroke"
             android:backgroundTint="@null"
             app:backgroundTint="@null"
@@ -65,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Location:"
-                android:textColor="@color/gray" />
+                android:textColor="@color/dark_purple" />
 
             <TextView
                 android:id="@+id/locationTextView"
@@ -73,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/purple"
                 android:text="-" />
         </LinearLayout>
 
@@ -89,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Date:"
-                android:textColor="@color/gray" />
+                android:textColor="@color/dark_purple" />
 
             <TextView
                 android:id="@+id/dateTextView"
@@ -97,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/purple"
                 android:text="-" />
         </LinearLayout>
 
@@ -113,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Time:"
-                android:textColor="@color/gray" />
+                android:textColor="@color/dark_purple" />
 
             <TextView
                 android:id="@+id/timeTextView"
@@ -121,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/purple"
                 android:text="-" />
         </LinearLayout>
 
@@ -136,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Description:"
-                android:textColor="@color/gray"
+                android:textColor="@color/dark_purple"
                 android:layout_marginTop="2dp" />
 
             <TextView
@@ -145,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/purple"
                 android:text="-"
                 android:maxLines="4" />
         </LinearLayout>
