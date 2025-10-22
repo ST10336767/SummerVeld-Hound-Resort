@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_navigation_home_to_savedDogsFragment"
             app:destination="@id/savedDogsFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_donateInfoFragment2"
+            app:destination="@id/donateInfoFragment2" />
     </fragment>
 
     <fragment
@@ -85,6 +88,9 @@
         <action
             android:id="@+id/action_profileViewFragment_to_editProfileFragment2"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileViewFragment_to_accountDeletionFragment"
+            app:destination="@id/accountDeletionFragment" />
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
@@ -94,6 +100,9 @@
         <action
             android:id="@+id/action_changePasswordFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_changePasswordFragment_to_profileViewFragment"
+            app:destination="@id/profileViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/createDog"
@@ -147,6 +156,17 @@
         android:name="com.example.summerveldhoundresort.ui.privacy.PrivacyFragment"
         android:label="Data and Privacy" />
 
+    <!-- Account Deletion destination -->
+    <fragment
+        android:id="@+id/accountDeletionFragment"
+        android:name="com.example.summerveldhoundresort.ui.profile.AccountDeletionFragment"
+        android:label="Data Management"
+        tools:layout="@layout/fragment_account_deletion" >
+        <action
+            android:id="@+id/action_accountDeletionFragment_to_authActivity"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
     <!-- Global actions so any screen can open these -->
     <action
         android:id="@+id/action_global_aboutUsFragment"
@@ -157,6 +177,10 @@
     <action
         android:id="@+id/action_global_changePasswordFragment"
         app:destination="@id/changePasswordFragment" />
+    <fragment
+        android:id="@+id/donateInfoFragment2"
+        android:name="com.example.summerveldhoundresort.DonateInfoFragment"
+        android:label="DonateInfoFragment" />
 
 
 </navigation>

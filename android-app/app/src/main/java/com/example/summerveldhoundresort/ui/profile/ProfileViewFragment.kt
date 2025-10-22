@@ -1,5 +1,6 @@
 package com.example.summerveldhoundresort.ui.profile
 
+import android.content.Intent
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import com.example.summerveldhoundresort.R
 import com.example.summerveldhoundresort.databinding.FragmentProfileViewBinding
 import com.example.summerveldhoundresort.databinding.FragmentRegisterBinding
 import com.example.summerveldhoundresort.db.implementations.firebaseUsersImpl
+import com.example.summerveldhoundresort.ui.auth.AuthActivity
 import com.example.summerveldhoundresort.ui.auth.AuthViewModel
 import com.example.summerveldhoundresort.ui.auth.AuthViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
@@ -69,8 +71,21 @@ class ProfileViewFragment : Fragment() {
         binding.mbSettings.setOnClickListener{
 //            findNavController().navigate(R.id.action_ProfileFragment_to_EditProfileFragment)
         }
+        binding.mbAccountDeletion.setOnClickListener {
+            findNavController().navigate(R.id.action_profileViewFragment_to_accountDeletionFragment)
+        }
         binding.mbLogout.setOnClickListener{
+            // ogMik - this does acc logout the user, it just never redirected them - my bad
             profileViewModel.logout()
+            //added -- for redirect
+            //isAdded -- > checks if this fragment is still connected to its activity - > prevents crashes
+                if(isAdded){
+                    val intent = Intent(requireContext(), AuthActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                }
+
+
         }
 
         return binding.root

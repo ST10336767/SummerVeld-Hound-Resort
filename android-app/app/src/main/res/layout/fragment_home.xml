@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome"
+        android:textColor="@color/dark_purple"
         android:textSize="18sp"
         android:layout_marginBottom="16dp"/>
 
@@ -28,22 +29,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="View All Events"
+            android:backgroundTint="@color/dark_purple"
             android:layout_marginTop="12dp"/>
-
-
 
 
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="About us" />
+        android:text="About us"
+        android:backgroundTint="@color/dark_purple"/>
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Our Dogs" />
+        android:text="Our Dogs"
+        android:backgroundTint="@color/dark_purple"/>
 
 
 </LinearLayout>
