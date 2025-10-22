@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.summerveldhoundresort.app.R
 import com.summerveldhoundresort.app.databinding.ActivityAuthBinding
+import com.summerveldhoundresort.app.utils.ThemeManager
 
 class AuthActivity : AppCompatActivity() {
 

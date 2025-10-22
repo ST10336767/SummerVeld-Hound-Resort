@@ -9,6 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.summerveldhoundresort.app.databinding.ActivityMainBinding
+import com.summerveldhoundresort.app.utils.ThemeManager
 
 class MainActivity : AppCompatActivity() {
 

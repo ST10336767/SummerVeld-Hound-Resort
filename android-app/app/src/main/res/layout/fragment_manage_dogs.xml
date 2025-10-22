@@ -29,7 +29,7 @@
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/paw"
+            android:src="@drawable/paw_reversed_svg"
             android:rotation="-15"
             android:layout_marginTop="-35dp"
             android:layout_marginEnd="-20dp"/>

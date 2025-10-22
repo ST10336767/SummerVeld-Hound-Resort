@@ -19,6 +19,7 @@ import com.summerveldhoundresort.app.ui.auth.AuthActivity
 import com.summerveldhoundresort.app.ui.auth.AuthViewModel
 import com.summerveldhoundresort.app.ui.auth.AuthViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
+import com.summerveldhoundresort.app.utils.ThemeManager
 
 class ProfileViewFragment : Fragment() {
     private lateinit var profileViewModel: ProfileViewModel

@@ -29,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="View All Events"
+            android:textColor="@color/white"
             android:backgroundTint="@color/dark_purple"
             android:layout_marginTop="12dp"/>
 
@@ -38,6 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="About us"
+        android:textColor="@color/white"
         android:backgroundTint="@color/dark_purple"/>
 
     <Button
@@ -45,6 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Our Dogs"
+        android:textColor="@color/white"
         android:backgroundTint="@color/dark_purple"/>
 
 
