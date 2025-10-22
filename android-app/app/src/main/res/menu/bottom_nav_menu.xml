@@ -12,7 +12,7 @@
         android:title="@string/title_dashboard" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/action_navigation_home_to_donateInfoFragment2"
         android:icon="@drawable/donate_heart_svg"
         android:title="@string/title_donate" />
 
