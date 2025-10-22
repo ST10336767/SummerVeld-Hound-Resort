@@ -37,8 +37,7 @@ class ChangePasswordFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnBackToLogin.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            findNavController().navigate(R.id.action_changePasswordFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_changePasswordFragment_to_profileViewFragment)
         }
     }
 
