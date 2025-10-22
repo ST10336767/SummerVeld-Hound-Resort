@@ -1,82 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="12dp"
-    android:elevation="4dp">
+    android:background="@drawable/bg_event_card"
+    android:padding="14dp"
+    android:layout_marginBottom="16dp">
 
-    <TextView
-        android:id="@+id/nameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Event Name"
-        android:textStyle="bold"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/dateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Date" />
-
-    <TextView
-        android:id="@+id/timeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Time" />
-
-    <TextView
-        android:id="@+id/locationTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Location" />
-
-    <TextView
-        android:id="@+id/descriptionTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Description" />
-
-    <!-- RSVP Section -->
-    <Button
-        android:id="@+id/buttonRsvp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RSVP" />
-
-    <TextView
-        android:id="@+id/textViewMemberCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0 members going"
-        android:paddingTop="4dp"/>
-
-    <!-- Comments Section -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerComments"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" />
-
+    <!-- top row -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="4dp">
+        android:gravity="center_vertical">
 
-        <EditText
-            android:id="@+id/editTextComment"
+        <TextView
+            android:id="@+id/nameTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Write a comment..." />
+            android:text="(Event Name)"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/buttonSendComment"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonRsvp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send" />
+            android:layout_height="40dp"
+            android:minWidth="96dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="RSVP"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:textColor="@color/dark_purple"
+            android:background="@drawable/bg_rsvp_button"
+            android:backgroundTint="@null"
+            android:stateListAnimator="@null" />
     </LinearLayout>
 
+    <!-- inner white info panel -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_inner_panel"
+        android:orientation="vertical"
+        android:padding="18dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:gravity="center_horizontal">
+
+        <!-- members going (RSVP count)-->
+        <TextView
+            android:id="@+id/textViewMemberCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 members going"
+            android:textColor="@color/dark_purple"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/locationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="location"
+            android:textColor="@color/purple"
+            android:layout_marginTop="6dp" />
+
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="date"
+            android:textColor="@color/purple" />
+
+        <TextView
+            android:id="@+id/timeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="time"
+            android:textColor="@color/purple" />
+
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="short description"
+            android:textColor="@color/purple"
+            android:layout_marginTop="6dp" />
+    </LinearLayout>
+
+    <!-- comments label chip -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comments"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:background="@drawable/bg_label_chip"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- comments panel -->
+    <RelativeLayout
+        android:id="@+id/commentsBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="160dp"
+        android:background="@drawable/bg_inner_panel"
+        android:padding="12dp">
+
+        <!-- RecyclerView for comments -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerComments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+
+        <!-- input row pinned to bottom -->
+        <LinearLayout
+            android:id="@+id/inputRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_alignParentBottom="true"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp">
+
+            <EditText
+                android:id="@+id/editTextComment"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:hint="Type here..."
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/dark_purple"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:background="@drawable/bg_comment_input" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonSendComment"
+                android:layout_width="72dp"
+                android:layout_height="40dp"
+                android:text="Send"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_purple"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_send_button"
+                android:backgroundTint="@null"
+                android:stateListAnimator="@null" />
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

@@ -1,28 +1,81 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/background">
 
+    <!-- decorative paw -->
+    <ImageView
+        android:id="@+id/pawHeader"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="-26dp"
+        android:layout_marginEnd="-28dp"
+        android:alpha="0.12"
+        android:contentDescription="@null"
+        android:rotation="-8"
+        android:scaleType="centerCrop"
+        android:src="@drawable/paw" />
 
-
-    <Button
-        android:id="@+id/btnAddEvent"
+    <!-- content -->
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Add Event" />
+        android:layout_height="match_parent"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewEvents"
-        android:layout_width="381dp"
-        android:layout_height="527dp"
-        android:layout_weight="1" />
+        <!-- title -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="Manage Events"
+            android:textColor="@color/dark_purple"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Back" />
-</LinearLayout>
+        <!-- Add Event -->
+        <TextView
+            android:id="@+id/btnAddEvent"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/bg_add_button"
+            android:gravity="center"
+            android:text="Add Event"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            />
+
+        <!-- events list -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewEvents"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingBottom="16dp" />
+
+        <!-- Back button -->
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            android:backgroundTint="@color/dark_purple"
+            android:text="← Back"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:padding="12dp" />
+    </LinearLayout>
+</FrameLayout>

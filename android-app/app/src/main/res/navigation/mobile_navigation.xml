@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.summerveldhoundresort.ui.home.HomeFragment"
+        android:name="com.summerveldhoundresort.app.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -19,22 +19,25 @@
         <action
             android:id="@+id/action_navigation_home_to_savedDogsFragment"
             app:destination="@id/savedDogsFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_donateInfoFragment2"
+            app:destination="@id/donateInfoFragment2" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.summerveldhoundresort.ui.dashboard.DashboardFragment"
+        android:name="com.summerveldhoundresort.app.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.summerveldhoundresort.ui.notifications.NotificationsFragment"
+        android:name="com.summerveldhoundresort.app.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.summerveldhoundresort.ui.auth.LoginFragment"
+        android:name="com.summerveldhoundresort.app.ui.auth.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -49,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.summerveldhoundresort.ui.auth.RegisterFragment"
+        android:name="com.summerveldhoundresort.app.ui.auth.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -62,18 +65,18 @@
     <fragment
 
         android:id="@+id/forgotPassawordFragment"
-        android:name="com.example.summerveldhoundresort.ui.auth.ForgotPassawordFragment"
+        android:name="com.summerveldhoundresort.app.ui.auth.ForgotPassawordFragment"
         android:label="fragment_forgot_passaword"
         tools:layout="@layout/fragment_forgot_passaword" />
 
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.example.summerveldhoundresort.ui.profile.EditProfileFragment"
+        android:name="com.summerveldhoundresort.app.ui.profile.EditProfileFragment"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
     <fragment
         android:id="@+id/profileViewFragment"
-        android:name="com.example.summerveldhoundresort.ui.profile.ProfileViewFragment"
+        android:name="com.summerveldhoundresort.app.ui.profile.ProfileViewFragment"
         android:label="fragment_profile_view"
         tools:layout="@layout/fragment_profile_view" >
         <action
@@ -85,19 +88,25 @@
         <action
             android:id="@+id/action_profileViewFragment_to_editProfileFragment2"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileViewFragment_to_accountDeletionFragment"
+            app:destination="@id/accountDeletionFragment" />
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
-        android:name="com.example.summerveldhoundresort.ui.profile.ChangePasswordFragment"
+        android:name="com.summerveldhoundresort.app.ui.profile.ChangePasswordFragment"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password" >
         <action
             android:id="@+id/action_changePasswordFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_changePasswordFragment_to_profileViewFragment"
+            app:destination="@id/profileViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/createDog"
-        android:name="com.example.summerveldhoundresort.ui.admin.CreateDog"
+        android:name="com.summerveldhoundresort.app.ui.admin.CreateDog"
         android:label="fragment_create_dog"
         tools:layout="@layout/fragment_create_dog" >
         <action
@@ -106,20 +115,20 @@
     </fragment>
     <activity
         android:id="@+id/manageEventsActivity"
-        android:name="com.example.summerveldhoundresort.ManageEventsActivity"
+        android:name="com.summerveldhoundresort.app.ManageEventsActivity"
         android:label="ManageEventsActivity" />
     <activity
         android:id="@+id/adminActivity"
-        android:name="com.example.summerveldhoundresort.AdminActivity"
+        android:name="com.summerveldhoundresort.app.AdminActivity"
         android:label="activity_admin"
         tools:layout="@layout/activity_admin" />
     <fragment
         android:id="@+id/eventsFragment"
-        android:name="com.example.summerveldhoundresort.ui.events.EventsFragment"
+        android:name="com.summerveldhoundresort.app.ui.events.EventsFragment"
         android:label="EventsFragment" />
     <fragment
         android:id="@+id/savedDogsFragment"
-        android:name="com.example.summerveldhoundresort.ui.saved.SavedDogsFragment"
+        android:name="com.summerveldhoundresort.app.ui.saved.SavedDogsFragment"
         android:label="SavedDogsFragment" >
         <action
             android:id="@+id/action_savedDogsFragment_to_dogDetailFragment"
@@ -127,25 +136,36 @@
     </fragment>
     <fragment
         android:id="@+id/dogDetailFragment"
-        android:name="com.example.summerveldhoundresort.ui.saved.DogDetailFragment"
+        android:name="com.summerveldhoundresort.app.ui.saved.DogDetailFragment"
         android:label="Dog Details"
         tools:layout="@layout/fragment_dog_detail" />
     <fragment
         android:id="@+id/editDogFragment"
-        android:name="com.example.summerveldhoundresort.ui.saved.EditDogFragment"
+        android:name="com.summerveldhoundresort.app.ui.saved.EditDogFragment"
         android:label="EditDogFragment" />
 
     <!-- About Us destination -->
     <fragment
         android:id="@+id/aboutUsFragment"
-        android:name="com.example.summerveldhoundresort.ui.about.AboutUsFragment"
+        android:name="com.summerveldhoundresort.app.ui.about.AboutUsFragment"
         android:label="About Us" />
 
     <!-- Privacy destination -->
     <fragment
         android:id="@+id/privacyFragment"
-        android:name="com.example.summerveldhoundresort.ui.privacy.PrivacyFragment"
+        android:name="com.summerveldhoundresort.app.ui.privacy.PrivacyFragment"
         android:label="Data and Privacy" />
+
+    <!-- Account Deletion destination -->
+    <fragment
+        android:id="@+id/accountDeletionFragment"
+        android:name="com.summerveldhoundresort.app.ui.profile.AccountDeletionFragment"
+        android:label="Data Management"
+        tools:layout="@layout/fragment_account_deletion" >
+        <action
+            android:id="@+id/action_accountDeletionFragment_to_authActivity"
+            app:destination="@id/loginFragment" />
+    </fragment>
 
     <!-- Global actions so any screen can open these -->
     <action
@@ -157,6 +177,10 @@
     <action
         android:id="@+id/action_global_changePasswordFragment"
         app:destination="@id/changePasswordFragment" />
+    <fragment
+        android:id="@+id/donateInfoFragment2"
+        android:name="com.summerveldhoundresort.app.DonateInfoFragment"
+        android:label="DonateInfoFragment" />
 
 
 </navigation>

@@ -29,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Image Upload"
+            android:textColor="@color/dark_purple"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginBottom="24dp" />
@@ -49,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No image selected"
+            android:textColor="@color/purple"
             android:textSize="14sp"
             android:layout_marginBottom="24dp" />
 
@@ -65,7 +67,8 @@
                 android:layout_height="wrap_content"
                 android:text="Select Image"
                 android:layout_marginBottom="8dp"
-                app:icon="@android:drawable/ic_menu_gallery" />
+                app:icon="@android:drawable/ic_menu_gallery"
+                android:backgroundTint="@color/dark_purple"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_upload_image"
