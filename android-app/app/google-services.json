@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:782347961405:android:aa08b3d33da0e18dc71654",
         "android_client_info": {
-          "package_name": "com.example.summerveldhoundresort"
+          "package_name": "com.summerveldhoundresort.app"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "782347961405-18c116bu2lhae4gn68j68125mjf4vlgg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.summerveldhoundresort",
+            "package_name": "com.summerveldhoundresort.app",
             "certificate_hash": "0c39afb0d79292e60f9b2c456f7e678eeaa8e820"
           }
         },
@@ -25,7 +25,7 @@
           "client_id": "782347961405-k5q76kqa25a1gejgjo81501nrrujv5v8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.summerveldhoundresort",
+            "package_name": "com.summerveldhoundresort.app",
             "certificate_hash": "32be9c29a95b5f6b39ad6d44d2df1518f8eb9985"
           }
         },

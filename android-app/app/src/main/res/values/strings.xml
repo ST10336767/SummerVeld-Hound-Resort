@@ -126,4 +126,15 @@
         We may update this policy from time to time. Significant changes will be highlighted in the app or on our website. Questions or concerns? Email us at info@summerveldhoundresort.org.za.
     </string>
 
+    <!-- Account Deletion strings -->
+    <string name="account_deletion_title">Account Deletion</string>
+    <string name="account_deletion_warning">Warning: Deleting your account will permanently remove all your data including dog profiles, events, and personal information. This action cannot be undone.</string>
+    <string name="account_deletion_confirm">Are you sure you want to delete your account?</string>
+    <string name="account_deletion_button">Delete Account</string>
+    <string name="account_deletion_cancel">Cancel</string>
+    <string name="account_deletion_success">Account deleted successfully</string>
+    <string name="account_deletion_error">Failed to delete account. Please try again.</string>
+    <string name="account_deletion_email_subject">Account Deletion Request</string>
+    <string name="account_deletion_email_body">I would like to request the deletion of my account and all associated data.</string>
+
 </resources>

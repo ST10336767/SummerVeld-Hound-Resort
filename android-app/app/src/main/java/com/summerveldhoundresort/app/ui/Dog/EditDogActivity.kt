@@ -2,7 +2,7 @@ package com.summerveldhoundresort.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.summerveldhoundresort.app.ui.saved.EditDogFragment
+import com.summerveldhoundresort.app.ui.Dog.EditDogFragment
 import com.summerveldhoundresort.app.db.entities.Dog
 
 class EditDogActivity : AppCompatActivity() {
