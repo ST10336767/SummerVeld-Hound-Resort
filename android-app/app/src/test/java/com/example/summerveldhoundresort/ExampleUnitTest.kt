@@ -1,4 +1,4 @@
-package com.example.summerveldhoundresort
+package com.summerveldhoundresort.app
 
 import org.junit.Test
 
