@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.summerveldhoundresort.ui.auth.LoginFragment"
+        android:name="com.summerveldhoundresort.app.ui.auth.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.summerveldhoundresort.ui.auth.RegisterFragment"
+        android:name="com.summerveldhoundresort.app.ui.auth.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/forgotPassawordFragment"
-        android:name="com.example.summerveldhoundresort.ui.auth.ForgotPassawordFragment"
+        android:name="com.summerveldhoundresort.app.ui.auth.ForgotPassawordFragment"
         android:label="fragment_forgot_passaword"
         tools:layout="@layout/fragment_forgot_passaword" />
 </navigation>

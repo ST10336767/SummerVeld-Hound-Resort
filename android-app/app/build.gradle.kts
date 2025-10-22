@@ -7,17 +7,26 @@ plugins {
 }
 
 android {
-    namespace = "com.example.summerveldhoundresort"
+    namespace = "com.summerveldhoundresort.app"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.summerveldhoundresort"
+        applicationId = "com.summerveldhoundresort.app"
         minSdk = 25
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        create("release") {
+            storeFile = file(project.findProperty("MYAPP_RELEASE_STORE_FILE") ?: "../my-release-key.keystore")
+            storePassword = project.findProperty("MYAPP_RELEASE_STORE_PASSWORD") as String?
+            keyAlias = project.findProperty("MYAPP_RELEASE_KEY_ALIAS") as String?
+            keyPassword = project.findProperty("MYAPP_RELEASE_KEY_PASSWORD") as String?
+        }
     }
 
     buildTypes {
@@ -27,6 +36,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
