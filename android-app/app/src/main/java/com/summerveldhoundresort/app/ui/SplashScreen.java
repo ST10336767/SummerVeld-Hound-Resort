@@ -1,4 +1,4 @@
-package com.example.summerveldhoundresort.ui;
+package com.summerveldhoundresort.app.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,8 +6,8 @@ import android.os.Handler;
 import android.os.Looper;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.summerveldhoundresort.ui.auth.AuthActivity;
-import com.example.summerveldhoundresort.R;
+import com.summerveldhoundresort.app.ui.auth.AuthActivity;
+import com.summerveldhoundresort.app.R;
 
 public class SplashScreen extends AppCompatActivity {
     @Override

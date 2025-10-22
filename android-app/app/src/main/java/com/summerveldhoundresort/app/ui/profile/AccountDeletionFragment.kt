@@ -1,4 +1,4 @@
-package com.example.summerveldhoundresort.ui.profile
+package com.summerveldhoundresort.app.ui.profile
 
 import android.content.Intent
 import android.net.Uri
@@ -10,8 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.summerveldhoundresort.R
-import com.example.summerveldhoundresort.databinding.FragmentAccountDeletionBinding
+import com.summerveldhoundresort.app.R
+import com.summerveldhoundresort.app.databinding.FragmentAccountDeletionBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 

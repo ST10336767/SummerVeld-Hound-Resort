@@ -1,4 +1,4 @@
-package com.example.summerveldhoundresort
+package com.summerveldhoundresort.app
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.summerveldhoundresort.app.R
 
 class DonateInfoFragment : Fragment() {
 

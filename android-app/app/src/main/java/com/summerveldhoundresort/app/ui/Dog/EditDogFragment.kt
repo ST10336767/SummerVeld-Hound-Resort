@@ -1,4 +1,4 @@
-package com.example.summerveldhoundresort.ui.saved
+package com.summerveldhoundresort.app.ui.Dog
 
 import android.app.Activity
 import android.app.DatePickerDialog
@@ -13,12 +13,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
-import com.example.summerveldhoundresort.R
-import com.example.summerveldhoundresort.databinding.FragmentEditDogBinding
-import com.example.summerveldhoundresort.db.AppResult
-import com.example.summerveldhoundresort.db.entities.Dog
-import com.example.summerveldhoundresort.ui.images.ImageViewModel
-import com.example.summerveldhoundresort.utils.ImagePickerUtils
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.summerveldhoundresort.app.R
+import com.summerveldhoundresort.app.databinding.FragmentEditDogBinding
+import com.summerveldhoundresort.app.db.AppResult
+import com.summerveldhoundresort.app.db.entities.Dog
+import com.summerveldhoundresort.app.ui.images.ImageViewModel
+import com.summerveldhoundresort.app.utils.ImagePickerUtils
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat

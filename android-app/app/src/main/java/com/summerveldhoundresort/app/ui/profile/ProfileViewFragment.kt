@@ -1,4 +1,4 @@
-package com.example.summerveldhoundresort.ui.profile
+package com.summerveldhoundresort.app.ui.profile
 
 import android.content.Intent
 import androidx.fragment.app.viewModels
@@ -10,13 +10,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.summerveldhoundresort.R
-import com.example.summerveldhoundresort.databinding.FragmentProfileViewBinding
-import com.example.summerveldhoundresort.databinding.FragmentRegisterBinding
-import com.example.summerveldhoundresort.db.implementations.firebaseUsersImpl
-import com.example.summerveldhoundresort.ui.auth.AuthActivity
-import com.example.summerveldhoundresort.ui.auth.AuthViewModel
-import com.example.summerveldhoundresort.ui.auth.AuthViewModelFactory
+import com.summerveldhoundresort.app.R
+import com.summerveldhoundresort.app.databinding.FragmentProfileViewBinding
+import com.summerveldhoundresort.app.databinding.FragmentRegisterBinding
+import com.summerveldhoundresort.app.db.implementations.firebaseUsersImpl
+import com.summerveldhoundresort.app.ui.auth.AuthActivity
+import com.summerveldhoundresort.app.ui.auth.AuthViewModel
+import com.summerveldhoundresort.app.ui.auth.AuthViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 
 class ProfileViewFragment : Fragment() {
