@@ -141,7 +141,7 @@
         tools:layout="@layout/fragment_dog_detail" />
     <fragment
         android:id="@+id/editDogFragment"
-        android:name="com.summerveldhoundresort.app.ui.saved.EditDogFragment"
+        android:name="com.summerveldhoundresort.app.ui.Dog.EditDogFragment"
         android:label="EditDogFragment" />
 
     <!-- About Us destination -->
