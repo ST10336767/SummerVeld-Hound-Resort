@@ -6,25 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileViewFragment">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="141dp"
-        android:layout_height="148dp"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="138dp"
-        android:src="@drawable/baseline_account_circle_24"
-        android:tint="@color/dark_purple"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbSettings"
-        android:layout_width="358dp"
+        android:layout_width="345dp"
         android:layout_height="51dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="29dp"
         android:backgroundTint="@android:color/transparent"
@@ -37,8 +22,6 @@
         app:iconSize="25dp"
         app:iconTint="@color/dark_purple"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mbChangePassword"
         app:rippleColor="?attr/colorControlHighlight"
         app:strokeColor="@android:color/transparent"
@@ -46,9 +29,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbEditProfile"
-        android:layout_width="358dp"
+        android:layout_width="345dp"
         android:layout_height="51dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="29dp"
         android:backgroundTint="@android:color/transparent"
@@ -61,8 +43,6 @@
         app:iconSize="25dp"
         app:iconTint="@color/dark_purple"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUsername"
         app:rippleColor="?attr/colorControlHighlight"
         app:strokeColor="@android:color/transparent"
@@ -92,9 +72,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbDataPrivacy"
-        android:layout_width="358dp"
+        android:layout_width="345dp"
         android:layout_height="51dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="29dp"
         android:backgroundTint="@android:color/transparent"
@@ -107,8 +86,6 @@
         app:iconSize="25dp"
         app:iconTint="@color/dark_purple"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mbEditProfile"
         app:rippleColor="?attr/colorControlHighlight"
         app:strokeColor="@android:color/transparent"
@@ -117,9 +94,8 @@
     <!-- Account Deletion Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbAccountDeletion"
-        android:layout_width="358dp"
+        android:layout_width="345dp"
         android:layout_height="51dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="29dp"
         android:backgroundTint="@android:color/transparent"
@@ -132,8 +108,6 @@
         app:iconSize="25dp"
         app:iconTint="#D32F2F"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mbSettings"
         app:rippleColor="?attr/colorControlHighlight"
         app:strokeColor="@android:color/transparent"
@@ -188,9 +162,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbChangePassword"
-        android:layout_width="358dp"
+        android:layout_width="345dp"
         android:layout_height="51dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="29dp"
         android:backgroundTint="@android:color/transparent"
@@ -203,8 +176,6 @@
         app:iconSize="25dp"
         app:iconTint="@color/dark_purple"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mbDataPrivacy"
         app:rippleColor="?attr/colorControlHighlight"
         app:strokeColor="@android:color/transparent"
@@ -226,24 +197,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="169dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="184dp"
+        android:layout_marginBottom="16dp"
         android:text="TextView"
         android:textColor="@color/purple"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/mbEditProfile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintHorizontal_bias="0.222"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="162dp"
         android:layout_height="174dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginBottom="152dp"
+        android:layout_marginStart="299dp"
+        android:layout_marginBottom="59dp"
         android:src="@drawable/paw_reversed"
         app:layout_constraintBottom_toTopOf="@+id/mbEditProfile"
-        app:layout_constraintStart_toEndOf="@+id/imageView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView7"
