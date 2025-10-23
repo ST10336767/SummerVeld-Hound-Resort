@@ -13,7 +13,6 @@
         android:layout_gravity="top|end"
         android:layout_marginTop="-26dp"
         android:layout_marginEnd="-28dp"
-        android:alpha="0.12"
         android:contentDescription="@null"
         android:rotation="-8"
         android:scaleType="centerCrop"
@@ -144,6 +143,17 @@
                     android:backgroundTint="@color/dark_purple"/>
 
                 <Button
+                    android:id="@+id/backBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:backgroundTint="@color/dark_purple"
+                    android:text="Cancel Changes"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"/>
+
+                <Button
                     android:id="@+id/deleteEventBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -153,15 +163,7 @@
                     android:textSize="16sp"
                     android:backgroundTint="@color/DangerBtn"/>
 
-                <Button
-                    android:id="@+id/backBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:backgroundTint="@color/dark_purple"
-                    android:text="← Back"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp"/>
+
 
             </LinearLayout>
         </LinearLayout>
