@@ -59,23 +59,24 @@
         android:textSize="16sp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@id/buttonBack"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Back Button -->
-    <Button
-        android:id="@+id/buttonBack"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/dark_purple"
-        android:textSize="16sp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+<!--    Not needed, will just crash if navigated staright fdrom navbar-->
+<!--    <Button-->
+<!--        android:id="@+id/buttonBack"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Back"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:backgroundTint="@color/dark_purple"-->
+<!--        android:textSize="16sp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"/>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

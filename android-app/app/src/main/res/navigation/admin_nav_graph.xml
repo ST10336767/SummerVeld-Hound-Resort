@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/admin_nav_graph"
+    app:startDestination="@id/adminHomeFragment">
+
+
+    <fragment
+        android:id="@+id/adminHomeFragment"
+        android:name="com.summerveldhoundresort.app.ui.admin.AdminHomeFragment"
+        android:label="Admin Home" />
+
+    <fragment
+        android:id="@+id/manageDogsFragment"
+        android:name="com.summerveldhoundresort.app.ui.admin.ManageDogsFragment"
+        android:label="Manage Dogs" />
+
+    <fragment
+        android:id="@+id/manageEventsFragment"
+        android:name="com.summerveldhoundresort.app.ui.admin.ManageEventsFragment"
+        android:label="Manage Events" />
+
+    <fragment
+        android:id="@+id/profileViewFragment"
+        android:name="com.summerveldhoundresort.app.ui.profile.ProfileViewFragment"
+        android:label="Profile" />
+</navigation>

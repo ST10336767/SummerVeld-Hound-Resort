@@ -181,6 +181,10 @@
         android:id="@+id/donateInfoFragment2"
         android:name="com.summerveldhoundresort.app.DonateInfoFragment"
         android:label="DonateInfoFragment" />
+    <fragment
+        android:id="@+id/manageDogsFragment"
+        android:name="com.summerveldhoundresort.app.ui.admin.ManageDogsFragment"
+        android:label="ManageDogsFragment" />
 
 
 </navigation>
