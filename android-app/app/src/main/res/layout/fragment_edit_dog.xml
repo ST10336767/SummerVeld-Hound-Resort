@@ -23,8 +23,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Back Button -->
-
         <!-- Title -->
         <TextView
             android:id="@+id/textView_title"
@@ -34,9 +32,10 @@
             android:textColor="@color/purple"
             android:textSize="26sp"
             android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="68dp" />
+            android:layout_marginTop="68dp"/>
 
         <!-- Dog Image -->
         <FrameLayout

@@ -27,13 +27,13 @@
 
         <ImageView
             android:id="@+id/pawsTopRight"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
+            android:layout_width="135dp"
+            android:layout_height="135dp"
             android:layout_alignParentEnd="true"
             android:src="@drawable/paw"
             android:rotation="-15"
             android:layout_marginTop="-35dp"
-            android:layout_marginEnd="-20dp"/>
+            android:layout_marginEnd="-25dp"/>
     </RelativeLayout>
 
     <!-- RecyclerView -->
@@ -68,7 +68,7 @@
         android:id="@+id/buttonBack"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Back"
+        android:text="← Back"
         android:textColor="@color/white"
         android:backgroundTint="@color/dark_purple"
         android:textSize="16sp"
