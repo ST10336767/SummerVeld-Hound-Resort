@@ -250,10 +250,10 @@
             android:layout_marginTop="24dp" />
 
         <Button
-            android:id="@+id/buttonDeleteDog"
+            android:id="@+id/buttonCancelEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Delete Dog"
+            android:text="Cancel Changes"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="18sp"
@@ -262,24 +262,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="32dp"
-            android:layout_marginTop="12dp" />
+            android:layout_marginBottom="100dp" />
 
         <Button
-            android:id="@+id/buttonCancelEdit"
+            android:id="@+id/buttonDeleteDog"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Cancel"
+            android:text="Delete Dog"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:backgroundTint="@color/dark_purple"
-            app:layout_constraintTop_toBottomOf="@id/buttonDeleteDog"
+            android:backgroundTint="@color/DangerBtn"
+            app:layout_constraintTop_toBottomOf="@id/buttonCancelEdit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginHorizontal="32dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="100dp" />
-
+            android:layout_marginHorizontal="32dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
