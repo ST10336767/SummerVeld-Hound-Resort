@@ -43,7 +43,7 @@ class ChangePasswordFragment : Fragment() {
         binding.btnBackToLogin.setOnClickListener {
 //            findNavController().navigate(R.id.action_changePasswordFragment_to_profileViewFragment)
             if (isAdminGraph) {
-                navController.navigate(R.id.action_global_viewProfil_admin)
+                navController.navigate(R.id.action_global_viewProfile_admin)
             } else {
                 navController.navigate(R.id.action_changePasswordFragment_to_profileViewFragment)
             }
