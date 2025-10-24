@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.summerveldhoundresort.app.EditDogActivity
 import com.summerveldhoundresort.app.R
 import com.summerveldhoundresort.app.db.entities.Dog
+import com.summerveldhoundresort.app.ui.Dog.ManageDogsAdapter
 import com.summerveldhoundresort.app.ui.admin.CreateDogActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
