@@ -8,7 +8,7 @@ on:
 
 env:
   NODE_VERSION: '18'
-  JAVA_VERSION: '11'
+  JAVA_VERSION: '17'
 
 jobs:
   # Backend Tests and Build
@@ -63,7 +63,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
-        java-version: ${{ env.JAVA_VERSION }}
+        java-version: '17'
         
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
@@ -198,7 +198,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
-        java-version: ${{ env.JAVA_VERSION }}
+        java-version: '17'
         
     - name: Build project (for Java analysis)
       if: matrix.language == 'java'
@@ -239,7 +239,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
-        java-version: ${{ env.JAVA_VERSION }}
+        java-version: '17'
         
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
