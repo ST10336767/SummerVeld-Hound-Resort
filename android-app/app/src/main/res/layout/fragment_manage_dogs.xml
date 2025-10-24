@@ -62,34 +62,57 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Add Dog Button -->
-        <Button
-            android:id="@+id/buttonAddDog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/purple"
-            android:text="+ Add Dog"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:padding="12dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/textView_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginHorizontal="32dp" />
+        <ImageView
+            android:id="@+id/pawsTopRight"
+            android:layout_width="135dp"
+            android:layout_height="135dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/paw"
+            android:rotation="-15"
+            android:layout_marginTop="-35dp"
+            android:layout_marginEnd="-25dp"/>
+    </RelativeLayout>
 
-        <!-- RecyclerView for Dogs -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerManageDogs"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="16dp"
-            android:padding="8dp"
-            app:layout_constraintTop_toBottomOf="@id/buttonAddDog"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:listitem="@layout/item_dog" />
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerManageDogs"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintBottom_toTopOf="@id/buttonAddDog"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+    <!-- Add Dog Button -->
+    <Button
+        android:id="@+id/buttonAddDog"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Add New Dog"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/dark_purple"
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="← Back"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/dark_purple"
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,17 @@
     android:background="@color/white"
     android:padding="16dp">
 
+    <ImageView
+        android:id="@+id/pawsTopRight"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:src="@drawable/paw"
+        android:rotation="-15"
+        android:layout_marginTop="-35dp"
+        android:layout_marginEnd="-20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <!-- Back Button -->
     <Button
         android:id="@+id/buttonBack"
@@ -27,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Our Dogs"
-        android:textSize="24sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="@color/purple"
         android:gravity="center"
