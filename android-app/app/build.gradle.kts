@@ -91,5 +91,5 @@ dependencies {
     implementation("com.github.dhaval2404:imagepicker:2.1")
     
     // Coroutines for async operations
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
 }
