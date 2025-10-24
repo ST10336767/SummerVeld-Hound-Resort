@@ -6,21 +6,27 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import com.summerveldhoundresort.app.R
 import com.summerveldhoundresort.app.db.entities.Event
 
-class AdminEventAdapter(private val events: List<Event>,
-                        private val onEventClick: (Event) -> Unit) :
-    RecyclerView.Adapter<AdminEventAdapter.EventViewHolder>() {
+class AdminEventAdapter(
+    private val events: List<Event>,
+    private val onEventClick: (Event) -> Unit
+) : RecyclerView.Adapter<AdminEventAdapter.EventViewHolder>() {
+
+    private val firestore = FirebaseFirestore.getInstance()
+    private val listeners: MutableMap<String, ListenerRegistration> = mutableMapOf()
 
     class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleTextView: TextView = itemView.findViewById(R.id.nameTextView)
         val dateTextView: TextView = itemView.findViewById(R.id.dateTextView)
-        val  timeTextView: TextView = itemView.findViewById(R.id.timeTextView)
+        val timeTextView: TextView = itemView.findViewById(R.id.timeTextView)
         val locationTextView: TextView = itemView.findViewById(R.id.locationTextView)
         val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
-
         val editButton: Button = itemView.findViewById(R.id.btnEdit)
+        val rsvpCountTextView: TextView? = itemView.findViewById(R.id.tvAttendees) // new RSVP line
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
@@ -36,13 +42,35 @@ class AdminEventAdapter(private val events: List<Event>,
         holder.timeTextView.text = event.time
         holder.locationTextView.text = event.location
         holder.descriptionTextView.text = event.description
-
         holder.editButton.visibility = View.VISIBLE
-        holder.editButton.setOnClickListener {
-            onEventClick(event)
+        holder.editButton.setOnClickListener { onEventClick(event) }
+
+        // --- RSVP Count Logic ---
+        holder.rsvpCountTextView?.text = "0 going"
+
+        event.id?.let { eventId ->
+            listeners[eventId]?.remove()
+            val reg = firestore.collection("events")
+                .document(eventId)
+                .collection("rsvps")
+                .addSnapshotListener { snapshot, _ ->
+                    val count = snapshot?.size() ?: 0
+                    holder.rsvpCountTextView?.text = "$count going"
+                }
+            listeners[eventId] = reg
         }
     }
 
+    override fun onViewRecycled(holder: EventViewHolder) {
+        super.onViewRecycled(holder)
+        holder.rsvpCountTextView?.text = "0 going"
+    }
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+        listeners.values.forEach { it.remove() }
+        listeners.clear()
+    }
 
     override fun getItemCount() = events.size
 }
