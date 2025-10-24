@@ -4,12 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
 import com.summerveldhoundresort.app.databinding.ActivityAdminBinding
-import com.summerveldhoundresort.app.ui.admin.CreateDog
 import com.google.firebase.auth.FirebaseAuth
 
 class AdminActivity : AppCompatActivity() {
@@ -35,8 +31,12 @@ class AdminActivity : AppCompatActivity() {
         }
 
         binding.MngDogsBtn.setOnClickListener {
-            val intent = Intent(this, ManageDogsActivity::class.java)
-            startActivity(intent)
+            // Navigate to Manage Dogs fragment
+            val fragment = com.summerveldhoundresort.app.ui.Dog.ManageDogsFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.admin_fragment_container, fragment)
+                .addToBackStack(null)
+                .commit()
         }
 
 
