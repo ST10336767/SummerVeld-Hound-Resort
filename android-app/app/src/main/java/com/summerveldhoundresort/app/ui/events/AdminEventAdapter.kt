@@ -1,5 +1,6 @@
 package com.summerveldhoundresort.app.ui.events
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +27,9 @@ class AdminEventAdapter(
         val locationTextView: TextView = itemView.findViewById(R.id.locationTextView)
         val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
         val editButton: Button = itemView.findViewById(R.id.btnEdit)
-        val rsvpCountTextView: TextView? = itemView.findViewById(R.id.tvAttendees) // new RSVP line
+
+        val rsvpCountTextView: TextView? = itemView.findViewById(R.id.tvAttendees)
+        val viewCommentsButton: Button? = itemView.findViewById(R.id.btnViewComments)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
@@ -42,12 +45,12 @@ class AdminEventAdapter(
         holder.timeTextView.text = event.time
         holder.locationTextView.text = event.location
         holder.descriptionTextView.text = event.description
+
         holder.editButton.visibility = View.VISIBLE
         holder.editButton.setOnClickListener { onEventClick(event) }
 
         // --- RSVP Count Logic ---
         holder.rsvpCountTextView?.text = "0 going"
-
         event.id?.let { eventId ->
             listeners[eventId]?.remove()
             val reg = firestore.collection("events")
@@ -58,6 +61,15 @@ class AdminEventAdapter(
                     holder.rsvpCountTextView?.text = "$count going"
                 }
             listeners[eventId] = reg
+        }
+
+        // --- View Comments button ---
+        holder.viewCommentsButton?.setOnClickListener {
+            val ctx = holder.itemView.context
+            val i = Intent(ctx, EventCommentsActivity::class.java)
+            i.putExtra("EVENT_ID", event.id)
+            i.putExtra("EVENT_NAME", event.name)
+            ctx.startActivity(i)
         }
     }
 
