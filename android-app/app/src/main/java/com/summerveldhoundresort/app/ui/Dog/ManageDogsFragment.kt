@@ -1,4 +1,4 @@
-package com.summerveldhoundresort.app.ui.admin
+package com.summerveldhoundresort.app.ui.Dog
 
 import android.content.Intent
 import android.os.Bundle
