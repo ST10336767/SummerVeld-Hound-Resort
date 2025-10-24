@@ -63,7 +63,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     //Added For Firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.16.0"))
+    implementation(platform("com.google.firebase:firebase-bom:34.4.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-storage-ktx")
