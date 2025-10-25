@@ -1,0 +1,43 @@
+# Dependabot configuration for SummerVeld Hound Resort
+# This file configures Dependabot to monitor and update dependencies
+
+version: 2
+updates:
+  # Backend Node.js dependencies
+  - package-ecosystem: "npm"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "ST10336767"
+    assignees:
+      - "ST10336767"
+
+  # Android Gradle dependencies
+  - package-ecosystem: "gradle"
+    directory: "/android-app"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "ST10336767"
+    assignees:
+      - "ST10336767"
+
+  # GitHub Actions dependencies
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "ST10336767"
+    assignees:
+      - "ST10336767"

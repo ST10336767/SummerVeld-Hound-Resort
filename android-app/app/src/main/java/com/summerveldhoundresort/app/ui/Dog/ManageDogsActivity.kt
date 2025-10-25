@@ -2,7 +2,7 @@ package com.summerveldhoundresort.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.summerveldhoundresort.app.ui.admin.ManageDogsFragment
+import com.summerveldhoundresort.app.ui.Dog.ManageDogsFragment
 
 class ManageDogsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

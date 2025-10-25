@@ -1,4 +1,4 @@
-package com.summerveldhoundresort.app.ui.admin
+package com.summerveldhoundresort.app.ui.Dog
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.summerveldhoundresort.app.EditDogActivity
 import com.summerveldhoundresort.app.R
 import com.summerveldhoundresort.app.db.entities.Dog
+import com.summerveldhoundresort.app.ui.Dog.ManageDogsAdapter
 import com.summerveldhoundresort.app.ui.admin.CreateDogActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
