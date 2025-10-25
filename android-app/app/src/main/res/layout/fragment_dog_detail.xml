@@ -76,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Breed"
-                    android:textColor="@color/purple_heading"
+                    android:textColor="@color/purple"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:text="Date of Birth"
                     android:textSize="20sp"
-                    android:textColor="@color/purple_heading"
+                    android:textColor="@color/purple"
                     android:textStyle="bold" />
 
                 <TextView
@@ -135,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:text="Color"
                         android:textSize="20sp"
-                        android:textColor="@color/purple_heading"
+                        android:textColor="@color/purple"
                         android:textStyle="bold" />
 
                     <TextView
@@ -161,7 +161,7 @@
                         android:layout_height="wrap_content"
                         android:text="Gender"
                         android:textSize="20sp"
-                        android:textColor="@color/purple_heading"
+                        android:textColor="@color/purple"
                         android:textStyle="bold" />
 
                     <TextView
@@ -187,7 +187,7 @@
                     android:layout_height="wrap_content"
                     android:text="About"
                     android:textSize="20sp"
-                    android:textColor="@color/purple_heading"
+                    android:textColor="@color/purple"
                     android:textStyle="bold" />
 
                 <TextView

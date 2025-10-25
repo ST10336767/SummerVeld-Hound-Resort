@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome"
-        android:textColor="@color/purple_heading"
+        android:textColor="@color/purple"
         android:textSize="18sp"
         android:layout_marginBottom="16dp"/>
 

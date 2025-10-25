@@ -52,7 +52,7 @@
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-medium"
-                android:textColor="@color/purple_heading"
+                android:textColor="@color/purple"
                 android:gravity="center"
                 android:layout_marginTop="40dp"
                 android:paddingBottom="8dp" />
@@ -87,7 +87,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/purple_heading"
+            android:textColor="@color/purple"
             android:gravity="center"
             android:paddingTop="16dp" />
 
@@ -116,7 +116,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/purple_heading"
+            android:textColor="@color/purple"
             android:gravity="center"
             android:paddingTop="24dp" />
 
@@ -145,7 +145,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/purple_heading"
+            android:textColor="@color/purple"
             android:gravity="center"
             android:paddingTop="24dp" />
 
@@ -174,7 +174,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/purple_heading"
+            android:textColor="@color/purple"
             android:gravity="center"
             android:paddingTop="24dp" />
 
@@ -203,7 +203,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/purple_heading"
+            android:textColor="@color/purple"
             android:gravity="center"
             android:paddingTop="24dp" />
 
@@ -232,7 +232,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/purple_heading"
+            android:textColor="@color/purple"
             android:gravity="center"
             android:paddingTop="24dp" />
 

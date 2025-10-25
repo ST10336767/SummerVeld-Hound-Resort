@@ -29,7 +29,7 @@
             android:text="@string/data_management_title"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/purple_heading"
+            android:textColor="@color/purple"
             android:gravity="center"
             android:layout_marginBottom="30dp" />
 
@@ -79,7 +79,7 @@
             android:text="@string/account_deletion_title"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/purple_heading"
+            android:textColor="@color/purple"
             android:layout_marginBottom="10dp" />
 
         <TextView
