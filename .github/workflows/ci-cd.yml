@@ -69,7 +69,7 @@ jobs:
       uses: android-actions/setup-android@v3
       
     - name: Cache Gradle packages
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           ~/.gradle/caches
@@ -110,7 +110,7 @@ jobs:
         fetch-depth: 0  # Shallow clones should be disabled for better analysis
         
     - name: SonarCloud Scan
-      uses: SonarSource/sonarcloud-github-action@master
+      uses: SonarSource/sonarqube-scan-action@v5.0.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -121,6 +121,8 @@ jobs:
           -Dsonar.sources=backend,android-app
           -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info
           -Dsonar.java.coverage.jacoco.xmlReportPaths=android-app/app/build/reports/jacoco/testDebugUnitTestReport/jacocoTestReport.xml
+          -Dsonar.ci.analysis.enabled=true
+          -Dsonar.ci.analysis.automaticAnalysis=false
 
   # Security Scanning
   security-scan:
@@ -152,7 +154,7 @@ jobs:
           --out reports
           
     - name: Upload OWASP results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: dependency-check-report
         path: reports
