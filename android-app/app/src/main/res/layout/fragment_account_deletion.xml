@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
     android:padding="20dp">
 
     <LinearLayout
@@ -30,18 +29,21 @@
             android:text="@string/data_management_title"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             android:gravity="center"
             android:layout_marginBottom="30dp" />
 
         <!-- Warning Card -->
+<!--        app:cardBackgroundColor="#FFF3E0"-->
+<!--        -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="#FFF3E0">
+            app:cardBackgroundColor="@color/light_gray"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -77,7 +79,7 @@
             android:text="@string/account_deletion_title"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             android:layout_marginBottom="10dp" />
 
         <TextView

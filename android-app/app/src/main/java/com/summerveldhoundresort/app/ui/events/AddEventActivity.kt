@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.summerveldhoundresort.app.utils.ThemeManager
 import java.util.Calendar
 
 class AddEventActivity : AppCompatActivity() {
@@ -25,6 +26,11 @@ class AddEventActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        // Apply saved theme on fragment creation
+        val savedTheme = ThemeManager.getThemeMode(this)
+        ThemeManager.applyTheme(savedTheme)
+
         super.onCreate(savedInstanceState)
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_add_event)

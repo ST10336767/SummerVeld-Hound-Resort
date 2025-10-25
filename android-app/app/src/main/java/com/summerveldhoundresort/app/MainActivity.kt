@@ -9,12 +9,19 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.summerveldhoundresort.app.databinding.ActivityMainBinding
+import com.summerveldhoundresort.app.utils.ThemeManager
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        //added -> apply saved themes straight from login/signup of app
+        // Apply saved theme on fragment creation
+        val savedTheme = ThemeManager.getThemeMode(this)
+        ThemeManager.applyTheme(savedTheme)
+
         super.onCreate(savedInstanceState)
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
 
