@@ -1,4 +1,4 @@
-package com.summerveldhoundresort.app.ui.admin
+package com.summerveldhoundresort.app.ui.Dog
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.summerveldhoundresort.app.EditDogActivity
 import com.summerveldhoundresort.app.R
 import com.summerveldhoundresort.app.db.entities.Dog
+import com.summerveldhoundresort.app.ui.Dog.ManageDogsAdapter
 import com.summerveldhoundresort.app.ui.admin.CreateDogActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
@@ -20,7 +21,7 @@ class ManageDogsFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ManageDogsAdapter
-    private lateinit var backButton: Button
+//    private lateinit var backButton: Button
     private val firestore = FirebaseFirestore.getInstance()
     private val dogList = mutableListOf<Dog>()
     private var realTimeListener: ListenerRegistration? = null
@@ -34,23 +35,23 @@ class ManageDogsFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerManageDogs)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
-        val backButton: Button = view.findViewById(R.id.buttonBack)
-        backButton.setOnClickListener {
-            try {
-                // Try to finish the activity safely
-                if (isAdded && !requireActivity().isFinishing) {
-                    requireActivity().finish()
-                }
-            } catch (e: Exception) {
-                // If there's an error, try alternative navigation
-                try {
-                    requireActivity().onBackPressed()
-                } catch (e2: Exception) {
-                    // Last resort - just log the error
-                    android.util.Log.e("ManageDogsFragment", "Error handling back button", e2)
-                }
-            }
-        }
+//        val backButton: Button = view.findViewById(R.id.buttonBack)
+//        backButton.setOnClickListener {
+//            try {
+//                // Try to finish the activity safely
+//                if (isAdded && !requireActivity().isFinishing) {
+//                    requireActivity().finish()
+//                }
+//            } catch (e: Exception) {
+//                // If there's an error, try alternative navigation
+//                try {
+//                    requireActivity().onBackPressed()
+//                } catch (e2: Exception) {
+//                    // Last resort - just log the error
+//                    android.util.Log.e("ManageDogsFragment", "Error handling back button", e2)
+//                }
+//            }
+//        }
 
         // Set up Add Dog button click listener
         val addDogButton: Button = view.findViewById(R.id.buttonAddDog)

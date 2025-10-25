@@ -4,6 +4,8 @@
     <string name="title_dashboard">Our Dogs</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_donate">Donate</string>
+    <string name="title_events">Events</string>
+    <string name="title_dogs">Dogs</string>
     <string name="title_profile">Profile</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

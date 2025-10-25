@@ -41,9 +41,8 @@
                 android:layout_gravity="top|start"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:src="@drawable/pawprint_svg"
-                android:contentDescription="@string/cd_paw_decor"
-                 />
+                android:src="@drawable/paw_trail"
+                android:contentDescription="@string/cd_paw_decor"/>
 
             <!-- Title text lowered slightly to center with paw trail -->
             <TextView

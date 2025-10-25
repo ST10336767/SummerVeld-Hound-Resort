@@ -1,80 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.Dog.ManageDogsFragment">
 
-    <!-- Header -->
-    <RelativeLayout
-        android:id="@+id/headerLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:paddingBottom="16dp">
 
+        <!-- Paw Prints -->
+        <ImageView
+            android:id="@+id/imgPawsTop"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/paw"
+            android:layout_marginTop="-15dp"
+            android:layout_marginEnd="-15dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgPawsBottom"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/paw"
+            android:layout_marginStart="-30dp"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerManageDogs"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Back Button -->
+        <Button
+            android:id="@+id/buttonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark_purple"
+            android:text="← Back"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:padding="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Title -->
         <TextView
-            android:id="@+id/textManageDogs"
+            android:id="@+id/textView_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Manage Dogs"
+            android:textColor="@color/purple"
             android:textSize="26sp"
             android:textStyle="bold"
-            android:paddingTop="15dp"
-            android:textColor="@color/purple"
-            android:layout_centerHorizontal="true" />
+            app:layout_constraintTop_toTopOf="@id/buttonBack"
+            app:layout_constraintBottom_toBottomOf="@id/buttonBack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <ImageView
-            android:id="@+id/pawsTopRight"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/paw_reversed_svg"
-            android:rotation="-15"
-            android:layout_marginTop="-35dp"
-            android:layout_marginEnd="-20dp"/>
-    </RelativeLayout>
+        <!-- Add Dog Button -->
+        <Button
+            android:id="@+id/buttonAddDog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Add New Dog"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dark_purple"
+            android:textSize="16sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/textView_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- RecyclerView -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerManageDogs"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="8dp"
-        android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/headerLayout"
-        app:layout_constraintBottom_toTopOf="@id/buttonAddDog"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <!-- RecyclerView for Dogs -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerManageDogs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="16dp"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/buttonAddDog"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:listitem="@layout/item_dog" />
 
-    <!-- Add Dog Button -->
-    <Button
-        android:id="@+id/buttonAddDog"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Add New Dog"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/dark_purple"
-        android:textSize="16sp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@id/buttonBack"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <!-- Back Button -->
-    <Button
-        android:id="@+id/buttonBack"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/dark_purple"
-        android:textSize="16sp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

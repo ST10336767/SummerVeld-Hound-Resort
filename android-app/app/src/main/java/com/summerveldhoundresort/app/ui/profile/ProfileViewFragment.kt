@@ -51,12 +51,27 @@ class ProfileViewFragment : Fragment() {
             binding.tvUsername.text = username
         }
 
+        //adeed
+        val navController = findNavController()
+        val graphId = navController.graph.id
+        val isAdminGraph = graphId == R.id.admin_nav_graph
+
 
         binding.mbEditProfile.setOnClickListener{
-            findNavController().navigate(R.id.action_profileViewFragment_to_editProfileFragment)
+//            findNavController().navigate(R.id.action_profileViewFragment_to_editProfileFragment)
+            if (isAdminGraph) {
+                navController.navigate(R.id.action_profileViewFragment_to_editProfileFragment_admin)
+            } else {
+                navController.navigate(R.id.action_profileViewFragment_to_editProfileFragment)
+            }
         }
         binding.mbDataPrivacy.setOnClickListener {
-            findNavController().navigate(R.id.action_global_privacyFragment)
+//            findNavController().navigate(R.id.action_global_privacyFragment)
+            if (isAdminGraph) {
+                navController.navigate(R.id.action_global_privacyFragment_admin)
+            } else {
+                navController.navigate(R.id.action_global_privacyFragment)
+            }
         }
         binding.mbChangePassword.setOnClickListener {
             val auth = FirebaseAuth.getInstance()
@@ -68,7 +83,12 @@ class ProfileViewFragment : Fragment() {
                         if (task.isSuccessful) {
                             Toast.makeText(requireContext(), "Password reset email sent!", Toast.LENGTH_SHORT).show()
                             // Navigate to change password fragment using global action
-                            findNavController().navigate(R.id.action_global_changePasswordFragment)
+//                            findNavController().navigate(R.id.action_global_changePasswordFragment)
+                            if (isAdminGraph) {
+                                navController.navigate(R.id.action_global_changePasswordFragment_admin)
+                            } else {
+                                navController.navigate(R.id.action_global_changePasswordFragment)
+                            }
                         } else {
                             Toast.makeText(requireContext(), "Failed to send reset email.", Toast.LENGTH_SHORT).show()
                         }
@@ -81,7 +101,12 @@ class ProfileViewFragment : Fragment() {
 //            findNavController().navigate(R.id.action_ProfileFragment_to_EditProfileFragment)
         }
         binding.mbAccountDeletion.setOnClickListener {
-            findNavController().navigate(R.id.action_profileViewFragment_to_accountDeletionFragment)
+//            findNavController().navigate(R.id.action_profileViewFragment_to_accountDeletionFragment)
+            if (isAdminGraph) {
+                navController.navigate(R.id.action_profileViewFragment_to_accountDeletionFragment_admin)
+            } else {
+                navController.navigate(R.id.action_profileViewFragment_to_accountDeletionFragment)
+            }
         }
         binding.mbLogout.setOnClickListener{
             // ogMik - this does acc logout the user, it just never redirected them - my bad

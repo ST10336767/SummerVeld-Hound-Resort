@@ -141,7 +141,7 @@
         tools:layout="@layout/fragment_dog_detail" />
     <fragment
         android:id="@+id/editDogFragment"
-        android:name="com.summerveldhoundresort.app.ui.saved.EditDogFragment"
+        android:name="com.summerveldhoundresort.app.ui.Dog.EditDogFragment"
         android:label="EditDogFragment" />
 
     <!-- About Us destination -->
@@ -181,6 +181,10 @@
         android:id="@+id/donateInfoFragment2"
         android:name="com.summerveldhoundresort.app.DonateInfoFragment"
         android:label="DonateInfoFragment" />
+    <fragment
+        android:id="@+id/manageDogsFragment"
+        android:name="com.summerveldhoundresort.app.ui.admin.ManageDogsFragment"
+        android:label="ManageDogsFragment" />
 
 
 </navigation>

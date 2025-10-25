@@ -36,8 +36,17 @@ class ChangePasswordFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val navController = findNavController()
+        val graphId = navController.graph.id
+        val isAdminGraph = graphId == R.id.admin_nav_graph
+
         binding.btnBackToLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_changePasswordFragment_to_profileViewFragment)
+//            findNavController().navigate(R.id.action_changePasswordFragment_to_profileViewFragment)
+            if (isAdminGraph) {
+                navController.navigate(R.id.action_global_viewProfile_admin)
+            } else {
+                navController.navigate(R.id.action_changePasswordFragment_to_profileViewFragment)
+            }
         }
     }
 

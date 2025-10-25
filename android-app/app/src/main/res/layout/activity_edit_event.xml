@@ -125,53 +125,46 @@
 
             <!-- action buttons -->
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center">
-
-                <Button
-                    android:id="@+id/deleteEventBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:text="Remove Event"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    android:background="@drawable/bg_btn_danger"
-                    android:backgroundTint="@null"
-                    app:backgroundTint="@null"
-                    />
+                android:gravity="center"
+                android:layout_marginTop="8dp">
 
                 <Button
                     android:id="@+id/saveEventBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Save Changes"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
                     android:textSize="16sp"
-                    android:background="@drawable/bg_add_button"
-                    android:backgroundTint="@null"
-                    app:backgroundTint="@null"
-                    />
-            </LinearLayout>
+                    android:backgroundTint="@color/dark_purple"/>
 
-            <Button
-                android:id="@+id/backBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="12dp"
-                android:backgroundTint="@color/dark_purple"
-                android:text="← Back"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"
-                android:padding="12dp" />
+                <Button
+                    android:id="@+id/backBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:backgroundTint="@color/dark_purple"
+                    android:text="Cancel Changes"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"/>
+
+                <Button
+                    android:id="@+id/deleteEventBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Remove Event"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:backgroundTint="@color/DangerBtn"/>
+
+
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </FrameLayout>
