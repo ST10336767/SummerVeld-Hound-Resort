@@ -21,16 +21,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="181dp"
-        android:layout_height="125dp"
-        android:layout_marginTop="70dp"
-        android:src="@drawable/baseline_account_circle_24"
-        app:tint="@color/dark_purple"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView2"-->
+<!--        android:layout_width="181dp"-->
+<!--        android:layout_height="125dp"-->
+<!--        android:layout_marginTop="70dp"-->
+<!--        android:src="@drawable/baseline_account_circle_24"-->
+<!--        app:tint="@color/dark_purple"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <EditText
         android:id="@+id/edtName"
@@ -50,7 +50,7 @@
         android:paddingEnd="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvChangePic" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
     <EditText
         android:id="@+id/edtEmail"
@@ -85,7 +85,7 @@
         android:ems="10"
         android:hint="Phone number"
         android:textColorHint="@color/purple"
-        android:inputType="text"
+        android:inputType="phone"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,17 +107,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtPhoneNum" />
 
-    <TextView
-        android:id="@+id/tvChangePic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Change Picture"
-        android:textColor="@color/purple"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+<!--    <TextView-->
+<!--        android:id="@+id/tvChangePic"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:text="Change Picture"-->
+<!--        android:textColor="@color/purple"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/imageView2" />-->
 
     <ImageView
         android:id="@+id/imageView4"
@@ -133,10 +133,14 @@
         android:id="@+id/imageView8"
         android:layout_width="134dp"
         android:layout_height="144dp"
-        android:layout_marginStart="17dp"
+        android:layout_marginEnd="14dp"
         android:layout_marginBottom="117dp"
         android:src="@drawable/paw_reversed_svg"
         app:layout_constraintBottom_toTopOf="@+id/edtName"
-        app:layout_constraintStart_toEndOf="@+id/imageView2" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.068" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

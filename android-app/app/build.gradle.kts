@@ -137,9 +137,9 @@ dependencies {
 }
 
 // Jacoco configuration for code coverage
-import org.gradle.api.tasks.testing.Test
-import org.gradle.testing.jacoco.tasks.JacocoReport
-import org.gradle.testing.jacoco.plugins.JacocoTaskExtension
+//import org.gradle.api.tasks.testing.Test
+//import org.gradle.testing.jacoco.tasks.JacocoReport
+//import org.gradle.testing.jacoco.plugins.JacocoTaskExtension
 
 tasks.withType<Test> {
     configure<JacocoTaskExtension> {

@@ -41,7 +41,7 @@ class ProfileViewModel(private val userRepo: firebaseUsersImpl) : ViewModel() {
     }
     private fun updateUserName(name: String) {
         fbUser = FirebaseAuth.getInstance().currentUser
-        firestore.collection("users").document(fbUser!!.uid).update("name", name)
+        firestore.collection("users").document(fbUser!!.uid).update("username", name)
     }
 
     private fun updateEmail(email: String) {

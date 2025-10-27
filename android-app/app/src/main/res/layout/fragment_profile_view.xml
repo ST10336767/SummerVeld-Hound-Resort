@@ -6,43 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileViewFragment">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="141dp"
-        android:layout_height="148dp"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="138dp"
-        android:src="@drawable/baseline_account_circle_24"
-        app:tint="@color/dark_purple"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="141dp"-->
+<!--        android:layout_height="148dp"-->
+<!--        android:layout_marginStart="132dp"-->
+<!--        android:layout_marginTop="112dp"-->
+<!--        android:layout_marginEnd="138dp"-->
+<!--        android:src="@drawable/baseline_account_circle_24"-->
+<!--        app:tint="@color/dark_purple"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="1.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/mbSettings"
-        android:layout_width="358dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="29dp"
-        android:backgroundTint="@android:color/transparent"
-        android:gravity="start|center_vertical"
-        android:text="Settings"
-        android:textColor="@color/purple"
-        app:icon="@drawable/baseline_settings_24"
-        app:iconGravity="start"
-        app:iconPadding="20dp"
-        app:iconSize="25dp"
-        app:iconTint="@color/dark_purple"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mbChangeTheme"
-        app:rippleColor="?attr/colorControlHighlight"
-        app:strokeColor="@android:color/transparent"
-        app:strokeWidth="0dp" />
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/mbSettings"-->
+<!--        android:layout_width="358dp"-->
+<!--        android:layout_height="51dp"-->
+<!--        android:layout_marginStart="24dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginEnd="29dp"-->
+<!--        android:backgroundTint="@android:color/transparent"-->
+<!--        android:gravity="start|center_vertical"-->
+<!--        android:text="Settings"-->
+<!--        android:textColor="@color/purple"-->
+<!--        app:icon="@drawable/baseline_settings_24"-->
+<!--        app:iconGravity="start"-->
+<!--        app:iconPadding="20dp"-->
+<!--        app:iconSize="25dp"-->
+<!--        app:iconTint="@color/dark_purple"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="1.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/mbChangeTheme"-->
+<!--        app:rippleColor="?attr/colorControlHighlight"-->
+<!--        app:strokeColor="@android:color/transparent"-->
+<!--        app:strokeWidth="0dp" />-->
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbEditProfile"
@@ -77,7 +77,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/mbEditProfile"
         app:layout_constraintEnd_toEndOf="@+id/mbEditProfile"
         app:layout_constraintTop_toTopOf="@+id/mbEditProfile"
-        app:layout_constraintVertical_bias="0.629" />
+        app:layout_constraintVertical_bias="0.629"
+        app:tint="?attr/colorOnSurface" />
 
     <ImageView
         android:id="@+id/ivArrowChangePassword"
@@ -88,7 +89,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/mbChangePassword"
         app:layout_constraintEnd_toEndOf="@+id/mbChangePassword"
         app:layout_constraintTop_toTopOf="@+id/mbChangePassword"
-        app:layout_constraintVertical_bias="0.666" />
+        app:layout_constraintVertical_bias="0.666"
+        app:tint="?attr/colorOnSurface"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbDataPrivacy"
@@ -134,7 +136,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mbSettings"
+        app:layout_constraintTop_toBottomOf="@+id/mbChangeTheme"
         app:rippleColor="?attr/colorControlHighlight"
         app:strokeColor="@android:color/transparent"
         app:strokeWidth="0dp" />
@@ -148,7 +150,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/mbAccountDeletion"
         app:layout_constraintEnd_toEndOf="@+id/mbAccountDeletion"
         app:layout_constraintTop_toTopOf="@+id/mbAccountDeletion"
-        app:layout_constraintVertical_bias="0.518" />
+        app:layout_constraintVertical_bias="0.518"
+        app:tint="?attr/colorOnSurface"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbLogout"
@@ -166,7 +169,7 @@
         app:iconGravity="start"
         app:iconPadding="20dp"
         app:iconSize="25dp"
-        app:iconTint="@color/black"
+        app:iconTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -184,7 +187,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/mbDataPrivacy"
         app:layout_constraintEnd_toEndOf="@+id/mbDataPrivacy"
         app:layout_constraintTop_toTopOf="@+id/mbDataPrivacy"
-        app:layout_constraintVertical_bias="0.518" />
+        app:layout_constraintVertical_bias="0.518"
+        app:tint="?attr/colorOnSurface"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbChangePassword"
@@ -243,49 +247,51 @@
         app:layout_constraintBottom_toBottomOf="@+id/mbChangeTheme"
         app:layout_constraintEnd_toEndOf="@+id/mbChangeTheme"
         app:layout_constraintTop_toTopOf="@+id/mbChangeTheme"
-        app:layout_constraintVertical_bias="0.666" />
+        app:layout_constraintVertical_bias="0.666"
+        app:tint="?attr/colorOnSurface"/>
 
-    <ImageView
-        android:id="@+id/ivArrowSettings"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="8dp"
-        android:src="@drawable/baseline_arrow_forward_ios_24"
-        app:layout_constraintBottom_toBottomOf="@+id/mbSettings"
-        app:layout_constraintEnd_toEndOf="@+id/mbSettings"
-        app:layout_constraintTop_toTopOf="@+id/mbSettings"
-        app:layout_constraintVertical_bias="0.518" />
+<!--    <ImageView-->
+<!--        android:id="@+id/ivArrowSettings"-->
+<!--        android:layout_width="24dp"-->
+<!--        android:layout_height="24dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:src="@drawable/baseline_arrow_forward_ios_24"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/mbSettings"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/mbSettings"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/mbSettings"-->
+<!--        app:layout_constraintVertical_bias="0.518" />-->
 
     <TextView
         android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="169dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="104dp"
         android:layout_marginEnd="184dp"
         android:text="TextView"
         android:textColor="@color/purple"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="162dp"
-        android:layout_height="174dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginBottom="152dp"
+        android:layout_width="143dp"
+        android:layout_height="162dp"
+        android:layout_marginStart="2dp"
         android:src="@drawable/paw_reversed_svg"
-        app:layout_constraintBottom_toTopOf="@+id/mbEditProfile"
-        app:layout_constraintStart_toEndOf="@+id/imageView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvUsername"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="165dp"
-        android:layout_height="152dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="291dp"
+        android:layout_width="171dp"
+        android:layout_height="171dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="268dp"
         android:src="@drawable/pawprint_svg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mbLogout" />
