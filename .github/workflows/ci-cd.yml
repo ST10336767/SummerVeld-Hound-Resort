@@ -81,9 +81,9 @@ jobs:
     - name: Make gradlew executable
       run: chmod +x ./android-app/gradlew
       
-    - name: Run unit tests
+    - name: Run unit tests with coverage
       working-directory: ./android-app
-      run: ./gradlew test
+      run: ./gradlew testDebugUnitTest jacocoTestReport
       
     - name: Run instrumented tests
       working-directory: ./android-app
@@ -110,7 +110,6 @@ jobs:
         fetch-depth: 0  # Shallow clones should be disabled for better analysis
         
     - name: SonarCloud Scan
-      # Re-enabled with correct project key and organization
       uses: SonarSource/sonarqube-scan-action@v5.0.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -121,7 +120,7 @@ jobs:
           -Dsonar.organization=st10336767
           -Dsonar.sources=backend,android-app
           -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info
-          -Dsonar.java.coverage.jacoco.xmlReportPaths=android-app/app/build/reports/jacoco/testDebugUnitTestReport/jacocoTestReport.xml
+          -Dsonar.java.coverage.jacoco.xmlReportPaths=android-app/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
           -Dsonar.ci.analysis.enabled=true
           -Dsonar.ci.analysis.automaticAnalysis=false
 
