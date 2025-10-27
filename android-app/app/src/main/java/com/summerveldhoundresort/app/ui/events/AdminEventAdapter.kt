@@ -50,7 +50,7 @@ class AdminEventAdapter(
         holder.editButton.setOnClickListener { onEventClick(event) }
 
         // --- RSVP Count Logic ---
-        holder.rsvpCountTextView?.text = "0 going"
+        holder.rsvpCountTextView?.text = "0 members going"
         event.id?.let { eventId ->
             listeners[eventId]?.remove()
             val reg = firestore.collection("events")
@@ -58,7 +58,7 @@ class AdminEventAdapter(
                 .collection("rsvps")
                 .addSnapshotListener { snapshot, _ ->
                     val count = snapshot?.size() ?: 0
-                    holder.rsvpCountTextView?.text = "$count going"
+                    holder.rsvpCountTextView?.text = "$count members going"
                 }
             listeners[eventId] = reg
         }

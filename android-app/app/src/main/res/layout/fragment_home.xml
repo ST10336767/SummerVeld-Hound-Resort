@@ -12,14 +12,15 @@
         android:layout_height="wrap_content"
         android:text="Welcome"
         android:textColor="@color/dark_purple"
-        android:textSize="18sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:layout_marginBottom="16dp"/>
 
         <!-- Upcoming events (3 only) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewEvents"
         android:layout_width="match_parent"
-        android:layout_height="385dp"
+        android:layout_height="560dp"
         android:nestedScrollingEnabled="false"
         android:overScrollMode="never" />
 

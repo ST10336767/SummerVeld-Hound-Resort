@@ -40,7 +40,7 @@
                 android:id="@+id/btnBack"
                 android:layout_width="88dp"
                 android:layout_height="36dp"
-                android:text="Back"
+                android:text="← Back"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:backgroundTint="@color/dark_purple"

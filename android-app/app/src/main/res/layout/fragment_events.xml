@@ -24,11 +24,12 @@
         android:text="All Events"
         android:textColor="@color/dark_purple"
         android:textSize="20sp"
+        android:textStyle="bold"
         android:paddingBottom="12dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewAllEvents"
         android:layout_width="match_parent"
-        android:layout_height="541dp" />
+        android:layout_height="630dp" />
 </LinearLayout>
 
