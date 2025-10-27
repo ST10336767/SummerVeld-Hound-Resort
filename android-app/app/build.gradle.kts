@@ -84,8 +84,8 @@ dependencies {
     // Network dependencies for REST API integration
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation("com.squareup.okhttp3:okhttp:5.2.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.2.1")
     
     // Image picker and camera
     implementation("com.github.dhaval2404:imagepicker:2.1")
