@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background">
+    android:layout_height="match_parent">
 
     <!-- decorative paw -->
+<!--    Removed this line - dunno if there was a reason for it or not-->
+<!--     Greyed out the paw prints-->
+<!--    android:alpha="0.12"-->
+
     <ImageView
         android:id="@+id/pawHeader"
         android:layout_width="160dp"
@@ -15,7 +18,7 @@
         android:contentDescription="@null"
         android:rotation="-8"
         android:scaleType="centerCrop"
-        android:src="@drawable/paw" />
+        android:src="@drawable/paw_reversed_svg" />
 
     <!-- content -->
     <LinearLayout
@@ -34,7 +37,7 @@
             android:layout_marginBottom="8dp"
             android:gravity="center"
             android:text="Manage Events"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             android:textSize="22sp"
             android:textStyle="bold" />
 

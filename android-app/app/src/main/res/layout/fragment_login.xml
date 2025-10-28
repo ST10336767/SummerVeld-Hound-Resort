@@ -53,6 +53,7 @@
         android:layout_marginEnd="90dp"
         android:backgroundTint="@color/dark_purple"
         android:text="Forgot password"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNoAccount" />
@@ -66,6 +67,7 @@
         android:layout_marginEnd="90dp"
         android:backgroundTint="@color/dark_purple"
         android:text="Login"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_input_password" />
@@ -217,7 +219,7 @@
         android:layout_width="157dp"
         android:layout_height="206dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/paw_trail"
+        android:src="@drawable/pawprint_svg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/status_text_view" />
 
@@ -227,7 +229,7 @@
         android:layout_height="174dp"
         android:layout_marginStart="48dp"
         android:layout_marginBottom="19dp"
-        android:src="@drawable/paw_reverse"
+        android:src="@drawable/paw_reversed_svg"
         app:layout_constraintBottom_toTopOf="@+id/edtEmailAddress"
         app:layout_constraintStart_toEndOf="@+id/tvLogin" />
 

@@ -33,4 +33,8 @@
         android:name="com.summerveldhoundresort.app.ui.auth.ForgotPassawordFragment"
         android:label="fragment_forgot_passaword"
         tools:layout="@layout/fragment_forgot_passaword" />
+
+
+
+
 </navigation>

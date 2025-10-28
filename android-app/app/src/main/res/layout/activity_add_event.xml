@@ -2,10 +2,12 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- decorative paw -->
+    <!--    Removed this line - dunno if there was a reason for it or not-->
+    <!--     Greyed out the paw prints-->
+    <!--    android:alpha="0.12"-->
     <ImageView
         android:id="@+id/pawHeader"
         android:layout_width="160dp"
@@ -16,7 +18,7 @@
         android:contentDescription="@null"
         android:rotation="-8"
         android:scaleType="centerCrop"
-        android:src="@drawable/paw" />
+        android:src="@drawable/paw_reversed_svg" />
 
     <!-- content -->
     <ScrollView
@@ -39,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Adding Event"
-                android:textColor="@color/dark_purple"
+                android:textColor="@color/purple"
                 android:textSize="28sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="50dp"
@@ -65,7 +67,7 @@
                     android:background="@drawable/bg_comment_input"
                     android:paddingStart="12dp"
                     android:textColor="@android:color/black"
-                    android:textColorHint="@color/light_gray"
+                    android:textColorHint="@color/gray"
                     android:textSize="16sp"
                     android:layout_marginBottom="12dp" />
 
@@ -80,7 +82,7 @@
                     android:background="@drawable/bg_comment_input"
                     android:paddingStart="12dp"
                     android:textColor="@android:color/black"
-                    android:textColorHint="@color/light_gray"
+                    android:textColorHint="@color/gray"
                     android:textSize="16sp"
                     android:layout_marginBottom="12dp" />
 
@@ -95,7 +97,7 @@
                     android:background="@drawable/bg_comment_input"
                     android:paddingStart="12dp"
                     android:textColor="@android:color/black"
-                    android:textColorHint="@color/light_gray"
+                    android:textColorHint="@color/gray"
                     android:textSize="16sp"
                     android:layout_marginBottom="12dp" />
 
@@ -108,7 +110,7 @@
                     android:background="@drawable/bg_comment_input"
                     android:paddingStart="12dp"
                     android:textColor="@android:color/black"
-                    android:textColorHint="@color/light_gray"
+                    android:textColorHint="@color/gray"
                     android:textSize="16sp"
                     android:layout_marginBottom="12dp" />
 
@@ -123,7 +125,7 @@
                     android:paddingStart="12dp"
                     android:paddingTop="10dp"
                     android:textColor="@android:color/black"
-                    android:textColorHint="@color/light_gray"
+                    android:textColorHint="@color/gray"
                     android:textSize="16sp" />
             </LinearLayout>
 

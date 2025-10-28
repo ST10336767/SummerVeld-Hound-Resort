@@ -2,7 +2,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:padding="24dp">
 
     <LinearLayout
@@ -18,7 +17,7 @@
             android:text="Support Summerveld Hound Resort"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             android:layout_marginBottom="16dp" />
 
         <!-- Info -->
@@ -27,7 +26,7 @@
             android:layout_height="wrap_content"
             android:text="You can donate via Zapper or directly to our bank account below."
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:layout_marginBottom="24dp" />
 
         <!-- Zapper QR -->
@@ -54,7 +53,7 @@
             android:text="Bank Details"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             android:layout_marginBottom="12dp" />
 
         <!-- Bank Details -->
@@ -63,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bank: Nedbank\nAccount Name: Summerveld Hound Resort\nAccount Number: 1188985205\nBranch Code: 133826\nAccount Type: Cheque Account\nReference: Your Name"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:lineSpacingExtra="6dp"
             android:textAlignment="center" />
