@@ -35,24 +35,6 @@ class ManageDogsFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerManageDogs)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
-//        val backButton: Button = view.findViewById(R.id.buttonBack)
-//        backButton.setOnClickListener {
-//            try {
-//                // Try to finish the activity safely
-//                if (isAdded && !requireActivity().isFinishing) {
-//                    requireActivity().finish()
-//                }
-//            } catch (e: Exception) {
-//                // If there's an error, try alternative navigation
-//                try {
-//                    requireActivity().onBackPressed()
-//                } catch (e2: Exception) {
-//                    // Last resort - just log the error
-//                    android.util.Log.e("ManageDogsFragment", "Error handling back button", e2)
-//                }
-//            }
-//        }
-
         // Set up Add Dog button click listener
         val addDogButton: Button = view.findViewById(R.id.buttonAddDog)
         addDogButton.setOnClickListener {
