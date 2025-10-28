@@ -124,7 +124,7 @@ class LoginFragment : Fragment() {
 
                         requireActivity().finish()
 
-                      
+
                     }
 
                     is AppResult.Error -> {
@@ -184,12 +184,12 @@ class LoginFragment : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(requireContext(), "Sign in successful", Toast.LENGTH_SHORT).show()
-                    
+
                     // Navigate to MainActivity immediately
                     val intent = Intent(requireContext(), MainActivity::class.java)
                     startActivity(intent)
                     requireActivity().finish()
-                    
+
                     // Handle user profile creation asynchronously without blocking
                     val user = Firebase.auth.currentUser
                     if (user != null) {
@@ -202,12 +202,12 @@ class LoginFragment : Fragment() {
                 }
             }
     }
-    
+
     private fun createGoogleUserProfileSafely(user: FirebaseUser) {
         // Create a supervisor job to avoid cancelling
         val supervisorJob = SupervisorJob()
         val scope = CoroutineScope(Dispatchers.IO + supervisorJob)
-        
+
         scope.launch {
             try {
                 createOrUpdateUserProfile(user)
@@ -218,14 +218,14 @@ class LoginFragment : Fragment() {
             }
         }
     }
-    
+
     private suspend fun createOrUpdateUserProfile(user: FirebaseUser) {
         try {
             val firestore = Firebase.firestore
-            
+
             // Check if user document already exists
             val userDocSnapshot = firestore.collection("users").document(user.uid).get().await()
-            
+
             if (!userDocSnapshot.exists()) {
                 // Create new user profile for Google Sign-In
                 val currentDate = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(java.util.Date())
@@ -237,7 +237,7 @@ class LoginFragment : Fragment() {
                     creationDate = currentDate,
                     role = "user"
                 )
-                
+
                 // Save to Firestore
                 firestore.collection("users").document(user.uid).set(userProfile).await()
                 Log.d(TAG, "Google user profile created in Firestore")
@@ -261,7 +261,7 @@ class LoginFragment : Fragment() {
     private fun isGooglePlayServicesAvailable(): Boolean {
         val googleApiAvailability = GoogleApiAvailability.getInstance()
         val resultCode = googleApiAvailability.isGooglePlayServicesAvailable(requireContext())
-        
+
         return when (resultCode) {
             ConnectionResult.SUCCESS -> true
             else -> {

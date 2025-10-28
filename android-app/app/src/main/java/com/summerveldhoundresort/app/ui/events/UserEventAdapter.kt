@@ -15,6 +15,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 
+// ADD
+import android.view.MotionEvent
+import android.view.ViewGroup as AndroidViewGroup
+
 class UserEventAdapter(private val events: List<Event>) :
     RecyclerView.Adapter<UserEventAdapter.EventViewHolder>() {
 
@@ -69,7 +73,7 @@ class UserEventAdapter(private val events: List<Event>) :
         }
 
         Log.d("UserEventAdapter", "Event ID: '${event.id}', Event name: '${event.name}'")
-        
+
         if (event.id.isNotEmpty()) {
             val rsvpCollection = firestore.collection("events")
                 .document(event.id)
@@ -123,7 +127,26 @@ class UserEventAdapter(private val events: List<Event>) :
             holder.commentsRecycler?.adapter = commentAdapter
             holder.commentsRecycler?.layoutManager = LinearLayoutManager(holder.itemView.context)
             holder.commentsRecycler?.setHasFixedSize(true)
-            
+
+            holder.commentsRecycler?.isNestedScrollingEnabled = true
+            holder.commentsRecycler?.let { rv ->
+                // if XML height is wrap_content/match_parent, gives it a viewport so it can scroll
+                val lp = rv.layoutParams
+                if (lp != null && (lp.height == AndroidViewGroup.LayoutParams.MATCH_PARENT ||
+                            lp.height == AndroidViewGroup.LayoutParams.WRAP_CONTENT)) {
+                    val px = (240 * rv.resources.displayMetrics.density).toInt()
+                    lp.height = px
+                    rv.layoutParams = lp
+                }
+                // prevent parent RecyclerView from stealing scroll gestures
+                rv.setOnTouchListener { v, ev ->
+                    if (ev.action == MotionEvent.ACTION_DOWN || ev.action == MotionEvent.ACTION_MOVE) {
+                        v.parent?.requestDisallowInterceptTouchEvent(true)
+                    }
+                    false
+                }
+            }
+
             Log.d("UserEventAdapter", "Comment input exists: ${holder.commentInput != null}")
             Log.d("UserEventAdapter", "Send button exists: ${holder.sendCommentButton != null}")
             Log.d("UserEventAdapter", "Comments recycler exists: ${holder.commentsRecycler != null}")
@@ -135,45 +158,50 @@ class UserEventAdapter(private val events: List<Event>) :
                     Log.e("UserEventAdapter", "Failed to load comments for event ${event.id}: ${error.message}")
                     return@addSnapshotListener
                 }
-                
+
                 commentsList.clear()
                 val comments = snapshot?.documents?.mapNotNull { doc ->
                     val comment = doc.toObject(Comment::class.java)
                     Log.d("UserEventAdapter", "Loaded comment: ${comment?.text} by ${comment?.username}")
                     comment
                 } ?: emptyList()
-                
+
                 commentsList.addAll(comments)
                 Log.d("UserEventAdapter", "Total comments loaded: ${commentsList.size}")
                 commentAdapter.notifyDataSetChanged()
+
+                holder.commentsRecycler?.post {
+                    holder.commentsRecycler?.scrollToPosition(commentsList.size - 1)
+                }
+
             }
 
             // Send comment
             holder.sendCommentButton?.setOnClickListener {
                 Log.d("UserEventAdapter", "Send comment button clicked")
-                
+
                 // Check if user is logged in
                 if (currentUser == null) {
                     Toast.makeText(holder.itemView.context, "Please sign in to comment", Toast.LENGTH_SHORT).show()
                     Log.e("UserEventAdapter", "User not logged in")
                     return@setOnClickListener
                 }
-                
+
                 val text = holder.commentInput?.text.toString().trim()
                 Log.d("UserEventAdapter", "Comment text: '$text'")
-                
+
                 if (text.isEmpty()) {
                     Toast.makeText(holder.itemView.context, "Please enter a comment", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                
+
                 val comment = Comment(
                     userId = currentUser.uid,
                     username = currentUser.displayName ?: "User",
                     text = text,
                     timestamp = System.currentTimeMillis()
                 )
-                
+
                 Log.d("UserEventAdapter", "Adding comment to collection: ${commentsCollection.path}")
                 commentsCollection.add(comment)
                     .addOnSuccessListener { docRef ->

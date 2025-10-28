@@ -54,7 +54,7 @@ class EventsFragment : Fragment() {
                 val allEvents = snapshot?.documents
                     ?.mapNotNull { doc ->
                         val event = doc.toObject(Event::class.java)
-                        event?.id = doc.id // critical for RSVP
+                        event?.id = doc.id
                         event
                     } ?: emptyList()
 

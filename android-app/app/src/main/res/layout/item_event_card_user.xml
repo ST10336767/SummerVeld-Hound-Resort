@@ -111,10 +111,12 @@
     <RelativeLayout
         android:id="@+id/commentsBox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="160dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:minHeight="300dp"
         android:background="@drawable/bg_inner_panel"
         android:padding="12dp">
+
 
         <!-- RecyclerView for comments -->
 

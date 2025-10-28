@@ -58,6 +58,9 @@
         <activity
             android:name=".ui.auth.AuthActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.events.EventCommentsActivity"
+            android:exported="true" />
 
         <activity
             android:name=".ui.SplashScreen"
@@ -67,6 +70,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
 
         <activity
             android:name=".MainActivity"

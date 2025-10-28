@@ -41,6 +41,8 @@ class EditEventActivity : AppCompatActivity() {
         deleteBtn = findViewById(R.id.deleteEventBtn)
         backBtn = findViewById(R.id.backBtn)
 
+        findViewById<Button?>(R.id.btnBack)?.setOnClickListener { finish() }
+
         eventId = intent.getStringExtra("EVENT_ID")
 
         if (eventId == null) {
@@ -55,7 +57,8 @@ class EditEventActivity : AppCompatActivity() {
         eventDateInput.isFocusable = false
         eventDateInput.setOnClickListener {
             val cal = Calendar.getInstance()
-            val datePicker = DatePickerDialog(this,
+            val datePicker = DatePickerDialog(
+                this,
                 { _, y, m, d -> eventDateInput.setText("%04d-%02d-%02d".format(y, m + 1, d)) },
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
@@ -68,7 +71,8 @@ class EditEventActivity : AppCompatActivity() {
         eventTimeInput.isFocusable = false
         eventTimeInput.setOnClickListener {
             val cal = Calendar.getInstance()
-            val timePicker = TimePickerDialog(this,
+            val timePicker = TimePickerDialog(
+                this,
                 { _, h, min -> eventTimeInput.setText("%02d:%02d".format(h, min)) },
                 cal.get(Calendar.HOUR_OF_DAY),
                 cal.get(Calendar.MINUTE),
@@ -90,11 +94,11 @@ class EditEventActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             val updates = mapOf(
-            "name" to name,
-            "description" to desc,
-            "date" to date,
-            "time" to time,
-            "location" to location
+                "name" to name,
+                "description" to desc,
+                "date" to date,
+                "time" to time,
+                "location" to location
             )
             db.collection("events").document(eventId!!)
                 .update(updates)
@@ -102,7 +106,7 @@ class EditEventActivity : AppCompatActivity() {
                     Toast.makeText(this, "Event updated successfully", Toast.LENGTH_SHORT).show()
                     finish()
                 }
-                .addOnFailureListener { _ ->
+                .addOnFailureListener {
                     Toast.makeText(this, "Update failed. Try again.", Toast.LENGTH_SHORT).show()
                 }
         }
@@ -112,7 +116,7 @@ class EditEventActivity : AppCompatActivity() {
             deleteEventWithSubcollections(eventId!!)
         }
 
-        // Back button
+        // Existing cancel button
         backBtn.setOnClickListener {
             finish()
         }
@@ -137,7 +141,6 @@ class EditEventActivity : AppCompatActivity() {
     }
 
     private fun deleteEventWithSubcollections(eventId: String) {
-        // Show confirmation dialog
         androidx.appcompat.app.AlertDialog.Builder(this)
             .setTitle("Delete Event")
             .setMessage("Are you sure you want to delete this event? This will also delete all comments and RSVPs. This action cannot be undone.")
@@ -150,14 +153,11 @@ class EditEventActivity : AppCompatActivity() {
 
     private fun performCompleteEventDeletion(eventId: String) {
         Toast.makeText(this, "Deleting event and all associated data...", Toast.LENGTH_SHORT).show()
-        
+
         val eventRef = db.collection("events").document(eventId)
-        
-        // First, delete all comments
-        deleteSubcollection(eventRef.collection("comments"), "comments") { commentsDeleted ->
-            // Then, delete all RSVPs
-            deleteSubcollection(eventRef.collection("rsvps"), "RSVPs") { rsvpsDeleted ->
-                // Finally, delete the main event document
+
+        deleteSubcollection(eventRef.collection("comments"), "comments") {
+            deleteSubcollection(eventRef.collection("rsvps"), "RSVPs") {
                 eventRef.delete()
                     .addOnSuccessListener {
                         Toast.makeText(this, "Event and all associated data deleted successfully", Toast.LENGTH_SHORT).show()
