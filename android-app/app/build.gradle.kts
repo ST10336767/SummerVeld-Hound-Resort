@@ -1,3 +1,7 @@
+import org.gradle.api.tasks.testing.Test
+import org.gradle.testing.jacoco.tasks.JacocoReport
+import org.gradle.testing.jacoco.plugins.JacocoTaskExtension
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -137,10 +141,6 @@ dependencies {
 }
 
 // Jacoco configuration for code coverage
-import org.gradle.api.tasks.testing.Test
-import org.gradle.testing.jacoco.tasks.JacocoReport
-import org.gradle.testing.jacoco.plugins.JacocoTaskExtension
-
 tasks.withType<Test> {
     configure<JacocoTaskExtension> {
         isIncludeNoLocationClasses = false
@@ -166,12 +166,12 @@ tasks.register("jacocoTestReport", JacocoReport::class) {
         "android/**/*.*"
     )
     
-    val debugTree = fileTree("${project.buildDir}/intermediates/javac/debug") {
+    val debugTree = fileTree("${layout.buildDirectory.get()}/intermediates/javac/debug") {
         exclude(fileFilter)
     }
     val mainSrc = "${project.projectDir}/src/main/java"
     
     sourceDirectories.setFrom(files(mainSrc))
     classDirectories.setFrom(files(debugTree))
-    executionData.setFrom(fileTree(buildDir).include("**/*.exec"))
+    executionData.setFrom(fileTree(layout.buildDirectory).include("**/*.exec"))
 }
