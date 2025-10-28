@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:clipToPadding="false"
+    android:paddingBottom="120dp">
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:padding="16dp">
 
     <TextView
@@ -13,26 +20,26 @@
         android:text="Welcome"
         android:textColor="@color/purple"
         android:textSize="18sp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="8dp"/>
 
         <!-- Upcoming events (3 only) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewEvents"
         android:layout_width="match_parent"
-        android:layout_height="560dp"
+        android:layout_height="wrap_content"
         android:nestedScrollingEnabled="false"
         android:overScrollMode="never" />
 
         <!-- Button to view all events -->
-        <Button
-            android:id="@+id/btnViewAllEvents"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="View All Events"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/dark_purple"
-            android:layout_marginTop="12dp"/>
-
+    <Button
+        android:id="@+id/btnViewAllEvents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View All Events"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/dark_purple"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"/>
 
     <Button
         android:id="@+id/button"
@@ -40,15 +47,9 @@
         android:layout_height="wrap_content"
         android:text="About us"
         android:textColor="@color/white"
-        android:backgroundTint="@color/dark_purple"/>
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Our Dogs"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/dark_purple"/>
-
+        android:backgroundTint="@color/dark_purple"
+        android:layout_marginTop="8dp"/>
 
 </LinearLayout>
+
+</ScrollView>
