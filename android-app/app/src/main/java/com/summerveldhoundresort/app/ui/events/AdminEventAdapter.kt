@@ -11,6 +11,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.summerveldhoundresort.app.R
 import com.summerveldhoundresort.app.db.entities.Event
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AdminEventAdapter(
     private val events: List<Event>,
@@ -27,10 +29,33 @@ class AdminEventAdapter(
         val locationTextView: TextView = itemView.findViewById(R.id.locationTextView)
         val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
         val editButton: Button = itemView.findViewById(R.id.btnEdit)
-
         val rsvpCountTextView: TextView? = itemView.findViewById(R.id.tvAttendees)
         val viewCommentsButton: Button? = itemView.findViewById(R.id.btnViewComments)
     }
+
+    // ---- date helpers (DATE + TIME) ----
+    private val dateTimeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).apply {
+        isLenient = false
+    }
+    private fun parseDateTime(date: String?, time: String?): Date? = try {
+        val d = date?.trim().orEmpty()
+        val t = time?.trim().orEmpty()
+        when {
+            d.isEmpty() -> null
+            t.isEmpty() -> dateTimeFormat.parse("$d 23:59")
+            else -> dateTimeFormat.parse("$d $t")
+        }
+    } catch (_: Exception) { null }
+
+    private val sortedEvents: List<Event>
+        get() {
+            val now = Date()
+            val (known, unknown) = events.partition { parseDateTime(it.date, it.time) != null }
+            val (past, upcoming) = known.partition { parseDateTime(it.date, it.time)!!.before(now) }
+            val upcomingSorted = upcoming.sortedBy { parseDateTime(it.date, it.time) }
+            val pastSorted = past.sortedByDescending { parseDateTime(it.date, it.time) }
+            return upcomingSorted + pastSorted + unknown
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -39,7 +64,8 @@ class AdminEventAdapter(
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-        val event = events[position]
+        val event = sortedEvents[position]
+
         holder.titleTextView.text = event.name
         holder.dateTextView.text = event.date
         holder.timeTextView.text = event.time
@@ -49,9 +75,10 @@ class AdminEventAdapter(
         holder.editButton.visibility = View.VISIBLE
         holder.editButton.setOnClickListener { onEventClick(event) }
 
-        // --- RSVP Count Logic ---
+        // RSVP Count
         holder.rsvpCountTextView?.text = "0 members going"
-        event.id?.let { eventId ->
+        val eventId = event.id
+        if (eventId.isNotEmpty()) {
             listeners[eventId]?.remove()
             val reg = firestore.collection("events")
                 .document(eventId)
@@ -63,7 +90,7 @@ class AdminEventAdapter(
             listeners[eventId] = reg
         }
 
-        // --- View Comments button ---
+        // View Comments
         holder.viewCommentsButton?.setOnClickListener {
             val ctx = holder.itemView.context
             val i = Intent(ctx, EventCommentsActivity::class.java)
@@ -84,5 +111,5 @@ class AdminEventAdapter(
         listeners.clear()
     }
 
-    override fun getItemCount() = events.size
+    override fun getItemCount() = sortedEvents.size
 }
