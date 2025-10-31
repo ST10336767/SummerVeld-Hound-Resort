@@ -44,11 +44,6 @@ class AdminProfileFragment : Fragment() {
             requireActivity().finish()
         }
 
-        // Back button
-        binding.btnBack.setOnClickListener {
-            // Go back to admin dashboard
-            requireActivity().onBackPressed()
-        }
     }
 
     override fun onDestroyView() {
