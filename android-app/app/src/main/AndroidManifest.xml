@@ -48,13 +48,15 @@
             android:exported="true" />
         <activity
             android:name=".EditDogActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".AdminActivity"
             android:exported="true" />
         <activity
             android:name=".ui.admin.CreateDogActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.auth.AuthActivity"
             android:exported="true" />
