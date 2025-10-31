@@ -57,10 +57,25 @@ class EditProfileFragment : Fragment() {
             val name = binding.edtName.text.toString()
             val phoneNum = binding.edtPhoneNum.text.toString()
 
+            // Check if at least one field has been entered
+            if (name.isEmpty() && email.isEmpty() && phoneNum.isEmpty()) {
+                Toast.makeText(requireContext(), "Please enter at least one field to update", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             //Updating user details
             Log.d(TAG, "Updating user info now")
-            profileViewModel.updateUserInfo(name.ifEmpty { null }, email.ifEmpty { null }, phoneNum.ifEmpty { null })
+            profileViewModel.updateUserInfo(
+                name.ifEmpty { null }, 
+                email.ifEmpty { null }, 
+                phoneNum.ifEmpty { null }
+            )
             Toast.makeText(requireContext(), "Profile info updated successfully", Toast.LENGTH_SHORT).show()
+            
+            // Navigate back after a short delay to allow update to complete
+            binding.root.postDelayed({
+                findNavController().navigateUp()
+            }, 500)
         }
 
         // Set up back button click listener
