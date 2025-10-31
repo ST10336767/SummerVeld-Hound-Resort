@@ -48,7 +48,9 @@ class ProfileViewFragment : Fragment() {
         profileViewModel = ViewModelProvider(this, factory)[ProfileViewModel::class.java]
 
         profileViewModel.username.observe(viewLifecycleOwner) {username ->
-            binding.tvUsername.text = username
+            if (username != null) {
+                binding.tvUsername.text = username
+            }
         }
 
         //adeed
@@ -124,6 +126,12 @@ class ProfileViewFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Reload username when fragment becomes visible (e.g., returning from edit screen)
+        profileViewModel.loadUsername()
     }
 
     private fun showThemeDialog() {

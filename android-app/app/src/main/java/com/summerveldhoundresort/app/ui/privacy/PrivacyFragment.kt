@@ -28,16 +28,32 @@ class PrivacyFragment : Fragment(R.layout.fragment_privacy) {
         try {
             // Open the full privacy policy hosted on GitHub Pages
             val privacyPolicyUrl = "https://ST10336767.github.io/Privacy-Policy-SummerveldHoundResort"
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(privacyPolicyUrl))
+            val uri = Uri.parse(privacyPolicyUrl)
+            val intent = Intent(Intent.ACTION_VIEW, uri)
             
-            // Add flags to ensure the intent works properly
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            // Check if there's an app that can handle this intent
+            val packageManager = requireContext().packageManager
+            val resolvedActivity = intent.resolveActivity(packageManager)
             
-            if (intent.resolveActivity(requireContext().packageManager) != null) {
+            if (resolvedActivity != null) {
+                // Activity can be resolved, start it directly
+                // Don't use FLAG_ACTIVITY_NEW_TASK when starting from a fragment
                 startActivity(intent)
+            } else {
+                // Try with chooser as fallback
+                val chooser = Intent.createChooser(intent, "Open Privacy Policy")
+                val chooserResolved = chooser.resolveActivity(packageManager)
+                if (chooserResolved != null) {
+                    startActivity(chooser)
+                } else {
+                    Toast.makeText(requireContext(), "No browser app found. Please install a web browser.", Toast.LENGTH_LONG).show()
+                }
             }
+        } catch (e: android.content.ActivityNotFoundException) {
+            Toast.makeText(requireContext(), "No browser app found. Please install a web browser.", Toast.LENGTH_LONG).show()
         } catch (e: Exception) {
-            // Silently fail if unable to open link
+            // Show error message if unable to open link
+            Toast.makeText(requireContext(), "Unable to open privacy policy: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 }
