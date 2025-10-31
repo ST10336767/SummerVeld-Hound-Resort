@@ -41,4 +41,10 @@
 
     <!-- Backgrounds -->
     <color name="background">#FDFDFD</color>
+
+    <!-- Gender Spinner -->
+    <color name="spinner_bg_color">#FFFFFF</color>
+    <color name="spinner_text_color">#C44187</color>
+    <color name="spinner_dropdown_bg">#FFFFFF</color>
+
 </resources>

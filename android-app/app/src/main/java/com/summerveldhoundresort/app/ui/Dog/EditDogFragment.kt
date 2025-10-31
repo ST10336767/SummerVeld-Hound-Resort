@@ -6,10 +6,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -49,6 +52,78 @@ class EditDogFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val spinner = binding.spinnerGender
+
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.gender_options,
+            R.layout.spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
+
+        dog?.gender?.let { currentGender ->
+            val pos = resources.getStringArray(R.array.gender_options).indexOf(currentGender)
+            if (pos >= 0) spinner.setSelection(pos)
+        }
+
+
+
+
+        //Scrollable edit description
+        binding.editDescription.setOnTouchListener { v, event ->
+            v.parent.requestDisallowInterceptTouchEvent(true)
+
+            if ((event.action and MotionEvent.ACTION_MASK) == MotionEvent.ACTION_UP) {
+                v.parent.requestDisallowInterceptTouchEvent(false)
+            }
+
+            v.performClick()
+            v.onTouchEvent(event)
+            true
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val targetPadding = imeInsets.bottom
+
+            v.setPadding(0, 0, 0, targetPadding)
+            insets
+        }
+
+        // Auto Scroll
+        view.viewTreeObserver.addOnGlobalLayoutListener {
+            val scrollView = binding.EditDogScroll
+            val focusedView = requireActivity().currentFocus ?: return@addOnGlobalLayoutListener
+
+            val rect = android.graphics.Rect()
+            scrollView.getWindowVisibleDisplayFrame(rect)
+            val screenHeight = scrollView.rootView.height
+            val keyboardHeight = screenHeight - rect.bottom
+            val isKeyboardVisible = keyboardHeight > screenHeight * 0.15
+
+            if (isKeyboardVisible) {
+                scrollView.postDelayed({
+                    val location = IntArray(2)
+                    focusedView.getLocationInWindow(location)
+                    val focusedBottom = location[1] + focusedView.height
+
+                    // Extra space for multiline
+                    val extraPadding = if (focusedView is android.widget.EditText &&
+                        focusedView.lineCount > 1) 300 else 150
+
+                    // Scrolls if the field is  hidden
+                    if (focusedBottom > rect.bottom - 80) {
+                        scrollView.smoothScrollTo(
+                            0,
+                            scrollView.scrollY + (focusedBottom - rect.bottom + extraPadding)
+                        )
+                    }
+                }, 100)
+            }
+        }
+
         setupImageUploadObserver()
         
         dog = arguments?.getSerializable("dog") as? Dog
@@ -79,18 +154,6 @@ class EditDogFragment : Fragment() {
             showImagePickerOptions()
         }
 
-        // Gender Spinner setup
-        val genderAdapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_item,
-            listOf("Male", "Female")
-        )
-        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerGender.adapter = genderAdapter
-        dog?.gender?.let { currentGender ->
-            val pos = genderAdapter.getPosition(currentGender)
-            if (pos >= 0) binding.spinnerGender.setSelection(pos)
-        }
 
         // Date picker
         binding.editDob.setOnClickListener {
