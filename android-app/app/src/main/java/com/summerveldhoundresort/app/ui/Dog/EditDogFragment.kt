@@ -52,6 +52,25 @@ class EditDogFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val spinner = binding.spinnerGender
+
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.gender_options,
+            R.layout.spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
+
+        dog?.gender?.let { currentGender ->
+            val pos = resources.getStringArray(R.array.gender_options).indexOf(currentGender)
+            if (pos >= 0) spinner.setSelection(pos)
+        }
+
+
+
+
         //Scrollable edit description
         binding.editDescription.setOnTouchListener { v, event ->
             v.parent.requestDisallowInterceptTouchEvent(true)
@@ -135,18 +154,6 @@ class EditDogFragment : Fragment() {
             showImagePickerOptions()
         }
 
-        // Gender Spinner setup
-        val genderAdapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_item,
-            listOf("Male", "Female")
-        )
-        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerGender.adapter = genderAdapter
-        dog?.gender?.let { currentGender ->
-            val pos = genderAdapter.getPosition(currentGender)
-            if (pos >= 0) binding.spinnerGender.setSelection(pos)
-        }
 
         // Date picker
         binding.editDob.setOnClickListener {
