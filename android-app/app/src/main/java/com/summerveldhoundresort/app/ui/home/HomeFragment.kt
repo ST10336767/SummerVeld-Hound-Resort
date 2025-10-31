@@ -46,9 +46,6 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_home_to_eventsFragment)
         }
 
-        binding.button2.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_home_to_savedDogsFragment)
-        }
         binding.button.setOnClickListener {
             findNavController().navigate(R.id.action_global_aboutUsFragment)
         }
