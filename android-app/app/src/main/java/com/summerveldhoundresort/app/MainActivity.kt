@@ -40,6 +40,11 @@ class MainActivity : AppCompatActivity() {
         )
         //setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        
+        // Handle profile navigation from admin
+        if (intent.getBooleanExtra("navigate_to_profile", false)) {
+            navController.navigate(R.id.profileViewFragment)
+        }
     }
 
     //Added - Enables back button functionality on toolbar

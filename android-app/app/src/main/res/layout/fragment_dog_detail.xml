@@ -50,7 +50,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardDogImage"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="6dp">
@@ -58,8 +58,9 @@
                 <ImageView
                     android:id="@+id/imageDogDetail"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
+                    android:layout_height="400dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
                     android:contentDescription="Dog Photo" />
             </androidx.cardview.widget.CardView>
 

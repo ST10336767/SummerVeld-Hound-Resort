@@ -76,7 +76,7 @@ class DogDetailFragment : Fragment() {
                 .load(publicImageUrl)
                 .placeholder(R.drawable.dog_placeholder)
                 .error(R.drawable.dog_placeholder)
-                .centerCrop()
+                .fitCenter()
                 .into(binding.imageDogDetail)
         } else {
             android.util.Log.w("DogDetailFragment", "Empty image URI for dog: $dogName")

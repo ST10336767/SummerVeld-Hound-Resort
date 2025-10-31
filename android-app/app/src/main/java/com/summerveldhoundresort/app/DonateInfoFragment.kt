@@ -3,6 +3,8 @@ package com.summerveldhoundresort.app
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +25,7 @@ class DonateInfoFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_donate_info, container, false)
 
         val btnCopy = view.findViewById<Button>(R.id.btnCopyDetails)
+        val btnZapperPayment = view.findViewById<TextView>(R.id.btnZapperPayment)
         val txtBank = view.findViewById<TextView>(R.id.txtBankDetails)
 
         btnCopy.setOnClickListener {
@@ -32,6 +35,21 @@ class DonateInfoFragment : Fragment() {
             Toast.makeText(requireContext(), "Bank details copied to clipboard!", Toast.LENGTH_SHORT).show()
         }
 
+        btnZapperPayment.setOnClickListener {
+            openZapperPayment()
+        }
+
         return view
+    }
+
+    private fun openZapperPayment() {
+        try {
+            // Zapper payment URL from the provided link
+            val zapperUrl = "https://zapper.com/url/IXFXLAIYd7"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(zapperUrl))
+            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), "Unable to open Zapper payment. Please try again.", Toast.LENGTH_SHORT).show()
+        }
     }
 }

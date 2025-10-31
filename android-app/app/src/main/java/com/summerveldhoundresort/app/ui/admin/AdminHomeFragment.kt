@@ -7,11 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.summerveldhoundresort.app.ManageDogsActivity
 import com.summerveldhoundresort.app.ManageEventsActivity
 import com.summerveldhoundresort.app.R
-import com.summerveldhoundresort.app.databinding.ActivityAdminBinding
 import com.summerveldhoundresort.app.databinding.FragmentAdminHomeBinding
 
 
@@ -49,13 +48,17 @@ class AdminHomeFragment : Fragment() {
         }
 
         binding.MngDogsBtn.setOnClickListener {
-            val intent = Intent(requireContext(), ManageDogsActivity::class.java)
-            startActivity(intent)
+            // Navigate to manage dogs using Navigation Component
+            findNavController().navigate(R.id.manageDogsFragment)
         }
 
         return binding.root
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

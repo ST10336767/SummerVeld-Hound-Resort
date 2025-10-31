@@ -49,6 +49,15 @@ class ManageEventsFragment : Fragment() {
             Log.d("ManageEventsFragment", "No user is currently logged in.")
         }
 
+        // Back button (if present in layout)
+        binding.root.findViewById<View?>(R.id.btnBack)?.setOnClickListener {
+            try {
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            } catch (_: Exception) {
+                requireActivity().onBackPressed()
+            }
+        }
+
         // Navigate to AddEventActivity
         binding.btnAddEvent.setOnClickListener {
             startActivity(Intent(requireContext(), AddEventActivity::class.java))

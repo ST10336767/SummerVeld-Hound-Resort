@@ -97,9 +97,6 @@ class ProfileViewFragment : Fragment() {
                 Toast.makeText(requireContext(), "No email associated with this account", Toast.LENGTH_SHORT).show()
             }
         }
-        binding.mbSettings.setOnClickListener{
-//            findNavController().navigate(R.id.action_ProfileFragment_to_EditProfileFragment)
-        }
         binding.mbAccountDeletion.setOnClickListener {
 //            findNavController().navigate(R.id.action_profileViewFragment_to_accountDeletionFragment)
             if (isAdminGraph) {

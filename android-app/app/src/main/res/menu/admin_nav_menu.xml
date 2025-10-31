@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/admin_dashboard"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Dashboard" />
+
+    <item
+        android:id="@+id/admin_manage_dogs"
+        android:icon="@drawable/dog_sit_svg"
+        android:title="Manage Dogs" />
+
+    <item
+        android:id="@+id/admin_manage_events"
+        android:icon="@drawable/event_svg"
+        android:title="Manage Events" />
+
+    <item
+        android:id="@+id/admin_logout"
+        android:icon="@drawable/baseline_account_circle_24"
+        android:title="Profile" />
+
+</menu>
