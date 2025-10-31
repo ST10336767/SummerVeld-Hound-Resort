@@ -163,7 +163,7 @@ class UserEventAdapter(private val events: List<Event>) :
                 holder.commentsRecycler?.post { holder.commentsRecycler?.scrollToPosition(commentsList.size - 1) }
             }
 
-            // Send comment
+            // Send comment — fetch username from users/{uid} then fallback
             holder.sendCommentButton?.setOnClickListener {
                 if (currentUser == null) {
                     Toast.makeText(holder.itemView.context, "Please sign in to comment", Toast.LENGTH_SHORT).show()
@@ -174,19 +174,49 @@ class UserEventAdapter(private val events: List<Event>) :
                     Toast.makeText(holder.itemView.context, "Please enter a comment", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                val comment = Comment(
-                    userId = currentUser.uid,
-                    username = currentUser.displayName ?: "User",
-                    text = text,
-                    timestamp = System.currentTimeMillis()
-                )
-                commentsCollection.add(comment)
-                    .addOnSuccessListener {
-                        holder.commentInput?.text?.clear()
-                        Toast.makeText(holder.itemView.context, "Comment posted!", Toast.LENGTH_SHORT).show()
+
+                val uid = currentUser.uid
+                val usersDoc = firestore.collection("users").document(uid)
+
+                usersDoc.get()
+                    .addOnSuccessListener { doc ->
+                        val name = doc.getString("username")
+                            ?: doc.getString("name")
+                            ?: currentUser.displayName
+                            ?: "User"
+
+                        val comment = Comment(
+                            userId = uid,
+                            username = name,
+                            text = text,
+                            timestamp = System.currentTimeMillis()
+                        )
+
+                        commentsCollection.add(comment)
+                            .addOnSuccessListener {
+                                holder.commentInput?.text?.clear()
+                                Toast.makeText(holder.itemView.context, "Comment posted!", Toast.LENGTH_SHORT).show()
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(holder.itemView.context, "Failed to send comment: ${e.message}", Toast.LENGTH_LONG).show()
+                            }
                     }
-                    .addOnFailureListener { e ->
-                        Toast.makeText(holder.itemView.context, "Failed to send comment: ${e.message}", Toast.LENGTH_LONG).show()
+                    .addOnFailureListener {
+                        val fallback = currentUser.displayName ?: "User"
+                        val comment = Comment(
+                            userId = uid,
+                            username = fallback,
+                            text = text,
+                            timestamp = System.currentTimeMillis()
+                        )
+                        commentsCollection.add(comment)
+                            .addOnSuccessListener {
+                                holder.commentInput?.text?.clear()
+                                Toast.makeText(holder.itemView.context, "Comment posted!", Toast.LENGTH_SHORT).show()
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(holder.itemView.context, "Failed to send comment: ${e.message}", Toast.LENGTH_LONG).show()
+                            }
                     }
             }
 
