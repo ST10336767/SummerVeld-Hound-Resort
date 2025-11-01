@@ -16,7 +16,7 @@
         android:contentDescription="@null"
         android:rotation="-8"
         android:scaleType="centerCrop"
-        android:src="@drawable/paw" />
+        android:src="@drawable/paw_reversed_svg" />
 
     <!-- content -->
     <LinearLayout
