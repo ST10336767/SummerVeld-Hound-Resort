@@ -88,7 +88,6 @@ class AdminProfileFragment : Fragment() {
 
         lightOption.setOnClickListener {
             ThemeManager.setThemeMode(requireContext(), ThemeManager.THEME_LIGHT)
-            //added
 
             ivLightSelected.visibility = View.VISIBLE
             ivDarkSelected.visibility = View.GONE
@@ -99,8 +98,6 @@ class AdminProfileFragment : Fragment() {
 
         darkOption.setOnClickListener {
             ThemeManager.setThemeMode(requireContext(), ThemeManager.THEME_DARK)
-            //added
-//            requireActivity().recreate()
             ivLightSelected.visibility = View.GONE
             ivDarkSelected.visibility = View.VISIBLE
             ivSystemSelected.visibility = View.GONE
@@ -110,8 +107,6 @@ class AdminProfileFragment : Fragment() {
 
         systemOption.setOnClickListener {
             ThemeManager.setThemeMode(requireContext(), ThemeManager.THEME_SYSTEM)
-            //added
-            requireActivity().recreate()
             ivLightSelected.visibility = View.GONE
             ivDarkSelected.visibility = View.GONE
             ivSystemSelected.visibility = View.VISIBLE
