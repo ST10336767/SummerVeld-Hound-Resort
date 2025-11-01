@@ -36,6 +36,7 @@
         android:drawableTint="@color/dark_purple"
         android:ems="10"
         android:hint="user@example.com"
+        android:textColor="@color/black"
         android:textColorHint="@color/purple"
         android:inputType="textEmailAddress"
         android:paddingStart="12dp"
