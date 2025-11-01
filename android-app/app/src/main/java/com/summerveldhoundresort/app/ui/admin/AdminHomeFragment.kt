@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.summerveldhoundresort.app.AdminActivity
 import com.summerveldhoundresort.app.ManageEventsActivity
 import com.summerveldhoundresort.app.R
 import com.summerveldhoundresort.app.databinding.FragmentAdminHomeBinding
@@ -43,14 +44,25 @@ class AdminHomeFragment : Fragment() {
         }
 
         // Navigate to Manage Events
+//        binding.MngEventsBtn.setOnClickListener {
+////            startActivity(Intent(requireContext(), ManageEventsActivity::class.java))
+//            findNavController().navigate((R.id.manageEventsFragment))
+//        }
+
+//        binding.MngDogsBtn.setOnClickListener {
+//            // Navigate to manage dogs using Navigation Component
+//            findNavController().navigate(R.id.manageDogsFragment)
+//        }
+
+        // ogMik -> rewrote button actions because there was
+        // an issue with naving back to home page if using these two buttons
+        binding.MngDogsBtn.setOnClickListener {
+            (activity as? AdminActivity)?.getBottomNavView()?.selectedItemId = R.id.manageDogsFragment
+        }
         binding.MngEventsBtn.setOnClickListener {
-            startActivity(Intent(requireContext(), ManageEventsActivity::class.java))
+            (activity as? AdminActivity)?.getBottomNavView()?.selectedItemId = R.id.manageEventsFragment
         }
 
-        binding.MngDogsBtn.setOnClickListener {
-            // Navigate to manage dogs using Navigation Component
-            findNavController().navigate(R.id.manageDogsFragment)
-        }
 
         return binding.root
 
