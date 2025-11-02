@@ -65,6 +65,8 @@
             android:name=".ui.events.EventCommentsActivity"
             android:exported="false" />
 
+        <!-- Launcher activity - MUST be exported for Android to launch the app -->
+        <!-- This is a false positive: Android requires launcher activities with MAIN action to be exported -->
         <activity
             android:name=".ui.SplashScreen"
             android:exported="true">
