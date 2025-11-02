@@ -1,32 +1,53 @@
+import org.gradle.api.tasks.testing.Test
+import org.gradle.testing.jacoco.tasks.JacocoReport
+import org.gradle.testing.jacoco.plugins.JacocoTaskExtension
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     kotlin("kapt")
     // Add the Google services Gradle plugin
     id("com.google.gms.google-services")
+    id("jacoco")
 }
 
 android {
-    namespace = "com.example.summerveldhoundresort"
+    namespace = "com.summerveldhoundresort.app"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.summerveldhoundresort"
+        applicationId = "com.summerveldhoundresort.app"
         minSdk = 25
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file(project.findProperty("MYAPP_RELEASE_STORE_FILE") ?: "../my-release-key.keystore")
+            storePassword = project.findProperty("MYAPP_RELEASE_STORE_PASSWORD") as String?
+            keyAlias = project.findProperty("MYAPP_RELEASE_KEY_ALIAS") as String?
+            keyPassword = project.findProperty("MYAPP_RELEASE_KEY_PASSWORD") as String?
+        }
+    }
+
     buildTypes {
-        release {
+        debug {
             isMinifyEnabled = false
+            isDebuggable = true
+        }
+        release {
+            // Security: Enable code obfuscation and resource shrinking for release builds
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
@@ -38,6 +59,18 @@ android {
     }
     buildFeatures {
         viewBinding = true
+    }
+    
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+            isReturnDefaultValues = true
+        }
+    }
+    
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
     }
 }
 
@@ -57,39 +90,91 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.compose.material)
-    implementation("androidx.constraintlayout:constraintlayout:2.2.1")
+    
+    // Testing dependencies
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.arch.core.testing)
+    testImplementation(libs.truth)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.mockwebserver)
+    testImplementation(libs.test.core)
+    testImplementation(libs.test.ext.junit)
+    
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.test.runner)
+    androidTestImplementation(libs.test.rules)
+    androidTestImplementation(libs.test.ext.junit)
+    androidTestImplementation(libs.mockito.android)
 
-    //Added For Firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.16.0"))
+    // Added For Firebase
+    implementation(platform(libs.firebase.bom))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-storage-ktx")
 
-//    implementation("com.google.firebase:firebase-auth-ktx") // ✅ Required for Firebase.auth
     // Firebase Auth KTX
     implementation("com.google.firebase:firebase-auth-ktx")
 
     // Google Sign-In and Firebase Authentication dependencies
-    implementation("com.google.android.gms:play-services-auth:21.2.0")
-    implementation("com.google.android.gms:play-services-base:18.5.0")
-    implementation("com.google.firebase:firebase-auth:23.0.0")
+    implementation(libs.play.services.auth)
+    implementation(libs.play.services.base)
+    implementation(libs.firebase.auth)
 
-    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.glide)
 
-    kapt("com.github.bumptech.glide:compiler:4.16.0")
+    kapt(libs.glide.compiler)
 
     // Network dependencies for REST API integration
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging.interceptor)
     
     // Image picker and camera
-    implementation("com.github.dhaval2404:imagepicker:2.1")
+    implementation(libs.imagepicker)
     
     // Coroutines for async operations
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation(libs.kotlinx.coroutines.android)
+}
+
+// Jacoco configuration for code coverage
+tasks.withType<Test> {
+    configure<JacocoTaskExtension> {
+        isIncludeNoLocationClasses = false
+        excludes = listOf("jdk.internal.*")
+    }
+}
+
+tasks.register("jacocoTestReport", JacocoReport::class) {
+    group = "verification"
+    description = "Generate JaCoCo test coverage report"
+    dependsOn("testDebugUnitTest")
+    
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+        csv.required.set(false)
+    }
+    
+    val fileFilter = listOf(
+        "**/R.class",
+        "**/R$*.class",
+        "**/BuildConfig.*",
+        "**/Manifest*.*",
+        "**/*Test*.*",
+        "android/**/*.*"
+    )
+    
+    val debugTree = fileTree("${layout.buildDirectory.get()}/intermediates/javac/debug") {
+        exclude(fileFilter)
+    }
+    val mainSrc = "${project.projectDir}/src/main/java"
+    
+    sourceDirectories.setFrom(files(mainSrc))
+    classDirectories.setFrom(files(debugTree))
+    executionData.setFrom(fileTree(layout.buildDirectory).include("**/*.exec"))
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/EditDogScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,26 +17,26 @@
             android:id="@+id/imgPawsTop"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/paw"
+            android:src="@drawable/paw_reversed_svg"
             android:layout_marginTop="-15dp"
             android:layout_marginEnd="-15dp"
+            android:rotation="-10"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Back Button -->
 
         <!-- Title -->
         <TextView
             android:id="@+id/textView_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
             android:text="Edit Dog"
             android:textColor="@color/purple"
             android:textSize="26sp"
             android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="68dp" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <!-- Dog Image -->
         <FrameLayout
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:text="Name:"
             android:textSize="18sp"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             app:layout_constraintTop_toBottomOf="@id/frameLayout_picture_placeholder"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="32dp"
@@ -85,7 +85,7 @@
             android:layout_height="48dp"
             android:background="@drawable/edittext_background"
             android:paddingHorizontal="12dp"
-            android:textColor="@color/purple"
+            android:textColor="@color/purple_text"
             android:textSize="16sp"
             android:hint="Enter dog’s name"
             android:textColorHint="@color/purple"
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:text="Date of Birth:"
             android:textSize="18sp"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             app:layout_constraintTop_toBottomOf="@id/editDogName"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="32dp"
@@ -113,7 +113,7 @@
             android:layout_height="48dp"
             android:background="@drawable/edittext_background"
             android:paddingHorizontal="12dp"
-            android:textColor="@color/purple"
+            android:textColor="@color/purple_text"
             android:textSize="16sp"
             android:hint="Select date of birth"
             android:textColorHint="@color/purple"
@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:text="Breed:"
             android:textSize="18sp"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             app:layout_constraintTop_toBottomOf="@id/editDob"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="32dp"
@@ -143,7 +143,7 @@
             android:layout_height="48dp"
             android:background="@drawable/edittext_background"
             android:paddingHorizontal="12dp"
-            android:textColor="@color/purple"
+            android:textColor="@color/purple_text"
             android:textSize="16sp"
             android:hint="Enter breed"
             android:textColorHint="@color/purple"
@@ -159,7 +159,7 @@
             android:layout_height="wrap_content"
             android:text="Colour:"
             android:textSize="18sp"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             app:layout_constraintTop_toBottomOf="@id/editBreed"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="32dp"
@@ -171,7 +171,7 @@
             android:layout_height="48dp"
             android:background="@drawable/edittext_background"
             android:paddingHorizontal="12dp"
-            android:textColor="@color/purple"
+            android:textColor="@color/purple_text"
             android:textSize="16sp"
             android:hint="Enter colour"
             android:textColorHint="@color/purple"
@@ -187,7 +187,7 @@
             android:layout_height="wrap_content"
             android:text="Gender:"
             android:textSize="18sp"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             app:layout_constraintTop_toBottomOf="@id/editColour"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="32dp"
@@ -197,6 +197,7 @@
             android:id="@+id/spinnerGender"
             android:layout_width="0dp"
             android:layout_height="48dp"
+            android:textColor="@android:color/black"
             android:background="@drawable/rounded_spinner_background"
             android:spinnerMode="dropdown"
             app:layout_constraintTop_toBottomOf="@id/label_gender"
@@ -211,7 +212,7 @@
             android:layout_height="wrap_content"
             android:text="Description:"
             android:textSize="18sp"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             app:layout_constraintTop_toBottomOf="@id/spinnerGender"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="32dp"
@@ -225,8 +226,11 @@
             android:gravity="top"
             android:hint="Describe this dog..."
             android:inputType="textMultiLine"
+            android:scrollbars="vertical"
+            android:overScrollMode="always"
+            android:nestedScrollingEnabled="true"
             android:padding="12dp"
-            android:textColor="@color/purple"
+            android:textColor="@color/purple_text"
             android:textColorHint="@color/purple"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -251,10 +255,10 @@
             android:layout_marginTop="24dp" />
 
         <Button
-            android:id="@+id/buttonDeleteDog"
+            android:id="@+id/buttonCancelEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Delete Dog"
+            android:text="Cancel Changes"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="18sp"
@@ -263,24 +267,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="32dp"
-            android:layout_marginTop="12dp" />
+            android:layout_marginBottom="100dp" />
 
         <Button
-            android:id="@+id/buttonCancelEdit"
+            android:id="@+id/buttonDeleteDog"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Cancel"
+            android:text="Delete Dog"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:backgroundTint="@color/dark_purple"
-            app:layout_constraintTop_toBottomOf="@id/buttonDeleteDog"
+            android:backgroundTint="@color/DangerBtn"
+            app:layout_constraintTop_toBottomOf="@id/buttonCancelEdit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginHorizontal="32dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="100dp" />
-
+            android:layout_marginHorizontal="32dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/admin_nav_graph"
+    app:startDestination="@id/adminHomeFragment">
+
+
+    <fragment
+        android:id="@+id/adminHomeFragment"
+        android:name="com.summerveldhoundresort.app.ui.admin.AdminHomeFragment"
+        android:label="Admin Home" />
+
+    <fragment
+        android:id="@+id/manageDogsFragment"
+        android:name="com.summerveldhoundresort.app.ui.Dog.ManageDogsFragment"
+        android:label="Manage Dogs" />
+
+    <fragment
+        android:id="@+id/manageEventsFragment"
+        android:name="com.summerveldhoundresort.app.ui.admin.ManageEventsFragment"
+        android:label="Manage Events" />
+
+    <fragment
+        android:id="@+id/profileViewFragment"
+        android:name="com.summerveldhoundresort.app.ui.profile.ProfileViewFragment"
+        android:label="Profile" >
+        <action
+            android:id="@+id/action_profileViewFragment_to_editProfileFragment_admin"
+            app:destination="@id/editProfileFragment2" />
+        <action
+            android:id="@+id/action_profileViewFragment_to_accountDeletionFragment_admin"
+            app:destination="@id/accountDeletionFragment2" />
+        <action
+            android:id="@+id/action_profileViewFragment_to_changePasswordFragment_admin"
+            app:destination="@id/changePasswordFragment2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment2"
+        android:name="com.summerveldhoundresort.app.ui.profile.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/accountDeletionFragment2"
+        android:name="com.summerveldhoundresort.app.ui.profile.AccountDeletionFragment"
+        android:label="AccountDeletionFragment" />
+    <fragment
+        android:id="@+id/changePasswordFragment2"
+        android:name="com.summerveldhoundresort.app.ui.profile.ChangePasswordFragment"
+        android:label="ChangePasswordFragment" />
+
+
+    <action
+        android:id="@+id/action_global_aboutUsFragment_admin"
+        app:destination="@id/aboutUsFragment2" />
+    <action
+        android:id="@+id/action_global_privacyFragment_admin"
+        app:destination="@id/privacyFragment2" />
+    <action
+        android:id="@+id/action_global_changePasswordFragment_admin"
+        app:destination="@id/changePasswordFragment2" />
+
+
+    <action
+        android:id="@+id/action_global_viewProfile_admin"
+        app:destination="@id/profileViewFragment" />
+
+    <action
+        android:id="@+id/action_global_editProfile_admin"
+        app:destination="@id/editProfileFragment2" />
+
+    <action
+        android:id="@+id/action_global_accountDeletion_admin"
+        app:destination="@id/accountDeletionFragment2" />
+
+    <action
+        android:id="@+id/action_global_changePassword_admin"
+        app:destination="@id/changePasswordFragment2" />
+    <fragment
+        android:id="@+id/aboutUsFragment2"
+        android:name="com.summerveldhoundresort.app.ui.about.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/privacyFragment2"
+        android:name="com.summerveldhoundresort.app.ui.privacy.PrivacyFragment"
+        android:label="fragment_privacy"
+        tools:layout="@layout/fragment_privacy" />
+    <fragment
+        android:id="@+id/adminProfileFragment"
+        android:name="com.summerveldhoundresort.app.ui.admin.AdminProfileFragment"
+        android:label="fragment_admin_profile"
+        tools:layout="@layout/fragment_admin_profile" />
+
+</navigation>

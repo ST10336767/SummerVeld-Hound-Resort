@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <color name="purple_text">#E91973</color>-->
+    <color name="purple_text">#D68FB3</color>
+
+    <!-- Gender Spinner-->
+    <color name="spinner_bg_color">#121212</color>
+    <color name="spinner_text_color">#D68FB3</color>
+    <color name="spinner_dropdown_bg">#1E1E1E</color>
+
+</resources>

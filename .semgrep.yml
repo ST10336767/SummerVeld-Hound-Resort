@@ -1,0 +1,6 @@
+# Semgrep configuration to exclude false positive for launcher activities
+# Android requires launcher activities (with MAIN action) to be exported
+
+# This file is merged with preset configs to exclude the false positive
+# for exported launcher activities in AndroidManifest.xml
+

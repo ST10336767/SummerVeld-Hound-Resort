@@ -3,7 +3,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding = "16dp"
+    android:paddingBottom="120dp">
 
     <!-- Back Button -->
     <Button
@@ -22,13 +23,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="All Events"
-        android:textColor="@color/dark_purple"
+        android:textColor="@color/purple"
         android:textSize="20sp"
+        android:textStyle="bold"
         android:paddingBottom="12dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewAllEvents"
         android:layout_width="match_parent"
-        android:layout_height="541dp" />
+        android:layout_height="match_parent" />
 </LinearLayout>
 

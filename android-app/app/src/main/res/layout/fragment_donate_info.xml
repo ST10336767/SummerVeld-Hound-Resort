@@ -2,8 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:padding="24dp">
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,8 +17,8 @@
             android:text="Support Summerveld Hound Resort"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="@color/dark_purple"
-            android:layout_marginBottom="16dp" />
+            android:textColor="@color/purple"
+            android:layout_marginBottom="8dp" />
 
         <!-- Info -->
         <TextView
@@ -27,8 +26,8 @@
             android:layout_height="wrap_content"
             android:text="You can donate via Zapper or directly to our bank account below."
             android:textAlignment="center"
-            android:textColor="@color/black"
-            android:layout_marginBottom="24dp" />
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginBottom="8dp" />
 
         <!-- Zapper QR -->
         <ImageView
@@ -37,15 +36,32 @@
             android:layout_height="250dp"
             android:src="@drawable/zapper_qr"
             android:contentDescription="Zapper QR Code"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="8dp"
             android:scaleType="fitCenter" />
+
+        <!-- Zapper Payment Link -->
+        <TextView
+            android:id="@+id/btnZapperPayment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pay with Zapper →"
+            android:textColor="@color/purple"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:drawablePadding="8dp" />
 
         <!-- Divider -->
         <View
             android:layout_width="80dp"
             android:layout_height="2dp"
             android:background="@color/dark_purple"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="8dp" />
 
         <!-- Bank Details Header -->
         <TextView
@@ -54,8 +70,8 @@
             android:text="Bank Details"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/dark_purple"
-            android:layout_marginBottom="12dp" />
+            android:textColor="@color/purple"
+            android:layout_marginBottom="8dp" />
 
         <!-- Bank Details -->
         <TextView
@@ -63,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bank: Nedbank\nAccount Name: Summerveld Hound Resort\nAccount Number: 1188985205\nBranch Code: 133826\nAccount Type: Cheque Account\nReference: Your Name"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:lineSpacingExtra="6dp"
             android:textAlignment="center" />

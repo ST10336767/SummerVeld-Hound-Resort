@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@android:color/white"
     tools:context=".ui.privacy.PrivacyFragment">
 
     <LinearLayout
@@ -41,8 +40,8 @@
                 android:layout_gravity="top|start"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:src="@drawable/paw_trail"
-                android:alpha="0.25"
+                android:src="@drawable/paw_reversed_svg"
+
                 android:contentDescription="@string/cd_paw_decor" />
 
             <TextView
@@ -53,7 +52,7 @@
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-medium"
-                android:textColor="@color/dark_purple"
+                android:textColor="@color/purple"
                 android:gravity="center"
                 android:layout_marginTop="40dp"
                 android:paddingBottom="8dp" />
@@ -75,7 +74,7 @@
             android:layout_height="wrap_content"
             android:text="@string/privacy_intro"
             android:textSize="14sp"
-            android:textColor="@color/purple"
+            android:textColor="@color/purple_text"
             android:lineSpacingExtra="2dp"
             android:gravity="center"
             android:paddingBottom="8dp" />
@@ -88,7 +87,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             android:gravity="center"
             android:paddingTop="16dp" />
 
@@ -97,7 +96,7 @@
             android:layout_height="wrap_content"
             android:text="@string/privacy_s1_body"
             android:textSize="14sp"
-            android:textColor="@color/purple"
+            android:textColor="@color/purple_text"
             android:lineSpacingExtra="2dp"
             android:gravity="center"
             android:paddingTop="8dp" />
@@ -117,7 +116,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             android:gravity="center"
             android:paddingTop="24dp" />
 
@@ -126,7 +125,7 @@
             android:layout_height="wrap_content"
             android:text="@string/privacy_s2_body"
             android:textSize="14sp"
-            android:textColor="@color/purple"
+            android:textColor="@color/purple_text"
             android:lineSpacingExtra="2dp"
             android:gravity="center"
             android:paddingTop="8dp" />
@@ -146,7 +145,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             android:gravity="center"
             android:paddingTop="24dp" />
 
@@ -155,7 +154,7 @@
             android:layout_height="wrap_content"
             android:text="@string/privacy_s3_body"
             android:textSize="14sp"
-            android:textColor="@color/purple"
+            android:textColor="@color/purple_text"
             android:lineSpacingExtra="2dp"
             android:gravity="center"
             android:paddingTop="8dp" />
@@ -175,7 +174,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             android:gravity="center"
             android:paddingTop="24dp" />
 
@@ -184,7 +183,7 @@
             android:layout_height="wrap_content"
             android:text="@string/privacy_s4_body"
             android:textSize="14sp"
-            android:textColor="@color/purple"
+            android:textColor="@color/purple_text"
             android:lineSpacingExtra="2dp"
             android:gravity="center"
             android:paddingTop="8dp" />
@@ -204,7 +203,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             android:gravity="center"
             android:paddingTop="24dp" />
 
@@ -213,7 +212,7 @@
             android:layout_height="wrap_content"
             android:text="@string/privacy_s5_body"
             android:textSize="14sp"
-            android:textColor="@color/purple"
+            android:textColor="@color/purple_text"
             android:lineSpacingExtra="2dp"
             android:gravity="center"
             android:paddingTop="8dp" />
@@ -233,7 +232,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/dark_purple"
+            android:textColor="@color/purple"
             android:gravity="center"
             android:paddingTop="24dp" />
 
@@ -242,7 +241,7 @@
             android:layout_height="wrap_content"
             android:text="@string/privacy_s6_body"
             android:textSize="14sp"
-            android:textColor="@color/purple"
+            android:textColor="@color/purple_text"
             android:lineSpacingExtra="2dp"
             android:gravity="center"
             android:paddingTop="8dp" />

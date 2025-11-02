@@ -1,7 +1,7 @@
-const express = require('express');
-const { auth, authorize } = require('../middleware/auth');
+const express = require('express')
+const { auth, authorize } = require('../middleware/auth')
 
-const router = express.Router();
+const router = express.Router()
 
 // Sample services data - in a real app, this would come from a database
 const services = [
@@ -50,60 +50,60 @@ const services = [
     price: 200,
     features: ['Health checkup', 'Vaccinations', 'Medical advice', 'Prescription medication']
   }
-];
+]
 
 // @route   GET /api/services
 // @desc    Get all available services
 // @access  Public
 router.get('/', (req, res) => {
   try {
-    const { type } = req.query;
-    
-    let filteredServices = services;
+    const { type } = req.query
+
+    let filteredServices = services
     if (type) {
-      filteredServices = services.filter(service => service.type === type);
+      filteredServices = services.filter(service => service.type === type)
     }
 
     res.json({
       success: true,
       count: filteredServices.length,
       data: filteredServices
-    });
+    })
   } catch (error) {
     res.status(500).json({
       success: false,
       message: 'Server error',
       error: error.message
-    });
+    })
   }
-});
+})
 
 // @route   GET /api/services/:id
 // @desc    Get single service
 // @access  Public
 router.get('/:id', (req, res) => {
   try {
-    const service = services.find(s => s.id === parseInt(req.params.id));
+    const service = services.find(s => s.id === parseInt(req.params.id))
 
     if (!service) {
       return res.status(404).json({
         success: false,
         message: 'Service not found'
-      });
+      })
     }
 
     res.json({
       success: true,
       data: service
-    });
+    })
   } catch (error) {
     res.status(500).json({
       success: false,
       message: 'Server error',
       error: error.message
-    });
+    })
   }
-});
+})
 
 // @route   POST /api/services
 // @desc    Create new service (admin only)
@@ -122,36 +122,36 @@ router.post('/', auth, authorize('admin'), [
     .withMessage('Price must be a positive number')
 ], (req, res) => {
   try {
-    const { validationResult } = require('express-validator');
-    const errors = validationResult(req);
+    const { validationResult } = require('express-validator')
+    const errors = validationResult(req)
     if (!errors.isEmpty()) {
       return res.status(400).json({
         success: false,
         message: 'Validation errors',
         errors: errors.array()
-      });
+      })
     }
 
     const newService = {
       id: services.length + 1,
       ...req.body,
       createdAt: new Date()
-    };
+    }
 
-    services.push(newService);
+    services.push(newService)
 
     res.status(201).json({
       success: true,
       message: 'Service created successfully',
       data: newService
-    });
+    })
   } catch (error) {
     res.status(500).json({
       success: false,
       message: 'Server error',
       error: error.message
-    });
+    })
   }
-});
+})
 
-module.exports = router;
+module.exports = router

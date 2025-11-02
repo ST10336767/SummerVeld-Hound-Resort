@@ -1,9 +1,9 @@
-const express = require('express');
-const { body } = require('express-validator');
-const { register, login, getMe, logout } = require('../controllers/authController');
-const { auth } = require('../middleware/auth');
+const express = require('express')
+const { body } = require('express-validator')
+const { register, login, getMe, logout } = require('../controllers/authController')
+const { auth } = require('../middleware/auth')
 
-const router = express.Router();
+const router = express.Router()
 
 // Validation rules
 const registerValidation = [
@@ -25,7 +25,7 @@ const registerValidation = [
   body('phone')
     .matches(/^\+?[\d\s-()]+$/)
     .withMessage('Please provide a valid phone number')
-];
+]
 
 const loginValidation = [
   body('email')
@@ -35,26 +35,26 @@ const loginValidation = [
   body('password')
     .notEmpty()
     .withMessage('Password is required')
-];
+]
 
 // @route   POST /api/auth/register
 // @desc    Register a new user
 // @access  Public
-router.post('/register', registerValidation, register);
+router.post('/register', registerValidation, register)
 
 // @route   POST /api/auth/login
 // @desc    Login user
 // @access  Public
-router.post('/login', loginValidation, login);
+router.post('/login', loginValidation, login)
 
 // @route   GET /api/auth/me
 // @desc    Get current user
 // @access  Private
-router.get('/me', auth, getMe);
+router.get('/me', auth, getMe)
 
 // @route   POST /api/auth/logout
 // @desc    Logout user
 // @access  Private
-router.post('/logout', auth, logout);
+router.post('/logout', auth, logout)
 
-module.exports = router;
+module.exports = router

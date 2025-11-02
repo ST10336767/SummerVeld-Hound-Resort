@@ -10,6 +10,8 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
     <application
         android:name=".SummerveldApplication"
         android:allowBackup="true"
@@ -29,44 +31,55 @@
             android:value="@integer/google_play_services_version" />
         
         <!-- New Activities from EditEvent branch -->
+        <!-- Internal activities should not be exported for security -->
         <activity
             android:name=".DogActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".EditEventActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".AddEventActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ManageEventsActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ManageDogsActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".EditDogActivity"
-            android:exported="true" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".AdminActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ui.admin.CreateDogActivity"
-            android:exported="true" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.auth.AuthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.events.EventCommentsActivity"
+            android:exported="false" />
+
+        <!-- Launcher activity - MUST be exported for Android to launch the app -->
+        <!-- This is a false positive: Android requires launcher activities with MAIN action to be exported -->
         <activity
             android:name=".ui.SplashScreen"
             android:exported="true">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.auth.AuthActivity"
-            android:exported="true" />
+
+
         <activity
             android:name=".MainActivity"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/app_name" >
 
             <!-- <intent-filter> -->
