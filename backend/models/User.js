@@ -142,6 +142,51 @@ class User {
     }
   }
 
+  // Handle $push operation for array fields
+  static async _handlePushOperation (collection, id, pushData) {
+    const user = await User.findById(id)
+    if (!user) return
+
+    const field = Object.keys(pushData)[0]
+    const value = pushData[field]
+
+    if (!user[field]) {
+      user[field] = []
+    }
+
+    if (Array.isArray(user[field])) {
+      user[field].push(value)
+    }
+
+    await collection.doc(id).update({
+      [field]: user[field],
+      updatedAt: new Date()
+    })
+  }
+
+  // Handle $pull operation for array fields
+  static async _handlePullOperation (collection, id, pullData) {
+    const user = await User.findById(id)
+    if (!user) return
+
+    const field = Object.keys(pullData)[0]
+    const pullValue = pullData[field]
+
+    if (user[field] && Array.isArray(user[field])) {
+      user[field] = user[field].filter(item => {
+        if (typeof pullValue === 'object' && pullValue.token) {
+          return item.token !== pullValue.token
+        }
+        return item !== pullValue
+      })
+    }
+
+    await collection.doc(id).update({
+      [field]: user[field],
+      updatedAt: new Date()
+    })
+  }
+
   // Update user by ID
   static async findByIdAndUpdate (id, updateData, _options = {}) {
     const collection = User.getCollection()
@@ -152,44 +197,9 @@ class User {
 
     // Handle MongoDB-style $push and $pull operations
     if (updateData.$push) {
-      const user = await User.findById(id)
-      if (user) {
-        const field = Object.keys(updateData.$push)[0]
-        const value = updateData.$push[field]
-
-        if (!user[field]) {
-          user[field] = []
-        }
-
-        if (Array.isArray(user[field])) {
-          user[field].push(value)
-        }
-
-        await collection.doc(id).update({
-          [field]: user[field],
-          updatedAt: new Date()
-        })
-      }
+      await User._handlePushOperation(collection, id, updateData.$push)
     } else if (updateData.$pull) {
-      const user = await User.findById(id)
-      if (user) {
-        const field = Object.keys(updateData.$pull)[0]
-        const pullData = updateData.$pull[field]
-
-        if (user[field] && Array.isArray(user[field])) {
-          user[field] = user[field].filter(item => {
-            if (typeof pullData === 'object' && pullData.token) {
-              return item.token !== pullData.token
-            }
-            return item !== pullData
-          })
-        }
-
-        await collection.doc(id).update({
-          [field]: user[field],
-          updatedAt: new Date()
-        })
-      }
+      await User._handlePullOperation(collection, id, updateData.$pull)
     } else {
       // Regular update
       await collection.doc(id).update(updatePayload)

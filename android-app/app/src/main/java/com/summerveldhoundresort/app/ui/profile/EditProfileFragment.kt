@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -14,9 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.summerveldhoundresort.app.R
 import com.summerveldhoundresort.app.databinding.FragmentEditProfileBinding
-import com.summerveldhoundresort.app.databinding.FragmentProfileViewBinding
 import com.summerveldhoundresort.app.db.AppResult
-import com.summerveldhoundresort.app.db.implementations.firebaseUsersImpl
 import kotlinx.coroutines.launch
 
 class EditProfileFragment : Fragment() {

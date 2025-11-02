@@ -3,7 +3,6 @@ package com.summerveldhoundresort.app.network.repository
 import android.content.ContentValues.TAG
 import android.util.Log
 import com.summerveldhoundresort.app.db.AppResult
-import com.summerveldhoundresort.app.db.entities.User
 import com.summerveldhoundresort.app.network.NetworkConfig
 import com.summerveldhoundresort.app.network.models.AuthModels
 import com.summerveldhoundresort.app.network.api.AuthApiService

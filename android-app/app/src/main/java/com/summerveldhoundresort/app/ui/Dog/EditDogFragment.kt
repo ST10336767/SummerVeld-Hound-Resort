@@ -1,6 +1,5 @@
 package com.summerveldhoundresort.app.ui.Dog
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
@@ -159,9 +158,9 @@ class EditDogFragment : Fragment() {
         binding.editDob.setOnClickListener {
             val calendar = Calendar.getInstance()
             if (dog != null) calendar.time = dog!!.dogDOB
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
+            val year = calendar[Calendar.YEAR]
+            val month = calendar[Calendar.MONTH]
+            val day = calendar[Calendar.DAY_OF_MONTH]
 
             DatePickerDialog(requireContext(), { _, y, m, d ->
                 calendar.set(y, m, d)

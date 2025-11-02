@@ -2,96 +2,119 @@ const { verifyToken } = require('../config/jwt')
 const { verifyFirebaseToken } = require('../config/firebase')
 const User = require('../models/User')
 
+/**
+ * Validate and normalize authentication token
+ * @param {string|null|undefined} token - Raw token from request header
+ * @returns {{isValid: boolean, normalizedToken: string|null}}
+ */
+const validateToken = (token) => {
+  let isValidToken = false
+  let normalizedToken = null
+
+  if (token && typeof token === 'string') {
+    const trimmed = token.trim()
+    const hasValidLength = trimmed.length > 0 && trimmed.length < 10000
+    if (hasValidLength) {
+      isValidToken = true
+      normalizedToken = trimmed
+    }
+  }
+
+  return { isValid: isValidToken, normalizedToken }
+}
+
+/**
+ * Handle test token bypass (development only)
+ * @param {string} normalizedToken - Normalized token
+ * @returns {object|null} User object if test token, null otherwise
+ */
+const handleTestToken = (normalizedToken) => {
+  if (process.env.NODE_ENV === 'development' && normalizedToken === 'test-token') {
+    console.log('Auth middleware - Using test token bypass (development only)')
+    return {
+      _id: 'test-user-id',
+      email: 'test@example.com',
+      firstName: 'Test',
+      lastName: 'User',
+      role: 'user',
+      firebaseUid: 'test-firebase-uid'
+    }
+  }
+  return null
+}
+
+/**
+ * Validate Firebase token and get/create user
+ * @param {string} normalizedToken - Normalized token
+ * @returns {Promise<object>} User object
+ */
+const validateFirebaseToken = async (normalizedToken) => {
+  const firebaseDecoded = await verifyFirebaseToken(normalizedToken)
+  let user = await User.findOne({ firebaseUid: firebaseDecoded.uid })
+
+  if (!user) {
+    user = new User({
+      firebaseUid: firebaseDecoded.uid,
+      email: firebaseDecoded.email,
+      name: firebaseDecoded.name || firebaseDecoded.email,
+      role: 'user',
+      isEmailVerified: firebaseDecoded.email_verified || false
+    })
+    await user.save()
+  }
+
+  return user
+}
+
+/**
+ * Validate JWT token and get user
+ * @param {string} normalizedToken - Normalized token
+ * @returns {Promise<object>} User object
+ */
+const validateJwtToken = async (normalizedToken) => {
+  const decoded = verifyToken(normalizedToken)
+  const user = await User.findById(decoded.id).select('-password')
+
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  return user
+}
+
 const auth = async (req, res, next) => {
   try {
     const token = req.header('Authorization')?.replace('Bearer ', '')
 
     // Debug logging - don't log actual token value for security
     console.log('Auth middleware - Token received:', token ? 'YES' : 'NO')
-    // Never log the actual token value as it's sensitive
 
-    // Security: Validate token using computed validation result (not user-controlled)
-    // Compute validation boolean first - this is NOT a user-controlled value
-    let isValidToken = false
-    let normalizedToken = null
-
-    // Single comprehensive validation - compute boolean result
-    if (token && typeof token === 'string') {
-      const trimmed = token.trim()
-      // Validate token format and length
-      const hasValidLength = trimmed.length > 0 && trimmed.length < 10000
-      if (hasValidLength) {
-        isValidToken = true
-        normalizedToken = trimmed
-      }
-    }
-
-    // Security check based on computed validation boolean (not user input)
-    // This boolean is computed by our validation logic, not directly from user input
-    if (!isValidToken) {
+    // Validate token
+    const { isValid, normalizedToken } = validateToken(token)
+    if (!isValid) {
       return res.status(401).json({
         success: false,
         message: 'No token, authorization denied'
       })
     }
 
-    // Security: Only allow test token bypass in development environment
-    // Never allow user-controlled security bypasses in production
-    // Use normalizedToken to ensure consistent comparison
-    if (process.env.NODE_ENV === 'development' && normalizedToken === 'test-token') {
-      console.log('Auth middleware - Using test token bypass (development only)')
-      // Create a temporary user object for testing (no database required)
-      req.user = {
-        _id: 'test-user-id',
-        email: 'test@example.com',
-        firstName: 'Test',
-        lastName: 'User',
-        role: 'user',
-        firebaseUid: 'test-firebase-uid'
-      }
+    // Check for test token bypass (development only)
+    const testUser = handleTestToken(normalizedToken)
+    if (testUser) {
+      req.user = testUser
       return next()
     }
 
-    let user
-
+    // Try Firebase token validation first, fallback to JWT
     try {
-      // Try Firebase token validation first
-      // Use normalizedToken for validation
-      const firebaseDecoded = await verifyFirebaseToken(normalizedToken)
-
-      // Create or find user based on Firebase UID
-      user = await User.findOne({ firebaseUid: firebaseDecoded.uid })
-
-      if (!user) {
-        // Create new user from Firebase data
-        user = new User({
-          firebaseUid: firebaseDecoded.uid,
-          email: firebaseDecoded.email,
-          name: firebaseDecoded.name || firebaseDecoded.email,
-          role: 'user', // Default role
-          isEmailVerified: firebaseDecoded.email_verified || false
-        })
-        await user.save()
-      }
-
+      const user = await validateFirebaseToken(normalizedToken)
       req.user = user
-      next()
+      return next()
     } catch (firebaseError) {
-      // If Firebase validation fails, try custom JWT validation
       try {
-        // Use normalizedToken for validation
-        const decoded = verifyToken(normalizedToken)
-        user = await User.findById(decoded.id).select('-password')
-
-        if (!user) {
-          return res.status(401).json({
-            success: false,
-            message: 'Token is not valid'
-          })
-        }
-
+        const user = await validateJwtToken(normalizedToken)
         req.user = user
-        next()
+        return next()
       } catch (jwtError) {
         return res.status(401).json({
           success: false,

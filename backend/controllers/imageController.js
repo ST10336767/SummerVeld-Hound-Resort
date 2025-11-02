@@ -236,13 +236,13 @@ const uploadPetProfileImage = async (req, res) => {
     }
 
     // Sanitize petId for use in filename (only alphanumeric, underscore, hyphen)
-    const sanitizedPetId = petIdStr.replace(/[^\w-]/g, '')
+    const sanitizedPetId = petIdStr.replaceAll(/[^\w-]/g, '')
     if (!sanitizedPetId || sanitizedPetId.length === 0) {
       return sendError(res, 'Invalid Pet ID format', 400)
     }
 
     // Sanitize user inputs for logging to prevent log injection
-    const sanitizedOriginalName = String(file?.originalname || 'unknown').replace(/[^\w.-]/g, '')
+    const sanitizedOriginalName = String(file?.originalname || 'unknown').replaceAll(/[^\w.-]/g, '')
     const fileSizeBytes = typeof file.size === 'number' ? file.size : 0
 
     // Use structured logging to prevent injection
@@ -266,7 +266,7 @@ const uploadPetProfileImage = async (req, res) => {
     const fileName = `pet_${sanitizedPetId}_${timestamp}${fileExtension}`
 
     // Use structured logging for fileName
-    console.log('🔄 Processing image:', { fileName: fileName.replace(/[^\w.-]/g, '') })
+    console.log('🔄 Processing image:', { fileName: fileName.replaceAll(/[^\w.-]/g, '') })
     const processingStartTime = Date.now()
 
     const result = await imageService.uploadImage(

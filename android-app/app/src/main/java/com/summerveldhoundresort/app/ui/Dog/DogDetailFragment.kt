@@ -32,7 +32,6 @@ class DogDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Get dog data from arguments
-        val dogId = arguments?.getString("dogID") ?: ""
         val dogName = arguments?.getString("dogName") ?: "Unknown"
         val breed = arguments?.getString("breed") ?: "Unknown"
         val colour = arguments?.getString("colour") ?: "Unknown"
