@@ -12,7 +12,7 @@ module.exports = {
     '!app.js'
   ],
   testMatch: [
-    '**/tests/simple.test.js'
+    '**/tests/**/*.test.js'
   ],
   setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
   testTimeout: 10000,
