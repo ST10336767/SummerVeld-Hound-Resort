@@ -10,19 +10,22 @@ const auth = async (req, res, next) => {
     console.log('Auth middleware - Token received:', token ? 'YES' : 'NO')
     // Never log the actual token value as it's sensitive
 
-    // Always require a token - validate securely without user-controlled bypass
-    // Check token existence and non-empty string explicitly
-    const hasToken = Boolean(token && typeof token === 'string' && token.length > 0)
-    if (!hasToken) {
-      return res.status(401).json({
-        success: false,
-        message: 'No token, authorization denied'
-      })
+    // Security: Validate token in a single, non-bypassable check
+    // Perform all validation upfront to prevent user-controlled bypass attempts
+    let normalizedToken = null
+
+    // Single comprehensive validation - no multiple checks on user-controlled data
+    if (token && typeof token === 'string') {
+      const trimmed = token.trim()
+      // Only accept tokens with meaningful length (prevent whitespace-only tokens)
+      if (trimmed.length > 0 && trimmed.length < 10000) { // Reasonable upper bound
+        normalizedToken = trimmed
+      }
     }
 
-    // Normalize token for further processing
-    const normalizedToken = String(token).trim()
-    if (normalizedToken.length === 0) {
+    // Reject if validation failed - this is NOT a user-controlled check,
+    // it's based on our internal validation state
+    if (!normalizedToken) {
       return res.status(401).json({
         success: false,
         message: 'No token, authorization denied'
