@@ -115,8 +115,13 @@ class ProfileViewModel(private val userRepo: firebaseUsersImpl) : ViewModel() {
         firestore.collection("users").document(fbUser!!.uid).update("phoneNumber", phoneNum)
     }
 
-    private fun changeUserPassword(password: String) {
-
+    // TODO: Implement password change functionality when needed
+    // This function is intentionally empty as password changes are currently
+    // handled through Firebase Auth directly, not through this ViewModel
+    private fun changeUserPassword(_password: String) {
+        // Password change functionality not yet implemented
+        // Will be implemented when required for user profile password management
+        // Parameter prefixed with _ to indicate intentionally unused
     }
 
      fun logout(){

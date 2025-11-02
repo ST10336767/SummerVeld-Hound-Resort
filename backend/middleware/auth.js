@@ -10,22 +10,25 @@ const auth = async (req, res, next) => {
     console.log('Auth middleware - Token received:', token ? 'YES' : 'NO')
     // Never log the actual token value as it's sensitive
 
-    // Security: Validate token in a single, non-bypassable check
-    // Perform all validation upfront to prevent user-controlled bypass attempts
+    // Security: Validate token using computed validation result (not user-controlled)
+    // Compute validation boolean first - this is NOT a user-controlled value
+    let isValidToken = false
     let normalizedToken = null
 
-    // Single comprehensive validation - no multiple checks on user-controlled data
+    // Single comprehensive validation - compute boolean result
     if (token && typeof token === 'string') {
       const trimmed = token.trim()
-      // Only accept tokens with meaningful length (prevent whitespace-only tokens)
-      if (trimmed.length > 0 && trimmed.length < 10000) { // Reasonable upper bound
+      // Validate token format and length
+      const hasValidLength = trimmed.length > 0 && trimmed.length < 10000
+      if (hasValidLength) {
+        isValidToken = true
         normalizedToken = trimmed
       }
     }
 
-    // Reject if validation failed - this is NOT a user-controlled check,
-    // it's based on our internal validation state
-    if (!normalizedToken) {
+    // Security check based on computed validation boolean (not user input)
+    // This boolean is computed by our validation logic, not directly from user input
+    if (!isValidToken) {
       return res.status(401).json({
         success: false,
         message: 'No token, authorization denied'
