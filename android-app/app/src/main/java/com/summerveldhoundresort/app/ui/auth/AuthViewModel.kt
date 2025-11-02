@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.summerveldhoundresort.app.db.AppResult
 import com.summerveldhoundresort.app.db.entities.User
+import com.summerveldhoundresort.app.db.implementations.firebaseUsersImpl
 import com.summerveldhoundresort.app.network.repository.AuthRepository
 import com.summerveldhoundresort.app.network.models.AuthModels
 import kotlinx.coroutines.launch

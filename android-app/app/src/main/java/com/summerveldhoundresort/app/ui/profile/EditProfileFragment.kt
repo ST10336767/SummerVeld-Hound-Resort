@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.summerveldhoundresort.app.R
 import com.summerveldhoundresort.app.databinding.FragmentEditProfileBinding
 import com.summerveldhoundresort.app.db.AppResult
+import com.summerveldhoundresort.app.db.implementations.firebaseUsersImpl
 import kotlinx.coroutines.launch
 
 class EditProfileFragment : Fragment() {
