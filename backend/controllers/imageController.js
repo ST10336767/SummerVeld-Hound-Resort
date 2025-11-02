@@ -229,10 +229,28 @@ const uploadPetProfileImage = async (req, res) => {
       return sendError(res, 'Pet ID is required', 400)
     }
 
+    // Validate and sanitize petId before use
+    const petIdStr = String(petId).trim()
+    if (!petIdStr || petIdStr.length === 0) {
+      return sendError(res, 'Pet ID is required', 400)
+    }
+
+    // Sanitize petId for use in filename (only alphanumeric, underscore, hyphen)
+    const sanitizedPetId = petIdStr.replace(/[^\w-]/g, '')
+    if (!sanitizedPetId || sanitizedPetId.length === 0) {
+      return sendError(res, 'Invalid Pet ID format', 400)
+    }
+
     // Sanitize user inputs for logging to prevent log injection
-    const sanitizedPetId = String(petId || '').replace(/[^\w-]/g, '')
-    const sanitizedOriginalName = String(file.originalname || '').replace(/[^\w.-]/g, '')
-    console.log(`📊 Upload details - Pet ID: ${sanitizedPetId}, File size: ${file.size} bytes, Original name: ${sanitizedOriginalName}`)
+    const sanitizedOriginalName = String(file?.originalname || 'unknown').replace(/[^\w.-]/g, '')
+    const fileSizeBytes = typeof file.size === 'number' ? file.size : 0
+
+    // Use structured logging to prevent injection
+    console.log('📊 Upload details:', {
+      petId: sanitizedPetId,
+      fileSize: fileSizeBytes,
+      originalName: sanitizedOriginalName
+    })
 
     // Store directly in dog_images bucket without subfolders
     const options = {
@@ -242,13 +260,13 @@ const uploadPetProfileImage = async (req, res) => {
       format: 'jpeg'
     }
 
-    // Generate unique filename with petId prefix
-    const fileExtension = path.extname(file.originalname)
-    const fileName = `pet_${petId}_${Date.now()}${fileExtension}`
+    // Generate unique filename with sanitized petId prefix
+    const fileExtension = path.extname(file.originalname || '.jpg')
+    const timestamp = Date.now()
+    const fileName = `pet_${sanitizedPetId}_${timestamp}${fileExtension}`
 
-    // Sanitize fileName for logging
-    const sanitizedLogFileName = fileName.replace(/[^\w.-]/g, '')
-    console.log(`🔄 Processing image: ${sanitizedLogFileName}`)
+    // Use structured logging for fileName
+    console.log('🔄 Processing image:', { fileName: fileName.replace(/[^\w.-]/g, '') })
     const processingStartTime = Date.now()
 
     const result = await imageService.uploadImage(

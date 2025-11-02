@@ -10,8 +10,19 @@ const auth = async (req, res, next) => {
     console.log('Auth middleware - Token received:', token ? 'YES' : 'NO')
     // Never log the actual token value as it's sensitive
 
-    // Always require a token - no user-controlled bypass
-    if (!token || token.trim() === '') {
+    // Always require a token - validate securely without user-controlled bypass
+    // Check token existence and non-empty string explicitly
+    const hasToken = Boolean(token && typeof token === 'string' && token.length > 0)
+    if (!hasToken) {
+      return res.status(401).json({
+        success: false,
+        message: 'No token, authorization denied'
+      })
+    }
+
+    // Normalize token for further processing
+    const normalizedToken = String(token).trim()
+    if (normalizedToken.length === 0) {
       return res.status(401).json({
         success: false,
         message: 'No token, authorization denied'
@@ -20,7 +31,8 @@ const auth = async (req, res, next) => {
 
     // Security: Only allow test token bypass in development environment
     // Never allow user-controlled security bypasses in production
-    if (process.env.NODE_ENV === 'development' && token === 'test-token') {
+    // Use normalizedToken to ensure consistent comparison
+    if (process.env.NODE_ENV === 'development' && normalizedToken === 'test-token') {
       console.log('Auth middleware - Using test token bypass (development only)')
       // Create a temporary user object for testing (no database required)
       req.user = {
@@ -38,7 +50,8 @@ const auth = async (req, res, next) => {
 
     try {
       // Try Firebase token validation first
-      const firebaseDecoded = await verifyFirebaseToken(token)
+      // Use normalizedToken for validation
+      const firebaseDecoded = await verifyFirebaseToken(normalizedToken)
 
       // Create or find user based on Firebase UID
       user = await User.findOne({ firebaseUid: firebaseDecoded.uid })
@@ -60,7 +73,8 @@ const auth = async (req, res, next) => {
     } catch (firebaseError) {
       // If Firebase validation fails, try custom JWT validation
       try {
-        const decoded = verifyToken(token)
+        // Use normalizedToken for validation
+        const decoded = verifyToken(normalizedToken)
         user = await User.findById(decoded.id).select('-password')
 
         if (!user) {
