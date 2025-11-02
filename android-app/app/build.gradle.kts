@@ -40,7 +40,9 @@ android {
             isDebuggable = true
         }
         release {
-            isMinifyEnabled = false  // Disable for now to avoid pipeline issues
+            // Security: Enable code obfuscation and resource shrinking for release builds
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -88,56 +90,55 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.compose.material)
-    implementation("androidx.constraintlayout:constraintlayout:2.2.1")
+    
     // Testing dependencies
     testImplementation(libs.junit)
-    testImplementation("org.mockito:mockito-core:5.8.0")
-    testImplementation("org.mockito:mockito-inline:5.2.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
-    testImplementation("androidx.arch.core:core-testing:2.2.0")
-    testImplementation("com.google.truth:truth:1.1.5")
-    testImplementation("org.robolectric:robolectric:4.11.1")
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
-    testImplementation("androidx.test:core:1.5.0")
-    testImplementation("androidx.test.ext:junit:1.1.5")
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.arch.core.testing)
+    testImplementation(libs.truth)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.mockwebserver)
+    testImplementation(libs.test.core)
+    testImplementation(libs.test.ext.junit)
     
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation("androidx.test:runner:1.5.2")
-    androidTestImplementation("androidx.test:rules:1.5.0")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("org.mockito:mockito-android:5.8.0")
+    androidTestImplementation(libs.test.runner)
+    androidTestImplementation(libs.test.rules)
+    androidTestImplementation(libs.test.ext.junit)
+    androidTestImplementation(libs.mockito.android)
 
-    //Added For Firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.16.0"))
+    // Added For Firebase
+    implementation(platform(libs.firebase.bom))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-storage-ktx")
 
-//    implementation("com.google.firebase:firebase-auth-ktx") // ✅ Required for Firebase.auth
     // Firebase Auth KTX
     implementation("com.google.firebase:firebase-auth-ktx")
 
     // Google Sign-In and Firebase Authentication dependencies
-    implementation("com.google.android.gms:play-services-auth:21.2.0")
-    implementation("com.google.android.gms:play-services-base:18.5.0")
-    implementation("com.google.firebase:firebase-auth:23.0.0")
+    implementation(libs.play.services.auth)
+    implementation(libs.play.services.base)
+    implementation(libs.firebase.auth)
 
-    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.glide)
 
-    kapt("com.github.bumptech.glide:compiler:4.16.0")
+    kapt(libs.glide.compiler)
 
     // Network dependencies for REST API integration
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging.interceptor)
     
     // Image picker and camera
-    implementation("com.github.dhaval2404:imagepicker:2.1")
+    implementation(libs.imagepicker)
     
     // Coroutines for async operations
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation(libs.kotlinx.coroutines.android)
 }
 
 // Jacoco configuration for code coverage
@@ -149,6 +150,8 @@ tasks.withType<Test> {
 }
 
 tasks.register("jacocoTestReport", JacocoReport::class) {
+    group = "verification"
+    description = "Generate JaCoCo test coverage report"
     dependsOn("testDebugUnitTest")
     
     reports {
