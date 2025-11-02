@@ -7,12 +7,15 @@ const path = require('path')
 // @access  Private
 const uploadSingleImage = async (req, res) => {
   try {
-    const { folder = '', width, height, quality, format } = req.body
+    const { folder: folderRaw = '', width, height, quality, format } = req.body
     const file = req.file
 
     if (!file) {
       return sendError(res, 'No file uploaded', 400)
     }
+
+    // Ensure folder is a string, not an array
+    const folder = Array.isArray(folderRaw) ? folderRaw[0] || '' : String(folderRaw || '')
 
     const options = {
       width: width ? parseInt(width) : undefined,
@@ -52,12 +55,18 @@ const uploadSingleImage = async (req, res) => {
 // @access  Private
 const uploadMultipleImages = async (req, res) => {
   try {
-    const { folder = '', width, height, quality, format } = req.body
+    const { folder: folderRaw = '', width, height, quality, format } = req.body
     const files = req.files
 
     if (!files || files.length === 0) {
       return sendError(res, 'No files uploaded', 400)
     }
+
+    // Ensure folder is a string, not an array
+    const folder = Array.isArray(folderRaw) ? folderRaw[0] || '' : String(folderRaw || '')
+
+    // Ensure files is an array
+    const filesArray = Array.isArray(files) ? files : [files].filter(Boolean)
 
     const options = {
       width: width ? parseInt(width) : undefined,
@@ -66,7 +75,7 @@ const uploadMultipleImages = async (req, res) => {
       format: format || 'jpeg'
     }
 
-    const uploadPromises = files.map(file =>
+    const uploadPromises = filesArray.map(file =>
       imageService.uploadImage(file.buffer, file.originalname, folder, options)
     )
 
@@ -78,7 +87,7 @@ const uploadMultipleImages = async (req, res) => {
     const response = {
       successful: successfulUploads.map(result => result.data),
       failed: failedUploads.map(result => result.error),
-      total: files.length,
+      total: filesArray.length,
       successfulCount: successfulUploads.length,
       failedCount: failedUploads.length
     }
@@ -89,9 +98,9 @@ const uploadMultipleImages = async (req, res) => {
 
     sendSuccess(
       res,
-      `Uploaded ${successfulUploads.length} of ${files.length} images`,
+      `Uploaded ${successfulUploads.length} of ${filesArray.length} images`,
       response,
-      successfulUploads.length === files.length ? 201 : 207 // 207 for partial success
+      successfulUploads.length === filesArray.length ? 201 : 207 // 207 for partial success
     )
   } catch (error) {
     console.error('Upload multiple images error:', error)
@@ -220,7 +229,10 @@ const uploadPetProfileImage = async (req, res) => {
       return sendError(res, 'Pet ID is required', 400)
     }
 
-    console.log(`📊 Upload details - Pet ID: ${petId}, File size: ${file.size} bytes, Original name: ${file.originalname}`)
+    // Sanitize user inputs for logging to prevent log injection
+    const sanitizedPetId = String(petId || '').replace(/[^\w-]/g, '')
+    const sanitizedOriginalName = String(file.originalname || '').replace(/[^\w.-]/g, '')
+    console.log(`📊 Upload details - Pet ID: ${sanitizedPetId}, File size: ${file.size} bytes, Original name: ${sanitizedOriginalName}`)
 
     // Store directly in dog_images bucket without subfolders
     const options = {
@@ -234,7 +246,9 @@ const uploadPetProfileImage = async (req, res) => {
     const fileExtension = path.extname(file.originalname)
     const fileName = `pet_${petId}_${Date.now()}${fileExtension}`
 
-    console.log(`🔄 Processing image: ${fileName}`)
+    // Sanitize fileName for logging
+    const sanitizedLogFileName = fileName.replace(/[^\w.-]/g, '')
+    console.log(`🔄 Processing image: ${sanitizedLogFileName}`)
     const processingStartTime = Date.now()
 
     const result = await imageService.uploadImage(

@@ -6,20 +6,22 @@ const auth = async (req, res, next) => {
   try {
     const token = req.header('Authorization')?.replace('Bearer ', '')
 
-    // Debug logging
+    // Debug logging - don't log actual token value for security
     console.log('Auth middleware - Token received:', token ? 'YES' : 'NO')
-    console.log('Auth middleware - Token value:', token)
+    // Never log the actual token value as it's sensitive
 
-    if (!token) {
+    // Always require a token - no user-controlled bypass
+    if (!token || token.trim() === '') {
       return res.status(401).json({
         success: false,
         message: 'No token, authorization denied'
       })
     }
 
-    // Temporary bypass for testing - remove in production
-    if (token === 'test-token') {
-      console.log('Auth middleware - Using test token bypass')
+    // Security: Only allow test token bypass in development environment
+    // Never allow user-controlled security bypasses in production
+    if (process.env.NODE_ENV === 'development' && token === 'test-token') {
+      console.log('Auth middleware - Using test token bypass (development only)')
       // Create a temporary user object for testing (no database required)
       req.user = {
         _id: 'test-user-id',
