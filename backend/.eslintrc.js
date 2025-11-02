@@ -23,4 +23,4 @@ module.exports = {
   globals: {
     // Add any global variables here
   }
-};
+}
