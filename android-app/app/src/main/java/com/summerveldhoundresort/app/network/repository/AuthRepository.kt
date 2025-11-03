@@ -3,7 +3,6 @@ package com.summerveldhoundresort.app.network.repository
 import android.content.ContentValues.TAG
 import android.util.Log
 import com.summerveldhoundresort.app.db.AppResult
-import com.summerveldhoundresort.app.db.entities.User
 import com.summerveldhoundresort.app.network.NetworkConfig
 import com.summerveldhoundresort.app.network.models.AuthModels
 import com.summerveldhoundresort.app.network.api.AuthApiService
@@ -16,6 +15,10 @@ import java.io.IOException
 class AuthRepository {
     
     private val authApiService: AuthApiService = NetworkConfig.authApiService
+    
+    companion object {
+        private const val ERROR_NETWORK_CONNECTION_FAILED = "Network connection failed"
+    }
     
     /**
      * Register a new user via API
@@ -56,7 +59,7 @@ class AuthRepository {
             AppResult.Error(Exception("Network error: ${e.message}"))
         } catch (e: IOException) {
             Log.e(TAG, "Network error during registration", e)
-            AppResult.Error(Exception("Network connection failed"))
+            AppResult.Error(Exception(ERROR_NETWORK_CONNECTION_FAILED))
         } catch (e: Exception) {
             Log.e(TAG, "Unexpected error during registration", e)
             AppResult.Error(e)
@@ -93,7 +96,7 @@ class AuthRepository {
             AppResult.Error(Exception("Network error: ${e.message}"))
         } catch (e: IOException) {
             Log.e(TAG, "Network error during login", e)
-            AppResult.Error(Exception("Network connection failed"))
+            AppResult.Error(Exception(ERROR_NETWORK_CONNECTION_FAILED))
         } catch (e: Exception) {
             Log.e(TAG, "Unexpected error during login", e)
             AppResult.Error(e)
@@ -125,7 +128,7 @@ class AuthRepository {
             AppResult.Error(Exception("Network error: ${e.message}"))
         } catch (e: IOException) {
             Log.e(TAG, "Network error during get current user", e)
-            AppResult.Error(Exception("Network connection failed"))
+            AppResult.Error(Exception(ERROR_NETWORK_CONNECTION_FAILED))
         } catch (e: Exception) {
             Log.e(TAG, "Unexpected error during get current user", e)
             AppResult.Error(e)
@@ -153,7 +156,7 @@ class AuthRepository {
             AppResult.Error(Exception("Network error: ${e.message}"))
         } catch (e: IOException) {
             Log.e(TAG, "Network error during logout", e)
-            AppResult.Error(Exception("Network connection failed"))
+            AppResult.Error(Exception(ERROR_NETWORK_CONNECTION_FAILED))
         } catch (e: Exception) {
             Log.e(TAG, "Unexpected error during logout", e)
             AppResult.Error(e)

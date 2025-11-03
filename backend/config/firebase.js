@@ -1,9 +1,9 @@
-const admin = require('firebase-admin');
+const admin = require('firebase-admin')
 
 // Initialize Firebase Admin SDK
 // You'll need to add your Firebase service account key
 // Download it from Firebase Console > Project Settings > Service Accounts
-let firebaseApp;
+let firebaseApp
 
 const initializeFirebase = () => {
   try {
@@ -19,53 +19,53 @@ const initializeFirebase = () => {
         credential: admin.credential.cert({
           projectId: process.env.FIREBASE_PROJECT_ID,
           privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-          clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+          clientEmail: process.env.FIREBASE_CLIENT_EMAIL
         })
-      });
+      })
     } else {
-      console.warn('Firebase Admin SDK not initialized. Add Firebase credentials to environment variables.');
-      return null;
+      console.warn('Firebase Admin SDK not initialized. Add Firebase credentials to environment variables.')
+      return null
     }
 
-    console.log('Firebase Admin SDK initialized successfully');
-    return firebaseApp;
+    console.log('Firebase Admin SDK initialized successfully')
+    return firebaseApp
   } catch (error) {
-    console.error('Error initializing Firebase Admin SDK:', error);
-    return null;
+    console.error('Error initializing Firebase Admin SDK:', error)
+    return null
   }
-};
+}
 
 const verifyFirebaseToken = async (idToken) => {
   try {
     if (!firebaseApp) {
-      throw new Error('Firebase Admin SDK not initialized');
+      throw new Error('Firebase Admin SDK not initialized')
     }
 
-    const decodedToken = await admin.auth().verifyIdToken(idToken);
-    return decodedToken;
+    const decodedToken = await admin.auth().verifyIdToken(idToken)
+    return decodedToken
   } catch (error) {
-    console.error('Error verifying Firebase token:', error);
-    throw error;
+    console.error('Error verifying Firebase token:', error)
+    throw error
   }
-};
+}
 
 const getFirebaseUser = async (uid) => {
   try {
     if (!firebaseApp) {
-      throw new Error('Firebase Admin SDK not initialized');
+      throw new Error('Firebase Admin SDK not initialized')
     }
 
-    const userRecord = await admin.auth().getUser(uid);
-    return userRecord;
+    const userRecord = await admin.auth().getUser(uid)
+    return userRecord
   } catch (error) {
-    console.error('Error getting Firebase user:', error);
-    throw error;
+    console.error('Error getting Firebase user:', error)
+    throw error
   }
-};
+}
 
 module.exports = {
   initializeFirebase,
   verifyFirebaseToken,
   getFirebaseUser,
   admin
-};
+}

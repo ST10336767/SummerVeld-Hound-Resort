@@ -29,7 +29,6 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-import java.util.UUID
 
 class CreateDog : Fragment() {
 
@@ -183,9 +182,9 @@ class CreateDog : Fragment() {
 
     private fun showDatePickerDialog() {
         val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val year = calendar[Calendar.YEAR]
+        val month = calendar[Calendar.MONTH]
+        val day = calendar[Calendar.DAY_OF_MONTH]
 
         val datePickerDialog = DatePickerDialog(
             requireContext(),
@@ -381,19 +380,6 @@ class CreateDog : Fragment() {
                 binding.buttonAddDog.isEnabled = true
                 Toast.makeText(requireContext(), "Failed to add dog: ${e.message}", Toast.LENGTH_LONG).show()
             }
-    }
-
-    private fun resetFields() {
-        binding.editTextName.text?.clear()
-        binding.editTextBreed.text?.clear()
-        binding.editTextDob.text?.clear()
-        binding.editTextColour.text?.clear()
-        binding.editTextDescription.text?.clear()
-        binding.spinnerGender.setSelection(0)
-        binding.imageViewDogPicture.setImageDrawable(null)
-        binding.imageViewDogPicture.visibility = View.GONE
-        binding.textViewPlaceholderText.visibility = View.VISIBLE
-        selectedImageUri = null
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

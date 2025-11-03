@@ -1,6 +1,5 @@
 package com.summerveldhoundresort.app.ui.profile
 
-import android.content.Intent
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,16 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import android.content.Intent
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.summerveldhoundresort.app.R
 import com.summerveldhoundresort.app.databinding.FragmentProfileViewBinding
-import com.summerveldhoundresort.app.databinding.FragmentRegisterBinding
 import com.summerveldhoundresort.app.db.implementations.firebaseUsersImpl
 import com.summerveldhoundresort.app.ui.auth.AuthActivity
-import com.summerveldhoundresort.app.ui.auth.AuthViewModel
-import com.summerveldhoundresort.app.ui.auth.AuthViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.summerveldhoundresort.app.utils.ThemeManager
 

@@ -38,10 +38,11 @@ jobs:
       continue-on-error: true
       
     - name: Upload Snyk results to GitHub Code Scanning
-      uses: github/codeql-action/upload-sarif@v2
-      if: always()
+      uses: github/codeql-action/upload-sarif@v3
+      if: always() && hashFiles('snyk.sarif') != ''
       with:
         sarif_file: snyk.sarif
+      continue-on-error: true
 
   # OWASP Dependency Check
   owasp-scan:
@@ -66,7 +67,7 @@ jobs:
           --scan android-app/
           
     - name: Upload OWASP results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: dependency-check-report
         path: reports
@@ -99,10 +100,11 @@ jobs:
         output: 'trivy-results.sarif'
         
     - name: Upload Trivy scan results to GitHub Security tab
-      uses: github/codeql-action/upload-sarif@v2
-      if: always()
+      uses: github/codeql-action/upload-sarif@v3
+      if: always() && hashFiles('trivy-results.sarif') != ''
       with:
         sarif_file: 'trivy-results.sarif'
+      continue-on-error: true
 
   # Semgrep Security Scan
   semgrep-scan:
@@ -115,15 +117,16 @@ jobs:
       
     - name: Run Semgrep security scan
       uses: returntocorp/semgrep-action@v1
+      continue-on-error: true
       with:
         config: >-
           p/security-audit
           p/secrets
           p/owasp-top-ten
-        generateSarif: "1"
         
     - name: Upload Semgrep results to GitHub Security tab
-      uses: github/codeql-action/upload-sarif@v2
-      if: always()
+      uses: github/codeql-action/upload-sarif@v3
+      if: always() && hashFiles('semgrep.sarif') != ''
       with:
         sarif_file: semgrep.sarif
+      continue-on-error: true

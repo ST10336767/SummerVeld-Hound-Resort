@@ -8,17 +8,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.summerveldhoundresort.app.R
 import com.summerveldhoundresort.app.databinding.FragmentChangePasswordBinding
-import com.google.firebase.auth.FirebaseAuth
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
- * A simple [Fragment] subclass.
- * Use the [ChangePasswordFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Fragment for changing user password
  */
 class ChangePasswordFragment : Fragment() {
 
@@ -41,7 +33,6 @@ class ChangePasswordFragment : Fragment() {
         val isAdminGraph = graphId == R.id.admin_nav_graph
 
         binding.btnBackToLogin.setOnClickListener {
-//            findNavController().navigate(R.id.action_changePasswordFragment_to_profileViewFragment)
             if (isAdminGraph) {
                 navController.navigate(R.id.action_global_viewProfile_admin)
             } else {

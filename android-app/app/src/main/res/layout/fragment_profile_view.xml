@@ -8,7 +8,6 @@
     tools:context=".ui.profile.ProfileViewFragment">
 
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbEditProfile"
         android:layout_width="0dp"
@@ -26,7 +25,7 @@
         app:iconSize="25dp"
         app:iconTint="@color/dark_purple"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUsername"
         app:rippleColor="?attr/colorControlHighlight"
@@ -38,6 +37,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginEnd="8dp"
+        app:tint="?attr/colorOnBackground"
         android:src="@drawable/baseline_arrow_forward_ios_24"
         app:layout_constraintBottom_toBottomOf="@+id/mbEditProfile"
         app:layout_constraintEnd_toEndOf="@+id/mbEditProfile"
@@ -50,6 +50,7 @@
         android:layout_height="24dp"
         android:layout_marginEnd="8dp"
         android:src="@drawable/baseline_arrow_forward_ios_24"
+        app:tint="?attr/colorOnBackground"
         app:layout_constraintBottom_toBottomOf="@+id/mbChangePassword"
         app:layout_constraintEnd_toEndOf="@+id/mbChangePassword"
         app:layout_constraintTop_toTopOf="@+id/mbChangePassword"
@@ -110,6 +111,8 @@
         android:layout_height="24dp"
         android:layout_marginEnd="8dp"
         android:src="@drawable/baseline_arrow_forward_ios_24"
+
+        app:tint="?attr/colorOnBackground"
         app:layout_constraintBottom_toBottomOf="@+id/mbAccountDeletion"
         app:layout_constraintEnd_toEndOf="@+id/mbAccountDeletion"
         app:layout_constraintTop_toTopOf="@+id/mbAccountDeletion"
@@ -146,6 +149,7 @@
         android:layout_height="24dp"
         android:layout_marginEnd="8dp"
         android:src="@drawable/baseline_arrow_forward_ios_24"
+        app:tint="?attr/colorOnBackground"
         app:layout_constraintBottom_toBottomOf="@+id/mbDataPrivacy"
         app:layout_constraintEnd_toEndOf="@+id/mbDataPrivacy"
         app:layout_constraintTop_toTopOf="@+id/mbDataPrivacy"
@@ -205,6 +209,7 @@
         android:layout_height="24dp"
         android:layout_marginEnd="8dp"
         android:src="@drawable/baseline_arrow_forward_ios_24"
+        app:tint="?attr/colorOnBackground"
         app:layout_constraintBottom_toBottomOf="@+id/mbChangeTheme"
         app:layout_constraintEnd_toEndOf="@+id/mbChangeTheme"
         app:layout_constraintTop_toTopOf="@+id/mbChangeTheme"

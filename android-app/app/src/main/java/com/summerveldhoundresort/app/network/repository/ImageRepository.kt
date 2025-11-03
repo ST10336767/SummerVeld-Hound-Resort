@@ -37,6 +37,14 @@ class ImageRepository {
         private const val MAX_RETRY_ATTEMPTS = 3
         private const val BASE_RETRY_DELAY_MS = 1000L // 1 second
         private const val MAX_RETRY_DELAY_MS = 10000L // 10 seconds
+        
+        // Error message constants
+        private const val ERROR_USER_NOT_AUTHENTICATED = "User not authenticated"
+        private const val ERROR_NO_DATA_RECEIVED = "No data received"
+        private const val ERROR_UPLOAD_FAILED = "Upload failed"
+        
+        // MIME type constants
+        private const val MIME_TYPE_TEXT_PLAIN = "text/plain"
     }
     
     /**
@@ -207,7 +215,7 @@ class ImageRepository {
     ): AppResult<ImageData> = withContext(Dispatchers.IO) {
         try {
             val token = getAuthToken() ?: return@withContext AppResult.Error(
-                Exception("User not authenticated")
+                Exception(ERROR_USER_NOT_AUTHENTICATED)
             )
             
             val file = createFileFromUri(context, imageUri)
@@ -215,11 +223,11 @@ class ImageRepository {
             val requestFile = file.asRequestBody(mimeType.toMediaTypeOrNull())
             val imagePart = MultipartBody.Part.createFormData("image", file.name, requestFile)
             
-            val folderBody = options.folder.toRequestBody("text/plain".toMediaTypeOrNull())
-            val widthBody = options.width?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
-            val heightBody = options.height?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
-            val qualityBody = options.quality?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
-            val formatBody = options.format?.toRequestBody("text/plain".toMediaTypeOrNull())
+            val folderBody = options.folder.toRequestBody(MIME_TYPE_TEXT_PLAIN.toMediaTypeOrNull())
+            val widthBody = options.width?.toString()?.toRequestBody(MIME_TYPE_TEXT_PLAIN.toMediaTypeOrNull())
+            val heightBody = options.height?.toString()?.toRequestBody(MIME_TYPE_TEXT_PLAIN.toMediaTypeOrNull())
+            val qualityBody = options.quality?.toString()?.toRequestBody(MIME_TYPE_TEXT_PLAIN.toMediaTypeOrNull())
+            val formatBody = options.format?.toRequestBody(MIME_TYPE_TEXT_PLAIN.toMediaTypeOrNull())
             
             val response = imageApiService.uploadSingleImage(
                 token = "Bearer $token",
@@ -234,9 +242,9 @@ class ImageRepository {
             if (response.isSuccessful && response.body()?.success == true) {
                 response.body()?.data?.let { imageData ->
                     AppResult.Success(imageData)
-                } ?: AppResult.Error(Exception("No data received"))
+                } ?: AppResult.Error(Exception(ERROR_NO_DATA_RECEIVED))
             } else {
-                val errorMessage = response.body()?.message ?: "Upload failed"
+                val errorMessage = response.body()?.message ?: ERROR_UPLOAD_FAILED
                 AppResult.Error(Exception(errorMessage))
             }
         } catch (e: Exception) {
@@ -255,7 +263,7 @@ class ImageRepository {
     ): AppResult<MultipleImageData> = withContext(Dispatchers.IO) {
         try {
             val token = getAuthToken() ?: return@withContext AppResult.Error(
-                Exception("User not authenticated")
+                Exception(ERROR_USER_NOT_AUTHENTICATED)
             )
             
             val imageParts = imageUris.map { uri ->
@@ -264,11 +272,11 @@ class ImageRepository {
                 MultipartBody.Part.createFormData("images", file.name, requestFile)
             }
             
-            val folderBody = options.folder.toRequestBody("text/plain".toMediaTypeOrNull())
-            val widthBody = options.width?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
-            val heightBody = options.height?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
-            val qualityBody = options.quality?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
-            val formatBody = options.format?.toRequestBody("text/plain".toMediaTypeOrNull())
+            val folderBody = options.folder.toRequestBody(MIME_TYPE_TEXT_PLAIN.toMediaTypeOrNull())
+            val widthBody = options.width?.toString()?.toRequestBody(MIME_TYPE_TEXT_PLAIN.toMediaTypeOrNull())
+            val heightBody = options.height?.toString()?.toRequestBody(MIME_TYPE_TEXT_PLAIN.toMediaTypeOrNull())
+            val qualityBody = options.quality?.toString()?.toRequestBody(MIME_TYPE_TEXT_PLAIN.toMediaTypeOrNull())
+            val formatBody = options.format?.toRequestBody(MIME_TYPE_TEXT_PLAIN.toMediaTypeOrNull())
             
             val response = imageApiService.uploadMultipleImages(
                 token = "Bearer $token",
@@ -283,9 +291,9 @@ class ImageRepository {
             if (response.isSuccessful && response.body()?.success == true) {
                 response.body()?.data?.let { data ->
                     AppResult.Success(data)
-                } ?: AppResult.Error(Exception("No data received"))
+                } ?: AppResult.Error(Exception(ERROR_NO_DATA_RECEIVED))
             } else {
-                val errorMessage = response.body()?.message ?: "Upload failed"
+                val errorMessage = response.body()?.message ?: ERROR_UPLOAD_FAILED
                 AppResult.Error(Exception(errorMessage))
             }
         } catch (e: Exception) {
@@ -305,14 +313,14 @@ class ImageRepository {
         var compressedFile: File? = null
         try {
             val token = getAuthToken() ?: return@withContext AppResult.Error(
-                Exception("User not authenticated")
+                Exception(ERROR_USER_NOT_AUTHENTICATED)
             )
             
             // Compress image before upload to reduce size and upload time
             compressedFile = compressImage(context, imageUri, maxWidth = 800, maxHeight = 800, quality = 90)
             val requestFile = compressedFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
             val imagePart = MultipartBody.Part.createFormData("image", compressedFile.name, requestFile)
-            val petIdBody = petId.toRequestBody("text/plain".toMediaTypeOrNull())
+            val petIdBody = petId.toRequestBody(MIME_TYPE_TEXT_PLAIN.toMediaTypeOrNull())
             
             Log.d(TAG, "Starting pet profile image upload for petId: $petId, compressed file size: ${compressedFile.length()} bytes")
             
@@ -331,12 +339,12 @@ class ImageRepository {
                 response.body()?.data?.let { imageData ->
                     Log.d(TAG, "Pet profile image upload successful: ${imageData.publicUrl}")
                     AppResult.Success(imageData)
-                } ?: AppResult.Error(Exception("No data received"))
+                } ?: AppResult.Error(Exception(ERROR_NO_DATA_RECEIVED))
             } else {
-                val errorMessage = response.body()?.message ?: "Upload failed"
+                val errorMessage = response.body()?.message ?: ERROR_UPLOAD_FAILED
                 val errorCode = response.code()
                 Log.e(TAG, "Pet profile image upload failed: $errorMessage (HTTP $errorCode)")
-                AppResult.Error(Exception("Upload failed: $errorMessage"))
+                AppResult.Error(Exception("$ERROR_UPLOAD_FAILED: $errorMessage"))
             }
         } catch (e: Exception) {
             Log.e(TAG, "Upload pet profile image error (Ask Gemini)", e)
@@ -361,7 +369,7 @@ class ImageRepository {
     suspend fun getImageUrl(filePath: String): AppResult<ImageUrlData> = withContext(Dispatchers.IO) {
         try {
             val token = getAuthToken() ?: return@withContext AppResult.Error(
-                Exception("User not authenticated")
+                Exception(ERROR_USER_NOT_AUTHENTICATED)
             )
             
             val response = imageApiService.getImageUrl(
@@ -372,7 +380,7 @@ class ImageRepository {
             if (response.isSuccessful && response.body()?.success == true) {
                 response.body()?.data?.let { data ->
                     AppResult.Success(data)
-                } ?: AppResult.Error(Exception("No data received"))
+                } ?: AppResult.Error(Exception(ERROR_NO_DATA_RECEIVED))
             } else {
                 val errorMessage = response.body()?.message ?: "Failed to get image URL"
                 AppResult.Error(Exception(errorMessage))
@@ -389,7 +397,7 @@ class ImageRepository {
     suspend fun createSignedUrl(filePath: String, expiresIn: Int = 3600): AppResult<SignedUrlData> = withContext(Dispatchers.IO) {
         try {
             val token = getAuthToken() ?: return@withContext AppResult.Error(
-                Exception("User not authenticated")
+                Exception(ERROR_USER_NOT_AUTHENTICATED)
             )
             
             val request = SignedUrlRequest(filePath, expiresIn)
@@ -401,7 +409,7 @@ class ImageRepository {
             if (response.isSuccessful && response.body()?.success == true) {
                 response.body()?.data?.let { data ->
                     AppResult.Success(data)
-                } ?: AppResult.Error(Exception("No data received"))
+                } ?: AppResult.Error(Exception(ERROR_NO_DATA_RECEIVED))
             } else {
                 val errorMessage = response.body()?.message ?: "Failed to create signed URL"
                 AppResult.Error(Exception(errorMessage))
@@ -422,7 +430,7 @@ class ImageRepository {
     ): AppResult<ImageListData> = withContext(Dispatchers.IO) {
         try {
             val token = getAuthToken() ?: return@withContext AppResult.Error(
-                Exception("User not authenticated")
+                Exception(ERROR_USER_NOT_AUTHENTICATED)
             )
             
             val response = imageApiService.listImages(
@@ -435,7 +443,7 @@ class ImageRepository {
             if (response.isSuccessful && response.body()?.success == true) {
                 response.body()?.data?.let { data ->
                     AppResult.Success(data)
-                } ?: AppResult.Error(Exception("No data received"))
+                } ?: AppResult.Error(Exception(ERROR_NO_DATA_RECEIVED))
             } else {
                 val errorMessage = response.body()?.message ?: "Failed to list images"
                 AppResult.Error(Exception(errorMessage))
@@ -452,7 +460,7 @@ class ImageRepository {
     suspend fun deleteImage(filePath: String): AppResult<Unit> = withContext(Dispatchers.IO) {
         try {
             val token = getAuthToken() ?: return@withContext AppResult.Error(
-                Exception("User not authenticated")
+                Exception(ERROR_USER_NOT_AUTHENTICATED)
             )
             
             val response = imageApiService.deleteImage(

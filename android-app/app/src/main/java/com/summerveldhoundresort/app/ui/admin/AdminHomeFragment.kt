@@ -1,6 +1,5 @@
 package com.summerveldhoundresort.app.ui.admin
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.summerveldhoundresort.app.ManageEventsActivity
+import com.summerveldhoundresort.app.AdminActivity
 import com.summerveldhoundresort.app.R
 import com.summerveldhoundresort.app.databinding.FragmentAdminHomeBinding
 
@@ -29,28 +28,29 @@ class AdminHomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_admin_home, container, false)
         _binding = FragmentAdminHomeBinding.inflate(inflater, container, false)
-
 
         // Log current Firebase user
         val user = FirebaseAuth.getInstance().currentUser
+        //getting username
+        val username = user?.displayName ?: user?.email ?: "Admin"
+        binding.textView2.text = "Welcome, $username!"
+
         if (user != null) {
             Log.d("AdminActivity", "Logged in user UID: ${user.uid}, Email: ${user.email}")
         } else {
             Log.d("AdminActivity", "No user is currently logged in.")
         }
 
-        // Navigate to Manage Events
+        // ogMik -> rewrote button actions because there was
+        // an issue with naving back to home page if using these two buttons
+        binding.MngDogsBtn.setOnClickListener {
+            (activity as? AdminActivity)?.getBottomNavView()?.selectedItemId = R.id.manageDogsFragment
+        }
         binding.MngEventsBtn.setOnClickListener {
-            startActivity(Intent(requireContext(), ManageEventsActivity::class.java))
+            (activity as? AdminActivity)?.getBottomNavView()?.selectedItemId = R.id.manageEventsFragment
         }
 
-        binding.MngDogsBtn.setOnClickListener {
-            // Navigate to manage dogs using Navigation Component
-            findNavController().navigate(R.id.manageDogsFragment)
-        }
 
         return binding.root
 

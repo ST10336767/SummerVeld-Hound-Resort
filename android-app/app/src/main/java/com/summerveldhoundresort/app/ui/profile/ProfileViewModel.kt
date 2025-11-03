@@ -115,9 +115,6 @@ class ProfileViewModel(private val userRepo: firebaseUsersImpl) : ViewModel() {
         firestore.collection("users").document(fbUser!!.uid).update("phoneNumber", phoneNum)
     }
 
-    private fun changeUserPassword(password: String) {
-
-    }
 
      fun logout(){
         userRepo.logout()
