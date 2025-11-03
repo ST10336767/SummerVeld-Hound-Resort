@@ -47,4 +47,39 @@
     <color name="spinner_text_color">#C44187</color>
     <color name="spinner_dropdown_bg">#FFFFFF</color>
 
+
+<!--    added for redesigned evenbts-->
+<!--    <color name="background_card">#F9F7FC</color>-->
+<!--    <color name="background_comment">#FBFAFF</color>-->
+<!--    <color name="border_card">#E0D7F3</color>-->
+<!--    <color name="text_primary">#2D2D2D</color>-->
+<!--    <color name="text_secondary">#5A5A5A</color>-->
+<!--    <color name="accent_purple">#7E57C2</color>-->
+<!--    <color name="accent_purple_light">#9C7EDB</color>-->
+<!--    <color name="rsvp_background">#F1E8FF</color>-->
+<!--    <color name="lighter_gray">#F0F0F0</color>-->
+
+
+
+    <!-- Core Backgrounds -->
+    <color name="background_light">#F9F9F9</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="comment_section_background">#F3F0FB</color> <!-- light lavender gray -->
+    <color name="comment_item_background">#FFFFFF</color>
+    <color name="rsvp_background">#EDE7F6</color> <!-- pale lavender -->
+
+    <!-- Accents -->
+    <color name="accent_purple">#7E57C2</color>
+    <color name="accent_purple_light">#B39DDB</color>
+    <color name="accent_purple_dark">#5E35B1</color>
+
+    <!-- Text -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#424242</color>
+    <color name="text_gray">#757575</color>
+
+    <!-- Misc -->
+    <color name="lighter_gray">#E0E0E0</color>
+    <color name="divider_gray">#DDDDDD</color>
+
 </resources>

@@ -33,6 +33,10 @@ class UserEventAdapter(private val events: List<Event>) :
         val commentInput: EditText? = itemView.findViewById(R.id.editTextComment)
         val sendCommentButton: Button? = itemView.findViewById(R.id.buttonSendComment)
         val commentsRecycler: RecyclerView? = itemView.findViewById(R.id.recyclerComments)
+
+        //added for expandable comments
+        val viewCommentsTextView: TextView = itemView.findViewById(R.id.viewCommentsTextView)
+        val commentInputRow: View = itemView.findViewById(R.id.commentInputRow)
     }
 
     private val firestore = FirebaseFirestore.getInstance()
@@ -42,6 +46,7 @@ class UserEventAdapter(private val events: List<Event>) :
     private val dateTimeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).apply {
         isLenient = false
     }
+
     private fun parseDateTime(date: String?, time: String?): Date? = try {
         val d = date?.trim().orEmpty()
         val t = time?.trim().orEmpty()
@@ -50,7 +55,9 @@ class UserEventAdapter(private val events: List<Event>) :
             t.isEmpty() -> dateTimeFormat.parse("$d 23:59") // no time -> end of day
             else -> dateTimeFormat.parse("$d $t")
         }
-    } catch (_: Exception) { null }
+    } catch (_: Exception) {
+        null
+    }
 
     // dynamically sorted each bind so async updates show
     private val sortedEvents: List<Event>
@@ -58,10 +65,20 @@ class UserEventAdapter(private val events: List<Event>) :
             val now = Date()
             val (known, unknown) = events.partition { parseDateTime(it.date, it.time) != null }
             val (past, upcoming) = known.partition { parseDateTime(it.date, it.time)!!.before(now) }
-            val upcomingSorted = upcoming.sortedBy { parseDateTime(it.date, it.time) }          // soonest first
-            val pastSorted = past.sortedByDescending { parseDateTime(it.date, it.time) }        // most recent past first
+            val upcomingSorted =
+                upcoming.sortedBy { parseDateTime(it.date, it.time) }          // soonest first
+            val pastSorted = past.sortedByDescending {
+                parseDateTime(
+                    it.date,
+                    it.time
+                )
+            }        // most recent past first
             return upcomingSorted + pastSorted + unknown
         }
+
+
+    //added - > for epxandable comments
+    private val expandedEvents = mutableSetOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -110,15 +127,25 @@ class UserEventAdapter(private val events: List<Event>) :
             // RSVP click
             holder.rsvpButton.setOnClickListener {
                 if (currentUser == null) {
-                    Toast.makeText(holder.itemView.context, "Sign in to RSVP", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(holder.itemView.context, "Sign in to RSVP", Toast.LENGTH_SHORT)
+                        .show()
                     return@setOnClickListener
                 }
                 val rsvpRef = rsvpCollection.document(currentUser.uid)
                 rsvpRef.get().addOnSuccessListener { doc ->
                     if (doc.exists()) rsvpRef.delete()
-                    else rsvpRef.set(mapOf("userId" to currentUser.uid, "timestamp" to System.currentTimeMillis()))
+                    else rsvpRef.set(
+                        mapOf(
+                            "userId" to currentUser.uid,
+                            "timestamp" to System.currentTimeMillis()
+                        )
+                    )
                 }.addOnFailureListener {
-                    Toast.makeText(holder.itemView.context, "RSVP failed: ${it.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        holder.itemView.context,
+                        "RSVP failed: ${it.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
@@ -137,7 +164,8 @@ class UserEventAdapter(private val events: List<Event>) :
             holder.commentsRecycler?.let { rv ->
                 val lp = rv.layoutParams
                 if (lp != null && (lp.height == AndroidViewGroup.LayoutParams.MATCH_PARENT ||
-                            lp.height == AndroidViewGroup.LayoutParams.WRAP_CONTENT)) {
+                            lp.height == AndroidViewGroup.LayoutParams.WRAP_CONTENT)
+                ) {
                     val px = (240 * rv.resources.displayMetrics.density).toInt()
                     lp.height = px
                     rv.layoutParams = lp
@@ -157,21 +185,45 @@ class UserEventAdapter(private val events: List<Event>) :
                     return@addSnapshotListener
                 }
                 commentsList.clear()
-                val comments = snapshot?.documents?.mapNotNull { it.toObject(Comment::class.java) } ?: emptyList()
+                val comments = snapshot?.documents?.mapNotNull { it.toObject(Comment::class.java) }
+                    ?: emptyList()
                 commentsList.addAll(comments)
                 commentAdapter.notifyDataSetChanged()
-                holder.commentsRecycler?.post { holder.commentsRecycler?.scrollToPosition(commentsList.size - 1) }
+
+                //added for expandable comments
+                // Refresh the toggle text with updated comment count
+                val isExpanded = expandedEvents.contains(event.id)
+                val count = commentsList.size
+                holder.viewCommentsTextView.text = if (isExpanded)
+                    "Hide Comments ($count)"
+                else
+                    "View Comments ($count)"
+
+
+                holder.commentsRecycler?.post {
+                    holder.commentsRecycler?.scrollToPosition(
+                        commentsList.size - 1
+                    )
+                }
             }
 
             // Send comment — fetch username from users/{uid} then fallback
             holder.sendCommentButton?.setOnClickListener {
                 if (currentUser == null) {
-                    Toast.makeText(holder.itemView.context, "Please sign in to comment", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        holder.itemView.context,
+                        "Please sign in to comment",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     return@setOnClickListener
                 }
                 val text = holder.commentInput?.text.toString().trim()
                 if (text.isEmpty()) {
-                    Toast.makeText(holder.itemView.context, "Please enter a comment", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        holder.itemView.context,
+                        "Please enter a comment",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     return@setOnClickListener
                 }
 
@@ -195,10 +247,18 @@ class UserEventAdapter(private val events: List<Event>) :
                         commentsCollection.add(comment)
                             .addOnSuccessListener {
                                 holder.commentInput?.text?.clear()
-                                Toast.makeText(holder.itemView.context, "Comment posted!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    holder.itemView.context,
+                                    "Comment posted!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                             .addOnFailureListener { e ->
-                                Toast.makeText(holder.itemView.context, "Failed to send comment: ${e.message}", Toast.LENGTH_LONG).show()
+                                Toast.makeText(
+                                    holder.itemView.context,
+                                    "Failed to send comment: ${e.message}",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
                     }
                     .addOnFailureListener {
@@ -212,10 +272,18 @@ class UserEventAdapter(private val events: List<Event>) :
                         commentsCollection.add(comment)
                             .addOnSuccessListener {
                                 holder.commentInput?.text?.clear()
-                                Toast.makeText(holder.itemView.context, "Comment posted!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    holder.itemView.context,
+                                    "Comment posted!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                             .addOnFailureListener { e ->
-                                Toast.makeText(holder.itemView.context, "Failed to send comment: ${e.message}", Toast.LENGTH_LONG).show()
+                                Toast.makeText(
+                                    holder.itemView.context,
+                                    "Failed to send comment: ${e.message}",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
                     }
             }
@@ -224,6 +292,28 @@ class UserEventAdapter(private val events: List<Event>) :
             holder.memberCountText.text = "0 members going"
             holder.rsvpButton.isEnabled = false
         }
+
+        // Determine if comments are expanded for this event
+        val isExpanded = expandedEvents.contains(event.id)
+
+        // Update "View Comments" text with count and toggle state
+        val commentsCount = holder.commentsRecycler?.adapter?.itemCount ?: 0
+        holder.viewCommentsTextView.text = if (isExpanded)
+            "Hide Comments ($commentsCount)"
+        else
+            "View Comments ($commentsCount)"
+
+         // Show or hide comments RecyclerView and input row based on expanded state
+        holder.commentsRecycler?.visibility = if (isExpanded) View.VISIBLE else View.GONE
+        holder.commentInputRow.visibility = if (isExpanded) View.VISIBLE else View.GONE
+
+        // Set click listener on the "View Comments" toggle
+        holder.viewCommentsTextView.setOnClickListener {
+            if (isExpanded) expandedEvents.remove(event.id)
+            else expandedEvents.add(event.id)
+            notifyItemChanged(position)  // refresh this item to update UI
+        }
+
     }
 
     override fun getItemCount() = sortedEvents.size

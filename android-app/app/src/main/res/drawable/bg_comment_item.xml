@@ -1,0 +1,23 @@
+<!--<shape xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--    <solid android:color="#FFFFFF" />-->
+<!--    <corners android:radius="6dp" />-->
+<!--    <stroke-->
+<!--        android:width="1dp"-->
+<!--        android:color="#D1C4E9" /> &lt;!&ndash; subtle purple border &ndash;&gt;-->
+<!--    <padding-->
+<!--        android:left="8dp"-->
+<!--        android:top="6dp"-->
+<!--        android:right="8dp"-->
+<!--        android:bottom="6dp" />-->
+<!--</shape>-->
+<!--<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">-->
+<!--    <solid android:color="#F9F9F9" /> &lt;!&ndash; very light gray &ndash;&gt;-->
+<!--    <corners android:radius="8dp" />-->
+<!--    <stroke android:width="1dp" android:color="#E0E0E0" />-->
+<!--</shape>-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#FAF8FF" /> <!-- very very light purple tint -->
+    <corners android:radius="8dp" />
+    <stroke android:width="1dp" android:color="#B39DDB" />
+    <padding android:left="12dp" android:top="12dp" android:right="12dp" android:bottom="12dp" />
+</shape>
