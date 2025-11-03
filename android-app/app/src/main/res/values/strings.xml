@@ -143,4 +143,8 @@
     <!-- Data Management -->
     <string name="data_management_title">Data Management</string>
 
+
+    <!--    empty events state-->
+    <string name="emptyEventsState">No Upcoming Events</string>
+
 </resources>
