@@ -4,14 +4,14 @@ A comprehensive Android application for the SummerVeld Hound Resort pet care man
 
 ## Features
 
-- 🔐 **Authentication** - Secure login and registration with Firebase Auth
-- 🐕 **Dog Management** - Create and manage dog profiles
-- 📅 **Event Management** - View and RSVP to resort events
-- 📸 **Image Upload** - Upload and manage pet photos
-- 👤 **User Profiles** - Manage user information and preferences
-- 🔔 **Notifications** - Stay updated with resort news and events
-- 🏠 **Dashboard** - Personalized home screen with quick access
-- 👨‍💼 **Admin Panel** - Administrative tools for staff
+- **Authentication** - Secure login and registration with Firebase Auth
+- **Dog Management** - Create and manage dog profiles
+- **Event Management** - View and RSVP to resort events
+- **Image Upload** - Upload and manage pet photos
+- **User Profiles** - Manage user information and preferences
+- **Notifications** - Stay updated with resort news and events
+- **Dashboard** - Personalized home screen with quick access
+- **Admin Panel** - Administrative tools for staff
 
 ## Tech Stack
 

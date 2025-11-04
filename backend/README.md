@@ -4,14 +4,14 @@ A comprehensive Node.js Express API backend service for the SummerVeld Hound Res
 
 ## Features
 
-- 🔐 **Authentication & Authorization** - JWT-based auth with role-based access control
-- 🐕 **Pet Management** - Complete pet profile and booking management
-- 📅 **Booking System** - Full booking lifecycle management
-- 🛠️ **Service Management** - Pet care services (boarding, grooming, training, etc.)
-- 👥 **User Management** - User profiles with different roles (user, staff, admin)
-- 🔒 **Security** - Helmet, CORS, rate limiting, input validation
-- 📊 **Logging** - Comprehensive request logging and error handling
-- 🗄️ **Database** - MongoDB with Mongoose ODM
+- **Authentication & Authorization** - JWT-based auth with role-based access control
+- **Pet Management** - Complete pet profile and booking management
+- **Booking System** - Full booking lifecycle management
+- **Service Management** - Pet care services (boarding, grooming, training, etc.)
+- **User Management** - User profiles with different roles (user, staff, admin)
+- **Security** - Helmet, CORS, rate limiting, input validation
+- **Logging** - Comprehensive request logging and error handling
+- **Database** - MongoDB with Mongoose ODM
 
 ## Tech Stack
 
