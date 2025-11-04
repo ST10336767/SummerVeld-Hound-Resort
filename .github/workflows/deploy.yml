@@ -1,4 +1,4 @@
-name: Deploy to Cloud
+name: Deploy to Render
 
 on:
   push:
@@ -7,7 +7,6 @@ on:
 
 env:
   NODE_VERSION: '18'
-  JAVA_VERSION: '11'
 
 jobs:
   # Deploy Backend to Render
@@ -20,107 +19,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Deploy to Render
-      uses: johnbeynon/render-deploy-action@v0.0.6
-      with:
-        service-id: ${{ secrets.RENDER_SERVICE_ID }}
-        api-key: ${{ secrets.RENDER_API_KEY }}
+    - name: Trigger Render Deployment
+      run: |
+        # Trigger manual deployment via Render API
+        curl -X POST \
+          "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+          -H "Accept: application/json" \
+          || echo "Note: Render may auto-deploy if connected to this repository"
         
     - name: Verify deployment
       run: |
-        sleep 30
+        echo "Waiting for deployment to complete..."
+        sleep 45
         curl -f ${{ secrets.RENDER_SERVICE_URL }}/health || exit 1
-
-  # Deploy to AWS (Alternative)
-  deploy-aws:
-    name: Deploy to AWS
-    runs-on: ubuntu-latest
-    if: false  # Set to true when AWS deployment is configured
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
-        
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v2
-      
-    - name: Build, tag, and push image to Amazon ECR
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: summerveld-api
-        IMAGE_TAG: ${{ github.sha }}
-      run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./backend
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        
-    - name: Deploy to AWS ECS
-      run: |
-        echo "ECS deployment would go here"
-
-  # Deploy to Google Cloud (Alternative)
-  deploy-gcp:
-    name: Deploy to Google Cloud
-    runs-on: ubuntu-latest
-    if: false  # Set to true when GCP deployment is configured
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Google Cloud CLI
-      uses: google-github-actions/setup-gcloud@v2
-      with:
-        service_account_key: ${{ secrets.GCP_SA_KEY }}
-        project_id: ${{ secrets.GCP_PROJECT_ID }}
-        
-    - name: Configure Docker to use gcloud as a credential helper
-      run: gcloud auth configure-docker
-      
-    - name: Build and push Docker image
-      run: |
-        docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/summerveld-api:${{ github.sha }} ./backend
-        docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/summerveld-api:${{ github.sha }}
-        
-    - name: Deploy to Cloud Run
-      run: |
-        gcloud run deploy summerveld-api \
-          --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/summerveld-api:${{ github.sha }} \
-          --platform managed \
-          --region us-central1 \
-          --allow-unauthenticated
-
-  # Deploy to Azure (Alternative)
-  deploy-azure:
-    name: Deploy to Azure
-    runs-on: ubuntu-latest
-    if: false  # Set to true when Azure deployment is configured
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Azure Login
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
-    - name: Build and push Docker image to Azure Container Registry
-      run: |
-        az acr build --registry ${{ secrets.ACR_NAME }} --image summerveld-api:${{ github.sha }} ./backend
-        
-    - name: Deploy to Azure Container Instances
-      run: |
-        az container create \
-          --resource-group ${{ secrets.AZURE_RG }} \
-          --name summerveld-api \
-          --image ${{ secrets.ACR_NAME }}.azurecr.io/summerveld-api:${{ github.sha }} \
-          --ports 3000 \
-          --environment-variables NODE_ENV=production
