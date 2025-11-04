@@ -1,4 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:fillViewport="true"-->
+<!--    android:clipToPadding="false"-->
+<!--    android:paddingBottom="120dp">-->
+
+<!--<LinearLayout-->
+<!--    android:orientation="vertical"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:padding="16dp">-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/textViewWelcome"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Welcome"-->
+<!--        android:textColor="@color/purple"-->
+<!--        android:textSize="18sp"-->
+<!--        android:layout_marginBottom="8dp"/>-->
+
+<!--        &lt;!&ndash; Upcoming events (3 only) &ndash;&gt;-->
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/recyclerViewEvents"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:nestedScrollingEnabled="false"-->
+<!--        android:overScrollMode="never" />-->
+
+<!--&lt;!&ndash;    <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;        android:id="@+id/imageNoEvents"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:adjustViewBounds="true"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:scaleType="centerInside"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:src="@drawable/view"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_marginTop="24dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:visibility="gone"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:contentDescription="No Upcoming Events" />&ndash;&gt;-->
+
+<!--    <include-->
+<!--        android:id="@+id/emptyStateLayout"-->
+<!--        layout="@layout/view_empty_state"-->
+<!--        android:visibility="gone"-->
+
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"/>-->
+
+
+<!--    &lt;!&ndash; Button to view all events &ndash;&gt;-->
+<!--    <Button-->
+<!--        android:id="@+id/btnViewAllEvents"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="View All Events"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:backgroundTint="@color/dark_purple"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:layout_marginBottom="8dp"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/button"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="About us"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:backgroundTint="@color/dark_purple"-->
+<!--        android:layout_marginTop="8dp"/>-->
+
+<!--</LinearLayout>-->
+
+<!--</ScrollView>-->
+
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -7,49 +85,62 @@
     android:clipToPadding="false"
     android:paddingBottom="120dp">
 
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp">
-
-    <TextView
-        android:id="@+id/textViewWelcome"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome"
-        android:textColor="@color/purple"
-        android:textSize="18sp"
-        android:layout_marginBottom="8dp"/>
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textViewWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome to SummerVeld Hound Resort!"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/purple"
+            android:textSize="20sp"
+            android:layout_marginBottom="8dp"/>
 
         <!-- Upcoming events (3 only) -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewEvents"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false"
-        android:overScrollMode="never" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewEvents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never" />
 
-        <!-- Button to view all events -->
-    <Button
-        android:id="@+id/btnViewAllEvents"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View All Events"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/dark_purple"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="8dp"/>
+        <include
+            android:id="@+id/emptyStateLayout"
+            layout="@layout/view_empty_state"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="About us"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/dark_purple"
-        android:layout_marginTop="8dp"/>
+        <!-- Buttons -->
+        <Button
+            android:id="@+id/btnViewAllEvents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="View All Events"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dark_purple"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"/>
 
-</LinearLayout>
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="About us"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dark_purple"
+            android:layout_marginTop="8dp"/>
+    </LinearLayout>
 
 </ScrollView>

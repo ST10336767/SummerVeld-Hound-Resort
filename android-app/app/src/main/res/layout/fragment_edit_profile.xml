@@ -21,36 +21,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="181dp"
-        android:layout_height="125dp"
-        android:layout_marginTop="70dp"
-        android:src="@drawable/baseline_account_circle_24"
-        app:tint="@color/dark_purple"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView2"-->
+<!--        android:layout_width="181dp"-->
+<!--        android:layout_height="125dp"-->
+<!--        android:layout_marginTop="70dp"-->
+<!--        android:src="@drawable/baseline_account_circle_24"-->
+<!--        app:tint="@color/dark_purple"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <EditText
         android:id="@+id/edtName"
         android:layout_width="279dp"
         android:layout_height="48dp"
         android:layout_marginStart="67dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="184dp"
         android:layout_marginEnd="65dp"
         android:background="@drawable/rounded_button"
         android:drawableEnd="@drawable/baseline_account_circle_24"
         android:drawableTint="@color/dark_purple"
         android:ems="10"
         android:hint="Name"
-        android:textColorHint="@color/purple"
         android:inputType="text"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
+        android:textColorHint="@color/purple"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvChangePic" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edtEmail"
@@ -100,6 +101,7 @@
         android:layout_marginTop="38dp"
         android:layout_marginEnd="74dp"
         android:backgroundTint="@color/dark_purple"
+        android:textColor="@color/white"
         android:text="Update Details"
         android:textStyle="bold"
         android:textSize="16dp"
@@ -107,36 +109,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtPhoneNum" />
 
-    <TextView
-        android:id="@+id/tvChangePic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Change Picture"
-        android:textColor="@color/purple"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+<!--    <TextView-->
+<!--        android:id="@+id/tvChangePic"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:text="Change Picture"-->
+<!--        android:textColor="@color/purple"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/imageView2" />-->
 
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView4"-->
+<!--        android:layout_width="259dp"-->
+<!--        android:layout_height="224dp"-->
+<!--        android:layout_marginTop="44dp"-->
+<!--        android:layout_marginEnd="228dp"-->
+<!--        android:src="@drawable/pawprint_svg"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/buttonUpdate" />-->
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="259dp"
         android:layout_height="224dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="228dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonUpdate"
         android:src="@drawable/pawprint_svg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonUpdate" />
+        />
+
 
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="134dp"
         android:layout_height="144dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginBottom="117dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="44dp"
         android:src="@drawable/paw_reversed_svg"
         app:layout_constraintBottom_toTopOf="@+id/edtName"
-        app:layout_constraintStart_toEndOf="@+id/imageView2" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
