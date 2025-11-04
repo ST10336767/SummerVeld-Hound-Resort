@@ -101,7 +101,8 @@ class CreateDog : Fragment() {
 
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
             val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
-            val targetPadding = imeInsets.bottom
+            val navBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val targetPadding = maxOf(imeInsets.bottom, navBarInsets.bottom)
 
             v.setPadding(0, 0, 0, targetPadding)
             insets

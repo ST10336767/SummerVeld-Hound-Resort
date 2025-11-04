@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +36,29 @@ class EventsFragment : Fragment() {
         binding.recyclerViewAllEvents.layoutManager = LinearLayoutManager(requireContext())
         adapter = UserEventAdapter(events)
         binding.recyclerViewAllEvents.adapter = adapter
+        
+        // Enable padding to allow scrolling past bottom items
+        binding.recyclerViewAllEvents.clipToPadding = false
+        
+        // Handle system navigation bars and ensure proper padding
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val minPaddingDp = 100
+            val minPaddingPx = (minPaddingDp * resources.displayMetrics.density).toInt()
+            val bottomPadding = maxOf(systemBars.bottom, imeInsets.bottom, minPaddingPx)
+            val extraPaddingPx = (100 * resources.displayMetrics.density).toInt() // Extra 100dp for comment boxes
+            
+            // Add extra padding to RecyclerView for bottom content visibility
+            binding.recyclerViewAllEvents.setPadding(
+                binding.recyclerViewAllEvents.paddingLeft,
+                binding.recyclerViewAllEvents.paddingTop,
+                binding.recyclerViewAllEvents.paddingRight,
+                bottomPadding + extraPaddingPx
+            )
+            
+            insets
+        }
 
         // Set up back button click listener
         binding.buttonBack.setOnClickListener {
