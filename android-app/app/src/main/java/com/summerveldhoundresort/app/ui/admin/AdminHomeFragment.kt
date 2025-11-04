@@ -32,6 +32,10 @@ class AdminHomeFragment : Fragment() {
 
         // Log current Firebase user
         val user = FirebaseAuth.getInstance().currentUser
+        //getting username
+        val username = user?.displayName ?: user?.email ?: "Admin"
+        binding.textView2.text = "Welcome, $username!"
+
         if (user != null) {
             Log.d("AdminActivity", "Logged in user UID: ${user.uid}, Email: ${user.email}")
         } else {
