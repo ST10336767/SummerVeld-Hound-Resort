@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@drawable/bg_event_card"
     android:padding="14dp"
-    android:layout_marginBottom="16dp">
+    android:layout_marginBottom="32dp">
 
     <!-- top row -->
     <LinearLayout
@@ -115,7 +115,8 @@
         android:layout_weight="1"
         android:minHeight="300dp"
         android:background="@drawable/bg_inner_panel"
-        android:padding="12dp">
+        android:padding="12dp"
+        android:paddingBottom="16dp">
 
 
         <!-- RecyclerView for comments -->
@@ -135,7 +136,7 @@
             android:gravity="center_vertical"
             android:layout_alignParentBottom="true"
             android:paddingTop="8dp"
-            android:paddingBottom="4dp">
+            android:paddingBottom="20dp">
 
             <EditText
                 android:id="@+id/editTextComment"
