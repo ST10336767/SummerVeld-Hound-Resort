@@ -19,10 +19,13 @@ android {
         applicationId = "com.summerveldhoundresort.app"
         minSdk = 25
         targetSdk = 35
-        versionCode = 4
-        versionName = "1.3"
+        versionCode = 5
+        versionName = "1.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        
+        // Enable BuildConfig generation
+        buildConfigField("boolean", "DEBUG", "false")
     }
 
     signingConfigs {
@@ -38,6 +41,7 @@ android {
         debug {
             isMinifyEnabled = false
             isDebuggable = true
+            buildConfigField("boolean", "DEBUG", "true")
         }
         release {
             // Security: Enable code obfuscation and resource shrinking for release builds
@@ -48,6 +52,9 @@ android {
                 "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("release")
+            // Generate mapping file for crash reports (upload to Google Play Console)
+            isDebuggable = false
+            buildConfigField("boolean", "DEBUG", "false")
         }
     }
     compileOptions {
@@ -59,6 +66,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
     
     testOptions {

@@ -4,9 +4,9 @@ A comprehensive dog resort management system with Android mobile app and RESTful
 
 ## CI/CD Pipeline Status
 
-[![CI/CD Pipeline](https://github.com/your-username/SummerVeld-Hound-Resort/workflows/CI/CD%20Pipeline/badge.svg)](https://github.com/your-username/SummerVeld-Hound-Resort/actions)
-[![Security Scan](https://github.com/your-username/SummerVeld-Hound-Resort/workflows/Security%20Scan/badge.svg)](https://github.com/your-username/SummerVeld-Hound-Resort/actions)
-[![CodeQL Analysis](https://github.com/your-username/SummerVeld-Hound-Resort/workflows/CodeQL%20Analysis/badge.svg)](https://github.com/your-username/SummerVeld-Hound-Resort/actions)
+[![CI/CD Pipeline](https://github.com/ST10336767/SummerVeld-Hound-Resort/workflows/CI/CD%20Pipeline/badge.svg)](https://github.com/ST10336767/SummerVeld-Hound-Resort/actions)
+[![Security Scan](https://github.com/ST10336767/SummerVeld-Hound-Resort/workflows/Security%20Scan/badge.svg)](https://github.com/ST10336767/SummerVeld-Hound-Resort/actions)
+[![CodeQL Analysis](https://github.com/ST10336767/SummerVeld-Hound-Resort/workflows/CodeQL%20Analysis/badge.svg)](https://github.com/ST10336767/SummerVeld-Hound-Resort/actions)
 
 ## Pipeline Features
 
