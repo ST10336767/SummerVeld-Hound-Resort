@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp">
+        android:paddingBottom="160dp">
 
         <!-- Paw Prints -->
         <ImageView
@@ -267,7 +267,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="32dp"
-            android:layout_marginBottom="100dp" />
+            android:layout_marginTop="12dp" />
 
         <Button
             android:id="@+id/buttonDeleteDog"
@@ -281,7 +281,8 @@
             app:layout_constraintTop_toBottomOf="@id/buttonCancelEdit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginHorizontal="32dp" />
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="12dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
