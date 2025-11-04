@@ -32,4 +32,13 @@ jobs:
       run: |
         echo "Waiting for deployment to complete..."
         sleep 45
-        curl -f ${{ secrets.RENDER_SERVICE_URL }}/health || exit 1
+        # Use secret if available, otherwise use default URL from codebase
+        RENDER_URL="${RENDER_SERVICE_URL:-https://summerveld-api.onrender.com}"
+        echo "Checking health endpoint: $RENDER_URL/health"
+        curl -f "$RENDER_URL/health" || {
+          echo "Health check failed, but deployment may still be in progress"
+          exit 1
+        }
+        echo "Deployment verified successfully!"
+      env:
+        RENDER_SERVICE_URL: ${{ secrets.RENDER_SERVICE_URL }}
