@@ -50,17 +50,53 @@ const handleTestToken = (normalizedToken) => {
  */
 const validateFirebaseToken = async (normalizedToken) => {
   const firebaseDecoded = await verifyFirebaseToken(normalizedToken)
-  let user = await User.findOne({ firebaseUid: firebaseDecoded.uid })
+  
+  // Try to find user by firebaseUid (check Firestore directly)
+  const { admin } = require('../config/firebase')
+  const collection = admin.firestore().collection('users')
+  const snapshot = await collection
+    .where('firebaseUid', '==', firebaseDecoded.uid)
+    .limit(1)
+    .get()
+  
+  let user = null
+  if (!snapshot.empty) {
+    const doc = snapshot.docs[0]
+    user = {
+      _id: doc.id,
+      ...doc.data()
+    }
+  }
 
   if (!user) {
-    user = new User({
+    // Parse name from Firebase token (could be "FirstName LastName" or just "Name")
+    const firebaseName = firebaseDecoded.name || ''
+    const nameParts = firebaseName.trim().split(/\s+/)
+    const firstName = nameParts[0] || firebaseDecoded.email?.split('@')[0] || 'User'
+    const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : ''
+    
+    // Create new user document
+    const userDoc = {
       firebaseUid: firebaseDecoded.uid,
-      email: firebaseDecoded.email,
-      name: firebaseDecoded.name || firebaseDecoded.email,
+      firstName: firstName,
+      lastName: lastName,
+      email: firebaseDecoded.email?.toLowerCase() || '',
       role: 'user',
-      isEmailVerified: firebaseDecoded.email_verified || false
-    })
-    await user.save()
+      isEmailVerified: firebaseDecoded.email_verified || false,
+      isActive: true,
+      address: {},
+      emergencyContact: {},
+      refreshTokens: [],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
+    
+    // Add to Firestore
+    const docRef = await collection.add(userDoc)
+    user = {
+      _id: docRef.id,
+      ...userDoc
+    }
   }
 
   return user
