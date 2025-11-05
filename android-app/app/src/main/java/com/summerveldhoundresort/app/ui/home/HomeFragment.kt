@@ -12,6 +12,7 @@ import com.summerveldhoundresort.app.databinding.FragmentHomeBinding
 import com.summerveldhoundresort.app.db.entities.Event
 import com.summerveldhoundresort.app.ui.events.UserEventAdapter
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,6 +24,9 @@ class HomeFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     private lateinit var adapter: UserEventAdapter
     private val events = mutableListOf<Event>()
+
+    //ogmik added -
+    private var listenerRegistration: ListenerRegistration? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +60,11 @@ class HomeFragment : Fragment() {
     private fun loadUpcomingEvents() {
         val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
-        db.collection("events")
+//        db.collection("events")
+//            .orderBy("date", Query.Direction.ASCENDING)
+//            .addSnapshotListener { snapshot, error ->
+        // Save listener registration so we can remove it later
+        listenerRegistration = db.collection("events")
             .orderBy("date", Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) return@addSnapshotListener
@@ -75,11 +83,27 @@ class HomeFragment : Fragment() {
 
                 events.addAll(upcomingEvents)
                 adapter.notifyDataSetChanged()
+
+
+//                // Handle empty state visibility
+                if (events.isEmpty()) {
+                    binding.recyclerViewEvents.visibility = View.GONE
+                    binding.emptyStateLayout.root.visibility = View.VISIBLE
+                } else {
+                    binding.recyclerViewEvents.visibility = View.VISIBLE
+                    binding.emptyStateLayout.root.visibility = View.GONE
+                }
             }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+
+        //Stop Firestore listener to prevent crashes
+        listenerRegistration?.remove()
+        listenerRegistration = null
+
+
         _binding = null
     }
 }
