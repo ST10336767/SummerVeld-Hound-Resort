@@ -9,6 +9,7 @@ import com.summerveldhoundresort.app.network.models.*
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -50,12 +51,30 @@ class ImageRepository {
     /**
      * Get authentication token from Firebase Auth
      */
-    private fun getAuthToken(): String? {
-        // Temporary test token for development - remove in production
-        return "test-token"
-        
-        // Original Firebase token code (uncomment when Firebase is fixed)
-        // return auth.currentUser?.getIdToken(false)?.result?.token
+    private suspend fun getAuthToken(): String? {
+        return try {
+            val currentUser = auth.currentUser
+            if (currentUser == null) {
+                Log.e(TAG, "No current user found - user must be logged in to upload images")
+                return null
+            }
+            
+            Log.d(TAG, "Getting Firebase token for user: ${currentUser.uid}")
+            // Force refresh token to ensure it's valid
+            val tokenResult = currentUser.getIdToken(true).await()
+            val token = tokenResult?.token
+            
+            if (token == null) {
+                Log.e(TAG, "Failed to retrieve Firebase token - token result is null")
+                return null
+            }
+            
+            Log.d(TAG, "Successfully retrieved Firebase token (length: ${token.length})")
+            token
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting Firebase token: ${e.message}", e)
+            null
+        }
     }
     
     /**
@@ -312,9 +331,21 @@ class ImageRepository {
     ): AppResult<ImageData> = withContext(Dispatchers.IO) {
         var compressedFile: File? = null
         try {
-            val token = getAuthToken() ?: return@withContext AppResult.Error(
-                Exception(ERROR_USER_NOT_AUTHENTICATED)
-            )
+            val token = getAuthToken()
+            if (token == null) {
+                Log.e(TAG, "Cannot upload image: No authentication token available. User must be logged in.")
+                return@withContext AppResult.Error(
+                    Exception("$ERROR_USER_NOT_AUTHENTICATED. Please log in and try again.")
+                )
+            }
+            
+            Log.d(TAG, "Using token for upload")
+            Log.d(TAG, "Token length: ${token.length}")
+            Log.d(TAG, "Token first 20 chars: ${token.take(20)}...")
+            Log.d(TAG, "Token last 20 chars: ...${token.takeLast(20)}")
+            // Check if token looks like a JWT (should have 3 parts separated by dots)
+            val tokenParts = token.split(".")
+            Log.d(TAG, "Token parts count: ${tokenParts.size}")
             
             // Compress image before upload to reduce size and upload time
             compressedFile = compressImage(context, imageUri, maxWidth = 800, maxHeight = 800, quality = 90)
@@ -341,10 +372,36 @@ class ImageRepository {
                     AppResult.Success(imageData)
                 } ?: AppResult.Error(Exception(ERROR_NO_DATA_RECEIVED))
             } else {
-                val errorMessage = response.body()?.message ?: ERROR_UPLOAD_FAILED
                 val errorCode = response.code()
-                Log.e(TAG, "Pet profile image upload failed: $errorMessage (HTTP $errorCode)")
-                AppResult.Error(Exception("$ERROR_UPLOAD_FAILED: $errorMessage"))
+                var errorBodyString: String? = null
+                var errorMessage: String? = null
+                
+                // Try to read error body
+                try {
+                    errorBodyString = response.errorBody()?.string()
+                    Log.d(TAG, "Error body string: $errorBodyString")
+                } catch (e: Exception) {
+                    Log.w(TAG, "Could not read error body: ${e.message}")
+                }
+                
+                // Try to read success body (some APIs return error in success body)
+                try {
+                    errorMessage = response.body()?.message
+                } catch (e: Exception) {
+                    Log.w(TAG, "Could not read response body: ${e.message}")
+                }
+                
+                val finalErrorMessage = errorMessage ?: errorBodyString ?: ERROR_UPLOAD_FAILED
+                
+                // Log detailed error information for debugging
+                Log.e(TAG, "=== PET PROFILE IMAGE UPLOAD FAILED ===")
+                Log.e(TAG, "HTTP Status Code: $errorCode")
+                Log.e(TAG, "Error Message: $finalErrorMessage")
+                Log.e(TAG, "Error Body: $errorBodyString")
+                Log.e(TAG, "Response Body Message: $errorMessage")
+                Log.e(TAG, "=========================================")
+                
+                AppResult.Error(Exception("$ERROR_UPLOAD_FAILED: $finalErrorMessage"))
             }
         } catch (e: Exception) {
             Log.e(TAG, "Upload pet profile image error (Ask Gemini)", e)

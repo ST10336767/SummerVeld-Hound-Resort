@@ -21,7 +21,17 @@ const app = express()
 // Initialize Firebase Admin SDK (Firebase is our database)
 const firebaseApp = initializeFirebase()
 if (!firebaseApp) {
-  console.warn('⚠️  Firebase not initialized. Some features may not work properly.')
+  console.error('❌ CRITICAL: Firebase Admin SDK not initialized!')
+  console.error('❌ Users authenticated via Firebase will NOT be able to access protected endpoints.')
+  console.error('❌ To fix this, set the following environment variables:')
+  console.error('   - FIREBASE_PROJECT_ID')
+  console.error('   - FIREBASE_PRIVATE_KEY')
+  console.error('   - FIREBASE_CLIENT_EMAIL')
+  console.error('')
+  console.error('⚠️  The server will still accept JWT tokens from /api/auth/login,')
+  console.error('⚠️  but Firebase tokens will be rejected.')
+} else {
+  console.log('✅ Firebase Admin SDK initialized - ready to verify Firebase tokens')
 }
 
 // Rate limiting

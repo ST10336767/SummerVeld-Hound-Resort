@@ -84,48 +84,147 @@ const validateJwtToken = async (normalizedToken) => {
 
 const auth = async (req, res, next) => {
   try {
-    const token = req.header('Authorization')?.replace('Bearer ', '')
+    // Try multiple ways to get the Authorization header (handles different Express versions)
+    const authHeader = req.header('Authorization') || req.headers.authorization || req.get('Authorization')
+    // Extract token and remove any potential encoding issues
+    let token = authHeader?.replace(/^Bearer\s+/i, '') || ''
+    // Remove any null bytes, carriage returns, or other problematic characters
+    token = token.replace(/\0/g, '').replace(/\r/g, '').trim()
 
     // Debug logging - don't log actual token value for security
+    // Use explicit console.log statements that will definitely show in Render logs
+    console.log('=== AUTH MIDDLEWARE START ===')
     console.log('Auth middleware - Token received:', token ? 'YES' : 'NO')
+    
+    if (token) {
+      console.log('Token length:', token.length)
+      console.log('Token starts with:', token.substring(0, 20))
+      // Check if token looks like a valid JWT (should have 3 parts separated by dots)
+      const parts = token.split('.')
+      console.log('Token parts count:', parts.length)
+      console.log('Token validation - About to validate token')
+    } else {
+      console.log('Token validation - NO TOKEN PROVIDED')
+    }
 
     // Validate token
     const { isValid, normalizedToken } = validateToken(token)
+    console.log('Token validation - isValid:', isValid)
+    console.log('Token validation - normalizedToken exists:', !!normalizedToken)
+    
     if (!isValid) {
+      console.log('❌ Token validation failed - returning 401')
       return res.status(401).json({
         success: false,
         message: 'No token, authorization denied'
       })
     }
 
+    // Log normalized token info for debugging
+    if (normalizedToken) {
+      console.log('Normalized token length:', normalizedToken.length)
+      const normalizedParts = normalizedToken.split('.')
+      console.log('Normalized token parts:', normalizedParts.length)
+    } else {
+      console.log('WARNING: Normalized token is null/undefined')
+    }
+
     // Check for test token bypass (development only)
     const testUser = handleTestToken(normalizedToken)
     if (testUser) {
+      console.log('Using test token bypass')
       req.user = testUser
       return next()
     }
 
     // Try Firebase token validation first, fallback to JWT
+    console.log('Starting Firebase token verification...')
     try {
-      const user = await validateFirebaseToken(normalizedToken)
+      // Pass the normalized token directly - ensure it's a clean string
+      // Remove any potential encoding issues, null bytes, or control characters
+      let cleanToken = String(normalizedToken).trim()
+      // Remove any null bytes, carriage returns, and ensure no extra whitespace
+      cleanToken = cleanToken.replace(/\0/g, '').replace(/\r/g, '').replace(/\n/g, '').trim()
+      
+      // Validate token format before passing to Firebase
+      const tokenParts = cleanToken.split('.')
+      if (tokenParts.length !== 3) {
+        console.error('Invalid token format: expected 3 parts, got', tokenParts.length)
+        throw new Error(`Invalid JWT format: expected 3 parts, got ${tokenParts.length}`)
+      }
+      
+      console.log('Clean token length:', cleanToken.length)
+      console.log('Clean token first 50 chars:', cleanToken.substring(0, 50))
+      console.log('Clean token last 20 chars:', cleanToken.substring(Math.max(0, cleanToken.length - 20)))
+      console.log('Token parts count:', tokenParts.length)
+      console.log('Calling validateFirebaseToken...')
+      
+      const user = await validateFirebaseToken(cleanToken)
+      console.log('SUCCESS: Firebase token verified successfully')
+      console.log('User ID:', user.firebaseUid || user._id)
       req.user = user
+      console.log('=== AUTH MIDDLEWARE SUCCESS ===')
       return next()
     } catch (firebaseError) {
+      // Always log Firebase errors - they're critical for debugging
+      console.log('=== FIREBASE TOKEN VALIDATION FAILED ===')
+      console.log('Error name:', firebaseError.name)
+      console.log('Error message:', firebaseError.message)
+      console.log('Error code:', firebaseError.code || 'N/A')
+      if (firebaseError.errorInfo) {
+        console.log('Firebase error info:', JSON.stringify(firebaseError.errorInfo, null, 2))
+      }
+      if (firebaseError.stack) {
+        console.log('Error stack (first 500 chars):', firebaseError.stack.substring(0, 500))
+      }
+      console.log('========================================')
+      
+      // If Firebase Admin SDK is not initialized, provide a clearer error
+      if (firebaseError.message && firebaseError.message.includes('Firebase Admin SDK not initialized')) {
+        console.error('❌ Firebase Admin SDK not initialized - check environment variables')
+        return res.status(500).json({
+          success: false,
+          message: 'Server configuration error: Firebase Admin SDK not initialized'
+        })
+      }
+      
+      // Try JWT fallback
+      console.log('Attempting JWT token validation as fallback...')
       try {
         const user = await validateJwtToken(normalizedToken)
+        console.log('SUCCESS: JWT token verified successfully')
         req.user = user
+        console.log('=== AUTH MIDDLEWARE SUCCESS (JWT) ===')
         return next()
       } catch (jwtError) {
-        return res.status(401).json({
+        console.log('JWT token validation also failed')
+        console.log('JWT error message:', jwtError.message)
+        console.log('JWT error name:', jwtError.name)
+        
+        // Return error with details - include Firebase error info for debugging
+        const errorResponse = {
           success: false,
-          message: 'Token is not valid'
-        })
+          message: 'Token is not valid',
+          // Include Firebase error details to help debug
+          error: firebaseError.message || 'Token verification failed',
+          code: firebaseError.code || 'UNKNOWN'
+        }
+        
+        console.log('Returning 401 error response')
+        return res.status(401).json(errorResponse)
       }
     }
   } catch (error) {
-    res.status(401).json({
+    // Catch any unexpected errors
+    console.log('=== UNEXPECTED ERROR in auth middleware ===')
+    console.log('Error message:', error.message)
+    console.log('Error name:', error.name)
+    console.log('Error stack:', error.stack)
+    console.log('=== AUTH MIDDLEWARE ERROR END ===')
+    return res.status(401).json({
       success: false,
-      message: 'Token is not valid'
+      message: 'Token is not valid',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
     })
   }
 }

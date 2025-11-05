@@ -43,8 +43,10 @@ const petProfileValidation = [
   body('petId')
     .notEmpty()
     .withMessage('Pet ID is required')
-    .isMongoId()
-    .withMessage('Invalid Pet ID format')
+    .isString()
+    .withMessage('Pet ID must be a string')
+    .isLength({ min: 1, max: 100 })
+    .withMessage('Pet ID must be between 1 and 100 characters')
 ]
 
 const signedUrlValidation = [
